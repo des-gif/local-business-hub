@@ -1,0 +1,18 @@
+{
+  "name": "local-business-hub",
+  "version": "1.0.0",
+  "description": "AI-powered business kit generator for UK local trades and small businesses",
+  "author": "Webb Care Consultancy <des@webbcareconsultancy.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "keywords": ["local business", "AI", "marketing", "UK trades", "anthropic"],
+  "homepage": "https://local-business-hub.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/des-gif/local-business-hub"
+  },
+  "scripts": {
+    "start": "npx serve src",
+    "dev": "npx serve src"
+  }
+}
