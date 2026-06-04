@@ -173,40 +173,114 @@ async function startGenerate() {
   }
 
   _form = f;
+  _kit = { landing: { headline: '', subheadline: '', body: '' }, emails: [], posts: [], videoScript: '' };
+
   var btn = document.getElementById('gen-btn');
   btn.disabled = true;
 
-  resetLoadingUI();
-  setPage('page-loading');
-  startLoading();
+  // Go straight to results page with per-section loading spinners
+  var desc = document.getElementById('results-desc');
+  if (desc) desc.textContent = f.name + ' · ' + f.location + ' · ' + f.type;
+  renderSectionLoading('out-landing');
+  renderSectionLoading('out-emails');
+  renderSectionLoading('out-social');
+  renderSectionLoading('out-video');
+  setPage('page-results');
 
-  try {
-    // Step 1: generate text content
-    var res = await fetch('/.netlify/functions/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(f)
+  // Fire all 4 API calls in parallel; each section renders as its promise resolves
+  await Promise.allSettled([
+    callGenerate(f, 'landing')
+      .then(function(text) { renderPartResult('landing', text, f); })
+      .catch(function(e) { renderSectionError('out-landing', e.message); }),
+    callGenerate(f, 'emails')
+      .then(function(text) { renderPartResult('emails', text, f); })
+      .catch(function(e) { renderSectionError('out-emails', e.message); }),
+    callGenerate(f, 'social')
+      .then(function(text) { renderPartResult('social', text, f); })
+      .catch(function(e) { renderSectionError('out-social', e.message); }),
+    callGenerate(f, 'video')
+      .then(function(text) { renderPartResult('video', text, f); })
+      .catch(function(e) { renderSectionError('out-video', e.message); })
+  ]);
+
+  btn.disabled = false;
+}
+
+async function callGenerate(f, part) {
+  var payload = Object.assign({}, f, { part: part });
+  var res = await fetch('/.netlify/functions/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    var errMsg;
+    try { errMsg = (await res.json()).error; } catch (_) { errMsg = await res.text(); }
+    throw new Error(errMsg || 'Generation failed (' + part + ').');
+  }
+  var data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.text;
+}
+
+function renderSectionLoading(elId) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = '<div class="section-loading"><div class="spinner-sm"></div><p>Generating…</p></div>';
+}
+
+function renderSectionError(elId, msg) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = '<div class="section-error"><p>⚠️ ' + esc(msg || 'Generation failed. Please try again.') + '</p></div>';
+}
+
+function renderPartResult(part, text, f) {
+  if (part === 'landing') {
+    var lpBlock = extract(text, '=== LANDING PAGE ===', null);
+    var landing = {
+      headline:    extractLine(lpBlock, 'HEADLINE'),
+      subheadline: extractLine(lpBlock, 'SUBHEADLINE'),
+      body:        extractBody(lpBlock)
+    };
+    if (_kit) _kit.landing = landing;
+    renderLanding(landing, f);
+
+  } else if (part === 'emails') {
+    var emailMeta = [
+      { label: 'Enquiry Reply',    badge: 'eb-1', start: '=== EMAIL 1: ENQUIRY REPLY ===',    next: '=== EMAIL 2' },
+      { label: 'Quote Follow-Up',  badge: 'eb-2', start: '=== EMAIL 2: QUOTE FOLLOW-UP ===',  next: '=== EMAIL 3' },
+      { label: 'Review Request',   badge: 'eb-3', start: '=== EMAIL 3: REVIEW REQUEST ===',   next: '=== EMAIL 4' },
+      { label: 'Seasonal Offer',   badge: 'eb-4', start: '=== EMAIL 4: SEASONAL OFFER ===',   next: '=== EMAIL 5' },
+      { label: 'Referral Request', badge: 'eb-5', start: '=== EMAIL 5: REFERRAL REQUEST ===', next: null }
+    ];
+    var emails = emailMeta.map(function(m) {
+      var block = extract(text, m.start, m.next);
+      return { label: m.label, badge: m.badge, subject: extractLine(block, 'SUBJECT'), body: extractBody(block) || block };
     });
-    var data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Generation failed.');
-    _kit = parse(data.text);
+    if (_kit) _kit.emails = emails;
+    renderEmails(emails);
 
-    // Step 2: kick off HeyGen video (non-blocking)
-    if (_kit.videoScript) {
-      startVideoGeneration(_kit.videoScript, f.name);
+  } else if (part === 'social') {
+    var platCycle = ['Facebook','Instagram','LinkedIn','Facebook','Instagram','LinkedIn','Facebook','Instagram','Facebook','LinkedIn'];
+    var posts = [];
+    for (var i = 1; i <= 10; i++) {
+      var plat = platCycle[i - 1];
+      var s = '=== SOCIAL POST ' + i + ' (' + plat + ') ===';
+      var nxt = i < 10 ? '=== SOCIAL POST ' + (i + 1) : null;
+      var block = extract(text, s, nxt);
+      var hashMatch = block.match(/HASHTAGS:\s*([^\n]+)/i);
+      var postText = block.replace(/^POST:\s*/i, '').replace(/HASHTAGS:\s*[^\n]+/i, '').trim();
+      posts.push({ num: i, platform: plat, text: postText, hashtags: hashMatch ? hashMatch[1].trim() : '' });
     }
+    if (_kit) _kit.posts = posts;
+    renderPosts(posts);
 
-    stopLoading();
-    renderResults(_kit, f);
-    setPage('page-results');
-
-  } catch (e) {
-    stopLoading();
-    setPage('page-form');
-    btn.disabled = false;
-    errEl.textContent = 'Error: ' + e.message;
-    errEl.style.display = 'block';
-    document.getElementById('form-top').scrollIntoView({ behavior: 'smooth' });
+  } else if (part === 'video') {
+    var videoScript = extract(text, '=== VIDEO SCRIPT ===', null);
+    if (_kit) _kit.videoScript = videoScript;
+    renderVideoPanel('initial', videoScript);
+    if (videoScript) startVideoGeneration(videoScript, f.name);
   }
 }
 
