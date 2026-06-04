@@ -674,4 +674,140 @@ async function downloadZIP() {
 document.addEventListener('DOMContentLoaded', function() {
   setPage('page-form');
   updateProgress();
+  chatInit();
 });
+
+/* ============================================================
+   CHAT WIDGET
+   Injects the floating chat UI and manages the conversation.
+   ============================================================ */
+
+var _chatHistory = [];   // [{role: 'user'|'assistant', content: string}]
+var _chatOpen    = false;
+var _chatBusy    = false;
+
+var CHAT_FALLBACK = 'Sorry, something went wrong — please email des@webbcareconsultancy.com or click Get Started above.';
+
+function chatInit() {
+  var widget = document.createElement('div');
+  widget.id = 'chat-widget';
+  widget.innerHTML =
+    '<button id="chat-toggle-btn" onclick="chatToggle()" aria-label="Open chat" aria-expanded="false">' +
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+      '<span class="chat-btn-label">Ask a question</span>' +
+    '</button>' +
+    '<div id="chat-panel" style="display:none;" role="dialog" aria-label="Chat with us">' +
+      '<div class="chat-header">' +
+        '<div class="chat-header-info">' +
+          '<div class="chat-avatar">◈</div>' +
+          '<div><div class="chat-name">Local Business AI Hub</div><div class="chat-status">Usually replies in seconds</div></div>' +
+        '</div>' +
+        '<button class="chat-close" onclick="chatToggle()" aria-label="Close chat">✕</button>' +
+      '</div>' +
+      '<div id="chat-messages" class="chat-messages">' +
+        '<div class="chat-msg bot"><div class="chat-bubble">Hi there! 👋 I can help you understand what we offer — our self-serve marketing kit or our boutique video service. What would you like to know?</div></div>' +
+      '</div>' +
+      '<div id="chat-typing" class="chat-typing" aria-live="polite" aria-label="Assistant is typing">' +
+        '<span></span><span></span><span></span>' +
+      '</div>' +
+      '<div class="chat-input-row">' +
+        '<input type="text" id="chat-input" class="chat-input" placeholder="Type a message…" onkeydown="chatKeydown(event)" maxlength="500" autocomplete="off">' +
+        '<button id="chat-send-btn" class="chat-send" onclick="chatSend()" aria-label="Send message">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(widget);
+}
+
+function chatToggle() {
+  _chatOpen = !_chatOpen;
+  var panel  = document.getElementById('chat-panel');
+  var btn    = document.getElementById('chat-toggle-btn');
+  if (!panel) return;
+  panel.style.display = _chatOpen ? 'flex' : 'none';
+  if (btn) btn.setAttribute('aria-expanded', String(_chatOpen));
+  if (_chatOpen) {
+    chatScrollBottom();
+    setTimeout(function() {
+      var input = document.getElementById('chat-input');
+      if (input) input.focus();
+    }, 60);
+  }
+}
+
+function chatKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    chatSend();
+  }
+}
+
+function chatScrollBottom() {
+  var msgs = document.getElementById('chat-messages');
+  if (msgs) msgs.scrollTop = msgs.scrollHeight;
+}
+
+function chatAppendMsg(role, text) {
+  var msgs = document.getElementById('chat-messages');
+  if (!msgs) return;
+  var wrap   = document.createElement('div');
+  wrap.className = 'chat-msg ' + role;
+  var bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  bubble.textContent = text;   // textContent — never innerHTML, avoids XSS
+  wrap.appendChild(bubble);
+  msgs.appendChild(wrap);
+  chatScrollBottom();
+}
+
+async function chatSend() {
+  if (_chatBusy) return;
+  var input   = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send-btn');
+  var typing  = document.getElementById('chat-typing');
+  if (!input) return;
+
+  var text = input.value.trim();
+  if (!text) return;
+
+  // Show user message immediately
+  input.value = '';
+  chatAppendMsg('user', text);
+  _chatHistory.push({ role: 'user', content: text });
+
+  // Enter busy state
+  _chatBusy = true;
+  input.disabled = true;
+  if (sendBtn)  sendBtn.disabled  = true;
+  if (typing)   typing.style.display = 'flex';
+  chatScrollBottom();
+
+  try {
+    var res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: _chatHistory })
+    });
+
+    var data;
+    try { data = await res.json(); } catch (e) { data = {}; }
+
+    if (!res.ok || data.error) {
+      chatAppendMsg('bot', CHAT_FALLBACK);
+    } else {
+      var reply = (typeof data.reply === 'string' && data.reply) ? data.reply : CHAT_FALLBACK;
+      chatAppendMsg('bot', reply);
+      _chatHistory.push({ role: 'assistant', content: reply });
+    }
+  } catch (err) {
+    chatAppendMsg('bot', CHAT_FALLBACK);
+  } finally {
+    _chatBusy = false;
+    input.disabled = false;
+    if (sendBtn)  sendBtn.disabled  = false;
+    if (typing)   typing.style.display = 'none';
+    input.focus();
+    chatScrollBottom();
+  }
+}
