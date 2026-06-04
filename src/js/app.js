@@ -1,644 +1,512 @@
 'use strict';
+/* ============================================================
+   LOCAL BUSINESS AI HUB — Full Application v2
+   ============================================================ */
 
-/* =========================================================
-   LOCAL BUSINESS AI HUB — Main Application
-   ========================================================= */
+var _kit = null;      // parsed content
+var _form = null;     // form values
+var _videoId = null;  // HeyGen video_id
+var _pollTimer = null;
+var _ldMsgTimer = null;
+var _ldStepTimer = null;
 
-var _generatedData = null;
-var _formData = null;
+/* ------------------------------------------------------------
+   NAVIGATION
+   ------------------------------------------------------------ */
+function goHome() {
+  _videoId = null;
+  clearInterval(_pollTimer);
+  show('page-form');
+  hide('page-loading');
+  hide('page-results');
+  show('site-footer');
+  window.scrollTo(0, 0);
+}
 
-/* ---------------------------------------------------------
-   SECTION NAVIGATION
-   --------------------------------------------------------- */
-function showSection(name) {
-  var sections = ['section-form', 'section-loading', 'section-results'];
-  sections.forEach(function(id) {
+function scrollForm() {
+  document.getElementById('form-top').scrollIntoView({ behavior: 'smooth' });
+}
+
+function show(id) { var e = document.getElementById(id); if (e) e.style.display = 'block'; }
+function hide(id) { var e = document.getElementById(id); if (e) e.style.display = 'none'; }
+
+function setPage(name) {
+  ['page-form','page-loading','page-results'].forEach(function(id) {
     var el = document.getElementById(id);
-    if (el) el.style.display = id === 'section-' + name ? 'block' : 'none';
+    if (el) el.style.display = id === name ? 'block' : 'none';
   });
-  var footer = document.getElementById('main-footer');
-  if (footer) footer.style.display = name === 'loading' ? 'none' : 'block';
-  if (name !== 'loading') window.scrollTo(0, 0);
+  var footer = document.getElementById('site-footer');
+  if (footer) footer.style.display = name === 'page-loading' ? 'none' : '';
+  if (name !== 'page-loading') window.scrollTo(0, 0);
 }
 
-/* ---------------------------------------------------------
+/* ------------------------------------------------------------
    PROGRESS BAR
-   --------------------------------------------------------- */
+   ------------------------------------------------------------ */
 function updateProgress() {
-  var fields = [
-    document.getElementById('q-business-type'),
-    document.getElementById('q-location'),
-    document.getElementById('q-audience'),
-    document.getElementById('q-usp'),
-    document.getElementById('q-services'),
-    document.getElementById('q-price'),
-    document.getElementById('q-years'),
-    document.getElementById('q-painpoints'),
-    document.getElementById('q-strength'),
-    document.querySelector('input[name="social"]:checked'),
-    document.getElementById('api-key')
-  ];
-  var filled = fields.filter(function(f) { return f && f.value && f.value.trim(); }).length;
-  var pct = Math.round((filled / fields.length) * 100);
-  var fill = document.getElementById('progress-fill');
-  var label = document.getElementById('progress-label');
-  if (fill) fill.style.width = Math.max(6, pct) + '%';
-  if (label) {
-    var answered = Math.min(10, Math.floor((filled / fields.length) * 10));
-    label.textContent = answered < 10 ? 'Question ' + (answered + 1) + ' of 10' : 'All questions answered ✓';
-  }
+  var textIds = ['q-type','q-name','q-location','q-service','q-customer','q-usp','q-price','q-goal'];
+  var filled = textIds.filter(function(id) {
+    var el = document.getElementById(id);
+    return el && el.value && el.value.trim();
+  }).length;
+  var radios = ['years','web'].filter(function(name) {
+    return !!document.querySelector('input[name="' + name + '"]:checked');
+  }).length;
+  var total = textIds.length + 2;
+  var done = filled + radios;
+  var pct = Math.round((done / total) * 100);
+  var fill = document.getElementById('prog-fill');
+  var text = document.getElementById('prog-text');
+  if (fill) fill.style.width = Math.max(1, pct) + '%';
+  if (text) text.textContent = done + ' / ' + total + (done === total ? ' ✓' : '');
 }
 
-/* ---------------------------------------------------------
-   RADIO CARD SELECTION
-   --------------------------------------------------------- */
-function selectRadio(card, groupId) {
+/* ------------------------------------------------------------
+   RADIO CARDS
+   ------------------------------------------------------------ */
+function pickRadio(groupId, card) {
   var group = document.getElementById(groupId);
   if (!group) return;
-  group.querySelectorAll('.radio-card').forEach(function(c) { c.classList.remove('selected'); });
-  card.classList.add('selected');
-  var radio = card.querySelector('input[type="radio"]');
-  if (radio) radio.checked = true;
+  group.querySelectorAll('.radio-card').forEach(function(c) { c.classList.remove('sel'); });
+  card.classList.add('sel');
+  var r = card.querySelector('input[type="radio"]');
+  if (r) r.checked = true;
   updateProgress();
 }
 
-/* ---------------------------------------------------------
-   API KEY TOGGLE
-   --------------------------------------------------------- */
-function toggleApiKey() {
-  var inp = document.getElementById('api-key');
-  var btn = document.getElementById('api-toggle-btn');
-  if (!inp) return;
-  if (inp.type === 'password') {
-    inp.type = 'text';
-    btn.textContent = '🔒';
-  } else {
-    inp.type = 'password';
-    btn.textContent = '👁';
-  }
-}
-
-/* ---------------------------------------------------------
-   FORM VALIDATION
-   --------------------------------------------------------- */
-function getFormData() {
-  var errors = [];
-  var data = {
-    businessType:  (document.getElementById('q-business-type') || {}).value || '',
-    location:      ((document.getElementById('q-location') || {}).value || '').trim(),
-    audience:      ((document.getElementById('q-audience') || {}).value || '').trim(),
-    usp:           ((document.getElementById('q-usp') || {}).value || '').trim(),
-    services:      ((document.getElementById('q-services') || {}).value || '').trim(),
-    priceRange:    (document.getElementById('q-price') || {}).value || '',
-    years:         (document.getElementById('q-years') || {}).value || '',
-    painPoints:    ((document.getElementById('q-painpoints') || {}).value || '').trim(),
-    strength:      ((document.getElementById('q-strength') || {}).value || '').trim(),
-    hasSocial:     '',
-    apiKey:        ((document.getElementById('api-key') || {}).value || '').trim()
+/* ------------------------------------------------------------
+   FORM COLLECTION & VALIDATION
+   ------------------------------------------------------------ */
+function collectForm() {
+  function v(id) { return ((document.getElementById(id) || {}).value || '').trim(); }
+  return {
+    type:     v('q-type'),
+    name:     v('q-name'),
+    location: v('q-location'),
+    service:  v('q-service'),
+    customer: v('q-customer'),
+    usp:      v('q-usp'),
+    price:    v('q-price'),
+    years:    ((document.querySelector('input[name="years"]:checked') || {}).value) || '',
+    web:      ((document.querySelector('input[name="web"]:checked') || {}).value) || '',
+    goal:     v('q-goal')
   };
-  var socialRadio = document.querySelector('input[name="social"]:checked');
-  if (socialRadio) data.hasSocial = socialRadio.value;
-
-  if (!data.businessType) errors.push('Please select your business type.');
-  if (!data.location) errors.push('Please enter your location.');
-  if (!data.audience) errors.push('Please describe your typical customers.');
-  if (!data.usp) errors.push('Please describe what makes you different.');
-  if (!data.services) errors.push('Please list your main services.');
-  if (!data.priceRange) errors.push('Please select your price range.');
-  if (!data.years) errors.push('Please select how long you\'ve been in business.');
-  if (!data.painPoints) errors.push('Please describe your customers\' pain points.');
-  if (!data.strength) errors.push('Please describe your biggest strength.');
-  if (!data.hasSocial) errors.push('Please answer the website/social media question.');
-  if (!data.apiKey) errors.push('Please enter your Anthropic API key.');
-  if (data.apiKey && !data.apiKey.startsWith('sk-ant-')) errors.push('API key should start with sk-ant-');
-
-  return { data: data, errors: errors };
 }
 
-/* ---------------------------------------------------------
-   PROMPT BUILDER
-   --------------------------------------------------------- */
-function buildPrompt(d) {
-  return 'You are an expert UK marketing copywriter for local businesses. Generate a complete marketing kit for this business.\n\n' +
-    'BUSINESS PROFILE:\n' +
-    '- Business Type: ' + d.businessType + '\n' +
-    '- Location: ' + d.location + '\n' +
-    '- Target Audience: ' + d.audience + '\n' +
-    '- Unique Selling Point: ' + d.usp + '\n' +
-    '- Main Services: ' + d.services + '\n' +
-    '- Price Range: ' + d.priceRange + '\n' +
-    '- Time in Business: ' + d.years + '\n' +
-    '- Customer Pain Points: ' + d.painPoints + '\n' +
-    '- Biggest Strength: ' + d.strength + '\n' +
-    '- Current Online Presence: ' + d.hasSocial + '\n\n' +
-    'Generate ALL sections below. Use EXACTLY these headers — nothing before the first header.\n\n' +
-
-    '=== LANDING PAGE ===\n' +
-    'HEADLINE: [Write a compelling, specific headline for this exact business and location. 8-12 words.]\n' +
-    'SUBHEADLINE: [Write a supporting subheadline. 15-20 words. Reference the location.]\n' +
-    'BODY:\n' +
-    '[Write exactly 200 words of professional website body copy. Reference the business type, location, services and USP specifically. End with a clear call to action.]\n\n' +
-
-    '=== EMAIL 1: ENQUIRY RESPONSE ===\n' +
-    'SUBJECT: [Subject line]\n' +
-    'BODY:\n' +
-    '[Professional email sent within minutes of receiving an enquiry. Warm, responsive, mentions their specific enquiry, gives next steps. 100-130 words.]\n\n' +
-
-    '=== EMAIL 2: QUOTE FOLLOW-UP ===\n' +
-    'SUBJECT: [Subject line]\n' +
-    'BODY:\n' +
-    '[Sent 3 days after sending a quote if no reply. Polite, adds a small extra value point, easy next step. 80-100 words.]\n\n' +
-
-    '=== EMAIL 3: REVIEW REQUEST ===\n' +
-    'SUBJECT: [Subject line]\n' +
-    'BODY:\n' +
-    '[Sent after completing a job. Genuine, grateful, makes leaving a Google review feel easy and worthwhile. 80-100 words.]\n\n' +
-
-    '=== EMAIL 4: SEASONAL PROMOTION ===\n' +
-    'SUBJECT: [Subject line]\n' +
-    'BODY:\n' +
-    '[A seasonal offer email relevant to the business type — spring clean, winter prep, new year check-up etc. Creates urgency without being pushy. 100-120 words.]\n\n' +
-
-    '=== EMAIL 5: REFERRAL REQUEST ===\n' +
-    'SUBJECT: [Subject line]\n' +
-    'BODY:\n' +
-    '[Sent to a happy customer asking for referrals. Friendly, explains why referrals matter to a small business, makes it easy to share. 80-100 words.]\n\n' +
-
-    '=== SOCIAL POST 1 (Facebook) ===\n' +
-    '[Facebook post. Conversational, warm community feel. 3-4 sentences + space + hashtags on own line. Starts with an engaging first line.]\n' +
-    'HASHTAGS: [5-7 relevant hashtags]\n\n' +
-
-    '=== SOCIAL POST 2 (Instagram) ===\n' +
-    '[Instagram post. Visual hook first. 3-4 punchy sentences. Slightly more aspirational/inspirational than Facebook.]\n' +
-    'HASHTAGS: [8-10 relevant hashtags including location]\n\n' +
-
-    '=== SOCIAL POST 3 (LinkedIn) ===\n' +
-    '[LinkedIn post. More professional. Could be a tip, insight or behind-the-scenes. 4-5 sentences. Professional but human.]\n' +
-    'HASHTAGS: [4-5 professional hashtags]\n\n' +
-
-    '=== SOCIAL POST 4 (Facebook) ===\n' +
-    '[Facebook post about a customer result or transformation — keep anonymous. Story format. 3-4 sentences.]\n' +
-    'HASHTAGS: [5-7 relevant hashtags]\n\n' +
-
-    '=== SOCIAL POST 5 (Instagram) ===\n' +
-    '[Instagram post. A tip or piece of advice related to the business type. Educational content.]\n' +
-    'HASHTAGS: [8-10 hashtags]\n\n' +
-
-    '=== SOCIAL POST 6 (LinkedIn) ===\n' +
-    '[LinkedIn. The story of why this business exists / the owner\'s passion for their trade. Human and authentic.]\n' +
-    'HASHTAGS: [4-5 hashtags]\n\n' +
-
-    '=== SOCIAL POST 7 (Facebook) ===\n' +
-    '[Facebook. Seasonal or timely content relevant to the business. Could be a warning, a tip or a promotion.]\n' +
-    'HASHTAGS: [5-7 hashtags]\n\n' +
-
-    '=== SOCIAL POST 8 (Instagram) ===\n' +
-    '[Instagram. Before and after style post OR a "did you know" fact about the trade. Engaging and shareable.]\n' +
-    'HASHTAGS: [8-10 hashtags]\n\n' +
-
-    '=== SOCIAL POST 9 (Facebook) ===\n' +
-    '[Facebook. A question or poll-style post to drive engagement. Relates to a common customer question or decision.]\n' +
-    'HASHTAGS: [5-7 hashtags]\n\n' +
-
-    '=== SOCIAL POST 10 (LinkedIn) ===\n' +
-    '[LinkedIn. A piece of industry insight, a prediction or a strong opinion about the trade. Shows expertise.]\n' +
-    'HASHTAGS: [4-5 hashtags]\n\n' +
-
-    '=== QUOTE GRAPHIC 1 ===\n' +
-    'QUOTE: "[An inspiring or powerful quote about their service, quality, or customer care. 15-25 words. First person from the business owner.]"\n' +
-    'ATTRIBUTION: [Business owner title / business name]\n' +
-    'DESIGN NOTES: [2-3 sentences of design guidance: suggested colours, mood, typography feel]\n\n' +
-
-    '=== QUOTE GRAPHIC 2 ===\n' +
-    'QUOTE: "[A quote about reliability, trust or peace of mind. 15-25 words. First person.]"\n' +
-    'ATTRIBUTION: [Title]\n' +
-    'DESIGN NOTES: [Design guidance]\n\n' +
-
-    '=== QUOTE GRAPHIC 3 ===\n' +
-    'QUOTE: "[A quote about the customer experience or transformation. 15-25 words.]"\n' +
-    'ATTRIBUTION: [Title]\n' +
-    'DESIGN NOTES: [Design guidance]\n\n' +
-
-    '=== QUOTE GRAPHIC 4 ===\n' +
-    'QUOTE: "[A quote about expertise or passion for the trade. 15-25 words.]"\n' +
-    'ATTRIBUTION: [Title]\n' +
-    'DESIGN NOTES: [Design guidance]\n\n' +
-
-    '=== QUOTE GRAPHIC 5 ===\n' +
-    'QUOTE: "[A quote about community, local pride or being part of the area. References the location. 15-25 words.]"\n' +
-    'ATTRIBUTION: [Title]\n' +
-    'DESIGN NOTES: [Design guidance]\n\n' +
-
-    'Make EVERYTHING specific to this exact business, location and audience. Never use placeholder text. Write as if you know this business personally.';
+function validateForm(f) {
+  if (!f.type)     return 'Please select your business type.';
+  if (!f.name)     return 'Please enter your business name.';
+  if (!f.location) return 'Please enter your location / service area.';
+  if (!f.service)  return 'Please describe your key service or product.';
+  if (!f.customer) return 'Please describe your ideal customer.';
+  if (!f.usp)      return 'Please describe what makes you different.';
+  if (!f.price)    return 'Please select your price range.';
+  if (!f.years)    return 'Please select how long you\'ve been in business.';
+  if (!f.web)      return 'Please answer the website/social media question.';
+  if (!f.goal)     return 'Please describe your main challenge and goal.';
+  return null;
 }
 
-/* ---------------------------------------------------------
-   API CALL
-   --------------------------------------------------------- */
-async function callAnthropic(prompt, apiKey) {
-  var response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 8000,
-      system: 'You are an expert UK marketing copywriter. Generate structured marketing content using EXACTLY the section headers specified. Never add preamble or commentary. Start directly with the first section header.',
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-  if (!response.ok) {
-    var errData = await response.json().catch(function() { return {}; });
-    throw new Error((errData.error && errData.error.message) || 'API error ' + response.status);
-  }
-  var data = await response.json();
-  if (!data.content || !data.content[0]) throw new Error('No content returned from API.');
-  return data.content[0].text;
-}
-
-/* ---------------------------------------------------------
-   CONTENT PARSER
-   --------------------------------------------------------- */
-function extractSection(text, startMarker, endMarker) {
-  var s = text.indexOf(startMarker);
-  if (s === -1) return '';
-  s += startMarker.length;
-  var e = endMarker ? text.indexOf(endMarker, s) : text.length;
-  if (e === -1) e = text.length;
-  return text.slice(s, e).trim();
-}
-
-function extractField(block, fieldName) {
-  var pattern = new RegExp(fieldName + ':\\s*([^\\n]+(?:\\n(?!' + ['HEADLINE','SUBHEADLINE','BODY','SUBJECT','HASHTAGS','QUOTE','ATTRIBUTION','DESIGN NOTES'].join('|') + ')[^\\n]+)*)', 'i');
-  var m = block.match(pattern);
-  return m ? m[1].trim().replace(/^\[|]$/g, '') : '';
-}
-
-function parseContent(text) {
-  var sections = [
-    '=== LANDING PAGE ===',
-    '=== EMAIL 1: ENQUIRY RESPONSE ===',
-    '=== EMAIL 2: QUOTE FOLLOW-UP ===',
-    '=== EMAIL 3: REVIEW REQUEST ===',
-    '=== EMAIL 4: SEASONAL PROMOTION ===',
-    '=== EMAIL 5: REFERRAL REQUEST ===',
-    '=== SOCIAL POST 1 (Facebook) ===',
-    '=== SOCIAL POST 2 (Instagram) ===',
-    '=== SOCIAL POST 3 (LinkedIn) ===',
-    '=== SOCIAL POST 4 (Facebook) ===',
-    '=== SOCIAL POST 5 (Instagram) ===',
-    '=== SOCIAL POST 6 (LinkedIn) ===',
-    '=== SOCIAL POST 7 (Facebook) ===',
-    '=== SOCIAL POST 8 (Instagram) ===',
-    '=== SOCIAL POST 9 (Facebook) ===',
-    '=== SOCIAL POST 10 (LinkedIn) ===',
-    '=== QUOTE GRAPHIC 1 ===',
-    '=== QUOTE GRAPHIC 2 ===',
-    '=== QUOTE GRAPHIC 3 ===',
-    '=== QUOTE GRAPHIC 4 ===',
-    '=== QUOTE GRAPHIC 5 ==='
-  ];
-
-  function getBlock(marker, nextMarker) {
-    return extractSection(text, marker, nextMarker || null);
-  }
-
-  // Landing Page
-  var landingBlock = getBlock('=== LANDING PAGE ===', '=== EMAIL 1');
-  var bodyMatch = landingBlock.match(/BODY:\s*\n([\s\S]+?)(?=\n===|$)/i);
-  var landing = {
-    headline: extractField(landingBlock, 'HEADLINE'),
-    subheadline: extractField(landingBlock, 'SUBHEADLINE'),
-    body: bodyMatch ? bodyMatch[1].trim().replace(/^\[|]$/g, '') : ''
-  };
-
-  // Emails
-  var emailDefs = [
-    { key: 'enquiry',  label: 'Enquiry Response',  badge: 'badge-enquiry',  marker: '=== EMAIL 1: ENQUIRY RESPONSE ===',  next: '=== EMAIL 2' },
-    { key: 'followup', label: 'Quote Follow-Up',   badge: 'badge-followup', marker: '=== EMAIL 2: QUOTE FOLLOW-UP ===',    next: '=== EMAIL 3' },
-    { key: 'review',   label: 'Review Request',    badge: 'badge-review',   marker: '=== EMAIL 3: REVIEW REQUEST ===',     next: '=== EMAIL 4' },
-    { key: 'seasonal', label: 'Seasonal Promotion',badge: 'badge-seasonal', marker: '=== EMAIL 4: SEASONAL PROMOTION ===', next: '=== EMAIL 5' },
-    { key: 'referral', label: 'Referral Request',  badge: 'badge-referral', marker: '=== EMAIL 5: REFERRAL REQUEST ===',   next: '=== SOCIAL POST 1' }
-  ];
-  var emails = emailDefs.map(function(e) {
-    var block = getBlock(e.marker, e.next);
-    var bodyM = block.match(/BODY:\s*\n([\s\S]+?)(?=\n===|$)/i);
-    return {
-      key: e.key, label: e.label, badge: e.badge,
-      subject: extractField(block, 'SUBJECT'),
-      body: bodyM ? bodyM[1].trim().replace(/^\[|]$/g, '') : block
-    };
-  });
-
-  // Social Posts
-  var socialDefs = [
-    { num: 1,  platform: 'Facebook',  next: '=== SOCIAL POST 2' },
-    { num: 2,  platform: 'Instagram', next: '=== SOCIAL POST 3' },
-    { num: 3,  platform: 'LinkedIn',  next: '=== SOCIAL POST 4' },
-    { num: 4,  platform: 'Facebook',  next: '=== SOCIAL POST 5' },
-    { num: 5,  platform: 'Instagram', next: '=== SOCIAL POST 6' },
-    { num: 6,  platform: 'LinkedIn',  next: '=== SOCIAL POST 7' },
-    { num: 7,  platform: 'Facebook',  next: '=== SOCIAL POST 8' },
-    { num: 8,  platform: 'Instagram', next: '=== SOCIAL POST 9' },
-    { num: 9,  platform: 'Facebook',  next: '=== SOCIAL POST 10' },
-    { num: 10, platform: 'LinkedIn',  next: '=== QUOTE GRAPHIC 1' }
-  ];
-  var posts = socialDefs.map(function(p) {
-    var marker = '=== SOCIAL POST ' + p.num + ' (' + p.platform + ') ===';
-    var block = getBlock(marker, p.next);
-    var hashMatch = block.match(/HASHTAGS:\s*([^\n]+)/i);
-    var hashText = hashMatch ? hashMatch[1].trim() : '';
-    var postText = block.replace(/HASHTAGS:\s*[^\n]+/i, '').trim();
-    return {
-      num: p.num,
-      platform: p.platform,
-      text: postText,
-      hashtags: hashText
-    };
-  });
-
-  // Quote Graphics
-  var quoteDefs = [
-    { num: 1, next: '=== QUOTE GRAPHIC 2' },
-    { num: 2, next: '=== QUOTE GRAPHIC 3' },
-    { num: 3, next: '=== QUOTE GRAPHIC 4' },
-    { num: 4, next: '=== QUOTE GRAPHIC 5' },
-    { num: 5, next: null }
-  ];
-  var quotes = quoteDefs.map(function(q) {
-    var marker = '=== QUOTE GRAPHIC ' + q.num + ' ===';
-    var block = getBlock(marker, q.next);
-    var dnMatch = block.match(/DESIGN NOTES:\s*([\s\S]+?)(?=\n===|$)/i);
-    return {
-      num: q.num,
-      quote: extractField(block, 'QUOTE').replace(/^"|"$/g, ''),
-      attribution: extractField(block, 'ATTRIBUTION'),
-      designNotes: dnMatch ? dnMatch[1].trim() : ''
-    };
-  });
-
-  return { landing: landing, emails: emails, posts: posts, quotes: quotes, raw: text };
-}
-
-/* ---------------------------------------------------------
+/* ------------------------------------------------------------
    LOADING ANIMATION
-   --------------------------------------------------------- */
-var _loadingTimer = null;
-var _stepTimer = null;
+   ------------------------------------------------------------ */
+var LDMsgs = [
+  'Analysing your business profile…',
+  'Writing your landing page copy…',
+  'Crafting your email templates…',
+  'Building your social media posts…',
+  'Writing your video script…',
+  'Finalising your complete kit…'
+];
 
 function startLoading() {
-  var messages = [
-    'Analysing your business profile',
-    'Writing your landing page copy',
-    'Crafting your email templates',
-    'Creating your social media posts',
-    'Designing your quote graphics',
-    'Putting the finishing touches on your kit'
-  ];
-  var steps = ['lstep-1', 'lstep-2', 'lstep-3', 'lstep-4'];
+  var mi = 0;
   var msgEl = document.getElementById('loading-msg');
-  var msgIdx = 0;
-  var stepIdx = 0;
+  var steps = ['ls-content','ls-video','ls-done'];
+  var si = 0;
 
-  function nextMsg() {
-    msgIdx = (msgIdx + 1) % messages.length;
-    if (msgEl) {
-      msgEl.innerHTML = messages[msgIdx] + '<span class="ldot">.</span><span class="ldot">.</span><span class="ldot">.</span>';
-    }
-  }
-
+  function nextMsg() { mi = (mi + 1) % LDMsgs.length; if (msgEl) msgEl.textContent = LDMsgs[mi]; }
   function nextStep() {
-    if (stepIdx < steps.length) {
-      if (stepIdx > 0) {
-        var prev = document.getElementById(steps[stepIdx - 1]);
-        if (prev) { prev.classList.remove('active'); prev.classList.add('done'); }
-      }
-      var cur = document.getElementById(steps[stepIdx]);
-      if (cur) cur.classList.add('active');
-      stepIdx++;
-    }
+    if (si > 0) { var p = document.getElementById(steps[si-1]); if (p) { p.classList.remove('active'); p.classList.add('done'); } }
+    var c = document.getElementById(steps[si]); if (c) c.classList.add('active');
+    si++;
   }
 
-  if (msgEl) msgEl.innerHTML = messages[0] + '<span class="ldot">.</span><span class="ldot">.</span><span class="ldot">.</span>';
+  if (msgEl) msgEl.textContent = LDMsgs[0];
   nextStep();
-  _loadingTimer = setInterval(nextMsg, 2500);
-  _stepTimer = setInterval(nextStep, 4000);
+  _ldMsgTimer = setInterval(nextMsg, 3000);
+  _ldStepTimer = setInterval(nextStep, 8000);
 }
 
 function stopLoading() {
-  clearInterval(_loadingTimer);
-  clearInterval(_stepTimer);
-  var steps = ['lstep-1', 'lstep-2', 'lstep-3', 'lstep-4'];
-  steps.forEach(function(id) {
+  clearInterval(_ldMsgTimer);
+  clearInterval(_ldStepTimer);
+  ['ls-content','ls-video','ls-done'].forEach(function(id) {
     var el = document.getElementById(id);
     if (el) { el.classList.remove('active'); el.classList.add('done'); }
   });
 }
 
-/* ---------------------------------------------------------
-   MAIN GENERATE FUNCTION
-   --------------------------------------------------------- */
-async function generateKit() {
-  var errEl = document.getElementById('form-error');
+function resetLoadingUI() {
+  ['ls-content','ls-video','ls-done'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.className = 'lstep';
+  });
+  var msg = document.getElementById('loading-msg');
+  if (msg) msg.textContent = LDMsgs[0];
+}
+
+/* ------------------------------------------------------------
+   MAIN GENERATE FLOW
+   ------------------------------------------------------------ */
+async function startGenerate() {
+  var errEl = document.getElementById('form-err');
   errEl.style.display = 'none';
 
-  var result = getFormData();
-  if (result.errors.length > 0) {
-    errEl.textContent = result.errors[0];
+  var f = collectForm();
+  var err = validateForm(f);
+  if (err) {
+    errEl.textContent = err;
     errEl.style.display = 'block';
     errEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     return;
   }
 
-  var btn = document.getElementById('generate-btn');
+  _form = f;
+  var btn = document.getElementById('gen-btn');
   btn.disabled = true;
 
-  _formData = result.data;
-  showSection('loading');
+  resetLoadingUI();
+  setPage('page-loading');
   startLoading();
 
   try {
-    var prompt = buildPrompt(result.data);
-    var rawText = await callAnthropic(prompt, result.data.apiKey);
-    _generatedData = parseContent(rawText);
+    // Step 1: generate text content
+    var res = await fetch('/.netlify/functions/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(f)
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Generation failed.');
+    _kit = parse(data.text);
+
+    // Step 2: kick off HeyGen video (non-blocking)
+    if (_kit.videoScript) {
+      startVideoGeneration(_kit.videoScript, f.name);
+    }
+
     stopLoading();
-    renderResults(_generatedData, result.data);
-    showSection('results');
-  } catch (err) {
+    renderResults(_kit, f);
+    setPage('page-results');
+
+  } catch (e) {
     stopLoading();
-    showSection('form');
+    setPage('page-form');
     btn.disabled = false;
-    errEl.textContent = 'Generation failed: ' + err.message + '. Please check your API key and try again.';
+    errEl.textContent = 'Error: ' + e.message;
     errEl.style.display = 'block';
     document.getElementById('form-top').scrollIntoView({ behavior: 'smooth' });
   }
 }
 
-/* ---------------------------------------------------------
-   RESULTS RENDERING
-   --------------------------------------------------------- */
+/* ------------------------------------------------------------
+   CONTENT PARSER
+   ------------------------------------------------------------ */
+function extract(text, start, end) {
+  var s = text.indexOf(start);
+  if (s === -1) return '';
+  s += start.length;
+  var e = end ? text.indexOf(end, s) : text.length;
+  return text.slice(s, e < 0 ? text.length : e).trim();
+}
+
+function extractLine(block, key) {
+  var m = block.match(new RegExp(key + ':\\s*([^\\n]+)', 'i'));
+  return m ? m[1].trim().replace(/^\[|]$/g, '') : '';
+}
+
+function extractBody(block) {
+  var m = block.match(/BODY:\s*\n([\s\S]+?)(?=\n===|$)/i);
+  return m ? m[1].trim() : '';
+}
+
+function parse(raw) {
+  // Landing page
+  var lpBlock = extract(raw, '=== LANDING PAGE ===', '=== EMAIL 1');
+  var landing = {
+    headline:    extractLine(lpBlock, 'HEADLINE'),
+    subheadline: extractLine(lpBlock, 'SUBHEADLINE'),
+    body:        extractBody(lpBlock)
+  };
+
+  // Emails
+  var emailMeta = [
+    { label: 'Enquiry Reply',   badge: 'eb-1', start: '=== EMAIL 1: ENQUIRY REPLY ===',    next: '=== EMAIL 2' },
+    { label: 'Quote Follow-Up', badge: 'eb-2', start: '=== EMAIL 2: QUOTE FOLLOW-UP ===',  next: '=== EMAIL 3' },
+    { label: 'Review Request',  badge: 'eb-3', start: '=== EMAIL 3: REVIEW REQUEST ===',   next: '=== EMAIL 4' },
+    { label: 'Seasonal Offer',  badge: 'eb-4', start: '=== EMAIL 4: SEASONAL OFFER ===',   next: '=== EMAIL 5' },
+    { label: 'Referral Request',badge: 'eb-5', start: '=== EMAIL 5: REFERRAL REQUEST ===', next: '=== SOCIAL POST 1' }
+  ];
+  var emails = emailMeta.map(function(m) {
+    var block = extract(raw, m.start, m.next);
+    return { label: m.label, badge: m.badge, subject: extractLine(block, 'SUBJECT'), body: extractBody(block) || block };
+  });
+
+  // Social posts
+  var platCycle = ['Facebook','Instagram','LinkedIn','Facebook','Instagram','LinkedIn','Facebook','Instagram','Facebook','LinkedIn'];
+  var posts = [];
+  for (var i = 1; i <= 10; i++) {
+    var plat = platCycle[i - 1];
+    var s = '=== SOCIAL POST ' + i + ' (' + plat + ') ===';
+    var n = i < 10 ? '=== SOCIAL POST ' + (i + 1) : '=== VIDEO SCRIPT ===';
+    var block = extract(raw, s, n);
+    var hashMatch = block.match(/HASHTAGS:\s*([^\n]+)/i);
+    var postText = block.replace(/^POST:\s*/i, '').replace(/HASHTAGS:\s*[^\n]+/i, '').trim();
+    posts.push({ num: i, platform: plat, text: postText, hashtags: hashMatch ? hashMatch[1].trim() : '' });
+  }
+
+  // Video script
+  var videoScript = extract(raw, '=== VIDEO SCRIPT ===', null);
+
+  return { landing, emails, posts, videoScript };
+}
+
+/* ------------------------------------------------------------
+   HEYGEN VIDEO GENERATION
+   ------------------------------------------------------------ */
+async function startVideoGeneration(script, businessName) {
+  try {
+    var res = await fetch('/.netlify/functions/video', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ script, businessName })
+    });
+    var data = await res.json();
+    if (data.data && data.data.video_id) {
+      _videoId = data.data.video_id;
+      renderVideoPanel('pending', null);
+      pollVideo();
+    } else {
+      renderVideoPanel('error', 'Video generation could not be started: ' + (data.error || JSON.stringify(data)));
+    }
+  } catch (e) {
+    renderVideoPanel('error', 'Video request failed: ' + e.message);
+  }
+}
+
+function pollVideo() {
+  clearInterval(_pollTimer);
+  _pollTimer = setInterval(async function() {
+    if (!_videoId) { clearInterval(_pollTimer); return; }
+    try {
+      var res = await fetch('/.netlify/functions/video?video_id=' + _videoId);
+      var data = await res.json();
+      var d = data.data || data;
+      var status = d.status;
+      if (status === 'completed') {
+        clearInterval(_pollTimer);
+        renderVideoPanel('ready', d.video_url);
+      } else if (status === 'failed') {
+        clearInterval(_pollTimer);
+        renderVideoPanel('error', 'Video generation failed. Please try again.');
+      }
+      // 'processing' or 'pending' — keep polling
+    } catch (e) { /* keep polling */ }
+  }, 8000); // poll every 8 seconds
+}
+
+/* ------------------------------------------------------------
+   RENDER RESULTS
+   ------------------------------------------------------------ */
 function esc(s) {
-  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function copyBtn(label, content) {
-  return '<button class="copy-btn" onclick="copyText(this,' + JSON.stringify(content) + ')">' +
-    '<span>📋</span>' + label + '</button>';
+function cpBtn(text, label) {
+  return '<button class="copy-btn" onclick="copyText(this,' + JSON.stringify(text) + ')">' +
+    '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+    ' ' + (label || 'Copy') + '</button>';
 }
 
-function renderResults(data, formData) {
-  // Update subtitle
-  var sub = document.getElementById('results-biz-label');
-  if (sub) sub.textContent = 'Complete marketing kit for ' + formData.businessType + ' · ' + formData.location;
-
-  renderLanding(data.landing);
-  renderEmails(data.emails);
-  renderPosts(data.posts);
-  renderQuotes(data.quotes);
+function renderResults(kit, f) {
+  var desc = document.getElementById('results-desc');
+  if (desc) desc.textContent = f.name + ' · ' + f.location + ' · ' + f.type;
+  renderLanding(kit.landing, f);
+  renderEmails(kit.emails);
+  renderPosts(kit.posts);
+  renderVideoPanel('initial', kit.videoScript);
 }
 
-function renderLanding(landing) {
-  var el = document.getElementById('landing-content');
+function renderLanding(l, f) {
+  var el = document.getElementById('out-landing');
   if (!el) return;
+  var allText = (l.headline || '') + '\n\n' + (l.subheadline || '') + '\n\n' + (l.body || '');
   el.innerHTML = [
-    '<div class="landing-field">',
-    '  <div class="landing-field-label">',
-    '    <span class="landing-field-title">Main Headline</span>',
-    '    ' + copyBtn('Copy headline', landing.headline),
+    '<div class="lp-block">',
+    '  <div class="lp-section">',
+    '    <div class="lp-row"><span class="lp-tag">Headline</span>' + cpBtn(l.headline, 'Copy headline') + '</div>',
+    '    <div class="lp-headline">' + esc(l.headline) + '</div>',
     '  </div>',
-    '  <div class="landing-headline-text">' + esc(landing.headline) + '</div>',
-    '</div>',
-    '<div class="landing-field">',
-    '  <div class="landing-field-label">',
-    '    <span class="landing-field-title">Subheadline</span>',
-    '    ' + copyBtn('Copy subheadline', landing.subheadline),
+    '  <div class="lp-section">',
+    '    <div class="lp-row"><span class="lp-tag">Subheadline</span>' + cpBtn(l.subheadline, 'Copy') + '</div>',
+    '    <div class="lp-subheadline">' + esc(l.subheadline) + '</div>',
     '  </div>',
-    '  <div class="landing-sub-text">' + esc(landing.subheadline) + '</div>',
-    '</div>',
-    '<div class="landing-field">',
-    '  <div class="landing-field-label">',
-    '    <span class="landing-field-title">Body Copy (~200 words)</span>',
-    '    ' + copyBtn('Copy body copy', landing.body),
+    '  <div class="lp-section">',
+    '    <div class="lp-row"><span class="lp-tag">Body Copy — 300–500 words</span>' + cpBtn(l.body, 'Copy body') + '</div>',
+    '    <div class="lp-body">' + esc(l.body) + '</div>',
     '  </div>',
-    '  <div class="landing-body-text">' + esc(landing.body) + '</div>',
-    '</div>',
-    '<div class="landing-field" style="background:var(--surface)">',
-    '  <div class="landing-field-label">',
-    '    <span class="landing-field-title">Copy All Landing Page Copy</span>',
-    '    ' + copyBtn('Copy all', landing.headline + '\n\n' + landing.subheadline + '\n\n' + landing.body),
-    '  </div>',
-    '  <p style="font-size:12px;color:var(--muted);">Copies headline + subheadline + body copy in one click.</p>',
+    '  <div class="lp-copy-all"><span>Copy all landing page copy at once</span>' + cpBtn(allText, 'Copy all') + '</div>',
     '</div>'
   ].join('');
 }
 
 function renderEmails(emails) {
-  var el = document.getElementById('emails-content');
+  var el = document.getElementById('out-emails');
   if (!el) return;
-  el.innerHTML = emails.map(function(email, i) {
-    var allText = 'Subject: ' + email.subject + '\n\n' + email.body;
+  el.innerHTML = emails.map(function(e, i) {
+    var all = 'Subject: ' + (e.subject || '') + '\n\n' + (e.body || '');
     return [
       '<div class="email-card">',
-      '  <div class="email-header">',
+      '  <div class="email-top">',
       '    <div>',
-      '      <span class="email-type-badge ' + email.badge + '">Email ' + (i + 1) + ' — ' + email.label + '</span>',
-      '      <div class="email-subject"><span class="email-subject-label">Subject:</span>' + esc(email.subject) + '</div>',
+      '      <span class="email-badge ' + e.badge + '">Email ' + (i+1) + ' — ' + e.label + '</span>',
+      '      <div class="email-subject"><span class="email-subj-tag">Subject:</span>' + esc(e.subject) + '</div>',
       '    </div>',
-      '    ' + copyBtn('Copy email', allText),
+      '    ' + cpBtn(all, 'Copy email'),
       '  </div>',
-      '  <div class="email-body-wrap">',
-      '    <div class="email-body">' + esc(email.body) + '</div>',
-      '  </div>',
+      '  <div class="email-body-text">' + esc(e.body) + '</div>',
       '</div>'
     ].join('');
   }).join('');
 }
 
 function renderPosts(posts) {
-  var el = document.getElementById('social-content');
+  var el = document.getElementById('out-social');
   if (!el) return;
-  var platformColors = { 'Facebook': 'badge-fb', 'Instagram': 'badge-ig', 'LinkedIn': 'badge-li' };
-  el.innerHTML = posts.map(function(post) {
-    var allText = post.text + (post.hashtags ? '\n\n' + post.hashtags : '');
+  var pillClass = { Facebook: 'pp-fb', Instagram: 'pp-ig', LinkedIn: 'pp-li' };
+  el.innerHTML = posts.map(function(p) {
+    var all = (p.text || '') + (p.hashtags ? '\n\n' + p.hashtags : '');
     return [
-      '<div class="social-card" data-platform="' + esc(post.platform) + '">',
-      '  <div class="social-card-header">',
-      '    <div class="platform-badge ' + (platformColors[post.platform] || '') + '">' + esc(post.platform) + '</div>',
-      '    <span class="social-post-num">Post ' + post.num + '</span>',
+      '<div class="social-card" data-plat="' + p.platform + '">',
+      '  <div class="social-top">',
+      '    <div class="plat-pill ' + (pillClass[p.platform] || '') + '">' + p.platform + '</div>',
+      '    <span class="post-n">Post ' + p.num + '</span>',
       '  </div>',
       '  <div class="social-body">',
-      '    <div class="social-text">' + esc(post.text) + '</div>',
-      post.hashtags ? '    <div class="social-hashtags">' + esc(post.hashtags) + '</div>' : '',
-      '    <div style="margin-top:12px;">' + copyBtn('Copy post', allText) + '</div>',
+      '    <div class="post-txt">' + esc(p.text) + '</div>',
+      p.hashtags ? '    <div class="post-tags">' + esc(p.hashtags) + '</div>' : '',
       '  </div>',
+      '  <div class="social-foot">' + cpBtn(all, 'Copy post') + '</div>',
       '</div>'
     ].join('');
   }).join('');
 }
 
-function renderQuotes(quotes) {
-  var el = document.getElementById('quotes-content');
+function renderVideoPanel(state, payload) {
+  var el = document.getElementById('out-video');
   if (!el) return;
-  var gradients = ['qg-1', 'qg-2', 'qg-3', 'qg-4', 'qg-5'];
-  el.innerHTML = quotes.map(function(q, i) {
-    var allText = '"' + q.quote + '" — ' + q.attribution;
-    return [
-      '<div class="quote-card-wrap">',
-      '  <div class="quote-graphic ' + gradients[i] + '">',
-      '    <div class="quote-text">' + esc(q.quote) + '</div>',
-      '    <div class="quote-attr">— ' + esc(q.attribution) + '</div>',
+  var script = (_kit && _kit.videoScript) ? _kit.videoScript : '';
+  var scriptHtml = script ? [
+    '<div class="script-box" style="margin-top:20px;">',
+    '  <div class="script-top"><h3>Video Script</h3>' + cpBtn(script, 'Copy script') + '</div>',
+    '  <div class="script-text">' + esc(script) + '</div>',
+    '</div>'
+  ].join('') : '';
+
+  var videoHtml = '';
+  if (state === 'initial') {
+    videoHtml = [
+      '<div class="video-wrap">',
+      '  <div class="video-player-wrap">',
+      '    <div class="video-pending">',
+      '      <div class="v-spinner"></div>',
+      '      <h3>Generating your video…</h3>',
+      '      <p>HeyGen is rendering your talking-head video. This usually takes 2–5 minutes.</p>',
+      '    </div>',
       '  </div>',
-      '  <div class="quote-card-actions">',
-      '    ' + copyBtn('Copy quote text', allText),
+      '  <div class="video-info"><p>Video generation started automatically. This panel will update when ready.</p></div>',
+      '</div>'
+    ].join('');
+  } else if (state === 'pending') {
+    videoHtml = [
+      '<div class="video-wrap">',
+      '  <div class="video-player-wrap">',
+      '    <div class="video-pending">',
+      '      <div class="v-spinner"></div>',
+      '      <h3>Rendering your video…</h3>',
+      '      <p>HeyGen is processing. Checking every 8 seconds. Usually takes 2–5 minutes.</p>',
+      '    </div>',
       '  </div>',
-      '  <div class="quote-design-note">',
-      '    <div class="quote-design-label">Design notes for your designer</div>',
-      '    ' + esc(q.designNotes),
+      '  <div class="video-info"><p>Video ID: ' + esc(_videoId || '') + '</p></div>',
+      '</div>'
+    ].join('');
+  } else if (state === 'ready') {
+    var url = payload || '';
+    videoHtml = [
+      '<div class="video-wrap">',
+      '  <div class="video-player-wrap">',
+      '    <video controls src="' + esc(url) + '">Your browser does not support video.</video>',
+      '  </div>',
+      '  <div class="video-info">',
+      '    <p>Your AI marketing video is ready.</p>',
+      '    <div style="display:flex;gap:8px;flex-wrap:wrap;">',
+      '      <a href="' + esc(url) + '" download="marketing-video.mp4" class="btn-download" style="background:var(--blue);color:#fff;border:none;">⬇ Download MP4</a>',
+      '    </div>',
       '  </div>',
       '</div>'
     ].join('');
-  }).join('');
+  } else if (state === 'error') {
+    videoHtml = [
+      '<div class="video-wrap">',
+      '  <div class="video-player-wrap">',
+      '    <div class="video-error">',
+      '      <p>⚠️ ' + esc(payload || 'Video generation failed.') + '</p>',
+      '      <button onclick="retryVideo()" class="video-gen-btn" style="margin-top:14px;">Retry Video Generation</button>',
+      '    </div>',
+      '  </div>',
+      '</div>'
+    ].join('');
+  }
+
+  el.innerHTML = videoHtml + scriptHtml;
 }
 
-/* ---------------------------------------------------------
+function retryVideo() {
+  if (_kit && _kit.videoScript && _form) {
+    renderVideoPanel('pending', null);
+    startVideoGeneration(_kit.videoScript, _form.name);
+  }
+}
+
+/* ------------------------------------------------------------
    TAB SWITCHING
-   --------------------------------------------------------- */
-function switchTab(name, btn) {
-  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.querySelectorAll('.tab-panel').forEach(function(p) { p.style.display = 'none'; p.classList.remove('active'); });
+   ------------------------------------------------------------ */
+function showTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.panel').forEach(function(p) { p.style.display = 'none'; p.classList.remove('active'); });
   if (btn) btn.classList.add('active');
-  var panel = document.getElementById('tab-' + name);
+  var panel = document.getElementById('panel-' + name);
   if (panel) { panel.style.display = 'block'; panel.classList.add('active'); }
 }
 
-/* ---------------------------------------------------------
-   PLATFORM FILTER
-   --------------------------------------------------------- */
-function filterPosts(platform, btn) {
-  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+function filterPosts(plat, btn) {
+  document.querySelectorAll('.pf-btn').forEach(function(b) { b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
-  document.querySelectorAll('.social-card').forEach(function(card) {
-    var p = card.getAttribute('data-platform');
-    card.style.display = (platform === 'all' || p === platform) ? 'block' : 'none';
+  document.querySelectorAll('.social-card').forEach(function(c) {
+    c.style.display = (plat === 'all' || c.getAttribute('data-plat') === plat) ? '' : 'none';
   });
 }
 
-/* ---------------------------------------------------------
-   COPY TO CLIPBOARD
-   --------------------------------------------------------- */
+/* ------------------------------------------------------------
+   CLIPBOARD
+   ------------------------------------------------------------ */
 function copyText(btn, text) {
   navigator.clipboard.writeText(text).then(function() {
     btn.classList.add('copied');
     var orig = btn.innerHTML;
-    btn.innerHTML = '<span>✓</span> Copied!';
-    setTimeout(function() {
-      btn.classList.remove('copied');
-      btn.innerHTML = orig;
-    }, 2000);
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
   }).catch(function() {
     var ta = document.createElement('textarea');
     ta.value = text;
@@ -649,260 +517,87 @@ function copyText(btn, text) {
   });
 }
 
-/* ---------------------------------------------------------
+/* ------------------------------------------------------------
    PDF DOWNLOAD
-   --------------------------------------------------------- */
+   ------------------------------------------------------------ */
 function downloadPDF() {
-  if (!_generatedData || !_formData) return;
-  var d = _generatedData;
-  var f = _formData;
-
-  // Use jsPDF if available, else fallback to text download
-  if (typeof window.jspdf !== 'undefined') {
-    var doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
-    var margin = 18;
-    var pageW = doc.internal.pageSize.getWidth();
-    var usableW = pageW - margin * 2;
-    var y = 20;
-    var lineH = 6;
-
-    function addHeading1(text) {
-      if (y > 240) { doc.addPage(); y = 20; }
-      doc.setFontSize(18);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(30, 41, 59);
-      doc.text(text, margin, y);
-      y += lineH * 2;
-      doc.setDrawColor(249, 115, 22);
-      doc.setLineWidth(0.8);
-      doc.line(margin, y - 4, pageW - margin, y - 4);
-      y += 4;
-    }
-    function addHeading2(text) {
-      if (y > 240) { doc.addPage(); y = 20; }
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(30, 41, 59);
-      doc.text(text, margin, y);
-      y += lineH * 1.4;
-    }
-    function addLabel(text) {
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(148, 163, 184);
-      doc.text(text.toUpperCase(), margin, y);
-      y += lineH;
-    }
-    function addBody(text, small) {
-      doc.setFontSize(small ? 9 : 10);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(71, 85, 105);
-      var lines = doc.splitTextToSize(text || '', usableW);
-      lines.forEach(function(line) {
-        if (y > 270) { doc.addPage(); y = 20; }
-        doc.text(line, margin, y);
-        y += lineH * 0.85;
-      });
-      y += lineH * 0.5;
-    }
-    function addGap(n) { y += lineH * (n || 1); }
-
-    // Cover
-    doc.setFillColor(30, 41, 59);
-    doc.rect(0, 0, pageW, 50, 'F');
-    doc.setFontSize(22);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(255, 255, 255);
-    doc.text('Marketing Kit', margin, 22);
-    doc.setFontSize(13);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(148, 163, 184);
-    doc.text(f.businessType + ' · ' + f.location, margin, 33);
-    doc.setFontSize(10);
-    doc.text('Generated by Local Business AI Hub · ' + new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'}), margin, 42);
-    y = 62;
-
-    // Landing Page
-    addHeading1('Landing Page Copy');
-    addLabel('Headline');
-    addBody(d.landing.headline);
-    addLabel('Subheadline');
-    addBody(d.landing.subheadline);
-    addLabel('Body Copy');
-    addBody(d.landing.body);
-    addGap(2);
-
-    // Emails
-    addHeading1('Email Templates');
-    d.emails.forEach(function(email, i) {
-      addHeading2('Email ' + (i + 1) + ' — ' + email.label);
-      addLabel('Subject');
-      addBody(email.subject, true);
-      addLabel('Body');
-      addBody(email.body);
-      addGap();
-    });
-
-    // Social Posts
-    addHeading1('Social Media Posts');
-    d.posts.forEach(function(post) {
-      addHeading2('Post ' + post.num + ' · ' + post.platform);
-      addBody(post.text);
-      if (post.hashtags) addBody(post.hashtags, true);
-      addGap(0.5);
-    });
-
-    // Quote Graphics
-    addHeading1('Quote Graphics');
-    d.quotes.forEach(function(q, i) {
-      addHeading2('Quote ' + (i + 1));
-      addLabel('Quote');
-      addBody('"' + q.quote + '"');
-      addLabel('Attribution');
-      addBody(q.attribution, true);
-      addLabel('Design Notes');
-      addBody(q.designNotes, true);
-      addGap(0.5);
-    });
-
-    doc.save('marketing-kit-' + f.location.replace(/\s+/g, '-').toLowerCase() + '.pdf');
-  } else {
-    // Fallback: plain text download
-    downloadTextFile('marketing-kit.txt', buildPlainText(_generatedData, _formData));
+  if (!_kit || !_form) return;
+  if (typeof window.jspdf === 'undefined') { alert('PDF library loading — try again.'); return; }
+  var doc = new window.jspdf.jsPDF({ unit:'mm', format:'a4' });
+  var pw = doc.internal.pageSize.getWidth();
+  var ml = 18, usable = pw - ml*2, y = 20;
+  var lh = 5.5;
+  function newPage() { doc.addPage(); y = 20; }
+  function chk(h) { if (y + h > 272) newPage(); }
+  function h1(t) { chk(14); doc.setFontSize(15); doc.setFont('helvetica','bold'); doc.setTextColor(29,78,216); doc.text(t, ml, y); y += 6; doc.setDrawColor(29,78,216); doc.setLineWidth(0.5); doc.line(ml, y, pw-ml, y); y += 6; }
+  function h2(t) { chk(10); doc.setFontSize(12); doc.setFont('helvetica','bold'); doc.setTextColor(30,41,59); doc.text(t, ml, y); y += lh*1.3; }
+  function tag(t) { doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(148,163,184); doc.text(t.toUpperCase(), ml, y); y += lh; }
+  function body(t, small) {
+    doc.setFontSize(small?9:10); doc.setFont('helvetica','normal'); doc.setTextColor(71,85,105);
+    doc.splitTextToSize(t||'', usable).forEach(function(l) { chk(lh); doc.text(l, ml, y); y += lh*0.85; }); y += 2;
   }
+  function gap(n) { y += lh*(n||1); }
+  // Cover
+  doc.setFillColor(15,23,42); doc.rect(0,0,pw,50,'F');
+  doc.setFontSize(20); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255); doc.text('Marketing Kit', ml, 22);
+  doc.setFontSize(12); doc.setFont('helvetica','normal'); doc.setTextColor(148,163,184);
+  doc.text((_form.name||'') + ' · ' + (_form.location||''), ml, 32);
+  doc.setFontSize(9); doc.text('Local Business AI Hub · ' + new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), ml, 42);
+  y = 62;
+  h1('Landing Page'); tag('Headline'); body(_kit.landing.headline); gap(0.3); tag('Subheadline'); body(_kit.landing.subheadline); gap(0.3); tag('Body Copy'); body(_kit.landing.body); gap(1.5);
+  h1('Email Templates');
+  _kit.emails.forEach(function(e,i){ h2('Email '+(i+1)+' — '+e.label); tag('Subject'); body(e.subject,true); gap(0.2); tag('Body'); body(e.body); gap(0.8); });
+  h1('Social Media Posts');
+  _kit.posts.forEach(function(p){ h2('Post '+p.num+' · '+p.platform); body(p.text); if(p.hashtags){doc.setFontSize(9);doc.setTextColor(59,130,246);doc.splitTextToSize(p.hashtags,usable).forEach(function(l){chk(lh);doc.text(l,ml,y);y+=lh*0.85;});} gap(0.6); });
+  if (_kit.videoScript) { h1('Video Script'); body(_kit.videoScript); }
+  doc.save('marketing-kit-' + (_form.name||'business').replace(/[^a-z0-9]/gi,'-').toLowerCase() + '.pdf');
 }
 
-/* ---------------------------------------------------------
+/* ------------------------------------------------------------
    ZIP DOWNLOAD
-   --------------------------------------------------------- */
+   ------------------------------------------------------------ */
 async function downloadZIP() {
-  if (!_generatedData || !_formData) return;
-  var d = _generatedData;
-  var f = _formData;
+  if (!_kit || !_form) return;
+  if (typeof JSZip === 'undefined') { alert('ZIP library loading — try again.'); return; }
+  var z = new JSZip();
+  var fn = (_form.name||'business').replace(/[^a-z0-9]/gi,'-').toLowerCase();
+  var folder = z.folder('marketing-kit-' + fn);
+  var date = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  var hdr = 'Marketing Kit — ' + (_form.name||'') + '\nGenerated: ' + date + '\n' + '='.repeat(50) + '\n\n';
 
-  if (typeof JSZip === 'undefined') {
-    alert('ZIP download is loading — please try again in a moment.');
-    return;
-  }
+  folder.file('01-landing-page.txt', hdr + 'HEADLINE\n' + (_kit.landing.headline||'') + '\n\nSUBHEADLINE\n' + (_kit.landing.subheadline||'') + '\n\nBODY COPY\n' + (_kit.landing.body||''));
 
-  var zip = new JSZip();
-  var folder = zip.folder('marketing-kit');
+  var emailsTxt = hdr;
+  _kit.emails.forEach(function(e,i){ emailsTxt += 'EMAIL '+(i+1)+' — '+e.label.toUpperCase()+'\n'+'-'.repeat(40)+'\nSubject: '+(e.subject||'')+'\n\n'+(e.body||'')+'\n\n\n'; });
+  folder.file('02-email-templates.txt', emailsTxt);
 
-  // Landing page
-  folder.file('01-landing-page.txt',
-    'LANDING PAGE COPY\n' +
-    'Generated for: ' + f.businessType + ' · ' + f.location + '\n' +
-    '='.repeat(50) + '\n\n' +
-    'HEADLINE\n' + d.landing.headline + '\n\n' +
-    'SUBHEADLINE\n' + d.landing.subheadline + '\n\n' +
-    'BODY COPY\n' + d.landing.body
-  );
+  var socialTxt = hdr;
+  _kit.posts.forEach(function(p){ socialTxt += 'POST '+p.num+' — '+p.platform.toUpperCase()+'\n'+'-'.repeat(40)+'\n'+(p.text||'')+(p.hashtags?'\n\n'+p.hashtags:'')+'\n\n\n'; });
+  folder.file('03-social-posts.txt', socialTxt);
 
-  // Emails
-  var emailText = 'EMAIL TEMPLATES\n' +
-    'Generated for: ' + f.businessType + ' · ' + f.location + '\n' +
-    '='.repeat(50) + '\n\n';
-  d.emails.forEach(function(email, i) {
-    emailText += 'EMAIL ' + (i + 1) + ' — ' + email.label.toUpperCase() + '\n' +
-      '-'.repeat(40) + '\n' +
-      'Subject: ' + email.subject + '\n\n' +
-      email.body + '\n\n\n';
-  });
-  folder.file('02-email-templates.txt', emailText);
-
-  // Social posts
-  var socialText = 'SOCIAL MEDIA POSTS\n' +
-    'Generated for: ' + f.businessType + ' · ' + f.location + '\n' +
-    '='.repeat(50) + '\n\n';
-  d.posts.forEach(function(post) {
-    socialText += 'POST ' + post.num + ' — ' + post.platform.toUpperCase() + '\n' +
-      '-'.repeat(40) + '\n' +
-      post.text + '\n' +
-      (post.hashtags ? '\n' + post.hashtags : '') + '\n\n\n';
-  });
-  folder.file('03-social-media-posts.txt', socialText);
-
-  // Quote graphics
-  var quoteText = 'QUOTE GRAPHICS\n' +
-    'Generated for: ' + f.businessType + ' · ' + f.location + '\n' +
-    '='.repeat(50) + '\n\n';
-  d.quotes.forEach(function(q, i) {
-    quoteText += 'QUOTE ' + (i + 1) + '\n' +
-      '-'.repeat(40) + '\n' +
-      '"' + q.quote + '"\n' +
-      '— ' + q.attribution + '\n\n' +
-      'DESIGN NOTES:\n' + q.designNotes + '\n\n\n';
-  });
-  folder.file('04-quote-graphics.txt', quoteText);
+  if (_kit.videoScript) folder.file('04-video-script.txt', hdr + 'VIDEO SCRIPT\n' + '-'.repeat(40) + '\n' + _kit.videoScript);
 
   // All in one
-  folder.file('00-all-content.txt', buildPlainText(d, f));
+  var all = hdr + '1. LANDING PAGE\n' + '='.repeat(50) + '\n\nHEADLINE\n'+(_kit.landing.headline||'')+'\n\nSUBHEADLINE\n'+(_kit.landing.subheadline||'')+'\n\nBODY COPY\n'+(_kit.landing.body||'')+'\n\n\n';
+  all += '2. EMAIL TEMPLATES\n' + '='.repeat(50) + '\n\n';
+  _kit.emails.forEach(function(e,i){ all+='Email '+(i+1)+' — '+e.label+'\nSubject: '+(e.subject||'')+'\n\n'+(e.body||'')+'\n\n\n'; });
+  all += '3. SOCIAL POSTS\n' + '='.repeat(50) + '\n\n';
+  _kit.posts.forEach(function(p){ all+='Post '+p.num+' ('+p.platform+')\n'+(p.text||'')+(p.hashtags?'\n'+p.hashtags:'')+'\n\n'; });
+  if (_kit.videoScript) all += '\n4. VIDEO SCRIPT\n' + '='.repeat(50) + '\n\n' + _kit.videoScript;
+  folder.file('00-all-content.txt', all);
 
-  var blob = await zip.generateAsync({ type: 'blob' });
+  var blob = await z.generateAsync({ type:'blob' });
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
-  a.href = url;
-  a.download = 'marketing-kit-' + f.location.replace(/\s+/g, '-').toLowerCase() + '.zip';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  a.href = url; a.download = 'marketing-kit-' + fn + '.zip';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
-function buildPlainText(d, f) {
-  var lines = [
-    'COMPLETE MARKETING KIT',
-    'Business: ' + f.businessType,
-    'Location: ' + f.location,
-    'Generated: ' + new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'}),
-    '='.repeat(60),
-    '', '',
-    'SECTION 1: LANDING PAGE COPY',
-    '='.repeat(60),
-    '',
-    'HEADLINE',
-    d.landing.headline,
-    '',
-    'SUBHEADLINE',
-    d.landing.subheadline,
-    '',
-    'BODY COPY',
-    d.landing.body,
-    '', '',
-    'SECTION 2: EMAIL TEMPLATES',
-    '='.repeat(60)
-  ];
-  d.emails.forEach(function(e, i) {
-    lines.push('', 'Email ' + (i+1) + ' — ' + e.label, '-'.repeat(40), 'Subject: ' + e.subject, '', e.body);
-  });
-  lines.push('', '', 'SECTION 3: SOCIAL MEDIA POSTS', '='.repeat(60));
-  d.posts.forEach(function(p) {
-    lines.push('', 'Post ' + p.num + ' — ' + p.platform, '-'.repeat(40), p.text);
-    if (p.hashtags) lines.push('', p.hashtags);
-  });
-  lines.push('', '', 'SECTION 4: QUOTE GRAPHICS', '='.repeat(60));
-  d.quotes.forEach(function(q, i) {
-    lines.push('', 'Quote ' + (i+1), '-'.repeat(40), '"' + q.quote + '"', '— ' + q.attribution, '', 'Design Notes:', q.designNotes);
-  });
-  return lines.join('\n');
-}
-
-function downloadTextFile(filename, text) {
-  var blob = new Blob([text], { type: 'text/plain' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-/* ---------------------------------------------------------
+/* ------------------------------------------------------------
    INIT
-   --------------------------------------------------------- */
+   ------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', function() {
-  showSection('form');
+  setPage('page-form');
   updateProgress();
 });
