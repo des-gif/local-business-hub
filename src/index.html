@@ -3,602 +3,1053 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Local Business AI Hub — Complete marketing kit, generated in minutes</title>
-<meta name="description" content="Answer 10 questions. Get a landing page, 5 email templates, 10 social posts and a professional video — all AI-generated for your business.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<title>Local Business AI Hub — AI-powered business tools for local trades</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --orange:#f97316;--orange-dark:#ea6c0a;--orange-light:#fff7ed;--orange-mid:#fed7aa;
+  --navy:#1e293b;--navy-mid:#334155;--slate:#475569;--muted:#94a3b8;
+  --bg:#ffffff;--surface:#f8fafc;--border:#e2e8f0;
+  --green:#22c55e;--red:#ef4444;
+  --radius:12px;--radius-sm:8px;
+  --shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy);background:var(--bg);line-height:1.6;font-size:16px;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
+
+/* ===== UTILITIES ===== */
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:var(--radius-sm);font-weight:600;font-size:15px;cursor:pointer;border:none;transition:all .15s;text-align:center;justify-content:center;}
+.btn-primary{background:var(--orange);color:#fff;}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.btn-secondary{background:#fff;color:var(--navy);border:2px solid var(--border);}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange);}
+.btn-lg{padding:16px 32px;font-size:16px;border-radius:var(--radius);}
+.btn-full{width:100%;}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;}
+.tag-green{background:#dcfce7;color:#15803d;}
+.tag-orange{background:var(--orange-light);color:var(--orange-dark);}
+.tag-blue{background:#dbeafe;color:#1d4ed8;}
+.section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:12px;}
+.section-title{font-size:36px;font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:16px;}
+.section-sub{font-size:18px;color:var(--slate);max-width:600px;}
+@media(max-width:640px){.section-title{font-size:26px;}.section-sub{font-size:16px;}}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:14px 0;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.nav-logo{font-size:17px;font-weight:800;background:linear-gradient(135deg,#f97316,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--slate);transition:color .12s;}
+.nav-links a:hover{color:var(--orange);}
+.nav-cta{padding:9px 20px;font-size:14px;}
+@media(max-width:768px){.nav-links{display:none;}}
+
+/* ===== HERO ===== */
+.hero{padding:96px 0 80px;text-align:center;background:linear-gradient(180deg,#fff7ed 0%,#ffffff 100%);}
+.hero-headline{font-size:58px;font-weight:800;color:var(--navy);line-height:1.08;margin-bottom:20px;}
+.hero-headline span{color:var(--orange);}
+.hero-sub{font-size:20px;color:var(--slate);max-width:640px;margin:0 auto 36px;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+.trust-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.trust-badge{display:flex;align-items:center;gap:8px;padding:10px 18px;background:#fff;border:1px solid var(--border);border-radius:40px;font-size:13px;font-weight:500;color:var(--slate);box-shadow:var(--shadow);}
+.trust-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;}
+@media(max-width:640px){.hero-headline{font-size:36px;}.hero-sub{font-size:17px;}}
+
+/* ===== PROBLEM ===== */
+.problem{padding:80px 0;background:var(--navy);}
+.problem .section-label{color:#fb923c;}
+.problem .section-title{color:#fff;}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+.problem-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:28px 24px;}
+.problem-icon{font-size:32px;margin-bottom:16px;}
+.problem-card h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:10px;}
+.problem-card p{font-size:14px;color:#94a3b8;line-height:1.7;}
+@media(max-width:768px){.problem-grid{grid-template-columns:1fr;}}
+
+/* ===== HOW IT WORKS ===== */
+.hiw{padding:80px 0;}
+.hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px;position:relative;}
+.hiw-steps::before{content:'';position:absolute;top:32px;left:calc(16% + 32px);right:calc(16% + 32px);height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-dark));z-index:0;}
+.hiw-step{text-align:center;position:relative;z-index:1;}
+.hiw-num{width:64px;height:64px;border-radius:50%;background:var(--orange);color:#fff;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.hiw-step h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.hiw-step p{font-size:14px;color:var(--slate);line-height:1.7;}
+@media(max-width:768px){.hiw-steps{grid-template-columns:1fr;gap:24px;}.hiw-steps::before{display:none;}}
+
+/* ===== WHAT YOU GET ===== */
+.wyg{padding:80px 0;background:var(--surface);}
+.wyg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.wyg-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;transition:box-shadow .15s,transform .15s;}
+.wyg-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.wyg-icon{font-size:28px;margin-bottom:14px;}
+.wyg-card h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.wyg-card p{font-size:13px;color:var(--slate);line-height:1.7;}
+@media(max-width:900px){.wyg-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.wyg-grid{grid-template-columns:1fr;}}
+
+/* ===== TRADES ===== */
+.trades{padding:80px 0;}
+.trades-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:48px;}
+.trade-pill{display:flex;align-items:center;gap:8px;padding:10px 18px;background:#fff;border:1.5px solid var(--border);border-radius:40px;font-size:14px;font-weight:500;color:var(--navy);transition:all .12s;cursor:default;}
+.trade-pill:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
+.trade-pill span{font-size:18px;}
+
+/* ===== PRICING ===== */
+.pricing{padding:80px 0;background:var(--surface);}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;align-items:start;}
+.pricing-card{background:#fff;border:2px solid var(--border);border-radius:var(--radius);padding:32px 28px;position:relative;}
+.pricing-card.featured{border-color:var(--orange);box-shadow:var(--shadow-lg);}
+.pricing-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;white-space:nowrap;}
+.pricing-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:12px;}
+.pricing-price{font-size:42px;font-weight:800;color:var(--navy);margin-bottom:4px;}
+.pricing-price span{font-size:18px;font-weight:500;color:var(--slate);}
+.pricing-desc{font-size:13px;color:var(--slate);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.pricing-features{list-style:none;margin-bottom:28px;}
+.pricing-features li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--slate);padding:6px 0;border-bottom:1px solid #f1f5f9;}
+.pricing-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+@media(max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto;}}
+
+/* ===== ONBOARDING TOOL ===== */
+.tool{padding:80px 0;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);}
+.tool .section-label{color:#fb923c;}
+.tool .section-title{color:#fff;text-align:center;}
+.tool .section-sub{color:#94a3b8;text-align:center;margin:0 auto 48px;}
+.tool-box{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,.5);max-width:740px;margin:0 auto;}
+.tool-progress{background:var(--surface);padding:20px 28px;border-bottom:1px solid var(--border);}
+.progress-steps{display:flex;gap:0;counter-reset:step;}
+.progress-step{flex:1;display:flex;align-items:center;gap:0;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+.progress-step::before{content:counter(step);counter-increment:step;width:24px;height:24px;border-radius:50%;background:var(--border);color:var(--muted);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:6px;transition:all .2s;}
+.progress-step.active::before{background:var(--orange);color:#fff;}
+.progress-step.done::before{background:var(--green);color:#fff;content:'✓';}
+.progress-step-label{display:none;}
+@media(min-width:600px){.progress-step-label{display:block;}}
+.progress-bar-track{height:4px;background:var(--border);border-radius:2px;margin-top:12px;}
+.progress-bar-fill{height:100%;background:var(--orange);border-radius:2px;transition:width .3s ease;}
+.tool-body{padding:36px 32px;}
+.tool-step{display:none;}
+.tool-step.active{display:block;}
+.step-title{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.step-sub{font-size:14px;color:var(--slate);margin-bottom:28px;}
+.field-group{margin-bottom:20px;}
+.field-label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:7px;}
+.field-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;color:var(--navy);font-family:'Inter',sans-serif;transition:border-color .12s;background:#fff;}
+.field-input:focus{outline:none;border-color:var(--orange);}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.field-row{grid-template-columns:1fr;}}
+/* Trade buttons */
+.trade-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.trade-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border:2px solid var(--border);border-radius:var(--radius-sm);background:#fff;cursor:pointer;transition:all .15s;font-size:12px;font-weight:600;color:var(--slate);text-align:center;}
+.trade-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
+.trade-btn.selected{border-color:var(--orange);background:var(--orange-light);color:var(--orange);}
+.trade-btn .icon{font-size:24px;}
+@media(max-width:500px){.trade-btns{grid-template-columns:repeat(3,1fr);}}
+/* Checkboxes */
+.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .12s;font-size:13px;color:var(--slate);}
+.check-item:hover{border-color:var(--orange);}
+.check-item input{accent-color:var(--orange);width:16px;height:16px;cursor:pointer;}
+.check-item.checked{border-color:var(--orange);background:var(--orange-light);color:var(--navy);font-weight:500;}
+/* Radio options */
+.radio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.radio-item{display:flex;align-items:center;gap:10px;padding:12px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .12s;font-size:14px;font-weight:500;color:var(--slate);}
+.radio-item:hover,.radio-item.selected{border-color:var(--orange);background:var(--orange-light);color:var(--navy);}
+.radio-item input{accent-color:var(--orange);width:16px;height:16px;}
+/* Tool nav */
+.tool-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);}
+.tool-nav .btn{min-width:110px;}
+/* API key section */
+.api-key-box{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;}
+.api-key-box p{font-size:12px;color:var(--slate);margin-top:6px;}
+.api-key-box a{color:var(--orange);}
+/* Generate */
+.generate-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:18px;font-size:17px;font-weight:700;background:linear-gradient(135deg,#f97316,#d97706);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;transition:all .15s;margin-top:8px;}
+.generate-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 20px rgba(249,115,22,.4);}
+.generate-btn:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+/* Loading */
+.loading-state{text-align:center;padding:20px 0;}
+.spinner{width:48px;height:48px;border:4px solid var(--orange-mid);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-msg{font-size:16px;font-weight:500;color:var(--slate);min-height:28px;}
+.loading-dots::after{content:'';animation:dots 1.5s steps(4,end) infinite;}
+@keyframes dots{0%,100%{content:'';}25%{content:'.';}50%{content:'..';}75%{content:'...'}}
+/* Output tabs */
+.output-tabs{display:flex;gap:4px;background:var(--surface);padding:6px;border-radius:var(--radius-sm);margin-bottom:20px;flex-wrap:wrap;}
+.output-tab{padding:8px 14px;border-radius:6px;font-size:13px;font-weight:600;color:var(--slate);cursor:pointer;transition:all .12s;border:none;background:none;}
+.output-tab.active{background:#fff;color:var(--navy);box-shadow:var(--shadow);}
+.output-panel{display:none;}
+.output-panel.active{display:block;}
+.output-content{white-space:pre-wrap;font-family:'Inter',sans-serif;font-size:13px;line-height:1.75;color:var(--navy);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;max-height:380px;overflow-y:auto;}
+.output-actions{display:flex;gap:10px;margin-top:12px;}
+.output-actions .btn{font-size:13px;padding:8px 16px;}
+.success-banner{background:#dcfce7;border:1px solid #86efac;border-radius:var(--radius-sm);padding:14px 18px;display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:14px;color:#15803d;font-weight:500;}
+
+/* ===== FOOTER ===== */
+footer{background:var(--navy);color:#94a3b8;padding:48px 0 32px;}
+.footer-inner{display:grid;grid-template-columns:1fr 2fr;gap:48px;margin-bottom:40px;}
+.footer-logo{font-size:18px;font-weight:800;background:linear-gradient(135deg,#f97316,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+.footer-tagline{font-size:13px;color:#64748b;max-width:220px;line-height:1.6;}
+.footer-links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:#64748b;padding:3px 0;transition:color .12s;}
+.footer-col a:hover{color:var(--orange);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;font-size:12px;color:#475569;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr;}.footer-links{grid-template-columns:repeat(2,1fr);}}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
+<!-- ===== SECTION 1: NAV ===== -->
+<nav>
   <div class="container">
-    <a class="logo" href="#" onclick="goHome();return false;">
-      <span class="logo-icon">◈</span> Local Business AI Hub
-    </a>
-    <div class="nav-links">
-      <a href="#how-it-works">How it works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#what-you-get">What you get</a>
-      <a href="#" onclick="scrollForm();return false;">Build my kit</a>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Local Business AI Hub</a>
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#what-you-get">What you get</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#demo">Demo</a>
+      </div>
+      <a href="#demo" class="btn btn-primary nav-cta">Build My Business Kit</a>
     </div>
-    <button class="btn-primary" onclick="scrollForm()">Get Started Free</button>
   </div>
 </nav>
 
-<!-- ========================================================
-     PAGE: FORM
-     ======================================================== -->
-<div id="page-form">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        AI-powered · 40+ business types · No tech skills needed
-      </div>
-      <h1>Your complete<br><em>marketing kit</em><br>in minutes.</h1>
-      <p class="hero-sub">Fill in 10 questions. Get a professional landing page, 5 email templates, 10 social posts and a talking-head marketing video — all generated by AI for your exact business.</p>
-      <div class="hero-actions">
-        <button class="btn-primary btn-xl" onclick="scrollForm()">
-          Build My Free Kit
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-        <a href="#what-you-get" class="btn-ghost btn-xl">See what you get</a>
-      </div>
-      <div class="hero-proof">
-        <div class="proof-item"><strong>40+</strong><span>Business types</span></div>
-        <div class="proof-div"></div>
-        <div class="proof-item"><strong>22+</strong><span>Pieces of content</span></div>
-        <div class="proof-div"></div>
-        <div class="proof-item"><strong>5 min</strong><span>Average time</span></div>
-        <div class="proof-div"></div>
-        <div class="proof-item"><strong>Free</strong><span>To generate</span></div>
-      </div>
+<!-- ===== SECTION 2: HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-headline">AI for local businesses</h1>
+    <p class="hero-sub" style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px;">Your complete marketing kit — made simple, done for you.</p>
+    <p class="hero-sub">You've heard everyone talking about AI — but no one's explained what it actually means for a business like yours. The simple truth: AI is already changing how businesses win customers, from the corner shop to the local electrician to the biggest firm in town. We're here to show you how, in plain English — and to do the hard part for you. No tech skills. No jargon. Just affordable, practical help.</p>
+    <div class="hero-btns">
+      <a href="#demo" class="btn btn-primary btn-lg">Build My Free Kit</a>
+      <a href="#what-you-get" class="btn btn-secondary btn-lg">See An Example</a>
     </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section bg-subtle" id="how-it-works">
-    <div class="container">
-      <p class="eyebrow">How it works</p>
-      <h2 class="section-title">Three steps to your complete kit</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-number">01</div>
-          <h3>Tell us about your business</h3>
-          <p>Select your business type and answer 10 quick questions about your services, customers and goals. Takes under 5 minutes.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">02</div>
-          <h3>AI generates everything</h3>
-          <p>Claude AI writes your landing page, emails and social posts. HeyGen creates your talking-head marketing video automatically.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">03</div>
-          <h3>Download and deploy</h3>
-          <p>Copy any piece instantly, download the full PDF report, or grab the ZIP with all files including your video MP4.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="section pricing-bg" id="pricing">
-    <div class="container">
-      <p class="eyebrow eyebrow-light">Pricing</p>
-      <h2 class="section-title light" style="margin-bottom:12px;">Simple, transparent pricing</h2>
-      <p class="pricing-intro">From instant self-serve content to fully produced video — pick the option that fits your business right now.</p>
-      <div class="pricing-grid">
-
-        <!-- 1 — Starter -->
-        <div class="price-card">
-          <div class="price-tier">Self-Serve Starter Kit</div>
-          <div class="price-amount">£49</div>
-          <div class="price-freq">one-off payment</div>
-          <p class="price-best">Best for owners who need fast marketing content but want to do it themselves.</p>
-          <ul class="price-includes">
-            <li>Professional landing page copy</li>
-            <li>5 ready-to-send emails</li>
-            <li>10 social media posts</li>
-            <li>1 video script</li>
-            <li>Basic positioning message</li>
-            <li>Instant delivery after the form</li>
-          </ul>
-          <a href="https://pay.tide.co/products/selfserve-s-kfnTn2Oy" target="_blank" rel="noopener" class="price-btn">Get Started — £49</a>
-        </div>
-
-        <!-- 2 — Pro (featured) -->
-        <div class="price-card featured">
-          <div class="price-badge">Best value</div>
-          <div class="price-tier">Self-Serve Pro Kit</div>
-          <div class="price-amount">£99</div>
-          <div class="price-freq">one-off payment</div>
-          <p class="price-best">Best for owners who want a fuller pack with stronger messaging.</p>
-          <ul class="price-includes">
-            <li>Everything in Starter</li>
-            <li>Improved landing page structure</li>
-            <li>15 social posts</li>
-            <li>7-email follow-up sequence</li>
-            <li>3 video script ideas</li>
-            <li>Offer &amp; CTA guidance</li>
-            <li>1 free revision from feedback</li>
-          </ul>
-          <a href="https://pay.tide.co/products/tier2pro-se-eZPxH3vR" target="_blank" rel="noopener" class="price-btn price-btn-featured">Get Pro — £99</a>
-        </div>
-
-        <!-- 3 — Boutique -->
-        <div class="price-card">
-          <div class="price-tier">Boutique Video Service</div>
-          <div class="price-amount">£295</div>
-          <div class="price-freq">one-off payment</div>
-          <p class="price-best">Best for owners who want a custom promo video made for them.</p>
-          <ul class="price-includes">
-            <li>Short discovery form</li>
-            <li>Custom script written by Des</li>
-            <li>Client approval before production</li>
-            <li>Professional visuals</li>
-            <li>Edited video</li>
-            <li>Captions &amp; text overlay</li>
-            <li>Final video ready for web &amp; social</li>
-          </ul>
-          <a href="https://pay.tide.co/products/tier3boutiq-UeNFyzaD" target="_blank" rel="noopener" class="price-btn">Order Boutique — £295</a>
-        </div>
-
-        <!-- 4 — Premium -->
-        <div class="price-card">
-          <div class="price-tier">Premium Launch Package</div>
-          <div class="price-amount">£495</div>
-          <div class="price-freq">one-off payment</div>
-          <p class="price-best">Best for businesses wanting the full done-for-you launch.</p>
-          <ul class="price-includes">
-            <li>Custom landing page copy</li>
-            <li>5-email campaign</li>
-            <li>10 social posts</li>
-            <li>Custom promotional video</li>
-            <li>Video script approval</li>
-            <li>Basic brand message</li>
-            <li>CTA wording</li>
-            <li>Simple campaign launch plan</li>
-          </ul>
-          <a href="https://pay.tide.co/products/tier4premiu-moEVVdm0" target="_blank" rel="noopener" class="price-btn">Get Premium — £495</a>
-        </div>
-
-        <!-- 5 — Monthly -->
-        <div class="price-card">
-          <div class="price-tier">Monthly Content Support</div>
-          <div class="price-amount">£149</div>
-          <div class="price-freq">per month</div>
-          <p class="price-best">Best for businesses needing ongoing content without weekly hassle.</p>
-          <ul class="price-includes">
-            <li>8 social posts each month</li>
-            <li>1 email / newsletter</li>
-            <li>1 short video script</li>
-            <li>1 promotional offer idea</li>
-            <li>Light monthly guidance</li>
-          </ul>
-          <a href="https://pay.tide.co/products/tier5monthl-u6HxnAOm" target="_blank" rel="noopener" class="price-btn">Subscribe — £149/mo</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT YOU GET -->
-  <section class="section" id="what-you-get">
-    <div class="container">
-      <p class="eyebrow">What you get</p>
-      <h2 class="section-title">Everything your business needs</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon blue">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          </div>
-          <h3>Landing Page Copy</h3>
-          <p>300–500 words of professional website copy — headline, subheadline and full body text tailored to your business and location.</p>
-          <span class="feature-tag">1 page</span>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon green">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <h3>Email Templates</h3>
-          <p>Five ready-to-send emails: enquiry reply, quote follow-up, review request, seasonal offer and referral ask.</p>
-          <span class="feature-tag">5 emails</span>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon purple">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <h3>Social Media Posts</h3>
-          <p>Ten posts across Facebook, Instagram and LinkedIn — platform-appropriate, punchy and ready to schedule.</p>
-          <span class="feature-tag">10 posts</span>
-        </div>
-        <div class="feature-card featured">
-          <div class="feature-badge">New</div>
-          <div class="feature-icon orange">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-          </div>
-          <h3>AI Marketing Video</h3>
-          <p>A professional talking-head video with your script delivered by an AI avatar. Downloadable as MP4.</p>
-          <span class="feature-tag">1 video</span>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon teal">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <h3>PDF Download</h3>
-          <p>All written content in a formatted PDF — print it, share it or keep it as your business marketing bible.</p>
-          <span class="feature-tag">1 file</span>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon indigo">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-          </div>
-          <h3>Full ZIP Download</h3>
-          <p>All content as separate files — landing page, emails, social posts and video — in one downloadable archive.</p>
-          <span class="feature-tag">5 files</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BUSINESS TYPES TICKER -->
-  <div class="types-ticker">
-    <div class="ticker-inner">
-      <span>Plumber</span><span>·</span><span>Coffee Shop</span><span>·</span><span>Personal Trainer</span><span>·</span><span>Hair Salon</span><span>·</span><span>Dog Walker</span><span>·</span><span>Accountant</span><span>·</span><span>Fitness Studio</span><span>·</span><span>Estate Agent</span><span>·</span><span>Photographer</span><span>·</span><span>Restaurant</span><span>·</span><span>Yoga Studio</span><span>·</span><span>Electrician</span><span>·</span><span>Dentist</span><span>·</span><span>Therapist</span><span>·</span><span>Florist</span><span>·</span><span>Bakery</span><span>·</span><span>Mechanic</span><span>·</span><span>Web Designer</span><span>·</span><span>Cleaner</span>
-      <!-- duplicate for seamless loop -->
-      <span>Plumber</span><span>·</span><span>Coffee Shop</span><span>·</span><span>Personal Trainer</span><span>·</span><span>Hair Salon</span><span>·</span><span>Dog Walker</span><span>·</span><span>Accountant</span><span>·</span><span>Fitness Studio</span><span>·</span><span>Estate Agent</span><span>·</span><span>Photographer</span><span>·</span><span>Restaurant</span><span>·</span><span>Yoga Studio</span><span>·</span><span>Electrician</span><span>·</span><span>Dentist</span><span>·</span><span>Therapist</span><span>·</span><span>Florist</span><span>·</span><span>Bakery</span><span>·</span><span>Mechanic</span><span>·</span><span>Web Designer</span><span>·</span><span>Cleaner</span>
+    <div class="trust-badges">
+      <div class="trust-badge"><div class="dot"></div>No tech skills needed</div>
+      <div class="trust-badge"><div class="dot"></div>Ready in 10 minutes</div>
+      <div class="trust-badge"><div class="dot"></div>Built for local businesses</div>
     </div>
   </div>
+</section>
 
-  <!-- THE FORM -->
-  <section class="section form-bg" id="form-top">
-    <div class="container">
-      <div class="form-header">
-        <p class="eyebrow eyebrow-light">Build your kit</p>
-        <h2 class="section-title light">Tell us about your business</h2>
-        <p class="form-header-sub">10 questions · under 5 minutes · your API keys are never exposed</p>
+<!-- ===== SECTION 3: PROBLEM ===== -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label">The problem</div>
+    <h2 class="section-title">Missing enquiries you never even knew about</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">🔍</div>
+        <h3>No proper online presence</h3>
+        <p>Customers Google you, find nothing, and call someone else. You lose jobs before you even know they existed.</p>
       </div>
-
-      <div class="form-card" id="main-form">
-
-        <!-- Progress -->
-        <div class="progress-wrap">
-          <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-          <span class="progress-text" id="prog-text">0 / 10</span>
-        </div>
-
-        <!-- Q1: Business Type -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">01</span>What type of business are you?</label>
-          <select id="q-type" class="field-input field-select" onchange="updateProgress()">
-            <option value="">— Select business type —</option>
-            <optgroup label="Trades &amp; Home Services">
-              <option>Plumber</option><option>Electrician</option><option>Builder / General Contractor</option>
-              <option>Roofer</option><option>Decorator / Painter</option><option>Carpenter / Joiner</option>
-              <option>Tiler</option><option>Heating Engineer</option><option>Handyman</option><option>Locksmith</option>
-              <option>Pest Control</option>
-            </optgroup>
-            <optgroup label="Food &amp; Drink">
-              <option>Coffee Shop / Café</option><option>Restaurant / Takeaway</option><option>Bakery</option>
-              <option>Catering / Private Chef</option><option>Food Truck / Street Food</option><option>Pub / Bar</option>
-            </optgroup>
-            <optgroup label="Health &amp; Fitness">
-              <option>Personal Trainer</option><option>Gym / Fitness Studio</option><option>Yoga / Pilates Studio</option>
-              <option>Nutritionist / Dietitian</option><option>Physiotherapist</option><option>Osteopath / Chiropractor</option>
-              <option>Sports Massage Therapist</option>
-            </optgroup>
-            <optgroup label="Beauty &amp; Wellness">
-              <option>Hair Salon</option><option>Barber</option><option>Beauty Salon / Nail Bar</option>
-              <option>Spa</option><option>Massage Therapist</option><option>Tattoo &amp; Piercing Studio</option>
-              <option>Aesthetics Clinic</option>
-            </optgroup>
-            <optgroup label="Pets">
-              <option>Dog Walker / Pet Sitter</option><option>Pet Groomer</option><option>Veterinary Practice</option>
-              <option>Pet Shop</option>
-            </optgroup>
-            <optgroup label="Professional Services">
-              <option>Accountant / Bookkeeper</option><option>Solicitor / Legal Services</option>
-              <option>Financial Adviser</option><option>Mortgage Broker</option><option>Business Consultant</option>
-              <option>Marketing Agency</option><option>Coach (Life / Business)</option><option>HR Consultant</option>
-            </optgroup>
-            <optgroup label="Property">
-              <option>Real Estate Agent</option><option>Letting Agent</option>
-              <option>Interior Designer</option><option>Architect</option>
-            </optgroup>
-            <optgroup label="Creative &amp; Digital">
-              <option>Photographer</option><option>Videographer</option><option>Graphic Designer</option>
-              <option>Web Designer / Developer</option><option>Copywriter</option><option>Social Media Manager</option>
-            </optgroup>
-            <optgroup label="Garden &amp; Outdoor">
-              <option>Landscaper / Gardener</option><option>Tree Surgeon</option><option>Window Cleaner</option>
-            </optgroup>
-            <optgroup label="Cleaning">
-              <option>Domestic Cleaner</option><option>Commercial Cleaner</option><option>End of Tenancy Cleaner</option>
-            </optgroup>
-            <optgroup label="Education &amp; Care">
-              <option>Driving Instructor</option><option>Music Teacher</option><option>Tutoring Service</option>
-              <option>Childminder / Nursery</option><option>Therapist / Counsellor</option>
-            </optgroup>
-            <optgroup label="Events">
-              <option>Event Planner</option><option>Florist</option><option>Wedding Planner</option>
-              <option>Entertainer / DJ</option>
-            </optgroup>
-            <optgroup label="Auto">
-              <option>Mechanic / Garage</option><option>Mobile Mechanic</option><option>Car Wash / Valeting</option>
-            </optgroup>
-            <optgroup label="Other">
-              <option>Retail Shop</option><option>Online Shop</option><option>Franchise</option>
-              <option>Other local business</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <!-- Q2: Business Name -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">02</span>What is your business name?</label>
-          <input type="text" id="q-name" class="field-input" placeholder="e.g. Smith's Plumbing Services" oninput="updateProgress()">
-        </div>
-
-        <!-- Q3: Location -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">03</span>Where are you based / what area do you cover?</label>
-          <input type="text" id="q-location" class="field-input" placeholder="e.g. Manchester and surrounding areas, within 20 miles" oninput="updateProgress()">
-        </div>
-
-        <!-- Q4: Key Service -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">04</span>What is your key service or product?</label>
-          <input type="text" id="q-service" class="field-input" placeholder="e.g. Emergency plumbing, boiler installation, bathroom fitting" oninput="updateProgress()">
-        </div>
-
-        <!-- Q5: Target Customer -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">05</span>Who is your ideal customer?</label>
-          <input type="text" id="q-customer" class="field-input" placeholder="e.g. Homeowners aged 35-60, landlords, small business owners" oninput="updateProgress()">
-        </div>
-
-        <!-- Q6: USP -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">06</span>What makes you different from competitors?</label>
-          <textarea id="q-usp" class="field-input field-textarea" rows="3" placeholder="e.g. Same-day service, 15 years experience, fully insured, 5-star reviews, family-run, no call-out charge..." oninput="updateProgress()"></textarea>
-        </div>
-
-        <!-- Q7: Price -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">07</span>What is your typical price range?</label>
-          <select id="q-price" class="field-input field-select" onchange="updateProgress()">
-            <option value="">— Select price range —</option>
-            <option>Under £50 per job</option>
-            <option>£50–£200 per job</option>
-            <option>£200–£500 per job</option>
-            <option>£500–£2,000 per job</option>
-            <option>£2,000–£10,000 per project</option>
-            <option>Over £10,000 per project</option>
-            <option>Hourly rate (£20–£50/hr)</option>
-            <option>Hourly rate (£50–£150/hr)</option>
-            <option>Monthly retainer</option>
-            <option>Free quotes / varies by project</option>
-          </select>
-        </div>
-
-        <!-- Q8: Years in business -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">08</span>How long have you been in business?</label>
-          <div class="radio-row" id="rg-years">
-            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="Just starting out (under 1 year)"><span>🌱</span>Just started</label>
-            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="1–3 years in business"><span>📈</span>1–3 years</label>
-            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="3–10 years in business"><span>🏆</span>3–10 years</label>
-            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="Over 10 years in business"><span>⭐</span>10+ years</label>
-          </div>
-        </div>
-
-        <!-- Q9: Web presence -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">09</span>Current website / social media presence?</label>
-          <div class="radio-row" id="rg-web">
-            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Yes — website and active social media"><span>✅</span>Both</label>
-            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Website only, limited social"><span>🌐</span>Website only</label>
-            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Social media only, no website"><span>📱</span>Social only</label>
-            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Starting from scratch"><span>🚀</span>Starting fresh</label>
-          </div>
-        </div>
-
-        <!-- Q10: Challenge + Goal -->
-        <div class="field-group">
-          <label class="field-label"><span class="q-badge">10</span>Main challenge right now, and goal for this kit?</label>
-          <textarea id="q-goal" class="field-input field-textarea" rows="3" placeholder="e.g. Not enough new enquiries. Goal: double customer base in 6 months and build a proper online presence." oninput="updateProgress()"></textarea>
-        </div>
-
-        <!-- Divider -->
-        <div class="divider"></div>
-
-        <!-- Submit -->
-        <div class="submit-area">
-          <button class="btn-generate" id="gen-btn" onclick="startGenerate()">
-            <span class="gen-spark">✦</span>
-            Generate My Complete Marketing Kit
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-          <p class="submit-note">Takes 30–60 seconds. Your API keys are stored only in Netlify's secure environment.</p>
-          <div id="form-err" class="form-error" style="display:none;"></div>
-        </div>
-
+      <div class="problem-card">
+        <div class="problem-icon">📋</div>
+        <h3>Enquiries fall through the cracks</h3>
+        <p>No follow-up system, no reminders, no structure. Enquiries go cold and jobs that were almost yours disappear.</p>
       </div>
-    </div>
-  </section>
-
-</div><!-- /page-form -->
-
-
-<!-- ========================================================
-     PAGE: LOADING
-     ======================================================== -->
-<div id="page-loading" style="display:none;">
-  <div class="loading-scene">
-    <div class="loading-card">
-      <div class="spinner"></div>
-      <h2 id="loading-title">Generating your marketing kit…</h2>
-      <p class="loading-sub" id="loading-sub">This takes 30–60 seconds</p>
-      <div class="loading-steps">
-        <div class="lstep" id="ls-content"><span class="lsdot"></span>Writing landing page, emails &amp; social posts</div>
-        <div class="lstep" id="ls-video"><span class="lsdot"></span>Generating your marketing video</div>
-        <div class="lstep" id="ls-done"><span class="lsdot"></span>Packaging your complete kit</div>
-      </div>
-      <div class="loading-msg" id="loading-msg">Analysing your business profile…</div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ========================================================
-     PAGE: RESULTS
-     ======================================================== -->
-<div id="page-results" style="display:none;">
-
-  <!-- Results header -->
-  <div class="results-header">
-    <div class="container">
-      <div class="results-header-left">
-        <div class="results-emoji">🎉</div>
-        <div>
-          <h1>Your marketing kit is ready</h1>
-          <p id="results-desc">Full content package generated</p>
-        </div>
-      </div>
-      <div class="results-header-right">
-        <button class="btn-download" onclick="downloadPDF()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          PDF
-        </button>
-        <button class="btn-download" onclick="downloadZIP()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>
-          ZIP
-        </button>
-        <button class="btn-outline-white" onclick="goHome()">Start over</button>
+      <div class="problem-card">
+        <div class="problem-icon">⏰</div>
+        <h3>No time for marketing</h3>
+        <p>You are doing the work, not promoting it. The business you already have is keeping you too busy to grow.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Tabs -->
-  <div class="tab-strip" id="tab-strip">
-    <div class="container">
-      <div class="tabs">
-        <button class="tab active" onclick="showTab('landing',this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          Landing Page
-        </button>
-        <button class="tab" onclick="showTab('emails',this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Emails <span class="tab-count">5</span>
-        </button>
-        <button class="tab" onclick="showTab('social',this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Social Posts <span class="tab-count">10</span>
-        </button>
-        <button class="tab" onclick="showTab('video',this)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-          Video
-        </button>
+<!-- ===== SECTION 4: HOW IT WORKS ===== -->
+<section class="hiw" id="how-it-works">
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Three steps to your complete business kit</h2>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-num">1</div>
+        <h3>Tell us about your business</h3>
+        <p>Fill in one simple form. Takes about 5 minutes. No jargon, no tech — just plain answers about your trade.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">2</div>
+        <h3>AI builds your kit</h3>
+        <p>Landing page copy, emails, social posts and quote templates are generated instantly using your exact details.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">3</div>
+        <h3>Launch and capture leads</h3>
+        <p>Copy, paste and go live the same day. Your new business presence starts working for you immediately.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Tab panels -->
-  <div class="tab-panels">
-    <div class="container">
+<!-- ===== SECTION 5: WHAT YOU GET ===== -->
+<section class="wyg" id="what-you-get">
+  <div class="container">
+    <div class="section-label">What you get</div>
+    <h2 class="section-title">Everything you need to look the part</h2>
+    <p class="section-sub">Six ready-to-use tools, all written for your specific trade and location. No templates. No generic filler.</p>
+    <div class="wyg-grid">
+      <div class="wyg-card">
+        <div class="wyg-icon">📄</div>
+        <h3>Landing Page Copy</h3>
+        <p>Professional headline, service descriptions, FAQs and trust builders written specifically for your business and location.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">📝</div>
+        <h3>Lead Capture Forms</h3>
+        <p>Quote request form, booking form and contact form — all with the right questions for your trade.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">✉️</div>
+        <h3>Email Templates</h3>
+        <p>Instant enquiry reply, quote follow-up, appointment reminder and review request — all ready to send.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">📱</div>
+        <h3>Social Media Posts</h3>
+        <p>30 days of Facebook, Instagram and Google Business posts written for your trade. Just copy and post.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">🔁</div>
+        <h3>Follow-up Sequences</h3>
+        <p>7-day follow-up, no-response chase and lost lead reactivation — so no enquiry ever slips through again.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">📋</div>
+        <h3>Business Documents</h3>
+        <p>Professional quote template, terms and conditions and privacy policy — all in your business name.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- LANDING PAGE -->
-      <div id="panel-landing" class="panel active">
-        <div class="panel-head">
-          <div><h2>Landing Page Copy</h2><p>300–500 words of professional website copy. Copy any section or grab everything at once.</p></div>
+<!-- ===== SECTION 6: TRADES ===== -->
+<section class="trades">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Trades we cover</div>
+    <h2 class="section-title">Built for every local trade</h2>
+    <p class="section-sub" style="margin:0 auto 40px;">Whether you work with tools or talent, we know your trade and write copy that sounds like you.</p>
+    <div class="trades-grid">
+      <div class="trade-pill"><span>🔨</span> Builder</div>
+      <div class="trade-pill"><span>🔧</span> Plumber</div>
+      <div class="trade-pill"><span>⚡</span> Electrician</div>
+      <div class="trade-pill"><span>✂️</span> Hairdresser</div>
+      <div class="trade-pill"><span>💈</span> Barber</div>
+      <div class="trade-pill"><span>🧹</span> Cleaner</div>
+      <div class="trade-pill"><span>🎨</span> Decorator</div>
+      <div class="trade-pill"><span>🌿</span> Gardener</div>
+      <div class="trade-pill"><span>🚗</span> Mobile Mechanic</div>
+      <div class="trade-pill"><span>💅</span> Beauty Therapist</div>
+      <div class="trade-pill"><span>📚</span> Tutor</div>
+      <div class="trade-pill"><span>🐕</span> Dog Groomer</div>
+      <div class="trade-pill"><span>📷</span> Photographer</div>
+      <div class="trade-pill"><span>🏋️</span> Personal Trainer</div>
+      <div class="trade-pill"><span>👶</span> Childminder</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: PRICING ===== -->
+<section class="pricing" id="pricing">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Start free. Scale when you're ready.</h2>
+    <p class="section-sub" style="margin:0 auto;">No contracts. No surprises. Cancel any time.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Starter Kit</div>
+        <div class="pricing-price">Free</div>
+        <div class="pricing-desc">Everything you need to get found online and start capturing leads today.</div>
+        <ul class="pricing-features">
+          <li>Landing page copy</li>
+          <li>3 email templates</li>
+          <li>10 social media posts</li>
+          <li>Quote template</li>
+          <li>One-time generation</li>
+        </ul>
+        <a href="#demo" class="btn btn-secondary btn-full">Build Free Kit</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">Lead Pro</div>
+        <div class="pricing-price">£29<span>/month</span></div>
+        <div class="pricing-desc">Full lead capture system with follow-up sequences to convert enquiries into jobs.</div>
+        <ul class="pricing-features">
+          <li>Everything in Starter</li>
+          <li>Quote request forms</li>
+          <li>Full email sequences (7 emails)</li>
+          <li>30 social media posts/month</li>
+          <li>Lead tracker spreadsheet</li>
+          <li>Monthly content refresh</li>
+        </ul>
+        <a href="#demo" class="btn btn-primary btn-full">Start Free Trial</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Growth System</div>
+        <div class="pricing-price">£49<span>/month</span></div>
+        <div class="pricing-desc">Full automation, review generation and performance tracking for serious growth.</div>
+        <ul class="pricing-features">
+          <li>Everything in Lead Pro</li>
+          <li>Follow-up automation</li>
+          <li>Review request workflow</li>
+          <li>Monthly new content</li>
+          <li>Performance dashboard</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#demo" class="btn btn-secondary btn-full">Start Free Trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 8: ONBOARDING TOOL ===== -->
+<section class="tool" id="demo">
+  <div class="container">
+    <div class="section-label">Live demo</div>
+    <h2 class="section-title">Build Your Free Business Kit</h2>
+    <p class="section-sub">Answer 10 quick questions and AI generates your complete business kit instantly.</p>
+
+    <div class="tool-box">
+      <!-- Progress bar -->
+      <div class="tool-progress">
+        <div class="progress-steps" id="progressSteps">
+          <div class="progress-step active"><span class="progress-step-label">Your Trade</span></div>
+          <div class="progress-step"><span class="progress-step-label">Business</span></div>
+          <div class="progress-step"><span class="progress-step-label">Services</span></div>
+          <div class="progress-step"><span class="progress-step-label">Customers</span></div>
+          <div class="progress-step"><span class="progress-step-label">Prices</span></div>
+          <div class="progress-step"><span class="progress-step-label">Generate</span></div>
         </div>
-        <div id="out-landing"></div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:16.7%"></div></div>
       </div>
 
-      <!-- EMAILS -->
-      <div id="panel-emails" class="panel" style="display:none">
-        <div class="panel-head">
-          <div><h2>Email Templates</h2><p>Five ready-to-send emails for every stage of the customer journey.</p></div>
-        </div>
-        <div id="out-emails"></div>
-      </div>
-
-      <!-- SOCIAL -->
-      <div id="panel-social" class="panel" style="display:none">
-        <div class="panel-head">
-          <div><h2>Social Media Posts</h2><p>Ten posts across Facebook, Instagram and LinkedIn. Copy and schedule.</p></div>
-          <div class="platform-filter">
-            <button class="pf-btn active" onclick="filterPosts('all',this)">All</button>
-            <button class="pf-btn" onclick="filterPosts('Facebook',this)">Facebook</button>
-            <button class="pf-btn" onclick="filterPosts('Instagram',this)">Instagram</button>
-            <button class="pf-btn" onclick="filterPosts('LinkedIn',this)">LinkedIn</button>
+      <!-- Step 1: Trade -->
+      <div class="tool-body">
+        <div class="tool-step active" id="step1">
+          <div class="step-title">What type of business are you?</div>
+          <div class="step-sub">Select your trade to get copy and content written specifically for you.</div>
+          <div class="trade-btns" id="tradeBtns">
+            <button class="trade-btn" data-trade="Builder" onclick="selectTrade(this)"><span class="icon">🔨</span>Builder</button>
+            <button class="trade-btn" data-trade="Plumber" onclick="selectTrade(this)"><span class="icon">🔧</span>Plumber</button>
+            <button class="trade-btn" data-trade="Electrician" onclick="selectTrade(this)"><span class="icon">⚡</span>Electrician</button>
+            <button class="trade-btn" data-trade="Hairdresser" onclick="selectTrade(this)"><span class="icon">✂️</span>Hairdresser</button>
+            <button class="trade-btn" data-trade="Barber" onclick="selectTrade(this)"><span class="icon">💈</span>Barber</button>
+            <button class="trade-btn" data-trade="Cleaner" onclick="selectTrade(this)"><span class="icon">🧹</span>Cleaner</button>
+            <button class="trade-btn" data-trade="Decorator" onclick="selectTrade(this)"><span class="icon">🎨</span>Decorator</button>
+            <button class="trade-btn" data-trade="Gardener" onclick="selectTrade(this)"><span class="icon">🌿</span>Gardener</button>
+            <button class="trade-btn" data-trade="Mobile Mechanic" onclick="selectTrade(this)"><span class="icon">🚗</span>Mobile Mechanic</button>
+            <button class="trade-btn" data-trade="Beauty Therapist" onclick="selectTrade(this)"><span class="icon">💅</span>Beauty Therapist</button>
+            <button class="trade-btn" data-trade="Tutor" onclick="selectTrade(this)"><span class="icon">📚</span>Tutor</button>
+            <button class="trade-btn" data-trade="Dog Groomer" onclick="selectTrade(this)"><span class="icon">🐕</span>Dog Groomer</button>
+            <button class="trade-btn" data-trade="Photographer" onclick="selectTrade(this)"><span class="icon">📷</span>Photographer</button>
+            <button class="trade-btn" data-trade="Personal Trainer" onclick="selectTrade(this)"><span class="icon">🏋️</span>Personal Trainer</button>
+            <button class="trade-btn" data-trade="Childminder" onclick="selectTrade(this)"><span class="icon">👶</span>Childminder</button>
+            <button class="trade-btn" data-trade="Other" onclick="selectTrade(this)"><span class="icon">💼</span>Other</button>
+          </div>
+          <div id="other-trade-field" style="display:none;margin-top:16px;">
+            <input type="text" class="field-input" id="otherTrade" placeholder="Describe your trade or business type">
+          </div>
+          <div class="tool-nav">
+            <div></div>
+            <button class="btn btn-primary" onclick="goStep(2)">Next →</button>
           </div>
         </div>
-        <div id="out-social" class="social-grid"></div>
-      </div>
 
-      <!-- VIDEO -->
-      <div id="panel-video" class="panel" style="display:none">
-        <div class="panel-head">
-          <div><h2>AI Marketing Video</h2><p>Your talking-head video generated by HeyGen. Download as MP4.</p></div>
+        <!-- Step 2: Business -->
+        <div class="tool-step" id="step2">
+          <div class="step-title">Tell us about your business</div>
+          <div class="step-sub">These details go into all your content — your name, your area, your business.</div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Business name</label>
+              <input type="text" class="field-input" id="bizName" placeholder="e.g. Smith's Plumbing Services">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Your first name</label>
+              <input type="text" class="field-input" id="firstName" placeholder="e.g. Dave">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Town or city you cover</label>
+              <input type="text" class="field-input" id="location" placeholder="e.g. Manchester">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Years in business</label>
+              <input type="number" class="field-input" id="yearsInBiz" placeholder="e.g. 8" min="0" max="60">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label">Main phone number</label>
+              <input type="tel" class="field-input" id="phone" placeholder="e.g. 07700 900123">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Email address</label>
+              <input type="email" class="field-input" id="email" placeholder="e.g. dave@smithsplumbing.co.uk">
+            </div>
+          </div>
+          <div class="tool-nav">
+            <button class="btn btn-secondary" onclick="goStep(1)">← Back</button>
+            <button class="btn btn-primary" onclick="goStep(3)">Next →</button>
+          </div>
         </div>
-        <div id="out-video"></div>
-      </div>
 
-    </div>
+        <!-- Step 3: Services -->
+        <div class="tool-step" id="step3">
+          <div class="step-title">What are your main services?</div>
+          <div class="step-sub">Tick everything you offer — we'll write specific copy for each one.</div>
+          <div class="check-grid" id="servicesGrid"></div>
+          <div class="field-group" style="margin-top:16px;">
+            <label class="field-label">Any other services you offer?</label>
+            <input type="text" class="field-input" id="otherServices" placeholder="e.g. Emergency callouts, weekend bookings...">
+          </div>
+          <div class="tool-nav">
+            <button class="btn btn-secondary" onclick="goStep(2)">← Back</button>
+            <button class="btn btn-primary" onclick="goStep(4)">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Customers -->
+        <div class="tool-step" id="step4">
+          <div class="step-title">Who are your main customers?</div>
+          <div class="step-sub">This helps us write copy that speaks directly to the right people.</div>
+          <div class="field-group">
+            <label class="field-label">Who do you mainly work for? (tick all that apply)</label>
+            <div class="check-grid" id="customerGrid">
+              <label class="check-item"><input type="checkbox" value="Homeowners"> Homeowners</label>
+              <label class="check-item"><input type="checkbox" value="Landlords"> Landlords</label>
+              <label class="check-item"><input type="checkbox" value="Estate agents"> Estate agents</label>
+              <label class="check-item"><input type="checkbox" value="Small businesses"> Small businesses</label>
+              <label class="check-item"><input type="checkbox" value="Schools and offices"> Schools and offices</label>
+              <label class="check-item"><input type="checkbox" value="All types of customer"> All types</label>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">What area do you cover?</label>
+            <input type="text" class="field-input" id="coverageArea" placeholder="e.g. Manchester and surrounding areas within 15 miles">
+          </div>
+          <div class="field-group">
+            <label class="field-label">What makes you different from other <span id="trade-label-4">businesses</span>?</label>
+            <textarea class="field-input" id="usp" rows="3" placeholder="e.g. Always on time, 10-year guarantee, family-run business since 2005, DBS checked..."></textarea>
+          </div>
+          <div class="tool-nav">
+            <button class="btn btn-secondary" onclick="goStep(3)">← Back</button>
+            <button class="btn btn-primary" onclick="goStep(5)">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 5: Prices -->
+        <div class="tool-step" id="step5">
+          <div class="step-title">How do you charge?</div>
+          <div class="step-sub">This shapes how we write your quotes and pricing copy.</div>
+          <div class="field-group">
+            <label class="field-label">Your pricing model</label>
+            <div class="radio-grid" id="pricingGrid">
+              <label class="radio-item"><input type="radio" name="pricing" value="Fixed prices"> Fixed prices</label>
+              <label class="radio-item"><input type="radio" name="pricing" value="Hourly rate"> Hourly rate</label>
+              <label class="radio-item"><input type="radio" name="pricing" value="Free quotes"> Free quotes</label>
+              <label class="radio-item"><input type="radio" name="pricing" value="Day rate"> Day rate</label>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Typical starting price <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+            <input type="text" class="field-input" id="startPrice" placeholder="e.g. Call-out from £65, haircuts from £25...">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Any guarantees or warranties? <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+            <input type="text" class="field-input" id="guarantees" placeholder="e.g. 12-month workmanship guarantee, satisfaction guaranteed...">
+          </div>
+          <div class="tool-nav">
+            <button class="btn btn-secondary" onclick="goStep(4)">← Back</button>
+            <button class="btn btn-primary" onclick="goStep(6)">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 6: Generate -->
+        <div class="tool-step" id="step6">
+          <div class="step-title">Almost there — one last thing</div>
+          <div class="step-sub">Enter your Anthropic API key to generate your kit. Your key is never stored.</div>
+          <div class="api-key-box">
+            <label class="field-label">Anthropic API Key</label>
+            <input type="password" class="field-input" id="apiKey" placeholder="sk-ant-...">
+            <p>Get a free key at <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>. Your key is only used for this generation and is never saved anywhere.</p>
+          </div>
+          <div id="generateArea">
+            <button class="generate-btn" id="generateBtn" onclick="generateKit()">
+              <span>✨</span> Generate My Business Kit
+            </button>
+          </div>
+          <div id="loadingArea" style="display:none;">
+            <div class="loading-state">
+              <div class="spinner"></div>
+              <div class="loading-msg" id="loadingMsg">Analysing your business<span class="loading-dots"></span></div>
+            </div>
+          </div>
+          <div id="errorArea" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:14px 18px;color:#dc2626;font-size:13px;margin-top:12px;"></div>
+          <div class="tool-nav">
+            <button class="btn btn-secondary" onclick="goStep(5)">← Back</button>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Step 7: Output -->
+        <div class="tool-step" id="step7">
+          <div class="success-banner">🎉 Your business kit is ready! Copy any section and use it today.</div>
+          <div class="output-tabs" id="outputTabs">
+            <button class="output-tab active" onclick="switchTab(this,'tab-landing')">Landing Page</button>
+            <button class="output-tab" onclick="switchTab(this,'tab-emails')">Emails</button>
+            <button class="output-tab" onclick="switchTab(this,'tab-social')">Social Posts</button>
+            <button class="output-tab" onclick="switchTab(this,'tab-quote')">Quote Template</button>
+            <button class="output-tab" onclick="switchTab(this,'tab-followup')">Follow-up</button>
+          </div>
+          <div id="tab-landing" class="output-panel active">
+            <div class="output-content" id="out-landing"></div>
+            <div class="output-actions">
+              <button class="btn btn-secondary" onclick="copyTab('out-landing')">📋 Copy All</button>
+              <button class="btn btn-secondary" onclick="downloadTab('out-landing','landing-page-copy')">⬇️ Download .txt</button>
+            </div>
+          </div>
+          <div id="tab-emails" class="output-panel">
+            <div class="output-content" id="out-emails"></div>
+            <div class="output-actions">
+              <button class="btn btn-secondary" onclick="copyTab('out-emails')">📋 Copy All</button>
+              <button class="btn btn-secondary" onclick="downloadTab('out-emails','email-templates')">⬇️ Download .txt</button>
+            </div>
+          </div>
+          <div id="tab-social" class="output-panel">
+            <div class="output-content" id="out-social"></div>
+            <div class="output-actions">
+              <button class="btn btn-secondary" onclick="copyTab('out-social')">📋 Copy All</button>
+              <button class="btn btn-secondary" onclick="downloadTab('out-social','social-media-posts')">⬇️ Download .txt</button>
+            </div>
+          </div>
+          <div id="tab-quote" class="output-panel">
+            <div class="output-content" id="out-quote"></div>
+            <div class="output-actions">
+              <button class="btn btn-secondary" onclick="copyTab('out-quote')">📋 Copy All</button>
+              <button class="btn btn-secondary" onclick="downloadTab('out-quote','quote-template')">⬇️ Download .txt</button>
+            </div>
+          </div>
+          <div id="tab-followup" class="output-panel">
+            <div class="output-content" id="out-followup"></div>
+            <div class="output-actions">
+              <button class="btn btn-secondary" onclick="copyTab('out-followup')">📋 Copy All</button>
+              <button class="btn btn-secondary" onclick="downloadTab('out-followup','followup-messages')">⬇️ Download .txt</button>
+            </div>
+          </div>
+          <div class="tool-nav" style="margin-top:20px;">
+            <button class="btn btn-secondary" onclick="resetTool()">Start Over</button>
+            <a href="#pricing" class="btn btn-primary">Upgrade to Lead Pro →</a>
+          </div>
+        </div>
+
+      </div><!-- /tool-body -->
+    </div><!-- /tool-box -->
   </div>
+</section>
 
-  <!-- Bottom bar -->
-  <div class="results-foot">
-    <div class="container">
-      <p>Want fresh content? Regenerate anytime with new details.</p>
-      <div class="results-foot-btns">
-        <button class="btn-download" onclick="downloadPDF()">📄 Download PDF</button>
-        <button class="btn-download" onclick="downloadZIP()">📦 Download ZIP</button>
-        <button class="btn-primary" onclick="goHome()">Generate Another Kit</button>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /page-results -->
-
-
-<!-- FOOTER -->
-<footer id="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo"><span class="logo-icon">◈</span> Local Business AI Hub</div>
-      <p>AI-powered marketing kits for UK local businesses.</p>
-    </div>
-    <div class="footer-cols">
+<!-- ===== SECTION 9: FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
       <div>
-        <h4>Product</h4>
-        <a href="#how-it-works">How it works</a>
-        <a href="#what-you-get">What you get</a>
-        <a href="#form-top">Build my kit</a>
+        <div class="footer-logo">Local Business AI Hub</div>
+        <div class="footer-tagline">AI-powered business tools for local trades and small businesses across the UK.</div>
       </div>
-      <div>
-        <h4>Company</h4>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#">Privacy</a>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#how-it-works">How it works</a>
+          <a href="#what-you-get">What you get</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#demo">Demo</a>
+        </div>
+        <div class="footer-col">
+          <h4>Trades</h4>
+          <a href="#demo">Builders</a>
+          <a href="#demo">Plumbers</a>
+          <a href="#demo">Electricians</a>
+          <a href="#demo">All trades</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="footer-base">
-    <div class="container footer-base-inner">
+    <div class="footer-bottom">
       <span>© 2026 Local Business AI Hub. All rights reserved.</span>
       <span>Built by Webb Care Consultancy</span>
     </div>
   </div>
 </footer>
 
-<script src="js/app.js"></script>
+<script>
+'use strict';
+
+/* ===== STATE ===== */
+var state = {
+  step: 1,
+  trade: '',
+  bizName: '', firstName: '', location: '', yearsInBiz: '', phone: '', email: '',
+  services: [],
+  otherServices: '',
+  customers: [],
+  coverageArea: '', usp: '',
+  pricingModel: '',
+  startPrice: '', guarantees: '',
+  apiKey: ''
+};
+
+/* ===== TRADE SERVICES MAP ===== */
+var tradeServices = {
+  'Builder':['Extensions & loft conversions','New builds & self-build','Renovations & refurbishments','Plastering & rendering','Bricklaying & blockwork','Roofing & guttering','Patios & driveways','Garden walls & fencing'],
+  'Plumber':['Emergency callouts','Boiler installation & servicing','Bathroom fitting','Leak detection & repairs','Central heating installation','Drain unblocking','Power flushing','General plumbing'],
+  'Electrician':['Full & partial rewires','Consumer unit installation','Fault finding & testing','EV charger installation','PAT testing','Lighting design & installation','CCTV & alarms','Solar panel installation'],
+  'Hairdresser':['Cuts & styling','Colouring & highlights','Balayage & ombre','Blow dry & finish','Keratin & smoothing treatments','Hair extensions','Bridal hair','Kids\' cuts'],
+  'Barber':['Men\'s cuts & styling','Fades & tapers','Beard trim & shaping','Hot towel shave','Kids\' cuts','Scalp treatments','Hair colouring','Line-ups & designs'],
+  'Cleaner':['Regular domestic cleaning','End of tenancy clean','Deep clean & spring clean','Office & commercial cleaning','Oven & appliance cleaning','Carpet & upholstery cleaning','Window cleaning','After-build clean'],
+  'Decorator':['Interior painting & decorating','Exterior painting','Wallpaper hanging','Wood staining & varnishing','Commercial & office decorating','New build decoration','Feature walls','Colour consultation'],
+  'Gardener':['Lawn mowing & edging','Garden clearance & tidying','Hedge trimming & shaping','Planting & landscaping','Tree surgery & pruning','Decking & patio installation','Regular maintenance contracts','Garden design'],
+  'Mobile Mechanic':['Full servicing','Brakes & pads','Tyres & punctures','Battery replacement','Diagnostic checks','MOT preparation','Oil & filter changes','Clutch & gearbox'],
+  'Beauty Therapist':['Nails & gel extensions','Lashes & brow tinting','Waxing & threading','Facials & skin treatments','Massage therapy','Spray tanning','Eyelash extensions','Bridal packages'],
+  'Tutor':['Primary school support','Secondary school tutoring','GCSE preparation','A-Level tutoring','Maths','English & literacy','Science & biology','11+ exam preparation'],
+  'Dog Groomer':['Full groom & styling','Bath & brush','Nail clipping & filing','Ear & teeth cleaning','De-matting & de-shedding','Breed-specific styling','Puppy first groom','Mobile grooming'],
+  'Photographer':['Wedding photography','Family portraits','Newborn & bump','Commercial & product','Events & corporate','Headshots & personal brand','Property & interiors','Graduation'],
+  'Personal Trainer':['Weight loss programmes','Muscle building & toning','Online coaching','Group training sessions','Nutrition advice & planning','HIIT & functional fitness','Rehabilitation & recovery','Home & gym sessions'],
+  'Childminder':['Full-time childcare','Before & after school care','Holiday childcare','EYFS activities & learning','School runs','Flexible drop-in sessions','Baby & toddler care','Ofsted registered care'],
+  'Other':['Enquiries & consultations','Appointments & bookings','Home visits','Remote & online services','Bespoke projects','Emergency call-outs','Maintenance & servicing','Installations']
+};
+
+/* ===== STEP NAVIGATION ===== */
+function goStep(n) {
+  var cur = document.getElementById('step' + state.step);
+  var next = document.getElementById('step' + n);
+  if (!next) return;
+
+  // Validation
+  if (state.step === 1 && n > 1 && !state.trade) {
+    alert('Please select your trade type first.');
+    return;
+  }
+  if (state.step === 2 && n > 2) {
+    if (!document.getElementById('bizName').value.trim()) {
+      alert('Please enter your business name.');
+      return;
+    }
+    if (!document.getElementById('location').value.trim()) {
+      alert('Please enter your town or city.');
+      return;
+    }
+    collectStep2();
+  }
+  if (state.step === 3 && n > 3) collectStep3();
+  if (state.step === 4 && n > 4) collectStep4();
+  if (state.step === 5 && n > 5) collectStep5();
+
+  cur.classList.remove('active');
+  next.classList.add('active');
+  state.step = n;
+  updateProgress(n);
+
+  // Scroll to tool
+  document.getElementById('demo').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function updateProgress(step) {
+  var steps = document.querySelectorAll('.progress-step');
+  steps.forEach(function(s, i) {
+    s.classList.remove('active', 'done');
+    if (i < step - 1) s.classList.add('done');
+    else if (i === step - 1) s.classList.add('active');
+  });
+  var pct = (step / 6) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+/* ===== TRADE SELECTION ===== */
+function selectTrade(btn) {
+  document.querySelectorAll('.trade-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  state.trade = btn.dataset.trade;
+  var otherField = document.getElementById('other-trade-field');
+  otherField.style.display = state.trade === 'Other' ? 'block' : 'none';
+  renderServicesForTrade(state.trade);
+  document.getElementById('trade-label-4').textContent = state.trade.toLowerCase() + 's';
+}
+
+function renderServicesForTrade(trade) {
+  var services = tradeServices[trade] || tradeServices['Other'];
+  var grid = document.getElementById('servicesGrid');
+  grid.innerHTML = '';
+  services.forEach(function(svc) {
+    var label = document.createElement('label');
+    label.className = 'check-item';
+    label.innerHTML = '<input type="checkbox" value="' + escHtml(svc) + '"> ' + escHtml(svc);
+    var cb = label.querySelector('input');
+    cb.addEventListener('change', function() {
+      label.classList.toggle('checked', cb.checked);
+    });
+    grid.appendChild(label);
+  });
+}
+
+/* ===== DATA COLLECTION ===== */
+function collectStep2() {
+  state.bizName = document.getElementById('bizName').value.trim();
+  state.firstName = document.getElementById('firstName').value.trim();
+  state.location = document.getElementById('location').value.trim();
+  state.yearsInBiz = document.getElementById('yearsInBiz').value.trim();
+  state.phone = document.getElementById('phone').value.trim();
+  state.email = document.getElementById('email').value.trim();
+}
+function collectStep3() {
+  var checks = document.querySelectorAll('#servicesGrid input:checked');
+  state.services = Array.from(checks).map(function(c) { return c.value; });
+  state.otherServices = document.getElementById('otherServices').value.trim();
+}
+function collectStep4() {
+  var checks = document.querySelectorAll('#customerGrid input:checked');
+  state.customers = Array.from(checks).map(function(c) { return c.value; });
+  state.coverageArea = document.getElementById('coverageArea').value.trim();
+  state.usp = document.getElementById('usp').value.trim();
+}
+function collectStep5() {
+  var radio = document.querySelector('input[name="pricing"]:checked');
+  state.pricingModel = radio ? radio.value : '';
+  state.startPrice = document.getElementById('startPrice').value.trim();
+  state.guarantees = document.getElementById('guarantees').value.trim();
+}
+
+/* ===== GENERATION ===== */
+var loadingMessages = [
+  'Analysing your business',
+  'Writing your landing page',
+  'Creating your email templates',
+  'Building your social posts',
+  'Crafting your quote template',
+  'Writing your follow-up messages',
+  'Your kit is almost ready'
+];
+
+function generateKit() {
+  collectStep2(); collectStep3(); collectStep4(); collectStep5();
+  var key = document.getElementById('apiKey').value.trim();
+  if (!key) { showError('Please enter your Anthropic API key.'); return; }
+  if (!key.startsWith('sk-ant-')) { showError('That doesn\'t look like a valid Anthropic API key. It should start with sk-ant-'); return; }
+  state.apiKey = key;
+
+  document.getElementById('generateArea').style.display = 'none';
+  document.getElementById('loadingArea').style.display = 'block';
+  document.getElementById('errorArea').style.display = 'none';
+
+  var msgEl = document.getElementById('loadingMsg');
+  var msgIdx = 0;
+  var msgInterval = setInterval(function() {
+    msgIdx = (msgIdx + 1) % loadingMessages.length;
+    msgEl.innerHTML = loadingMessages[msgIdx] + '<span class="loading-dots"></span>';
+  }, 2200);
+
+  callAnthropicAPI(buildPrompt())
+    .then(function(result) {
+      clearInterval(msgInterval);
+      parseAndDisplay(result);
+      goStep(7);
+    })
+    .catch(function(err) {
+      clearInterval(msgInterval);
+      document.getElementById('loadingArea').style.display = 'none';
+      document.getElementById('generateArea').style.display = 'block';
+      showError('Generation failed: ' + err.message + '. Check your API key and try again.');
+    });
+}
+
+function buildPrompt() {
+  var trade = state.trade === 'Other' ? (document.getElementById('otherTrade').value.trim() || 'local business') : state.trade;
+  var allServices = state.services.concat(state.otherServices ? [state.otherServices] : []).join(', ') || 'general services';
+  var customers = state.customers.join(', ') || 'homeowners and local customers';
+  var yearsText = state.yearsInBiz ? state.yearsInBiz + ' years in business' : '';
+  var priceText = state.pricingModel + (state.startPrice ? ', starting from ' + state.startPrice : '');
+
+  return 'Generate a complete business marketing kit for this local business.\n\n' +
+    'BUSINESS DETAILS:\n' +
+    'Trade: ' + trade + '\n' +
+    'Business Name: ' + (state.bizName || trade + ' Services') + '\n' +
+    'First Name: ' + (state.firstName || 'the owner') + '\n' +
+    'Location: ' + (state.location || 'local area') + '\n' +
+    (yearsText ? 'Experience: ' + yearsText + '\n' : '') +
+    'Phone: ' + (state.phone || '[phone number]') + '\n' +
+    'Email: ' + (state.email || '[email address]') + '\n' +
+    'Services: ' + allServices + '\n' +
+    'Main customers: ' + customers + '\n' +
+    'Coverage area: ' + (state.coverageArea || state.location || 'local area') + '\n' +
+    'What makes them different: ' + (state.usp || 'reliable, professional service') + '\n' +
+    'Pricing model: ' + (priceText || 'free quotes available') + '\n' +
+    (state.guarantees ? 'Guarantees: ' + state.guarantees + '\n' : '') + '\n' +
+    'INSTRUCTIONS:\n' +
+    'Generate ALL FIVE sections below. Use clear section headers exactly as shown.\n\n' +
+    '=== LANDING PAGE COPY ===\n' +
+    'Write: a compelling headline, a subheadline (2 sentences), an "About" paragraph (3-4 sentences), a services section listing each service with a 1-sentence description, 5 FAQs with answers, a strong call to action, and 4 trust badges.\n\n' +
+    '=== EMAIL TEMPLATES ===\n' +
+    'Write 4 complete emails:\n' +
+    '1. INSTANT ENQUIRY REPLY — sent within minutes of a new enquiry\n' +
+    '2. QUOTE FOLLOW-UP — sent 3 days after quote if no response\n' +
+    '3. NO RESPONSE CHASE — sent 7 days after first contact\n' +
+    '4. REVIEW REQUEST — sent after job completion\n' +
+    'Each email should have: Subject line, greeting, body (3-5 sentences), sign-off.\n\n' +
+    '=== SOCIAL MEDIA POSTS ===\n' +
+    'Write 10 social media posts for Facebook and Instagram. Each post should have a caption (2-4 sentences, conversational and engaging) and 5-8 relevant hashtags. Number each post 1-10.\n\n' +
+    '=== QUOTE TEMPLATE ===\n' +
+    'Write a professional quote template with: business name header, date and quote number fields, customer details section, itemised services/costs table (with example rows for their services), terms and conditions (5 bullet points), payment terms, and a professional sign-off.\n\n' +
+    '=== FOLLOW-UP MESSAGES ===\n' +
+    'Write 5 short WhatsApp/SMS messages (under 160 characters each where possible, but can be longer if needed):\n' +
+    '1. NEW ENQUIRY RECEIVED — confirming you got their message\n' +
+    '2. QUOTE SENT — letting them know the quote is on its way\n' +
+    '3. JOB BOOKED — confirmation and next steps\n' +
+    '4. JOB COMPLETE — thank you and what happens next\n' +
+    '5. REVIEW REQUEST — friendly ask for a Google review\n\n' +
+    'Make everything specific to their trade, location and business name. Use warm, professional, locally-relevant language. Never use generic corporate language.';
+}
+
+function callAnthropicAPI(prompt) {
+  return fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': state.apiKey,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 8000,
+      system: 'You are an expert marketing copywriter specialising in local trade businesses in the UK. You write professional, conversion-focused copy for small local businesses including builders, plumbers, electricians, hairdressers, cleaners, gardeners and other tradespeople. Your copy is warm, trustworthy, locally relevant and designed to capture leads and convert enquiries into paying customers. Always use the business name and location provided. Always make the copy specific to the trade. Never use generic corporate language. Write like a trusted local business, not a big company.',
+      messages: [{role: 'user', content: prompt}]
+    })
+  }).then(function(res) {
+    if (!res.ok) {
+      return res.json().then(function(e) {
+        throw new Error(e.error ? e.error.message : 'API error ' + res.status);
+      });
+    }
+    return res.json();
+  }).then(function(data) {
+    if (!data.content || !data.content[0]) throw new Error('No content returned from API.');
+    return data.content[0].text;
+  });
+}
+
+function parseAndDisplay(text) {
+  var sections = {
+    landing: extract(text, '=== LANDING PAGE COPY ===', '=== EMAIL TEMPLATES ==='),
+    emails:  extract(text, '=== EMAIL TEMPLATES ===', '=== SOCIAL MEDIA POSTS ==='),
+    social:  extract(text, '=== SOCIAL MEDIA POSTS ===', '=== QUOTE TEMPLATE ==='),
+    quote:   extract(text, '=== QUOTE TEMPLATE ===', '=== FOLLOW-UP MESSAGES ==='),
+    followup:extract(text, '=== FOLLOW-UP MESSAGES ===', null)
+  };
+  document.getElementById('out-landing').textContent = sections.landing || text;
+  document.getElementById('out-emails').textContent  = sections.emails  || 'See Landing Page tab for full output.';
+  document.getElementById('out-social').textContent  = sections.social  || 'See Landing Page tab for full output.';
+  document.getElementById('out-quote').textContent   = sections.quote   || 'See Landing Page tab for full output.';
+  document.getElementById('out-followup').textContent= sections.followup|| 'See Landing Page tab for full output.';
+}
+
+function extract(text, startMarker, endMarker) {
+  var s = text.indexOf(startMarker);
+  if (s === -1) return '';
+  s += startMarker.length;
+  var e = endMarker ? text.indexOf(endMarker, s) : text.length;
+  if (e === -1) e = text.length;
+  return text.slice(s, e).trim();
+}
+
+/* ===== TAB SWITCHING ===== */
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.output-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.output-panel').forEach(function(p) { p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+/* ===== COPY & DOWNLOAD ===== */
+function copyTab(elId) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(function() {
+    var btn = el.parentElement.querySelector('button');
+    var orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(function() { btn.textContent = orig; }, 2000);
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = el.textContent;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+function downloadTab(elId, filename) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  var blob = new Blob([el.textContent], {type:'text/plain'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename + '.txt';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===== UTILITIES ===== */
+function showError(msg) {
+  var el = document.getElementById('errorArea');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function resetTool() {
+  state = {step:1,trade:'',bizName:'',firstName:'',location:'',yearsInBiz:'',phone:'',email:'',services:[],otherServices:'',customers:[],coverageArea:'',usp:'',pricingModel:'',startPrice:'',guarantees:'',apiKey:''};
+  document.querySelectorAll('.tool-step').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('step1').classList.add('active');
+  document.querySelectorAll('.trade-btn').forEach(function(b){b.classList.remove('selected');});
+  document.querySelectorAll('.field-input').forEach(function(i){i.value='';});
+  document.getElementById('other-trade-field').style.display='none';
+  document.getElementById('generateArea').style.display='block';
+  document.getElementById('loadingArea').style.display='none';
+  document.getElementById('errorArea').style.display='none';
+  updateProgress(1);
+  document.getElementById('demo').scrollIntoView({behavior:'smooth'});
+}
+
+/* Checkbox styling sync */
+document.addEventListener('change', function(e) {
+  if (e.target.type === 'checkbox') {
+    e.target.closest('.check-item').classList.toggle('checked', e.target.checked);
+  }
+  if (e.target.type === 'radio') {
+    document.querySelectorAll('.radio-item').forEach(function(r) { r.classList.remove('selected'); });
+    e.target.closest('.radio-item').classList.add('selected');
+  }
+});
+
+/* Init */
+renderServicesForTrade('Builder');
+</script>
 </body>
 </html>
