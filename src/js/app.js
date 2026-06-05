@@ -41,18 +41,158 @@ function setPage(name) {
 }
 
 /* ------------------------------------------------------------
+   Q4 / Q5 PRESET DATA
+   ------------------------------------------------------------ */
+var SERVICE_PRESETS = {
+  'Plumber':                      ['Emergency call-outs','Boiler installation & repair','Bathroom fitting','Leak detection & repair','Drain unblocking','Central heating'],
+  'Electrician':                  ['Full rewiring','Consumer unit upgrades','EV charger installation','Fault finding','Smart home & lighting','PAT testing'],
+  'Builder / General Contractor': ['House extensions','Loft conversions','New builds','Full renovations','Structural work','Garden rooms'],
+  'Roofer':                       ['Roof repairs','New roof installation','Flat roofing','Guttering','Fascias & soffits'],
+  'Decorator / Painter':          ['Interior painting & decorating','Exterior painting','Wallpapering','Woodwork & staining'],
+  'Carpenter / Joiner':           ['Fitted wardrobes & storage','Kitchen fitting','Bespoke furniture','Decking','Doors & windows'],
+  'Tiler':                        ['Floor tiling','Wall tiling','Bathroom tiling','Kitchen splashbacks','Outdoor paving'],
+  'Heating Engineer':             ['Boiler installation','Boiler service & repair','Central heating systems','Underfloor heating','Heat pumps'],
+  'Handyman':                     ['General repairs & maintenance','Furniture assembly','Shelving & hanging','Door & lock repairs','Odd jobs'],
+  'Locksmith':                    ['Emergency lockouts','Lock replacement & upgrades','Security assessments','Key cutting'],
+  'Pest Control':                 ['Rodent control','Insect treatment','Bird proofing','Commercial pest management'],
+  'Coffee Shop / Café':           ['Coffee & hot drinks','Breakfast & brunch','Lunch & light bites','Cakes & pastries'],
+  'Restaurant / Takeaway':        ['Dine-in meals','Takeaway & delivery','Catering for events','Private dining'],
+  'Bakery':                       ['Fresh bread & rolls','Cakes & pastries','Wedding & celebration cakes','Custom orders'],
+  'Catering / Private Chef':      ['Event catering','Private dining','Wedding catering','Corporate catering','Meal prep'],
+  'Food Truck / Street Food':     ['Street food & market stalls','Event catering','Private hire','Pop-up dining'],
+  'Pub / Bar':                    ['Food & drinks service','Live events','Private hire','Sunday roasts'],
+  'Personal Trainer':             ['1-to-1 personal training','Group fitness sessions','Online coaching','Nutrition advice','Weight loss programmes'],
+  'Gym / Fitness Studio':         ['Gym membership','Group classes','Personal training','Online programmes'],
+  'Yoga / Pilates Studio':        ['Group classes','1-to-1 sessions','Online classes','Workshops & retreats'],
+  'Nutritionist / Dietitian':     ['Nutrition consultations','Meal planning','Weight management','Sports nutrition'],
+  'Physiotherapist':              ['Sports injury treatment','Post-surgery rehabilitation','Back & neck pain','Manual therapy'],
+  'Osteopath / Chiropractor':     ['Back & spine treatment','Sports injury rehab','Neck & shoulder pain','Preventative care'],
+  'Sports Massage Therapist':     ['Sports massage','Deep tissue massage','Injury rehabilitation','Pre/post-event massage'],
+  'Hair Salon':                   ['Haircuts & styling','Colouring & highlights','Treatments & extensions','Blow-dries'],
+  'Barber':                       ['Haircuts & fades','Beard trims & shaping','Hot towel shaves','Kids cuts'],
+  'Beauty Salon / Nail Bar':      ['Manicures & pedicures','Facials','Waxing','Eyelash & eyebrow treatments'],
+  'Spa':                          ['Massage treatments','Facials & skin treatments','Body treatments','Spa day packages'],
+  'Massage Therapist':            ['Swedish massage','Deep tissue massage','Hot stone massage','Pregnancy massage'],
+  'Tattoo & Piercing Studio':     ['Custom tattoos','Piercing services','Cover-ups & reworks','Flash tattoos'],
+  'Aesthetics Clinic':            ['Anti-wrinkle injections','Dermal fillers','Skin rejuvenation','Body contouring'],
+  'Dog Walker / Pet Sitter':      ['Dog walking','Pet sitting & home visits','Doggy day care','Holiday pet care'],
+  'Pet Groomer':                  ['Full grooming','Bath & blow-dry','Nail trimming','Breed-specific cuts'],
+  'Veterinary Practice':          ['Routine check-ups','Vaccinations','Surgery','Emergency care'],
+  'Pet Shop':                     ['Pet food & accessories','Small animals','Aquatics','Grooming products'],
+  'Accountant / Bookkeeper':      ['Tax returns','Monthly bookkeeping','VAT returns','Payroll','Business accounts'],
+  'Solicitor / Legal Services':   ['Conveyancing','Wills & probate','Employment law','Family law','Business legal advice'],
+  'Financial Adviser':            ['Financial planning','Pension advice','Investments','Protection & insurance'],
+  'Mortgage Broker':              ['Residential mortgages','Buy-to-let mortgages','Remortgaging','First-time buyer advice'],
+  'Business Consultant':          ['Business strategy','Operations improvement','Growth planning','Project management'],
+  'Marketing Agency':             ['Social media management','SEO & content','Paid advertising','Brand strategy'],
+  'Coach (Life / Business)':      ['1-to-1 coaching','Group programmes','Online courses','Workshops'],
+  'HR Consultant':                ['HR strategy','Recruitment support','Employment contracts','Training & development'],
+  'Real Estate Agent':            ['Property sales','Property valuations','New listings','Investment properties'],
+  'Letting Agent':                ['Residential lettings','Property management','Tenant finding','Rent collection'],
+  'Interior Designer':            ['Full interior design','Room makeovers','Styling & mood boards','3D visualisation'],
+  'Architect':                    ['Architectural design','Planning applications','Building regulations','Project management'],
+  'Photographer':                 ['Portrait photography','Wedding photography','Commercial photography','Events photography'],
+  'Videographer':                 ['Wedding videography','Corporate video','Event filming','Social media content'],
+  'Graphic Designer':             ['Logo & brand identity','Print design','Social media graphics','Packaging design'],
+  'Web Designer / Developer':     ['Website design','E-commerce sites','WordPress development','Landing pages'],
+  'Copywriter':                   ['Website copy','Blog & article writing','Email campaigns','SEO content'],
+  'Social Media Manager':         ['Social media management','Content creation','Paid social ads','Community management'],
+  'Landscaper / Gardener':        ['Garden design & landscaping','Lawn care','Patio & decking','Planting & maintenance'],
+  'Tree Surgeon':                 ['Tree removal','Crown reduction & pruning','Stump grinding','Hedge trimming'],
+  'Window Cleaner':               ['Domestic window cleaning','Commercial window cleaning','Conservatory cleaning','Gutter cleaning'],
+  'Domestic Cleaner':             ['Regular home cleaning','One-off deep cleans','End of tenancy cleans','Ironing & laundry'],
+  'Commercial Cleaner':           ['Office cleaning','Industrial cleaning','Retail & hospitality','Contract cleaning'],
+  'End of Tenancy Cleaner':       ['End of tenancy deep clean','Carpet cleaning','Oven cleaning','Window cleaning'],
+  'Driving Instructor':           ['Driving lessons','Intensive crash courses','Pass Plus','Theory test prep'],
+  'Music Teacher':                ['Instrument lessons','Music theory','Online lessons','School workshops'],
+  'Tutoring Service':             ['1-to-1 tutoring','Online tutoring','Exam preparation','Small group tuition'],
+  'Childminder / Nursery':        ['Full-day childcare','After-school care','Holiday clubs','Wraparound care'],
+  'Therapist / Counsellor':       ['Individual therapy','Couples counselling','CBT','Online therapy sessions'],
+  'Event Planner':                ['Corporate events','Weddings & parties','Product launches','Conference management'],
+  'Florist':                      ['Wedding florals','Event flowers','Bouquets & arrangements','Funeral flowers'],
+  'Wedding Planner':              ['Full wedding planning','Day coordination','Venue sourcing','Styling & decor'],
+  'Entertainer / DJ':             ['DJ sets & music','Live entertainment','Kids parties','Corporate events'],
+  'Mechanic / Garage':            ['MOT testing','Servicing & maintenance','Diagnostics','Tyre fitting','Repairs'],
+  'Mobile Mechanic':              ['Mobile servicing','Roadside repairs','Pre-purchase inspections','Tyre replacement'],
+  'Car Wash / Valeting':          ['Basic wash & dry','Full valet','Interior deep clean','Paint protection'],
+  'Retail Shop':                  ['In-store sales','Click & collect','Gift wrapping','Bespoke orders'],
+  'Online Shop':                  ['Product sales','Subscription boxes','Custom & personalised items','Wholesale'],
+  'Franchise':                    ['Franchise services','Local franchise operations','Franchise packages'],
+  'Other local business':         ['Core service','Specialist service','Consultations','Custom orders']
+};
+var SERVICE_DEFAULT = ['Core service','Installation & fitting','Repairs & maintenance','Consultations','Custom orders','Project management'];
+
+/* ------------------------------------------------------------
+   Q4 / Q5 SELECT HELPERS
+   ------------------------------------------------------------ */
+function getSelectOrOther(selId, otherId) {
+  var sel = document.getElementById(selId);
+  if (!sel) return '';
+  var val = (sel.value || '').trim();
+  if (val === '__other__') {
+    var oth = document.getElementById(otherId);
+    return oth ? (oth.value || '').trim() : '';
+  }
+  return val;
+}
+
+function updateServicePresets() {
+  var type = ((document.getElementById('q-type') || {}).value || '').trim();
+  var presets = SERVICE_PRESETS[type] || SERVICE_DEFAULT;
+  var sel = document.getElementById('q-service-sel');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— Select a service / product —</option>';
+  presets.forEach(function(p) {
+    var o = document.createElement('option');
+    o.value = p; o.textContent = p;
+    sel.appendChild(o);
+  });
+  var oo = document.createElement('option');
+  oo.value = '__other__'; oo.textContent = 'Other (type your own)';
+  sel.appendChild(oo);
+  sel.value = '';
+  var oi = document.getElementById('q-service-other');
+  if (oi) { oi.style.display = 'none'; oi.value = ''; }
+  updateProgress();
+}
+
+function onServiceChange() {
+  var sel = document.getElementById('q-service-sel');
+  var oth = document.getElementById('q-service-other');
+  if (!sel || !oth) return;
+  if (sel.value === '__other__') { oth.style.display = 'block'; oth.focus(); }
+  else { oth.style.display = 'none'; oth.value = ''; }
+  updateProgress();
+}
+
+function onServiceOtherType() { updateProgress(); }
+
+function onCustomerChange() {
+  var sel = document.getElementById('q-customer-sel');
+  var oth = document.getElementById('q-customer-other');
+  if (!sel || !oth) return;
+  if (sel.value === '__other__') { oth.style.display = 'block'; oth.focus(); }
+  else { oth.style.display = 'none'; oth.value = ''; }
+  updateProgress();
+}
+
+function onCustomerOtherType() { updateProgress(); }
+
+/* ------------------------------------------------------------
    PROGRESS BAR
    ------------------------------------------------------------ */
 function updateProgress() {
-  var textIds = ['q-type','q-name','q-location','q-service','q-customer','q-usp','q-price','q-goal'];
+  var textIds = ['q-type','q-name','q-location','q-usp','q-price','q-goal'];
   var filled = textIds.filter(function(id) {
     var el = document.getElementById(id);
     return el && el.value && el.value.trim();
   }).length;
+  if (getSelectOrOther('q-service-sel','q-service-other')) filled++;
+  if (getSelectOrOther('q-customer-sel','q-customer-other')) filled++;
   var radios = ['years','web'].filter(function(name) {
     return !!document.querySelector('input[name="' + name + '"]:checked');
   }).length;
-  var total = textIds.length + 2;
+  var total = 10; // 6 text + 2 select-or-other + 2 radios
   var done = filled + radios;
   var pct = Math.round((done / total) * 100);
   var fill = document.getElementById('prog-fill');
@@ -83,8 +223,8 @@ function collectForm() {
     type:     v('q-type'),
     name:     v('q-name'),
     location: v('q-location'),
-    service:  v('q-service'),
-    customer: v('q-customer'),
+    service:  getSelectOrOther('q-service-sel','q-service-other'),
+    customer: getSelectOrOther('q-customer-sel','q-customer-other'),
     usp:      v('q-usp'),
     price:    v('q-price'),
     years:    ((document.querySelector('input[name="years"]:checked') || {}).value) || '',
@@ -673,7 +813,7 @@ async function downloadZIP() {
    ------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', function() {
   setPage('page-form');
-  updateProgress();
+  updateServicePresets(); // populates Q4 and calls updateProgress()
   chatInit();
 });
 
