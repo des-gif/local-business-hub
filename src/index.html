@@ -298,7 +298,7 @@
         <!-- Q1: Business Type -->
         <div class="field-group">
           <label class="field-label"><span class="q-badge">01</span>What type of business are you?</label>
-          <select id="q-type" class="field-input field-select" onchange="updateProgress()">
+          <select id="q-type" class="field-input field-select" onchange="updateServicePresets()">
             <option value="">— Select business type —</option>
             <optgroup label="Trades &amp; Home Services">
               <option>Plumber</option><option>Electrician</option><option>Builder / General Contractor</option>
@@ -376,13 +376,26 @@
         <!-- Q4: Key Service -->
         <div class="field-group">
           <label class="field-label"><span class="q-badge">04</span>What is your key service or product?</label>
-          <input type="text" id="q-service" class="field-input" placeholder="e.g. Emergency plumbing, boiler installation, bathroom fitting" oninput="updateProgress()">
+          <select id="q-service-sel" class="field-input field-select" onchange="onServiceChange()">
+            <option value="">— Select a service / product —</option>
+          </select>
+          <input type="text" id="q-service-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Describe your key service or product" oninput="onServiceOtherType()">
         </div>
 
         <!-- Q5: Target Customer -->
         <div class="field-group">
           <label class="field-label"><span class="q-badge">05</span>Who is your ideal customer?</label>
-          <input type="text" id="q-customer" class="field-input" placeholder="e.g. Homeowners aged 35-60, landlords, small business owners" oninput="updateProgress()">
+          <select id="q-customer-sel" class="field-input field-select" onchange="onCustomerChange()">
+            <option value="">— Select your ideal customer —</option>
+            <option>Homeowners</option>
+            <option>Landlords</option>
+            <option>Small businesses</option>
+            <option>Property managers</option>
+            <option>Commercial clients</option>
+            <option>New builds</option>
+            <option value="__other__">Other (type your own)</option>
+          </select>
+          <input type="text" id="q-customer-other" class="field-input" style="display:none;margin-top:8px;" placeholder="e.g. Homeowners aged 35-60, landlords, small business owners" oninput="onCustomerOtherType()">
         </div>
 
         <!-- Q6: USP -->
