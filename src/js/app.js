@@ -137,8 +137,14 @@ function getSelectOrOther(selId, otherId) {
 }
 
 function updateServicePresets() {
-  var type = ((document.getElementById('q-type') || {}).value || '').trim();
-  var presets = SERVICE_PRESETS[type] || SERVICE_DEFAULT;
+  var typeVal = ((document.getElementById('q-type') || {}).value || '').trim();
+  // Show/hide Q1 Other text input
+  var typeOther = document.getElementById('q-type-other');
+  if (typeOther) {
+    if (typeVal === '__other__') { typeOther.style.display = 'block'; typeOther.focus(); }
+    else { typeOther.style.display = 'none'; typeOther.value = ''; }
+  }
+  var presets = (typeVal && typeVal !== '__other__' ? SERVICE_PRESETS[typeVal] : null) || SERVICE_DEFAULT;
   var sel = document.getElementById('q-service-sel');
   if (!sel) return;
   sel.innerHTML = '<option value="">— Select a service / product —</option>';
@@ -153,6 +159,60 @@ function updateServicePresets() {
   sel.value = '';
   var oi = document.getElementById('q-service-other');
   if (oi) { oi.style.display = 'none'; oi.value = ''; }
+  updateProgress();
+}
+
+function onTypeOtherType() { updateProgress(); }
+
+function getUspValue() {
+  var vals = [];
+  document.querySelectorAll('#q-usp-chips .chip.sel').forEach(function(c) {
+    var v = c.getAttribute('data-val');
+    if (v && v !== '__other__') vals.push(v);
+  });
+  if (document.querySelector('#q-usp-chips .chip[data-val="__other__"].sel')) {
+    var ov = ((document.getElementById('q-usp-other') || {}).value || '').trim();
+    if (ov) vals.push(ov);
+  }
+  return vals.join(', ');
+}
+
+function toggleUspChip(el) {
+  el.classList.toggle('sel');
+  if (el.getAttribute('data-val') === '__other__') {
+    var oth = document.getElementById('q-usp-other');
+    if (oth) {
+      var on = el.classList.contains('sel');
+      oth.style.display = on ? 'block' : 'none';
+      if (on) oth.focus(); else oth.value = '';
+    }
+  }
+  updateProgress();
+}
+
+function getGoalValue() {
+  var vals = [];
+  document.querySelectorAll('#q-goal-chips .chip.sel').forEach(function(c) {
+    var v = c.getAttribute('data-val');
+    if (v && v !== '__other__') vals.push(v);
+  });
+  if (document.querySelector('#q-goal-chips .chip[data-val="__other__"].sel')) {
+    var ov = ((document.getElementById('q-goal-other') || {}).value || '').trim();
+    if (ov) vals.push(ov);
+  }
+  return vals.join(', ');
+}
+
+function toggleGoalChip(el) {
+  el.classList.toggle('sel');
+  if (el.getAttribute('data-val') === '__other__') {
+    var oth = document.getElementById('q-goal-other');
+    if (oth) {
+      var on = el.classList.contains('sel');
+      oth.style.display = on ? 'block' : 'none';
+      if (on) oth.focus(); else oth.value = '';
+    }
+  }
   updateProgress();
 }
 
@@ -182,17 +242,20 @@ function onCustomerOtherType() { updateProgress(); }
    PROGRESS BAR
    ------------------------------------------------------------ */
 function updateProgress() {
-  var textIds = ['q-type','q-name','q-location','q-usp','q-price','q-goal'];
+  var textIds = ['q-name','q-location','q-price'];
   var filled = textIds.filter(function(id) {
     var el = document.getElementById(id);
     return el && el.value && el.value.trim();
   }).length;
+  if (getSelectOrOther('q-type','q-type-other')) filled++;
   if (getSelectOrOther('q-service-sel','q-service-other')) filled++;
   if (getSelectOrOther('q-customer-sel','q-customer-other')) filled++;
+  if (getUspValue()) filled++;
+  if (getGoalValue()) filled++;
   var radios = ['years','web'].filter(function(name) {
     return !!document.querySelector('input[name="' + name + '"]:checked');
   }).length;
-  var total = 10; // 6 text + 2 select-or-other + 2 radios
+  var total = 10; // 3 text + 5 select/chip + 2 radios
   var done = filled + radios;
   var pct = Math.round((done / total) * 100);
   var fill = document.getElementById('prog-fill');
@@ -220,16 +283,16 @@ function pickRadio(groupId, card) {
 function collectForm() {
   function v(id) { return ((document.getElementById(id) || {}).value || '').trim(); }
   return {
-    type:     v('q-type'),
+    type:     getSelectOrOther('q-type','q-type-other'),
     name:     v('q-name'),
     location: v('q-location'),
     service:  getSelectOrOther('q-service-sel','q-service-other'),
     customer: getSelectOrOther('q-customer-sel','q-customer-other'),
-    usp:      v('q-usp'),
+    usp:      getUspValue(),
     price:    v('q-price'),
     years:    ((document.querySelector('input[name="years"]:checked') || {}).value) || '',
     web:      ((document.querySelector('input[name="web"]:checked') || {}).value) || '',
-    goal:     v('q-goal')
+    goal:     getGoalValue()
   };
 }
 
