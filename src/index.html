@@ -269,6 +269,27 @@
     </div>
   </section>
 
+  <!-- SHORTS — SEE IT IN ACTION -->
+  <section style="padding:64px 0;background:var(--surface);text-align:center;">
+    <div class="container">
+      <p class="eyebrow">See it in action</p>
+      <h2 style="font-size:28px;font-weight:800;color:var(--navy);margin:0 0 12px;letter-spacing:-.01em;">Real results, in under a minute</h2>
+      <p style="font-size:15px;color:var(--text);margin:0 0 36px;">Watch what the AI creates — from a 5-minute questionnaire to a complete marketing kit.</p>
+      <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+        <div style="width:100%;max-width:300px;">
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);">
+            <iframe src="https://www.youtube-nocookie.com/embed/IrA8-mTvmx8" title="Local Business AI Hub — example 1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div style="width:100%;max-width:300px;">
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);">
+            <iframe src="https://www.youtube-nocookie.com/embed/oj-cPpoI5dc" title="Local Business AI Hub — example 2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- BUSINESS TYPES TICKER -->
   <div class="types-ticker">
     <div class="ticker-inner">
@@ -357,8 +378,10 @@
             <optgroup label="Other">
               <option>Retail Shop</option><option>Online Shop</option><option>Franchise</option>
               <option>Other local business</option>
+              <option value="__other__">Other (type your own)</option>
             </optgroup>
           </select>
+          <input type="text" id="q-type-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Describe your business type" oninput="onTypeOtherType()">
         </div>
 
         <!-- Q2: Business Name -->
@@ -401,7 +424,22 @@
         <!-- Q6: USP -->
         <div class="field-group">
           <label class="field-label"><span class="q-badge">06</span>What makes you different from competitors?</label>
-          <textarea id="q-usp" class="field-input field-textarea" rows="3" placeholder="e.g. Same-day service, 15 years experience, fully insured, 5-star reviews, family-run, no call-out charge..." oninput="updateProgress()"></textarea>
+          <div class="chip-wrap" id="q-usp-chips">
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Same-day service">Same-day service</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="15+ years experience">15+ years experience</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Fully insured">Fully insured</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="5-star reviews">5-star reviews</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Family-run">Family-run</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="No call-out charge">No call-out charge</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Free quotes">Free quotes</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Guaranteed work / warranty">Guaranteed work / warranty</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Local &amp; trusted">Local &amp; trusted</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="24/7 availability">24/7 availability</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Accredited / certified">Accredited / certified</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Competitive pricing">Competitive pricing</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="__other__">Other (type your own)</button>
+          </div>
+          <input type="text" id="q-usp-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Add another differentiator..." oninput="updateProgress()">
         </div>
 
         <!-- Q7: Price -->
@@ -447,7 +485,20 @@
         <!-- Q10: Challenge + Goal -->
         <div class="field-group">
           <label class="field-label"><span class="q-badge">10</span>Main challenge right now, and goal for this kit?</label>
-          <textarea id="q-goal" class="field-input field-textarea" rows="3" placeholder="e.g. Not enough new enquiries. Goal: double customer base in 6 months and build a proper online presence." oninput="updateProgress()"></textarea>
+          <div class="chip-wrap" id="q-goal-chips">
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Not enough new enquiries">Not enough new enquiries</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Low online visibility / SEO">Low online visibility / SEO</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="No or outdated website">No or outdated website</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Weak social media presence">Weak social media presence</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Not enough reviews">Not enough reviews</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Inconsistent branding">Inconsistent branding</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Want to launch or scale">Want to launch or scale</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Beat local competitors">Beat local competitors</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Improve lead conversion">Improve lead conversion</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Grow customer base">Grow customer base</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="__other__">Other (type your own)</button>
+          </div>
+          <input type="text" id="q-goal-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Describe your main challenge and goal..." oninput="updateProgress()">
         </div>
 
         <!-- Divider -->
