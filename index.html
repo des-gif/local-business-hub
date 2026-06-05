@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Business AI Hub — Complete marketing kit, generated in minutes</title>
+<meta name="description" content="Practical AI-powered business tools, marketing assets and specialist digital systems that help small businesses get found, respond faster, follow up properly and win more work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <a class="logo" href="#" onclick="goHome();return false;">
+      <span class="logo-icon">◈</span> Local Business AI Hub
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#what-you-get">What you get</a>
+      <a href="#" onclick="scrollForm();return false;">Build my kit</a>
+    </div>
+    <button class="btn-primary" onclick="scrollForm()">Get Started</button>
+  </div>
+</nav>
+
+<!-- ========================================================
+     PAGE: FORM
+     ======================================================== -->
+<div id="page-form">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-powered · 40+ business types · No tech skills needed
+      </div>
+      <h1>AI for local businesses</h1>
+      <p style="font-size:22px;font-weight:700;color:rgba(255,255,255,.95);max-width:640px;margin:0 auto 16px;line-height:1.3;">Practical AI-powered business tools, marketing assets and specialist digital systems — made simple, done for you.</p>
+      <p class="hero-sub">We don't just create basic content. We build practical AI tools and systems that help your business get found, respond faster, follow up properly, win more work and stop losing opportunities. No tech skills. No jargon. Just affordable, practical help — in plain English, with the hard part done for you.</p>
+      <div class="hero-actions">
+        <a href="#what-you-get" class="btn-primary btn-xl">
+          See What You Get
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#pricing" class="btn-ghost btn-xl">View pricing</a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item"><strong>40+</strong><span>Business types</span></div>
+        <div class="proof-div"></div>
+        <div class="proof-item"><strong>22+</strong><span>Pieces of content</span></div>
+        <div class="proof-div"></div>
+        <div class="proof-item"><strong>5 min</strong><span>Average time</span></div>
+        <div class="proof-div"></div>
+        <div class="proof-item"><strong>AI</strong><span>Powered tools</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEE HOW IT WORKS — VIDEO -->
+  <section id="how-it-works-video" style="padding:64px 0;background:var(--dark);text-align:center;">
+    <div class="container">
+      <p class="eyebrow-light">See how it works</p>
+      <h2 style="font-size:28px;font-weight:800;color:#fff;margin:0 0 36px;letter-spacing:-.01em;">Watch it in action</h2>
+      <div style="max-width:340px;margin:0 auto;">
+        <!-- 9:16 responsive wrapper (YouTube Shorts) — to swap the video, change the YouTube ID in the src URL below -->
+        <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 24px 48px rgba(0,0,0,.5);">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/M7fAv46czno"
+            title="How it works"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section bg-subtle" id="how-it-works">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section-title">Three steps to your complete kit</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h3>Tell us about your business</h3>
+          <p>Select your business type and answer 10 quick questions about your services, customers and goals. Takes under 5 minutes.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h3>AI generates everything</h3>
+          <p>Claude AI writes your landing page, emails and social posts. HeyGen creates your talking-head marketing video automatically.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h3>Download and deploy</h3>
+          <p>Copy any piece instantly, download the full PDF report, or grab the ZIP with all files including your video MP4.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section pricing-bg" id="pricing">
+    <div class="container">
+      <p class="eyebrow eyebrow-light">Pricing</p>
+      <h2 class="section-title light" style="margin-bottom:12px;">Simple, transparent pricing</h2>
+      <p class="pricing-intro">From instant self-serve content to fully produced video — pick the option that fits your business right now.</p>
+      <div class="pricing-grid">
+
+        <!-- 1 — Starter -->
+        <div class="price-card">
+          <div class="price-tier">Self-Serve Starter Kit</div>
+          <div class="price-amount">£49</div>
+          <div class="price-freq">one-off payment</div>
+          <p class="price-best">Best for owners who need fast marketing content but want to do it themselves.</p>
+          <ul class="price-includes">
+            <li>Professional landing page copy</li>
+            <li>5 ready-to-send emails</li>
+            <li>10 social media posts</li>
+            <li>1 video script</li>
+            <li>Basic positioning message</li>
+            <li>Instant delivery after the form</li>
+          </ul>
+          <a href="https://pay.tide.co/products/selfserve-s-kfnTn2Oy" target="_blank" rel="noopener" class="price-btn">Get Started — £49</a>
+        </div>
+
+        <!-- 2 — Pro (featured) -->
+        <div class="price-card featured">
+          <div class="price-badge">Best value</div>
+          <div class="price-tier">Self-Serve Pro Kit</div>
+          <div class="price-amount">£99</div>
+          <div class="price-freq">one-off payment</div>
+          <p class="price-best">Best for owners who want a fuller pack with stronger messaging.</p>
+          <ul class="price-includes">
+            <li>Everything in Starter</li>
+            <li>Improved landing page structure</li>
+            <li>15 social posts</li>
+            <li>7-email follow-up sequence</li>
+            <li>3 video script ideas</li>
+            <li>Offer &amp; CTA guidance</li>
+            <li>1 free revision from feedback</li>
+          </ul>
+          <a href="https://pay.tide.co/products/tier2pro-se-eZPxH3vR" target="_blank" rel="noopener" class="price-btn price-btn-featured">Get Pro — £99</a>
+        </div>
+
+        <!-- 3 — Boutique -->
+        <div class="price-card">
+          <div class="price-tier">Boutique Video Service</div>
+          <div class="price-amount">£295</div>
+          <div class="price-freq">one-off payment</div>
+          <p class="price-best">Best for owners who want a custom promo video made for them.</p>
+          <ul class="price-includes">
+            <li>Short discovery form</li>
+            <li>Custom script written by Des</li>
+            <li>Client approval before production</li>
+            <li>Professional visuals</li>
+            <li>Edited video</li>
+            <li>Captions &amp; text overlay</li>
+            <li>Final video ready for web &amp; social</li>
+          </ul>
+          <a href="https://pay.tide.co/products/tier3boutiq-UeNFyzaD" target="_blank" rel="noopener" class="price-btn">Order Boutique — £295</a>
+        </div>
+
+        <!-- 4 — Premium -->
+        <div class="price-card">
+          <div class="price-tier">Premium Launch Package</div>
+          <div class="price-amount">£495</div>
+          <div class="price-freq">one-off payment</div>
+          <p class="price-best">Best for businesses wanting the full done-for-you launch.</p>
+          <ul class="price-includes">
+            <li>Custom landing page copy</li>
+            <li>5-email campaign</li>
+            <li>10 social posts</li>
+            <li>Custom promotional video</li>
+            <li>Video script approval</li>
+            <li>Basic brand message</li>
+            <li>CTA wording</li>
+            <li>Simple campaign launch plan</li>
+          </ul>
+          <a href="https://pay.tide.co/products/tier4premiu-moEVVdm0" target="_blank" rel="noopener" class="price-btn">Get Premium — £495</a>
+        </div>
+
+        <!-- 5 — Monthly -->
+        <div class="price-card">
+          <div class="price-tier">Monthly Content Support</div>
+          <div class="price-amount">£149</div>
+          <div class="price-freq">per month</div>
+          <p class="price-best">Best for businesses needing ongoing content without weekly hassle.</p>
+          <ul class="price-includes">
+            <li>8 social posts each month</li>
+            <li>1 email / newsletter</li>
+            <li>1 short video script</li>
+            <li>1 promotional offer idea</li>
+            <li>Light monthly guidance</li>
+          </ul>
+          <a href="https://pay.tide.co/products/tier5monthl-u6HxnAOm" target="_blank" rel="noopener" class="price-btn">Subscribe — £149/mo</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="section" id="what-you-get">
+    <div class="container">
+      <p class="eyebrow">What you get</p>
+      <h2 class="section-title" style="margin-bottom:12px;">Everything your business needs</h2>
+      <p style="font-size:15px;color:var(--text);max-width:760px;margin:0 0 48px;line-height:1.7;">We don't just create basic content. We build practical AI-powered business tools, marketing assets and specialist digital systems that help your business get found, respond faster, follow up properly, win more work and stop losing opportunities. Click any card to see examples of the work.</p>
+      <div class="features-grid">
+
+        <!-- 1 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>Landing Pages and Websites</h3>
+          <p>Professional landing pages and simple websites built around your business, services, offer and location. Designed to help customers understand what you do, trust you quickly and take action.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 2 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></svg>
+          </div>
+          <h3>AI Google Business Pack</h3>
+          <p>AI-powered Google Business Profile support, including business descriptions, service descriptions, local keywords, Google posts, FAQs, review request messages and review reply templates.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 3 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <h3>AI Marketing Video</h3>
+          <p>A short promotional video created from your business message, offer and script. Ideal for your website, social media, adverts, WhatsApp, Google Business Profile and email campaigns.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 4 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon purple">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </div>
+          <h3>CEO Business Dashboard</h3>
+          <p>A simple business command centre showing your leads, tasks, goals, marketing activity, enquiries, follow-ups, quotes and business priorities in one place.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 5 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon teal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>Lead and Quote Tracker</h3>
+          <p>A practical tracker for new enquiries, customer details, quotes sent, follow-up dates, job status and outcomes, so leads do not get forgotten.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 6 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon indigo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>AI Customer Response System</h3>
+          <p>Ready-made AI-assisted replies for new enquiries, missed calls, quote follow-ups, bookings, review requests, payment reminders and customer reactivation.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 7 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Review and Reputation System</h3>
+          <p>A simple system to help your business collect more reviews, reply professionally and protect your reputation when customers leave feedback.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 8 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+          </div>
+          <h3>Booking and Enquiry Forms</h3>
+          <p>Professional forms for quote requests, bookings, consultations, customer enquiries, call-backs and client intake.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 9 -->
+        <a href="#" class="feature-card feature-link">
+          <div class="feature-icon orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Local SEO Starter Pack</h3>
+          <p>Local search wording, service descriptions, FAQs, page titles and keyword ideas to help your business appear more relevant to customers in your area.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+        <!-- 10 -->
+        <a href="#specialist-services" class="feature-card feature-link">
+          <div class="feature-icon purple">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <h3>Specialist Business Support</h3>
+          <p>Sector-specific AI and digital support for businesses that need more than general marketing, including regulated, professional and service-based organisations.</p>
+          <span class="feature-tag">View examples →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIALIST SERVICES -->
+  <section class="section bg-subtle" id="specialist-services">
+    <div class="container">
+      <p class="eyebrow">Specialist services</p>
+      <h2 class="section-title" style="margin-bottom:12px;">Specialist Services</h2>
+      <p style="font-size:15px;color:var(--text);max-width:760px;margin:0 0 36px;line-height:1.7;">Specialist AI and digital support for regulated, professional and service-based businesses that need practical tools, strong presentation and clear systems.</p>
+      <div class="features-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,360px));">
+        <a href="#health-social-services" class="feature-card feature-link">
+          <div class="feature-icon teal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Health and Social Services</h3>
+          <p>Specialist AI and digital support for care providers, supported living services, children's homes and health and social care businesses.</p>
+          <span class="feature-tag">Explore →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEALTH AND SOCIAL SERVICES -->
+  <section class="section" id="health-social-services">
+    <div class="container">
+      <p class="eyebrow">Specialist sector</p>
+      <h2 class="section-title" style="margin-bottom:12px;">Health and Social Services</h2>
+      <p style="font-size:15px;color:var(--text);max-width:760px;margin:0 0 8px;line-height:1.7;">AI-powered digital and business support for care providers, supported living services, children's homes and health and social care businesses.</p>
+      <p style="font-size:15px;color:var(--text);max-width:760px;margin:0 0 36px;line-height:1.7;">We help providers present themselves professionally, prepare for registration, market their services and organise key business information.</p>
+      <div class="features-grid">
+        <div class="feature-card"><h3>Property Search Support</h3></div>
+        <div class="feature-card"><h3>CQC Application Support</h3></div>
+        <div class="feature-card"><h3>Children's Home Ofsted Application Support</h3></div>
+        <div class="feature-card"><h3>Planning and Setup Support</h3></div>
+        <div class="feature-card"><h3>Landing Pages</h3></div>
+        <div class="feature-card"><h3>Social Media Posts</h3></div>
+        <div class="feature-card"><h3>AI Marketing Video</h3></div>
+        <div class="feature-card"><h3>CEO Dashboard</h3></div>
+        <div class="feature-card"><h3>Lead and Enquiry Tracker</h3></div>
+        <div class="feature-card"><h3>Policy and Documentation Support</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHORTS — SEE IT IN ACTION -->
+  <section style="padding:64px 0;background:var(--surface);text-align:center;">
+    <div class="container">
+      <p class="eyebrow">See it in action</p>
+      <h2 style="font-size:28px;font-weight:800;color:var(--navy);margin:0 0 12px;letter-spacing:-.01em;">Real results, in under a minute</h2>
+      <p style="font-size:15px;color:var(--text);margin:0 0 36px;">Watch what the AI creates — from a 5-minute questionnaire to a complete marketing kit.</p>
+      <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+        <div style="width:100%;max-width:300px;">
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);">
+            <iframe src="https://www.youtube-nocookie.com/embed/IrA8-mTvmx8" title="Local Business AI Hub — example 1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div style="width:100%;max-width:300px;">
+          <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);">
+            <iframe src="https://www.youtube-nocookie.com/embed/oj-cPpoI5dc" title="Local Business AI Hub — example 2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS TYPES TICKER -->
+  <div class="types-ticker">
+    <div class="ticker-inner">
+      <span>Plumber</span><span>·</span><span>Coffee Shop</span><span>·</span><span>Personal Trainer</span><span>·</span><span>Hair Salon</span><span>·</span><span>Dog Walker</span><span>·</span><span>Accountant</span><span>·</span><span>Fitness Studio</span><span>·</span><span>Estate Agent</span><span>·</span><span>Photographer</span><span>·</span><span>Restaurant</span><span>·</span><span>Yoga Studio</span><span>·</span><span>Electrician</span><span>·</span><span>Dentist</span><span>·</span><span>Therapist</span><span>·</span><span>Florist</span><span>·</span><span>Bakery</span><span>·</span><span>Mechanic</span><span>·</span><span>Web Designer</span><span>·</span><span>Cleaner</span>
+      <!-- duplicate for seamless loop -->
+      <span>Plumber</span><span>·</span><span>Coffee Shop</span><span>·</span><span>Personal Trainer</span><span>·</span><span>Hair Salon</span><span>·</span><span>Dog Walker</span><span>·</span><span>Accountant</span><span>·</span><span>Fitness Studio</span><span>·</span><span>Estate Agent</span><span>·</span><span>Photographer</span><span>·</span><span>Restaurant</span><span>·</span><span>Yoga Studio</span><span>·</span><span>Electrician</span><span>·</span><span>Dentist</span><span>·</span><span>Therapist</span><span>·</span><span>Florist</span><span>·</span><span>Bakery</span><span>·</span><span>Mechanic</span><span>·</span><span>Web Designer</span><span>·</span><span>Cleaner</span>
+    </div>
+  </div>
+
+  <!-- THE FORM -->
+  <section class="section form-bg" id="form-top">
+    <div class="container">
+      <div class="form-header">
+        <p class="eyebrow eyebrow-light">Build your kit</p>
+        <h2 class="section-title light">Tell us about your business</h2>
+        <p class="form-header-sub">10 questions · under 5 minutes · your API keys are never exposed</p>
+      </div>
+
+      <div class="form-card" id="main-form">
+
+        <!-- Progress -->
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+          <span class="progress-text" id="prog-text">0 / 10</span>
+        </div>
+
+        <!-- Q1: Business Type -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">01</span>What type of business are you?</label>
+          <select id="q-type" class="field-input field-select" onchange="updateServicePresets()">
+            <option value="">— Select business type —</option>
+            <optgroup label="Trades &amp; Home Services">
+              <option>Plumber</option><option>Electrician</option><option>Builder / General Contractor</option>
+              <option>Roofer</option><option>Decorator / Painter</option><option>Carpenter / Joiner</option>
+              <option>Tiler</option><option>Heating Engineer</option><option>Handyman</option><option>Locksmith</option>
+              <option>Pest Control</option>
+            </optgroup>
+            <optgroup label="Food &amp; Drink">
+              <option>Coffee Shop / Café</option><option>Restaurant / Takeaway</option><option>Bakery</option>
+              <option>Catering / Private Chef</option><option>Food Truck / Street Food</option><option>Pub / Bar</option>
+            </optgroup>
+            <optgroup label="Health &amp; Fitness">
+              <option>Personal Trainer</option><option>Gym / Fitness Studio</option><option>Yoga / Pilates Studio</option>
+              <option>Nutritionist / Dietitian</option><option>Physiotherapist</option><option>Osteopath / Chiropractor</option>
+              <option>Sports Massage Therapist</option>
+            </optgroup>
+            <optgroup label="Beauty &amp; Wellness">
+              <option>Hair Salon</option><option>Barber</option><option>Beauty Salon / Nail Bar</option>
+              <option>Spa</option><option>Massage Therapist</option><option>Tattoo &amp; Piercing Studio</option>
+              <option>Aesthetics Clinic</option>
+            </optgroup>
+            <optgroup label="Pets">
+              <option>Dog Walker / Pet Sitter</option><option>Pet Groomer</option><option>Veterinary Practice</option>
+              <option>Pet Shop</option>
+            </optgroup>
+            <optgroup label="Professional Services">
+              <option>Accountant / Bookkeeper</option><option>Solicitor / Legal Services</option>
+              <option>Financial Adviser</option><option>Mortgage Broker</option><option>Business Consultant</option>
+              <option>Marketing Agency</option><option>Coach (Life / Business)</option><option>HR Consultant</option>
+            </optgroup>
+            <optgroup label="Property">
+              <option>Real Estate Agent</option><option>Letting Agent</option>
+              <option>Interior Designer</option><option>Architect</option>
+            </optgroup>
+            <optgroup label="Creative &amp; Digital">
+              <option>Photographer</option><option>Videographer</option><option>Graphic Designer</option>
+              <option>Web Designer / Developer</option><option>Copywriter</option><option>Social Media Manager</option>
+            </optgroup>
+            <optgroup label="Garden &amp; Outdoor">
+              <option>Landscaper / Gardener</option><option>Tree Surgeon</option><option>Window Cleaner</option>
+            </optgroup>
+            <optgroup label="Cleaning">
+              <option>Domestic Cleaner</option><option>Commercial Cleaner</option><option>End of Tenancy Cleaner</option>
+            </optgroup>
+            <optgroup label="Education &amp; Care">
+              <option>Driving Instructor</option><option>Music Teacher</option><option>Tutoring Service</option>
+              <option>Childminder / Nursery</option><option>Therapist / Counsellor</option>
+            </optgroup>
+            <optgroup label="Events">
+              <option>Event Planner</option><option>Florist</option><option>Wedding Planner</option>
+              <option>Entertainer / DJ</option>
+            </optgroup>
+            <optgroup label="Auto">
+              <option>Mechanic / Garage</option><option>Mobile Mechanic</option><option>Car Wash / Valeting</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option>Retail Shop</option><option>Online Shop</option><option>Franchise</option>
+              <option>Other local business</option>
+              <option value="__other__">Other (type your own)</option>
+            </optgroup>
+          </select>
+          <input type="text" id="q-type-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Describe your business type" oninput="onTypeOtherType()">
+        </div>
+
+        <!-- Q2: Business Name -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">02</span>What is your business name?</label>
+          <input type="text" id="q-name" class="field-input" placeholder="e.g. Smith's Plumbing Services" oninput="updateProgress()">
+        </div>
+
+        <!-- Q3: Location -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">03</span>Where are you based / what area do you cover?</label>
+          <input type="text" id="q-location" class="field-input" placeholder="e.g. Manchester and surrounding areas, within 20 miles" oninput="updateProgress()">
+        </div>
+
+        <!-- Q4: Key Service -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">04</span>What is your key service or product?</label>
+          <select id="q-service-sel" class="field-input field-select" onchange="onServiceChange()">
+            <option value="">— Select a service / product —</option>
+          </select>
+          <input type="text" id="q-service-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Describe your key service or product" oninput="onServiceOtherType()">
+        </div>
+
+        <!-- Q5: Target Customer -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">05</span>Who is your ideal customer?</label>
+          <select id="q-customer-sel" class="field-input field-select" onchange="onCustomerChange()">
+            <option value="">— Select your ideal customer —</option>
+            <option>Homeowners</option>
+            <option>Landlords</option>
+            <option>Small businesses</option>
+            <option>Property managers</option>
+            <option>Commercial clients</option>
+            <option>New builds</option>
+            <option value="__other__">Other (type your own)</option>
+          </select>
+          <input type="text" id="q-customer-other" class="field-input" style="display:none;margin-top:8px;" placeholder="e.g. Homeowners aged 35-60, landlords, small business owners" oninput="onCustomerOtherType()">
+        </div>
+
+        <!-- Q6: USP -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">06</span>What makes you different from competitors?</label>
+          <div class="chip-wrap" id="q-usp-chips">
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Same-day service">Same-day service</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="15+ years experience">15+ years experience</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Fully insured">Fully insured</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="5-star reviews">5-star reviews</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Family-run">Family-run</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="No call-out charge">No call-out charge</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Free quotes">Free quotes</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Guaranteed work / warranty">Guaranteed work / warranty</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Local &amp; trusted">Local &amp; trusted</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="24/7 availability">24/7 availability</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Accredited / certified">Accredited / certified</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="Competitive pricing">Competitive pricing</button>
+            <button type="button" class="chip" onclick="toggleUspChip(this)" data-val="__other__">Other (type your own)</button>
+          </div>
+          <input type="text" id="q-usp-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Add another differentiator..." oninput="updateProgress()">
+        </div>
+
+        <!-- Q7: Price -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">07</span>What is your typical price range?</label>
+          <select id="q-price" class="field-input field-select" onchange="updateProgress()">
+            <option value="">— Select price range —</option>
+            <option>Under £50 per job</option>
+            <option>£50–£200 per job</option>
+            <option>£200–£500 per job</option>
+            <option>£500–£2,000 per job</option>
+            <option>£2,000–£10,000 per project</option>
+            <option>Over £10,000 per project</option>
+            <option>Hourly rate (£20–£50/hr)</option>
+            <option>Hourly rate (£50–£150/hr)</option>
+            <option>Monthly retainer</option>
+            <option>Free quotes / varies by project</option>
+          </select>
+        </div>
+
+        <!-- Q8: Years in business -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">08</span>How long have you been in business?</label>
+          <div class="radio-row" id="rg-years">
+            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="Just starting out (under 1 year)"><span>🌱</span>Just started</label>
+            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="1–3 years in business"><span>📈</span>1–3 years</label>
+            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="3–10 years in business"><span>🏆</span>3–10 years</label>
+            <label class="radio-card" onclick="pickRadio('rg-years',this)"><input type="radio" name="years" value="Over 10 years in business"><span>⭐</span>10+ years</label>
+          </div>
+        </div>
+
+        <!-- Q9: Web presence -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">09</span>Current website / social media presence?</label>
+          <div class="radio-row" id="rg-web">
+            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Yes — website and active social media"><span>✅</span>Both</label>
+            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Website only, limited social"><span>🌐</span>Website only</label>
+            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Social media only, no website"><span>📱</span>Social only</label>
+            <label class="radio-card" onclick="pickRadio('rg-web',this)"><input type="radio" name="web" value="Starting from scratch"><span>🚀</span>Starting fresh</label>
+          </div>
+        </div>
+
+        <!-- Q10: Challenge + Goal -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">10</span>Main challenge right now, and goal for this kit?</label>
+          <div class="chip-wrap" id="q-goal-chips">
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Not enough new enquiries">Not enough new enquiries</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Low online visibility / SEO">Low online visibility / SEO</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="No or outdated website">No or outdated website</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Weak social media presence">Weak social media presence</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Not enough reviews">Not enough reviews</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Inconsistent branding">Inconsistent branding</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Want to launch or scale">Want to launch or scale</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Beat local competitors">Beat local competitors</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Improve lead conversion">Improve lead conversion</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="Grow customer base">Grow customer base</button>
+            <button type="button" class="chip" onclick="toggleGoalChip(this)" data-val="__other__">Other (type your own)</button>
+          </div>
+          <input type="text" id="q-goal-other" class="field-input" style="display:none;margin-top:8px;" placeholder="Describe your main challenge and goal..." oninput="updateProgress()">
+        </div>
+
+        <!-- Q11: Contact details -->
+        <div class="field-group">
+          <label class="field-label"><span class="q-badge">11</span>How can we reach you?</label>
+          <input type="email" id="q-email" class="field-input" placeholder="Your email address" oninput="updateProgress()">
+          <input type="text" id="q-phone" class="field-input" style="margin-top:8px;" placeholder="Phone number (optional)" oninput="updateProgress()">
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Submit -->
+        <div class="submit-area">
+          <button class="btn-generate" id="gen-btn" onclick="startGenerate()">
+            <span class="gen-spark">✦</span>
+            Send My Details
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="submit-note">We'll review your details and get your kit ready. Takes under a minute to send.</p>
+          <div id="form-err" class="form-error" style="display:none;"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-form -->
+
+
+<!-- ========================================================
+     PAGE: LOADING
+     ======================================================== -->
+<div id="page-loading" style="display:none;">
+  <div class="loading-scene">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <h2 id="loading-title">Generating your marketing kit…</h2>
+      <p class="loading-sub" id="loading-sub">This takes 30–60 seconds</p>
+      <div class="loading-steps">
+        <div class="lstep" id="ls-content"><span class="lsdot"></span>Writing landing page, emails &amp; social posts</div>
+        <div class="lstep" id="ls-video"><span class="lsdot"></span>Generating your marketing video</div>
+        <div class="lstep" id="ls-done"><span class="lsdot"></span>Packaging your complete kit</div>
+      </div>
+      <div class="loading-msg" id="loading-msg">Analysing your business profile…</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================================================
+     PAGE: RESULTS
+     ======================================================== -->
+<div id="page-results" style="display:none;">
+
+  <!-- Results header -->
+  <div class="results-header">
+    <div class="container">
+      <div class="results-header-left">
+        <div class="results-emoji">🎉</div>
+        <div>
+          <h1>Your marketing kit is ready</h1>
+          <p id="results-desc">Full content package generated</p>
+        </div>
+      </div>
+      <div class="results-header-right">
+        <button class="btn-download" onclick="downloadPDF()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          PDF
+        </button>
+        <button class="btn-download" onclick="downloadZIP()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>
+          ZIP
+        </button>
+        <button class="btn-outline-white" onclick="goHome()">Start over</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-strip" id="tab-strip">
+    <div class="container">
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('landing',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Landing Page
+        </button>
+        <button class="tab" onclick="showTab('emails',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Emails <span class="tab-count">5</span>
+        </button>
+        <button class="tab" onclick="showTab('social',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Social Posts <span class="tab-count">10</span>
+        </button>
+        <button class="tab" onclick="showTab('video',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          Video
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab panels -->
+  <div class="tab-panels">
+    <div class="container">
+
+      <!-- LANDING PAGE -->
+      <div id="panel-landing" class="panel active">
+        <div class="panel-head">
+          <div><h2>Landing Page Copy</h2><p>300–500 words of professional website copy. Copy any section or grab everything at once.</p></div>
+        </div>
+        <div id="out-landing"></div>
+      </div>
+
+      <!-- EMAILS -->
+      <div id="panel-emails" class="panel" style="display:none">
+        <div class="panel-head">
+          <div><h2>Email Templates</h2><p>Five ready-to-send emails for every stage of the customer journey.</p></div>
+        </div>
+        <div id="out-emails"></div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div id="panel-social" class="panel" style="display:none">
+        <div class="panel-head">
+          <div><h2>Social Media Posts</h2><p>Ten posts across Facebook, Instagram and LinkedIn. Copy and schedule.</p></div>
+          <div class="platform-filter">
+            <button class="pf-btn active" onclick="filterPosts('all',this)">All</button>
+            <button class="pf-btn" onclick="filterPosts('Facebook',this)">Facebook</button>
+            <button class="pf-btn" onclick="filterPosts('Instagram',this)">Instagram</button>
+            <button class="pf-btn" onclick="filterPosts('LinkedIn',this)">LinkedIn</button>
+          </div>
+        </div>
+        <div id="out-social" class="social-grid"></div>
+      </div>
+
+      <!-- VIDEO -->
+      <div id="panel-video" class="panel" style="display:none">
+        <div class="panel-head">
+          <div><h2>AI Marketing Video</h2><p>Your talking-head video generated by HeyGen. Download as MP4.</p></div>
+        </div>
+        <div id="out-video"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="results-foot">
+    <div class="container">
+      <p>Want fresh content? Regenerate anytime with new details.</p>
+      <div class="results-foot-btns">
+        <button class="btn-download" onclick="downloadPDF()">📄 Download PDF</button>
+        <button class="btn-download" onclick="downloadZIP()">📦 Download ZIP</button>
+        <button class="btn-primary" onclick="goHome()">Generate Another Kit</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-results -->
+
+
+<!-- FOOTER -->
+<footer id="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><span class="logo-icon">◈</span> Local Business AI Hub</div>
+      <p>Practical AI-powered business tools, marketing assets and specialist digital systems for UK local businesses.</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Product</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="#what-you-get">What you get</a>
+        <a href="#form-top">Build my kit</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-base">
+    <div class="container footer-base-inner">
+      <span>© 2026 Local Business AI Hub. All rights reserved.</span>
+      <span>Built by Webb Care Consultancy</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
