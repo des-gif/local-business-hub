@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Examples — See the work | Local Business AI Hub</title>
+<meta name="description" content="Real examples of the websites, marketing assets, content packs and business tools built by Local Business AI Hub.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16223e;
+    --navy-2:#23314f;
+    --blue:#2f6bff;
+    --blue-deep:#1f54d6;
+    --bg:#ffffff;
+    --mist:#f5f7fb;
+    --txt:#3a455c;
+    --muted:#7b879c;
+    --line:#e6eaf2;
+    --shadow:0 22px 55px -30px rgba(22,34,62,.45);
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--txt);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{color:var(--navy);letter-spacing:-.02em;line-height:1.12;font-weight:800}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+  .hero{background:var(--mist);padding:54px 0 46px;border-bottom:1px solid var(--line)}
+  .back{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:.92rem;color:var(--blue);margin-bottom:20px}
+  .eyebrow{font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:13px}
+  .hero h1{font-size:clamp(2.1rem,5vw,3.1rem);margin-bottom:13px}
+  .hero p{font-size:1.12rem;color:var(--muted);max-width:62ch}
+
+  section.group{padding:46px 0 8px}
+  .gh{margin-bottom:22px}
+  .gh .lbl{font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+  .gh h2{font-size:1.5rem;margin-top:5px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s,border-color .18s}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#cdd9f0}
+  .thumb{height:96px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative}
+  .t-plumb{background:radial-gradient(120% 120% at 80% -10%,#19405e,#0b1b2b)}
+  .t-elec{background:radial-gradient(120% 120% at 80% -10%,#1f2a16,#141519)}
+  .t-salon{background:radial-gradient(120% 120% at 80% -10%,#523047,#3a2233)}
+  .t-cafe{background:radial-gradient(120% 120% at 80% -10%,#46301f,#33231a)}
+  .t-pt{background:radial-gradient(120% 120% at 80% -10%,#2a3a16,#0d0f0d)}
+  .t-clean{background:linear-gradient(135deg,#0f766e,#2dd4bf)}
+  .t-mech{background:linear-gradient(135deg,#f4742b,#222831)}
+  .t-dent{background:radial-gradient(120% 120% at 80% -10%,#16407a,#0d2b4e)}
+  .t-build{background:linear-gradient(160deg,#3a5a47,#2f4a3a)}
+  .t-care{background:radial-gradient(120% 120% at 80% -10%,#262f5c,#1b2347)}
+  .t-video{background:linear-gradient(135deg,#2f6bff,#16223e)}
+  .cbody{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+  .cat{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue)}
+  .cbody h3{font-size:1.12rem;margin:5px 0 5px}
+  .cbody p{font-size:.92rem;color:var(--muted);flex:1}
+  .open{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--blue-deep)}
+  .badge{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+
+  .footer-cta{background:var(--navy);color:#dce4f5;text-align:center;padding:50px 24px;margin-top:50px}
+  .footer-cta h2{color:#fff;font-size:1.8rem;margin-bottom:10px}
+  .footer-cta p{opacity:.82;margin-bottom:20px}
+  .btn{display:inline-block;background:var(--blue);color:#fff;font-weight:700;padding:13px 26px;border-radius:11px}
+  footer{text-align:center;padding:24px;font-size:.84rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">‹ Back to Local Business AI Hub</a>
+    <div class="eyebrow">Examples</div>
+    <h1>See the work in action</h1>
+    <p>Real examples of what we build — each one made for a different trade, to show it works for any business. Open any example to explore the full piece.</p>
+  </div>
+</section>
+
+<!-- WEBSITES & LANDING PAGES -->
+<section class="group" id="websites">
+  <div class="wrap">
+    <div class="gh"><div class="lbl">Get found · take action</div><h2>Landing pages &amp; websites</h2></div>
+    <div class="grid">
+      <a class="card" href="01-plumber-landing-page.html" target="_blank">
+        <div class="thumb t-plumb">🔧</div>
+        <div class="cbody"><div class="cat">Landing page · Plumber</div><h3>High-converting landing page</h3><p>Headline, services, trust, reviews, FAQs and an enquiry form — built to turn visitors into bookings.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="02-electrician-website.html" target="_blank">
+        <div class="thumb t-elec">⚡</div>
+        <div class="cbody"><div class="cat">Website · Electrician</div><h3>Full multi-section website</h3><p>Home, about, services, reviews, an advice section and contact — a complete professional presence.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="01-plumber-landing-page.html" target="_blank">
+        <div class="thumb t-plumb">📝</div>
+        <div class="cbody"><div class="cat">Booking &amp; enquiry forms</div><h3>Enquiry / quote form</h3><p>See the built-in enquiry form on the plumber example — quote requests and call-backs made simple.</p><span class="open">Open example →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT & MARKETING -->
+<section class="group" id="content">
+  <div class="wrap">
+    <div class="gh"><div class="lbl">Get seen · build trust</div><h2>Content &amp; marketing</h2></div>
+    <div class="grid">
+      <a class="card" href="03-salon-google-business-pack.html" target="_blank">
+        <div class="thumb t-salon">💇</div>
+        <div class="cbody"><div class="cat">Google Business Pack · Salon</div><h3>AI Google Business Pack</h3><p>Profile description, services, local keywords, Google posts, FAQs and review templates.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="04-cafe-social-media-pack.html" target="_blank">
+        <div class="thumb t-cafe">☕</div>
+        <div class="cbody"><div class="cat">Social Media Pack · Café</div><h3>Social Media Content Pack</h3><p>A month of posts, captions, offers, reel scripts and a simple posting plan.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="marketing-video-gallery.html" target="_blank">
+        <div class="thumb t-video">🎬<span class="badge">Video</span></div>
+        <div class="cbody"><div class="cat">AI Marketing Video</div><h3>Video showcase gallery</h3><p>Watch example promo videos across different trades — ready to play for prospective clients.</p><span class="open">Open gallery →</span></div>
+      </a>
+      <a class="card" href="08-dentist-local-seo-pack.html" target="_blank">
+        <div class="thumb t-dent">🦷</div>
+        <div class="cbody"><div class="cat">Local SEO Pack · Dentist</div><h3>Local SEO Starter Pack</h3><p>Keywords, page titles, meta descriptions, FAQs and search-friendly wording.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="09-builder-brand-trust-builder.html" target="_blank">
+        <div class="thumb t-build">🧱</div>
+        <div class="cbody"><div class="cat">Brand &amp; Trust · Builder</div><h3>Brand &amp; Trust Builder</h3><p>About, founder story, guarantees, reassurance copy, testimonials and a case-study framework.</p><span class="open">Open example →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS & SYSTEMS -->
+<section class="group" id="tools">
+  <div class="wrap">
+    <div class="gh"><div class="lbl">Respond faster · follow up</div><h2>Tools &amp; systems</h2></div>
+    <div class="grid">
+      <a class="card" href="06-cleaning-business-command-centre.html" target="_blank">
+        <div class="thumb t-clean">📊</div>
+        <div class="cbody"><div class="cat">Business Dashboard · Cleaning co.</div><h3>CEO Business Command Centre</h3><p>An interactive dashboard: leads, quotes, tasks, goals, marketing and a reputation manager.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="06-cleaning-business-command-centre.html" target="_blank">
+        <div class="thumb t-clean">📥</div>
+        <div class="cbody"><div class="cat">Lead &amp; Quote Tracker</div><h3>Lead &amp; quote tracking</h3><p>See the Leads and Quotes tabs in the command centre — no enquiry ever forgotten.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="06-cleaning-business-command-centre.html" target="_blank">
+        <div class="thumb t-clean">⭐</div>
+        <div class="cbody"><div class="cat">Review &amp; Reputation System</div><h3>Reputation manager</h3><p>The Reputation tab: review requests, reply templates, complaint wording and a feedback form.</p><span class="open">Open example →</span></div>
+      </a>
+      <a class="card" href="07-mechanic-customer-response-system.html" target="_blank">
+        <div class="thumb t-mech">🔧</div>
+        <div class="cbody"><div class="cat">Response System · Mechanic</div><h3>AI Customer Response System</h3><p>Ready-to-send replies for enquiries, missed calls, quotes, bookings, reviews and reminders.</p><span class="open">Open example →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALIST -->
+<section class="group" id="specialist">
+  <div class="wrap">
+    <div class="gh"><div class="lbl">More than marketing</div><h2>Specialist business support</h2></div>
+    <div class="grid">
+      <a class="card" href="10-specialist-care-support.html" target="_blank">
+        <div class="thumb t-care">🏥</div>
+        <div class="cbody"><div class="cat">Specialist · Care &amp; children&rsquo;s services</div><h3>Specialist Business Support</h3><p>Health &amp; social care, children&rsquo;s homes, CQC &amp; Ofsted, property, planning, policy &amp; documentation.</p><span class="open">Open example →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="footer-cta">
+  <h2>Like what you see?</h2>
+  <p>This is just a taste — every piece is tailored to your business.</p>
+  <a class="btn" href="index.html#what-you-get">Build my kit</a>
+</div>
+
+<footer>Examples · Local Business AI Hub · Built by Webb Care Consultancy</footer>
+
+</body>
+</html>
