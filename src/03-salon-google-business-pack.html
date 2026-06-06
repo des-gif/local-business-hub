@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Google Business Pack — Bloom Hair &amp; Beauty (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#3a2233;
+    --plum-2:#523047;
+    --blush:#e7a795;
+    --terra:#c46a52;
+    --terra-deep:#a8543d;
+    --cream:#faf2ec;
+    --cream-2:#f3e6dd;
+    --gold:#bd9242;
+    --txt:#43303b;
+    --muted:#8a7480;
+    --line:rgba(58,34,51,.14);
+    --shadow:0 20px 50px -26px rgba(58,34,51,.4);
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Mulish",system-ui,sans-serif;color:var(--txt);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.display{font-family:"Fraunces","Mulish",serif;line-height:1.08;letter-spacing:-.01em;font-weight:600;color:var(--plum)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--plum);color:var(--cream);font-size:.82rem;text-align:center;padding:9px 16px;letter-spacing:.02em}
+  .demo-bar b{color:var(--blush)}
+
+  /* cover */
+  .cover{background:radial-gradient(120% 120% at 85% -10%,var(--plum-2),var(--plum));color:var(--cream);padding:64px 0 58px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:radial-gradient(40% 60% at 12% 110%,rgba(231,167,149,.25),transparent 70%)}
+  .cover .wrap{position:relative}
+  .kicker{font-family:"Mulish";font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--blush);margin-bottom:16px}
+  .cover h1{color:var(--cream);font-size:clamp(2.3rem,5.5vw,3.5rem);margin-bottom:12px}
+  .cover .biz{font-family:"Mulish";font-weight:600;opacity:.85;font-size:1.1rem}
+  .cover .meta{margin-top:26px;display:flex;gap:24px;flex-wrap:wrap;font-size:.9rem;opacity:.78}
+  .cover .meta span{display:flex;align-items:center;gap:7px}
+
+  /* content sections */
+  main{padding:18px 0 40px}
+  .sec{padding:40px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-family:"Fraunces";font-weight:600;color:var(--terra);font-size:.95rem;letter-spacing:.04em}
+  .sec h2{font-size:clamp(1.5rem,3.2vw,2rem);margin:4px 0 6px}
+  .sec .intro{color:var(--muted);margin-bottom:22px;max-width:62ch}
+
+  /* copy block (paste-ready) */
+  .copy{background:#fff;border:1px solid var(--line);border-left:4px solid var(--terra);border-radius:12px;padding:20px 22px;position:relative;margin-bottom:14px}
+  .copy .tag{position:absolute;top:-10px;right:14px;background:var(--cream-2);color:var(--terra-deep);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+  .copy p{margin-bottom:8px}
+  .copy p:last-child{margin-bottom:0}
+  .copy strong{color:var(--plum)}
+
+  /* services list */
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.svc{grid-template-columns:1fr}}
+  .svc .item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .svc .item b{font-family:"Fraunces";color:var(--plum);font-weight:600;font-size:1.05rem}
+  .svc .item p{font-size:.92rem;color:var(--muted);margin-top:3px}
+
+  /* keyword chips */
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:.9rem;font-weight:500}
+  .chip b{color:var(--terra-deep);font-weight:700}
+
+  /* posts */
+  .posts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.posts{grid-template-columns:1fr}}
+  .post{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .post .ph{height:84px;background:linear-gradient(135deg,var(--blush),var(--terra));display:grid;place-items:center;font-size:1.8rem}
+  .post .pb{padding:16px 18px}
+  .post .label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-deep)}
+  .post p{font-size:.92rem;margin-top:6px}
+  .post .img-note{font-size:.78rem;color:var(--muted);margin-top:10px;font-style:italic}
+
+  /* faq */
+  .faq .q{margin-bottom:14px}
+  .faq .q b{font-family:"Fraunces";color:var(--plum);font-weight:600;display:block;margin-bottom:2px}
+  .faq .q span{color:var(--muted);font-size:.95rem}
+
+  /* templates */
+  .tmpl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+  .tmpl .h{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-deep);margin-bottom:7px}
+  .tmpl p{font-size:.95rem}
+
+  ul.ideas{list-style:none;display:grid;gap:9px}
+  ul.ideas li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:.95rem;display:flex;gap:10px}
+  ul.ideas li::before{content:"✦";color:var(--terra)}
+
+  .script{background:var(--plum);color:var(--cream);border-radius:16px;padding:24px 26px}
+  .script h3{color:var(--blush);font-size:1rem;letter-spacing:.04em;margin-bottom:14px;font-family:"Mulish";font-weight:700;text-transform:uppercase}
+  .script .line{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid rgba(231,167,149,.2)}
+  .script .line:last-child{border-bottom:0}
+  .script .t{color:var(--blush);font-weight:700;font-size:.85rem}
+  .script .s{font-size:.96rem;opacity:.92}
+
+  footer{background:var(--plum);color:var(--cream);text-align:center;padding:30px 20px;font-size:.82rem;opacity:.85}
+  footer b{color:var(--blush)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — the same Google Business Pack can be created for <b>any</b> local business</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">AI Google Business Pack</div>
+    <h1>Get found, get chosen on Google</h1>
+    <div class="biz">Prepared for: Bloom Hair &amp; Beauty · Chiswick, West London</div>
+    <div class="meta">
+      <span>💇 Hair &amp; beauty salon</span>
+      <span>📍 Chiswick, W4</span>
+      <span>⭐ Google Business Profile content</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- 1 -->
+    <section class="sec">
+      <div class="num">01</div>
+      <h2>Google Business Profile description</h2>
+      <p class="intro">A warm, keyword-aware "from the business" description, ready to paste straight into the profile.</p>
+      <div class="copy"><span class="tag">Paste-ready</span>
+        <p>Bloom Hair &amp; Beauty is a friendly, modern salon in the heart of Chiswick, West London. Our experienced stylists and beauty therapists offer everything from precision cuts, blow-dries and expert colour and balayage, to brows, lashes, facials and relaxing nails — all in a calm, welcoming space.</p>
+        <p>Whether you&rsquo;re after a fresh new look, getting ready for a special occasion, or simply treating yourself, we take the time to understand exactly what you want. Easy online booking, honest advice, and results you&rsquo;ll love. Book your appointment with Bloom today.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="sec">
+      <div class="num">02</div>
+      <h2>Service descriptions</h2>
+      <p class="intro">Short, appealing descriptions for each Google "Services" entry.</p>
+      <div class="svc">
+        <div class="item"><b>Cut &amp; Style</b><p>Tailored cuts and finishes for every hair type, shaped around your face and lifestyle.</p></div>
+        <div class="item"><b>Colour &amp; Balayage</b><p>Glossy full colour, natural balayage and hand-painted highlights by our colour specialists.</p></div>
+        <div class="item"><b>Blow-Dry &amp; Styling</b><p>Polished blow-dries and event styling that last — perfect for any occasion.</p></div>
+        <div class="item"><b>Brows &amp; Lashes</b><p>Brow shaping, tints, lash lifts and extensions to frame and lift your look.</p></div>
+        <div class="item"><b>Facials &amp; Skincare</b><p>Relaxing, results-driven facials tailored to your skin&rsquo;s needs.</p></div>
+        <div class="item"><b>Bridal &amp; Occasion</b><p>Trials and on-the-day hair and make-up to look and feel your absolute best.</p></div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="sec">
+      <div class="num">03</div>
+      <h2>Local keyword ideas</h2>
+      <p class="intro">Phrases real customers type into Google — weave these naturally through the profile, posts and website.</p>
+      <div class="chips">
+        <span class="chip">hairdresser <b>Chiswick</b></span>
+        <span class="chip">hair salon near me</span>
+        <span class="chip">balayage <b>West London</b></span>
+        <span class="chip">blow dry Chiswick W4</span>
+        <span class="chip">lash extensions Chiswick</span>
+        <span class="chip">bridal hair West London</span>
+        <span class="chip">brow shaping Chiswick</span>
+        <span class="chip">facials near me</span>
+        <span class="chip">best hair colourist Chiswick</span>
+        <span class="chip">ladies haircut W4</span>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="sec">
+      <div class="num">04</div>
+      <h2>Google update posts</h2>
+      <p class="intro">Ready-to-publish posts to keep the profile active (Google rewards regularly updated profiles).</p>
+      <div class="posts">
+        <div class="post"><div class="ph">✨</div><div class="pb"><div class="label">Offer</div><p>New here? Enjoy <strong>20% off your first colour or balayage</strong> this month at Bloom, Chiswick. Tap "Book" to grab your slot — limited availability!</p><p class="img-note">Image idea: a glossy balayage before/after.</p></div></div>
+        <div class="post"><div class="ph">💍</div><div class="pb"><div class="label">Service spotlight</div><p>Wedding season is here 💐 Book a <strong>bridal hair &amp; make-up trial</strong> with our team and walk down the aisle feeling flawless. Now taking 2025 dates.</p><p class="img-note">Image idea: an elegant bridal updo.</p></div></div>
+        <div class="post"><div class="ph">💡</div><div class="pb"><div class="label">Tip</div><p>Colour looking dull? A gloss treatment revives shine in 20 minutes. Ask us at your next visit — your hair will thank you!</p><p class="img-note">Image idea: shiny, healthy hair close-up.</p></div></div>
+        <div class="post"><div class="ph">🎁</div><div class="pb"><div class="label">Seasonal</div><p>Treat someone (or yourself!) with a <strong>Bloom gift card</strong> — the perfect present for any occasion. Available in salon and online.</p><p class="img-note">Image idea: a branded gift card flat-lay.</p></div></div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="sec">
+      <div class="num">05</div>
+      <h2>FAQ content</h2>
+      <p class="intro">Answers to add to the profile&rsquo;s Q&amp;A section — and reuse on the website.</p>
+      <div class="faq">
+        <div class="q"><b>Do you take walk-ins or do I need to book?</b><span>We recommend booking to guarantee your slot, but we&rsquo;ll always do our best to fit in walk-ins when we can.</span></div>
+        <div class="q"><b>Do you offer a colour consultation?</b><span>Yes — we offer free consultations for colour and any bigger changes, so you&rsquo;re completely confident before we begin.</span></div>
+        <div class="q"><b>Is there parking nearby?</b><span>There&rsquo;s pay-and-display parking close by and we&rsquo;re a short walk from Chiswick station.</span></div>
+        <div class="q"><b>How do I book an appointment?</b><span>Tap the "Book" button on our Google profile, call us, or message us — whatever&rsquo;s easiest for you.</span></div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="sec">
+      <div class="num">06</div>
+      <h2>Review request messages</h2>
+      <p class="intro">Friendly templates to send after an appointment — more reviews means a stronger Google ranking.</p>
+      <div class="tmpl"><div class="h">Text message</div><p>Hi [Name], it was lovely having you at Bloom today! 💕 If you&rsquo;ve a spare moment, a quick Google review would mean the world to us: [link]. See you next time!</p></div>
+      <div class="tmpl"><div class="h">Email</div><p>Hi [Name], thank you for visiting Bloom Hair &amp; Beauty — we hope you&rsquo;re loving your new look! Reviews help our small salon enormously, so if you have a minute we&rsquo;d be so grateful for a quick Google review here: [link]. Warmly, The Bloom Team.</p></div>
+    </section>
+
+    <!-- 7 -->
+    <section class="sec">
+      <div class="num">07</div>
+      <h2>Review response templates</h2>
+      <p class="intro">Replying to reviews shows future customers you care — and Google notices too.</p>
+      <div class="tmpl"><div class="h">Positive review</div><p>Thank you so much, [Name]! 💕 It was a joy looking after you, and we&rsquo;re thrilled you love the result. We can&rsquo;t wait to welcome you back to Bloom soon!</p></div>
+      <div class="tmpl"><div class="h">Positive — specific</div><p>This made our day, [Name]! [Stylist] will be so pleased you loved your balayage. Thank you for the kind words and for choosing Bloom — see you next time!</p></div>
+    </section>
+
+    <!-- 8 -->
+    <section class="sec">
+      <div class="num">08</div>
+      <h2>Complaint &amp; negative review responses</h2>
+      <p class="intro">Calm, professional wording that protects your reputation and shows you put things right.</p>
+      <div class="tmpl"><div class="h">Negative review reply</div><p>Hi [Name], thank you for taking the time to share this, and we&rsquo;re truly sorry your visit didn&rsquo;t meet the standard we aim for. That&rsquo;s not the Bloom experience we want for anyone. We&rsquo;d really like to understand what happened and make it right — please call us on [number] or email [email] and ask for [manager]. We hope to have the chance to restore your confidence in us.</p></div>
+      <div class="tmpl"><div class="h">Brief holding reply</div><p>Hi [Name], we&rsquo;re sorry to hear this and we take your feedback seriously. We&rsquo;ve sent you a private message so we can look into it properly and put things right. Thank you for letting us know.</p></div>
+    </section>
+
+    <!-- 9 -->
+    <section class="sec">
+      <div class="num">09</div>
+      <h2>Rich media ideas for images &amp; posts</h2>
+      <p class="intro">Photo and post concepts that make the profile look active, professional and inviting.</p>
+      <ul class="ideas">
+        <li>Before-and-after transformations (colour, cut, balayage) — Google&rsquo;s most-clicked image type.</li>
+        <li>Clean, bright shots of the salon interior and styling chairs.</li>
+        <li>Short "meet the team" portraits with each stylist&rsquo;s speciality.</li>
+        <li>Close-ups of glossy finished hair, brows and lash work.</li>
+        <li>Behind-the-scenes Reels of a blow-dry or colour in progress.</li>
+        <li>Seasonal looks (party hair, bridal, summer balayage).</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="sec">
+      <div class="num">10</div>
+      <h2>Explainer video script</h2>
+      <p class="intro">A short 30–40 second script for Google and social media.</p>
+      <div class="script">
+        <h3>Bloom Hair &amp; Beauty — 35-second explainer</h3>
+        <div class="line"><div class="t">0–5s</div><div class="s">[Warm shot of salon] "Looking for a salon that actually listens?"</div></div>
+        <div class="line"><div class="t">5–15s</div><div class="s">[Stylist working, smiling client] "At Bloom in Chiswick, our expert team create cuts, colour and styles tailored just for you."</div></div>
+        <div class="line"><div class="t">15–25s</div><div class="s">[Before/after flashes] "From a fresh everyday look to your big day — you&rsquo;ll leave feeling like the best version of you."</div></div>
+        <div class="line"><div class="t">25–35s</div><div class="s">[Logo + button] "Bloom Hair &amp; Beauty, Chiswick. Tap to book your appointment today."</div></div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="sec">
+      <div class="num">11</div>
+      <h2>Short promotional video content ideas</h2>
+      <p class="intro">Quick Reel and Short concepts to keep the salon visible between appointments.</p>
+      <ul class="ideas">
+        <li>"3 blow-dry secrets your stylist wishes you knew" — fast tips Reel.</li>
+        <li>A satisfying 15-second colour transformation, before to reveal.</li>
+        <li>"A day at Bloom" — quick behind-the-scenes montage.</li>
+        <li>Client reaction reveal in the mirror (with permission) — pure feel-good.</li>
+        <li>"This month&rsquo;s offer" — punchy 10-second promo with the booking link.</li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example AI Google Business Pack · prepared for the fictional "Bloom Hair &amp; Beauty" · built by <b>Local Business AI Hub</b><br>
+  The same pack can be tailored for any local business — plumber, café, dentist, care provider and beyond.
+</footer>
+
+</body>
+</html>
