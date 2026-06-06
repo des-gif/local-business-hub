@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Local SEO Starter Pack — Riverside Dental Practice (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d2b4e;
+    --blue:#1463d6;
+    --blue-2:#3b82f6;
+    --mint:#27c6a8;
+    --paper:#f3f7fc;
+    --paper-2:#e6eef8;
+    --txt:#26384d;
+    --muted:#74879c;
+    --line:rgba(13,43,78,.12);
+    --code-bg:#0d2b4e;
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Figtree",system-ui,sans-serif;color:var(--txt);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Schibsted Grotesk",system-ui,sans-serif;color:var(--navy);letter-spacing:-.02em;line-height:1.08;font-weight:700}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--navy);color:#cfe3fb;font-size:.82rem;text-align:center;padding:9px 16px}
+  .demo-bar b{color:var(--mint)}
+
+  .cover{background:radial-gradient(120% 130% at 85% -10%,#16407a,var(--navy));color:#eaf2fc;padding:58px 0 50px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(39,198,168,.35),transparent 70%);right:-40px;top:-60px}
+  .cover .wrap{position:relative}
+  .kicker{font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.76rem;color:var(--mint);margin-bottom:14px;font-family:"Figtree"}
+  .cover h1{color:#fff;font-size:clamp(2.2rem,5.5vw,3.5rem)}
+  .cover .biz{font-family:"Figtree";font-weight:600;opacity:.85;font-size:1.05rem;margin-top:8px}
+  .cover .meta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  .cover .meta span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:7px 14px;font-size:.85rem}
+
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--mint);border-radius:12px;padding:16px 20px;margin:26px auto 0;max-width:940px;font-size:.95rem;color:var(--txt)}
+  .note b{color:var(--navy)}
+
+  main{padding:14px 0 40px}
+  .sec{padding:32px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-family:"Schibsted Grotesk";color:var(--blue);font-size:.9rem;font-weight:700;letter-spacing:.04em}
+  .sec h2{font-size:clamp(1.4rem,3.2vw,1.95rem);margin:3px 0 6px}
+  .sec .intro{color:var(--muted);margin-bottom:18px;max-width:64ch}
+
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:.9rem;font-weight:500}
+  .chip b{color:var(--blue)}
+
+  .group{margin-bottom:16px}
+  .group .gh{font-family:"Schibsted Grotesk";font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:8px}
+
+  .code{background:var(--code-bg);color:#cfe3fb;border-radius:12px;padding:16px 18px;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.86rem;line-height:1.7;margin-bottom:10px;overflow-x:auto}
+  .code .tag{color:var(--mint)}
+  .code .ttl{color:#fff}
+  .code .lim{color:#8fb6e6;font-size:.78rem}
+
+  .copy{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+  .copy .h{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  .copy p{font-size:.95rem}
+
+  .faq .q{margin-bottom:13px}
+  .faq .q b{font-family:"Schibsted Grotesk";color:var(--navy);display:block;margin-bottom:2px}
+  .faq .q span{color:var(--muted);font-size:.95rem}
+
+  ul.ideas{list-style:none;display:grid;gap:9px}
+  ul.ideas li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:.95rem;display:flex;gap:10px}
+  ul.ideas li::before{content:"📍";font-size:.85rem}
+  ul.ideas li b{color:var(--navy)}
+
+  .ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){.ctas{grid-template-columns:1fr}}
+  .cta{background:var(--blue);color:#fff;border-radius:10px;padding:13px 16px;font-weight:600;font-size:.95rem;text-align:center}
+  .cta.alt{background:var(--mint);color:#06302a}
+
+  footer{background:var(--navy);color:#cfe3fb;text-align:center;padding:30px 20px;font-size:.82rem}
+  footer b{color:var(--mint)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — the same SEO pack can be created for <b>any</b> local business</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">Local SEO Starter Pack</div>
+    <h1>Be found by local patients on Google</h1>
+    <div class="biz">Prepared for: Riverside Dental Practice · Kingston upon Thames</div>
+    <div class="meta">
+      <span>🦷 Dental practice</span>
+      <span>📍 Kingston upon Thames</span>
+      <span>🔎 Search-friendly wording</span>
+    </div>
+  </div>
+</header>
+
+<div class="note"><b>The idea:</b> this isn&rsquo;t about tricking Google. It&rsquo;s about making the practice easy to understand, easy to find, and easy for local patients to choose — by using the words real people search for.</div>
+
+<main>
+  <div class="wrap">
+
+    <section class="sec">
+      <div class="num">01</div>
+      <h2>Local keyword ideas</h2>
+      <p class="intro">The phrases nearby patients actually type into Google.</p>
+      <div class="chips">
+        <span class="chip">dentist <b>Kingston</b></span>
+        <span class="chip">dentist near me</span>
+        <span class="chip">private dentist <b>Kingston upon Thames</b></span>
+        <span class="chip">emergency dentist Kingston</span>
+        <span class="chip">new patient dentist Kingston</span>
+        <span class="chip">family dentist Surbiton</span>
+        <span class="chip">dental practice KT1</span>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">02</div>
+      <h2>Service-based keywords</h2>
+      <p class="intro">Higher-value searches tied to specific treatments.</p>
+      <div class="chips">
+        <span class="chip">Invisalign Kingston</span>
+        <span class="chip">teeth whitening Kingston</span>
+        <span class="chip">dental implants Kingston</span>
+        <span class="chip">cosmetic dentistry Surrey</span>
+        <span class="chip">children&rsquo;s dentist Kingston</span>
+        <span class="chip">dental check-up &amp; hygiene</span>
+        <span class="chip">veneers Kingston</span>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">03</div>
+      <h2>Location-based wording</h2>
+      <p class="intro">Natural location phrasing to weave through pages so Google knows exactly where you serve.</p>
+      <div class="copy"><div class="h">Examples</div><p>&ldquo;In the heart of Kingston upon Thames&rdquo; · &ldquo;Conveniently located minutes from Kingston station&rdquo; · &ldquo;Proudly serving Kingston, Surbiton, New Malden and the surrounding KT postcodes.&rdquo;</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">04</div>
+      <h2>SEO page titles</h2>
+      <p class="intro">The clickable blue headline Google shows — keyword first, brand last, under ~60 characters.</p>
+      <div class="code"><span class="tag">Home</span><br><span class="ttl">Dentist in Kingston | Riverside Dental Practice</span> <span class="lim">(47)</span></div>
+      <div class="code"><span class="tag">Invisalign</span><br><span class="ttl">Invisalign Kingston | Straighten Your Teeth | Riverside</span> <span class="lim">(55)</span></div>
+      <div class="code"><span class="tag">Emergency</span><br><span class="ttl">Emergency Dentist Kingston | Same-Day Appointments</span> <span class="lim">(50)</span></div>
+      <div class="code"><span class="tag">Whitening</span><br><span class="ttl">Teeth Whitening Kingston | Brighter Smile | Riverside</span> <span class="lim">(53)</span></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">05</div>
+      <h2>Meta descriptions</h2>
+      <p class="intro">The grey summary under the title — a mini advert, around 155 characters.</p>
+      <div class="code"><span class="tag">Home</span><br>Friendly dentist in Kingston upon Thames. Check-ups, Invisalign, whitening &amp; implants. New patients &amp; same-day emergencies welcome. Book online today. <span class="lim">(149)</span></div>
+      <div class="code"><span class="tag">Emergency</span><br>Tooth pain in Kingston? Riverside Dental offers same-day emergency appointments with gentle, expert care. Call now or book your urgent slot online. <span class="lim">(146)</span></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">06</div>
+      <h2>Search-friendly service descriptions</h2>
+      <p class="intro">Clear treatment copy that includes the keywords naturally.</p>
+      <div class="copy"><div class="h">Invisalign</div><p>Straighten your teeth discreetly with Invisalign in Kingston. Our clear, removable aligners gently guide your smile into place — with no metal braces and a free consultation to get you started.</p></div>
+      <div class="copy"><div class="h">Emergency dental</div><p>In pain? We keep same-day emergency dentist appointments free each day for patients across Kingston. Call us first thing and we&rsquo;ll get you seen and out of discomfort fast.</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">07</div>
+      <h2>FAQ content</h2>
+      <p class="intro">Real questions patients search — great for the website and Google.</p>
+      <div class="faq">
+        <div class="q"><b>Are you taking on new patients in Kingston?</b><span>Yes — we welcome new private patients and offer a relaxed first appointment to get to know you.</span></div>
+        <div class="q"><b>Do you offer emergency dental appointments?</b><span>We do — same-day emergency slots are available daily. Call us as early as you can.</span></div>
+        <div class="q"><b>How much is a check-up?</b><span>Our new-patient examination is [£__], including a full assessment and personalised plan.</span></div>
+        <div class="q"><b>Where exactly are you located?</b><span>We&rsquo;re in central Kingston upon Thames, a short walk from the station, with parking nearby.</span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">08</div>
+      <h2>Website section wording</h2>
+      <p class="intro">Ready, keyword-aware copy for the key parts of the homepage.</p>
+      <div class="copy"><div class="h">Hero headline</div><p>Gentle, modern dentistry in the heart of Kingston upon Thames.</p></div>
+      <div class="copy"><div class="h">About line</div><p>Riverside Dental Practice is a friendly, family-run dental practice in Kingston, offering everything from routine check-ups to Invisalign, whitening and implants.</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">09</div>
+      <h2>Google-friendly business wording</h2>
+      <p class="intro">A profile description that reads naturally and ranks well.</p>
+      <div class="copy"><div class="h">Google Business Profile</div><p>Riverside Dental Practice is a welcoming dentist in Kingston upon Thames, offering check-ups, hygiene, Invisalign, teeth whitening, implants and same-day emergency care. New patients welcome — book online or call today.</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">10</div>
+      <h2>Customer-problem wording</h2>
+      <p class="intro">Speaking to what patients are actually worried about builds trust (and matches their searches).</p>
+      <div class="chips">
+        <span class="chip">&ldquo;I&rsquo;m a nervous patient&rdquo;</span>
+        <span class="chip">&ldquo;I have tooth pain&rdquo;</span>
+        <span class="chip">&ldquo;I&rsquo;m embarrassed by my smile&rdquo;</span>
+        <span class="chip">&ldquo;I need a dentist today&rdquo;</span>
+        <span class="chip">&ldquo;I want straighter teeth&rdquo;</span>
+        <span class="chip">&ldquo;I&rsquo;ve a missing tooth&rdquo;</span>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">11</div>
+      <h2>Local landing-page ideas</h2>
+      <p class="intro">Dedicated pages that rank for high-value local searches.</p>
+      <ul class="ideas">
+        <li><b>Invisalign in Kingston</b> — for everyone searching to straighten their teeth.</li>
+        <li><b>Emergency Dentist Kingston</b> — captures urgent, high-intent searches.</li>
+        <li><b>Dental Implants Kingston</b> — a premium, high-value treatment page.</li>
+        <li><b>New Patients Kingston</b> — a warm welcome page that converts.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <div class="num">12</div>
+      <h2>Search-friendly call-to-action wording</h2>
+      <p class="intro">Clear next steps that turn searchers into booked appointments.</p>
+      <div class="ctas">
+        <div class="cta">Book your check-up online</div>
+        <div class="cta alt">Call for a same-day emergency appointment</div>
+        <div class="cta alt">Claim your free Invisalign consultation</div>
+        <div class="cta">Register as a new patient today</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example Local SEO Starter Pack · prepared for the fictional "Riverside Dental Practice" · built by <b>Local Business AI Hub</b><br>
+  The same pack can be tailored to any local business and any town.
+</footer>
+
+</body>
+</html>
