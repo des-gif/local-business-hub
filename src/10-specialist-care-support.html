@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Specialist Business Support — Care &amp; Children&rsquo;s Services (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#1b2347;
+    --indigo-2:#262f5c;
+    --gold:#c8a23c;
+    --gold-soft:#e3c878;
+    --paper:#f5f3ee;
+    --paper-2:#ece8de;
+    --txt:#33384f;
+    --muted:#7b7f95;
+    --line:rgba(27,35,71,.13);
+    --shadow:0 18px 46px -26px rgba(27,35,71,.45);
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--txt);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Spectral",serif;color:var(--indigo);letter-spacing:-.01em;line-height:1.15;font-weight:600}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--indigo);color:#dfe3f5;font-size:.82rem;text-align:center;padding:9px 16px}
+  .demo-bar b{color:var(--gold-soft)}
+
+  .cover{background:radial-gradient(120% 130% at 82% -10%,var(--indigo-2),var(--indigo));color:#eef0fa;padding:62px 0 54px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(200,162,60,.05) 0 1px,transparent 1px 22px)}
+  .cover .wrap{position:relative}
+  .kicker{font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.74rem;color:var(--gold-soft);margin-bottom:14px}
+  .cover h1{color:#fff;font-size:clamp(2.2rem,5.2vw,3.4rem)}
+  .cover .biz{font-weight:500;opacity:.85;font-size:1.05rem;margin-top:10px}
+  .cover .meta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+  .cover .meta span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:7px 14px;font-size:.85rem}
+
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:16px 20px;margin:26px auto 0;max-width:940px;font-size:.95rem}
+  .note b{color:var(--indigo)}
+
+  main{padding:14px 0 40px}
+  .sec{padding:30px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-family:"Spectral";color:var(--gold);font-weight:700;font-size:1rem;letter-spacing:.04em}
+  .sec h2{font-size:clamp(1.45rem,3.2vw,1.95rem);margin:2px 0 8px}
+  .sec .intro{color:var(--muted);margin-bottom:18px;max-width:66ch}
+
+  .cap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.cap{grid-template-columns:1fr}}
+  .c{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+  .c .ico{font-size:1.5rem;margin-bottom:10px}
+  .c h3{font-size:1.12rem;margin-bottom:6px}
+  .c p{font-size:.93rem;color:var(--txt)}
+  .c ul{list-style:none;margin-top:11px;display:grid;gap:6px}
+  .c ul li{display:flex;gap:8px;font-size:.88rem;color:var(--muted)}
+  .c ul li::before{content:"◆";color:var(--gold);font-size:.7rem;margin-top:5px}
+
+  .feature{background:linear-gradient(160deg,var(--indigo-2),var(--indigo));color:#eef0fa;border-radius:16px;padding:26px 28px}
+  .feature h3{color:#fff;font-size:1.3rem;margin-bottom:8px}
+  .feature p{opacity:.85;font-size:.96rem;margin-bottom:14px}
+  .feature .tags{display:flex;flex-wrap:wrap;gap:9px}
+  .feature .tags span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 13px;font-size:.84rem}
+  .feature .tags span b{color:var(--gold-soft);font-weight:600}
+
+  /* dashboard mini preview */
+  .dash{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:4px}
+  .dash .bar{background:var(--indigo);color:#dfe3f5;padding:11px 16px;font-family:"Spectral";font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:8px}
+  .dash .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+  @media(max-width:600px){.dash .grid{grid-template-columns:1fr 1fr}}
+  .dash .cell{background:#fff;padding:15px 16px}
+  .dash .cell .l{font-size:.72rem;color:var(--muted);font-weight:600}
+  .dash .cell .v{font-family:"Spectral";font-weight:700;color:var(--indigo);font-size:1.4rem;margin-top:3px}
+  .dash .foot{padding:13px 16px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+
+  footer{background:var(--indigo);color:#dfe3f5;text-align:center;padding:30px 20px;font-size:.82rem;opacity:.92}
+  footer b{color:var(--gold-soft)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — specialist support tailored to regulated &amp; professional sectors</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">Specialist Business Support</div>
+    <h1>Expert support for regulated care &amp; children&rsquo;s services</h1>
+    <div class="biz">For health &amp; social care providers, children&rsquo;s homes and supported living services</div>
+    <div class="meta">
+      <span>🏥 Health &amp; social care</span>
+      <span>🏠 Children&rsquo;s homes</span>
+      <span>📋 CQC &amp; Ofsted</span>
+    </div>
+  </div>
+</header>
+
+<div class="note"><b>Who this is for:</b> regulated, professional and service-based organisations that need more than general marketing — stronger presentation, clearer systems, and specialist support that understands the sector. Our specialist support complements your own clinical and compliance work; we make you look as professional as the care you provide.</div>
+
+<main>
+  <div class="wrap">
+
+    <section class="sec">
+      <div class="num">01 — Sector support</div>
+      <h2>Health &amp; social care · children&rsquo;s homes</h2>
+      <p class="intro">Presentation, systems and marketing built specifically for the realities of regulated care.</p>
+      <div class="cap">
+        <div class="c"><div class="ico">🏥</div><h3>Health &amp; social care support</h3><p>A professional, reassuring presence for domiciliary care, supported living and residential providers.</p>
+          <ul><li>Referral-focused websites &amp; brochures</li><li>Local authority &amp; family-facing messaging</li><li>Carer recruitment landing pages</li></ul>
+        </div>
+        <div class="c"><div class="ico">🏠</div><h3>Children&rsquo;s home support</h3><p>Polished presentation and systems for new and established children&rsquo;s homes.</p>
+          <ul><li>Placement referral materials</li><li>Local-authority enquiry handling</li><li>Professional brochures &amp; statements</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">02 — Regulatory readiness</div>
+      <h2>CQC &amp; Ofsted application support</h2>
+      <p class="intro">We help you present your service clearly and professionally through the registration journey — working alongside your own compliance and clinical leads.</p>
+      <div class="cap">
+        <div class="c"><div class="ico">📋</div><h3>CQC application support</h3><p>Support preparing a clear, well-presented registration application and supporting materials.</p>
+          <ul><li>Statement of Purpose presentation</li><li>Document formatting &amp; consistency</li><li>Professional, inspection-ready materials</li></ul>
+        </div>
+        <div class="c"><div class="ico">🎓</div><h3>Ofsted application support</h3><p>The same careful, professional support for children&rsquo;s home registration.</p>
+          <ul><li>Statement of Purpose &amp; guides</li><li>Clear, well-structured documentation</li><li>Presentation that inspires confidence</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">03 — Getting set up</div>
+      <h2>Property, planning &amp; documentation</h2>
+      <p class="intro">Practical support across the early, often-overwhelming setup stages.</p>
+      <div class="cap">
+        <div class="c"><div class="ico">🔑</div><h3>Property search support</h3><p>Help identifying and presenting suitable properties for care or children&rsquo;s-home use.</p></div>
+        <div class="c"><div class="ico">📐</div><h3>Planning &amp; setup support</h3><p>Guidance through the setup journey — branding, systems and presentation from day one.</p></div>
+        <div class="c"><div class="ico">📄</div><h3>Policy &amp; documentation support</h3><p>Professional formatting and presentation of policies, statements, brochures and referral packs.</p></div>
+        <div class="c"><div class="ico">🤝</div><h3>Referral &amp; partner materials</h3><p>Materials that help local authorities and commissioners say yes with confidence.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">04 — Specialist web presence</div>
+      <h2>Specialist landing pages</h2>
+      <p class="intro">Purpose-built pages for the audiences that matter most in this sector.</p>
+      <div class="feature">
+        <h3>Pages designed for placements &amp; recruitment</h3>
+        <p>Rather than a generic website, we build focused pages aimed at exactly who you need to reach.</p>
+        <div class="tags">
+          <span><b>›</b> "Refer a placement" — for local authorities</span>
+          <span><b>›</b> "Join our team" — carer &amp; staff recruitment</span>
+          <span><b>›</b> "For families" — reassurance &amp; trust</span>
+          <span><b>›</b> "Our service" — Statement of Purpose, presented beautifully</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">05 — Specialist systems</div>
+      <h2>Specialist dashboards &amp; enquiry tracking</h2>
+      <p class="intro">A command centre tailored to the sector — track referrals, placements, enquiries and key reminders in one place.</p>
+      <div class="dash">
+        <div class="bar">🛡️ Care Command Centre — placements &amp; referrals</div>
+        <div class="grid">
+          <div class="cell"><div class="l">New referrals</div><div class="v">4</div></div>
+          <div class="cell"><div class="l">Placements live</div><div class="v">11</div></div>
+          <div class="cell"><div class="l">Beds available</div><div class="v">3</div></div>
+          <div class="cell"><div class="l">Staff vacancies</div><div class="v">2</div></div>
+        </div>
+        <div class="foot">Plus: enquiry tracking · follow-up reminders · document &amp; review dates · recruitment pipeline — all in one secure place.</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example Specialist Business Support overview · built by <b>Local Business AI Hub</b><br>
+  Specialist presentation, marketing &amp; systems support — designed to work alongside your own clinical and compliance expertise.
+</footer>
+
+</body>
+</html>
