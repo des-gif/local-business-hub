@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Social Media Content Pack — Maple &amp; Bean Coffee House (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#33231a;
+    --espresso-2:#46301f;
+    --cream:#f6efe3;
+    --cream-2:#efe4d2;
+    --caramel:#c4863c;
+    --caramel-deep:#a76b29;
+    --sage:#7e8c69;
+    --txt:#3d2c20;
+    --muted:#8a7460;
+    --line:rgba(51,35,26,.14);
+    --shadow:0 20px 50px -26px rgba(51,35,26,.4);
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Karla",system-ui,sans-serif;color:var(--txt);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"DM Serif Display",serif;line-height:1.1;color:var(--espresso);font-weight:400}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--espresso);color:var(--cream);font-size:.82rem;text-align:center;padding:9px 16px}
+  .demo-bar b{color:var(--caramel)}
+
+  .cover{background:radial-gradient(120% 130% at 80% -20%,var(--espresso-2),var(--espresso));color:var(--cream);padding:60px 0 54px;position:relative;overflow:hidden}
+  .cover::before{content:"☕";position:absolute;right:-10px;bottom:-30px;font-size:200px;opacity:.06}
+  .cover .wrap{position:relative}
+  .kicker{font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--caramel);margin-bottom:16px}
+  .cover h1{color:var(--cream);font-size:clamp(2.2rem,5.5vw,3.4rem);margin-bottom:10px}
+  .cover .biz{font-weight:600;opacity:.85;font-size:1.08rem}
+  .cover .meta{margin-top:24px;display:flex;gap:22px;flex-wrap:wrap;font-size:.9rem;opacity:.78}
+
+  main{padding:24px 0 40px}
+  .sec{padding:36px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-weight:700;color:var(--caramel-deep);font-size:.9rem;letter-spacing:.04em;font-family:"Karla"}
+  .sec h2{font-size:clamp(1.5rem,3.2vw,2rem);margin:3px 0 6px}
+  .sec .intro{color:var(--muted);margin-bottom:22px;max-width:64ch}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+  /* social post card */
+  .post{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+  .post .head{display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:1px solid var(--line)}
+  .post .avatar{width:30px;height:30px;border-radius:50%;background:var(--espresso);color:var(--caramel);display:grid;place-items:center;font-size:.85rem;font-weight:700}
+  .post .head b{font-size:.9rem;color:var(--espresso)}
+  .post .plat{margin-left:auto;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--caramel-deep)}
+  .post .ph{height:96px;background:linear-gradient(135deg,var(--caramel),var(--espresso-2));display:grid;place-items:center;font-size:2.1rem}
+  .post .ph.sage{background:linear-gradient(135deg,var(--sage),var(--espresso-2))}
+  .post .body{padding:15px 17px}
+  .post .body p{font-size:.95rem}
+  .post .tags{margin-top:10px;font-size:.84rem;color:var(--sage);font-weight:600}
+  .post .img-note{font-size:.78rem;color:var(--muted);font-style:italic;margin-top:10px}
+
+  ul.ideas{list-style:none;display:grid;gap:9px}
+  ul.ideas li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:.95rem;display:flex;gap:10px}
+  ul.ideas li::before{content:"☕";font-size:.85rem}
+
+  .captions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:760px){.captions{grid-template-columns:1fr}}
+  .cap{background:#fff;border:1px solid var(--line);border-left:4px solid var(--caramel);border-radius:10px;padding:13px 16px;font-size:.95rem}
+
+  /* plan */
+  .plan{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:760px){.plan{grid-template-columns:1fr 1fr}}
+  .day{background:var(--espresso);color:var(--cream);border-radius:13px;padding:16px}
+  .day b{font-family:"DM Serif Display";color:var(--caramel);font-size:1.1rem;display:block;margin-bottom:5px}
+  .day span{font-size:.86rem;opacity:.85}
+
+  footer{background:var(--espresso);color:var(--cream);text-align:center;padding:30px 20px;font-size:.82rem;opacity:.85}
+  footer b{color:var(--caramel)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — the same content pack can be created for <b>any</b> local business</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">Social Media Content Pack</div>
+    <h1>A month of posts, ready to go</h1>
+    <div class="biz">Prepared for: Maple &amp; Bean Coffee House · Ealing, West London</div>
+    <div class="meta">
+      <span>☕ Independent café</span>
+      <span>📍 Ealing, W5</span>
+      <span>📱 Facebook · Instagram · local pages</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- offers -->
+    <section class="sec">
+      <div class="num">01 · OFFER POSTS</div>
+      <h2>Offer &amp; promotion posts</h2>
+      <p class="intro">Drive footfall with clear, friendly offers. Ready to publish — just add the image.</p>
+      <div class="grid">
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Instagram</span></div>
+          <div class="ph">☕</div>
+          <div class="body"><p>It&rsquo;s a 2-for-1 kind of Friday! 🎉 Bring a friend and enjoy <strong>buy-one-get-one on all lattes</strong>, today only. First sip&rsquo;s on us-ish 😉</p><p class="tags">#EalingCafe #CoffeeLovers #W5</p><p class="img-note">Image: two lattes clinking on a wooden table.</p></div>
+        </div>
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Facebook</span></div>
+          <div class="ph sage">🎁</div>
+          <div class="body"><p>Coffee number ten is always free at Maple &amp; Bean ☕ Grab a loyalty card next time you&rsquo;re in — your caffeine habit deserves a reward.</p><p class="tags">#Loyalty #EalingEats #SupportLocal</p><p class="img-note">Image: a stamped loyalty card beside a flat white.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- trust -->
+    <section class="sec">
+      <div class="num">02 · TRUST-BUILDING POSTS</div>
+      <h2>Trust &amp; story posts</h2>
+      <p class="intro">Build the connection that turns first-timers into regulars.</p>
+      <div class="grid">
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Instagram</span></div>
+          <div class="ph">🌱</div>
+          <div class="body"><p>Every bean we pour is ethically sourced and roasted right here in London 🌍 Great coffee should taste good <em>and</em> do good. That&rsquo;s the Maple &amp; Bean promise.</p><p class="tags">#EthicalCoffee #LocallyRoasted</p><p class="img-note">Image: close-up of fresh beans being scooped.</p></div>
+        </div>
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Facebook</span></div>
+          <div class="ph sage">👋</div>
+          <div class="body"><p>Meet Tom, the smile behind your morning flat white ☕ He knows the regulars&rsquo; orders off by heart — come say hi!</p><p class="tags">#MeetTheTeam #YourLocalCafe</p><p class="img-note">Image: a friendly barista portrait at the machine.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- service / menu -->
+    <section class="sec">
+      <div class="num">03 · MENU &amp; SERVICE POSTS</div>
+      <h2>Menu &amp; service explanation posts</h2>
+      <p class="intro">Show people exactly what you offer — and why they&rsquo;ll love it.</p>
+      <div class="grid">
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Instagram</span></div>
+          <div class="ph">🥛</div>
+          <div class="body"><p>Oat, almond, soy or coconut — all our plant milks are <strong>on the house</strong>, no cheeky surcharge here 🌿 Your coffee, your way.</p><p class="tags">#DairyFree #OatMilk #EalingCafe</p><p class="img-note">Image: a beautiful oat-milk latte with art.</p></div>
+        </div>
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Facebook</span></div>
+          <div class="ph sage">🍳</div>
+          <div class="body"><p>Brunch is served! 🥑 Our new weekend menu is here — from smashed avo to proper eggs benedict. Booking recommended for Saturdays.</p><p class="tags">#BrunchTime #EalingBrunch</p><p class="img-note">Image: a styled brunch spread from above.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- reviews + local -->
+    <section class="sec">
+      <div class="num">04 · REVIEW &amp; LOCAL POSTS</div>
+      <h2>Review &amp; local-awareness posts</h2>
+      <p class="intro">Turn happy customers and community pride into reach.</p>
+      <div class="grid">
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Instagram</span></div>
+          <div class="ph">⭐</div>
+          <div class="body"><p>&ldquo;Best flat white in Ealing, hands down.&rdquo; ⭐⭐⭐⭐⭐ Thank you Sarah — reviews like this make our day! 💛</p><p class="tags">#5Stars #HappyCustomers</p><p class="img-note">Image: a quote graphic over a coffee photo.</p></div>
+        </div>
+        <div class="post">
+          <div class="head"><span class="avatar">M&amp;B</span><b>Maple &amp; Bean</b><span class="plat">Facebook</span></div>
+          <div class="ph sage">📍</div>
+          <div class="body"><p>Proud to be Ealing&rsquo;s neighbourhood coffee spot 🧡 Whether it&rsquo;s your morning ritual or a catch-up with friends, there&rsquo;s always a seat for you here.</p><p class="tags">#Ealing #SupportLocal #W5</p><p class="img-note">Image: the cosy café interior, busy and warm.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- quick captions -->
+    <section class="sec">
+      <div class="num">05 · QUICK CAPTIONS</div>
+      <h2>Everyday caption ideas</h2>
+      <p class="intro">Drop-in captions for those days you just want to post a quick photo.</p>
+      <div class="captions">
+        <div class="cap">&ldquo;Monday called. We answered with a double shot. ☕&rdquo;</div>
+        <div class="cap">&ldquo;Some things are better hot — like our coffee and this weather isn&rsquo;t. ❄️&rdquo;</div>
+        <div class="cap">&ldquo;Friendly reminder: you deserve the good cake. 🍰&rdquo;</div>
+        <div class="cap">&ldquo;Tag the friend you&rsquo;re bringing here this weekend 👀&rdquo;</div>
+      </div>
+    </section>
+
+    <!-- reels -->
+    <section class="sec">
+      <div class="num">06 · SHORT VIDEO &amp; REEL IDEAS</div>
+      <h2>Reel &amp; short video scripts</h2>
+      <p class="intro">Quick, scroll-stopping video concepts that show off the café.</p>
+      <ul class="ideas">
+        <li>Satisfying latte-art pour, slow-mo, with a "which would you order?" caption.</li>
+        <li>"6am vs 9am" — the calm setup transforming into the morning rush.</li>
+        <li>"How we make our signature maple latte" — quick step-by-step.</li>
+        <li>A regular&rsquo;s order made start-to-finish in 15 seconds.</li>
+        <li>"Plant milk taste test" with the team — fun and shareable.</li>
+      </ul>
+    </section>
+
+    <!-- posting plan -->
+    <section class="sec">
+      <div class="num">07 · POSTING PLAN</div>
+      <h2>A simple weekly rhythm</h2>
+      <p class="intro">No need to overthink it — a light, repeatable schedule keeps the page active.</p>
+      <div class="plan">
+        <div class="day"><b>Mon</b><span>Motivational / coffee-quote caption</span></div>
+        <div class="day"><b>Wed</b><span>Offer or menu highlight</span></div>
+        <div class="day"><b>Fri</b><span>Behind-the-scenes reel</span></div>
+        <div class="day"><b>Sun</b><span>Review or local-love post</span></div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example Social Media Content Pack · prepared for the fictional "Maple &amp; Bean Coffee House" · built by <b>Local Business AI Hub</b><br>
+  The same monthly pack can be tailored to any local business and any platform.
+</footer>
+
+</body>
+</html>
