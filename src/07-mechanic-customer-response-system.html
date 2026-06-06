@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Customer Response System — RoadReady Mobile Mechanics (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Asap:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel:#222831;
+    --steel-2:#2d3640;
+    --paper:#f4f5f3;
+    --paper-2:#e9ebe7;
+    --orange:#f4742b;
+    --orange-deep:#d65f1c;
+    --blue:#3d6e8f;
+    --txt:#2c333b;
+    --muted:#76808a;
+    --line:rgba(34,40,49,.13);
+    --shadow:0 18px 46px -26px rgba(34,40,49,.5);
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Asap",system-ui,sans-serif;color:var(--txt);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Oswald",system-ui,sans-serif;text-transform:uppercase;letter-spacing:.02em;color:var(--steel);font-weight:600;line-height:1.05}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--steel);color:var(--paper);font-size:.82rem;text-align:center;padding:9px 16px}
+  .demo-bar b{color:var(--orange)}
+
+  .cover{background:var(--steel);color:var(--paper);padding:58px 0 50px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(244,116,43,.06) 0 1px,transparent 1px 16px)}
+  .cover .wrap{position:relative}
+  .kicker{font-family:"Asap";font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.76rem;color:var(--orange);margin-bottom:14px}
+  .cover h1{color:var(--paper);font-size:clamp(2.3rem,6vw,3.8rem)}
+  .cover .biz{font-family:"Asap";font-weight:600;opacity:.82;font-size:1.05rem;margin-top:8px;text-transform:none}
+  .cover .meta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  .cover .meta span{background:var(--steel-2);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px 14px;font-size:.85rem}
+
+  main{padding:20px 0 40px}
+  .sec{padding:34px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-family:"Oswald";color:var(--orange-deep);font-size:1rem;letter-spacing:.04em}
+  .sec h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:2px 0 6px}
+  .sec .intro{color:var(--muted);margin-bottom:20px;max-width:64ch}
+
+  .tmpls{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.tmpls{grid-template-columns:1fr}}
+  .t{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .t .head{display:flex;align-items:center;gap:8px;padding:11px 16px;background:var(--paper-2);border-bottom:1px solid var(--line)}
+  .t .head .lbl{font-family:"Oswald";font-size:.9rem;letter-spacing:.03em;color:var(--steel)}
+  .t .head .chan{margin-left:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--blue);padding:3px 9px;border-radius:999px}
+  .t .head .chan.sms{background:var(--orange-deep)}
+  .t .body{padding:15px 17px}
+  .t .body p{font-size:.94rem}
+
+  .tips{background:var(--steel);color:var(--paper);border-radius:16px;padding:24px 26px;margin-top:8px}
+  .tips h3{color:var(--orange);font-size:1.1rem;margin-bottom:14px}
+  .tips ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  @media(max-width:720px){.tips ul{grid-template-columns:1fr}}
+  .tips li{display:flex;gap:9px;font-size:.93rem;opacity:.92}
+  .tips li::before{content:"🔧";font-size:.85rem}
+
+  footer{background:var(--steel);color:var(--paper);text-align:center;padding:30px 20px;font-size:.82rem;opacity:.85}
+  footer b{color:var(--orange)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — the same response system can be built for <b>any</b> business</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">AI Customer Response System</div>
+    <h1>Never lose a customer to a slow reply</h1>
+    <div class="biz">Prepared for: RoadReady Mobile Mechanics · covering West London</div>
+    <div class="meta">
+      <span>🔧 Mobile mechanic / garage</span>
+      <span>💬 SMS · WhatsApp · email</span>
+      <span>⚡ Copy, tweak, send</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="sec">
+      <div class="num">01</div>
+      <h2>New enquiry replies</h2>
+      <p class="intro">Fast, friendly first responses that capture the details you need.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">First reply</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], thanks for getting in touch with RoadReady! 🔧 Happy to help — pop me your car&rsquo;s make, model and reg, plus what&rsquo;s happening with it, and I&rsquo;ll come back with a price and the soonest I can get to you.</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">Out-of-hours auto-reply</span><span class="chan sms">Text</span></div><div class="body"><p>Thanks for your message! I&rsquo;m out on jobs right now but I&rsquo;ll get back to you first thing. If it&rsquo;s an urgent breakdown, give me a call on [number].</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">02</div>
+      <h2>Missed call messages</h2>
+      <p class="intro">Turn a missed call into a booking before they ring the next garage.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">Missed call follow-up</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], sorry I missed your call — I was under a bonnet! 🔧 Ring me back on [number] or text me what you need and I&rsquo;ll get you sorted.</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">After-hours missed call</span><span class="chan sms">Text</span></div><div class="body"><p>Hi, sorry I couldn&rsquo;t grab your call just now. I&rsquo;ll be free to talk after [time] — or reply here with what&rsquo;s up and I&rsquo;ll help straight away.</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">03</div>
+      <h2>Quote follow-ups</h2>
+      <p class="intro">A gentle nudge keeps quotes from going cold — most jobs are won on the follow-up.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">First follow-up</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], just checking you got the quote for your [car]? Happy to answer any questions or get you booked in — just say the word. 👍</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">Second follow-up</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], still happy to help with your [car] whenever suits you. I&rsquo;ve a couple of slots free this week if you&rsquo;d like one before they go?</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">04</div>
+      <h2>Booking confirmations</h2>
+      <p class="intro">Clear confirmations that cut no-shows and build trust.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">Confirmation</span><span class="chan sms">Text</span></div><div class="body"><p>You&rsquo;re booked in, [Name]! ✅ [Service] on [date] at [time], at [address]. I&rsquo;ll text when I&rsquo;m on my way. If anything changes, just let me know.</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">Day-before reminder</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], quick reminder I&rsquo;m booked to see your [car] tomorrow at [time]. Please make sure I can access it. See you then! 🔧</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">05</div>
+      <h2>Review requests</h2>
+      <p class="intro">Ask while they&rsquo;re happy — right after a job well done.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">Review request</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], hope the [car]&rsquo;s running sweet! 🚗 If you&rsquo;ve a sec, a quick Google review really helps a small local business like mine: [link]. Cheers!</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">Review request — email</span><span class="chan">Email</span></div><div class="body"><p>Hi [Name], thanks again for trusting RoadReady with your [car]. Reviews make a huge difference to a one-man operation — if you were happy, I&rsquo;d be really grateful for a quick review here: [link]. Thanks! — [Your name]</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">06</div>
+      <h2>Payment reminders</h2>
+      <p class="intro">Get paid on time without the awkwardness — a friendly nudge first, a firmer one if needed.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">Gentle reminder</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], hope all&rsquo;s well and the [car]&rsquo;s running great! Just a friendly nudge that the invoice for your recent work ([amount]) is due. You can pay by [methods]. Thanks!</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">Firmer reminder</span><span class="chan">Email</span></div><div class="body"><p>Hi [Name], just following up on invoice [#] for [amount], now [x] days overdue. Could you settle it by [date]? If there&rsquo;s any problem, let me know and we&rsquo;ll sort something out. Thanks, [Your name].</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">07</div>
+      <h2>Customer reactivation</h2>
+      <p class="intro">Win back past customers and remind them when they&rsquo;re due — easy repeat business.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">Service-due reminder</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], it&rsquo;s been about a year since I last looked at your [car] — it may be due a service! Want me to pop you in the diary? Returning customers get [offer]. 🔧</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">We miss you</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], just checking in — how&rsquo;s the [car] doing? If it needs anything, you know where I am. Always happy to help my regulars first. 👍</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">08</div>
+      <h2>Complaint responses</h2>
+      <p class="intro">Handle problems calmly and quickly — it&rsquo;s how good reputations are protected.</p>
+      <div class="tmpls">
+        <div class="t"><div class="head"><span class="lbl">First response</span><span class="chan sms">Text</span></div><div class="body"><p>Hi [Name], I&rsquo;m really sorry to hear that — that&rsquo;s not the service I want to give. I&rsquo;d like to put it right; can you give me a call on [number] so I can understand what&rsquo;s happened and sort it for you?</p></div></div>
+        <div class="t"><div class="head"><span class="lbl">Resolution follow-up</span><span class="chan">Email</span></div><div class="body"><p>Hi [Name], thanks for talking it through with me. As promised, [what you&rsquo;ll do]. I really appreciate your patience and the chance to make it right — your trust means a lot.</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="tips">
+        <h3>How to use these well</h3>
+        <ul>
+          <li>Reply fast — even a holding text beats silence.</li>
+          <li>Always use their first name and their car.</li>
+          <li>Keep it warm and human; light emojis are fine.</li>
+          <li>Save them as phone shortcuts to send in seconds.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example AI Customer Response System · prepared for the fictional "RoadReady Mobile Mechanics" · built by <b>Local Business AI Hub</b><br>
+  The same set can be tailored to any business&rsquo;s services, voice and customers.
+</footer>
+
+</body>
+</html>
