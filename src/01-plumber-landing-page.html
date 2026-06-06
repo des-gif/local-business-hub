@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Halstead Plumbing &amp; Heating — Isleworth &amp; West London</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1b2b;
+    --ink-2:#102a40;
+    --paper:#f7f4ec;
+    --paper-2:#efe9db;
+    --amber:#ff8c3b;
+    --amber-deep:#e9712a;
+    --steel:#3a93c9;
+    --line:rgba(11,27,43,.12);
+    --shadow:0 18px 50px -22px rgba(11,27,43,.45);
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:"Bricolage Grotesque","Hanken Grotesk",sans-serif;line-height:1.02;letter-spacing:-.02em;font-weight:800}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:1rem;padding:14px 24px;border-radius:999px;border:0;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;font-family:inherit}
+  .btn-amber{background:linear-gradient(180deg,var(--amber),var(--amber-deep));color:#1b0e02;box-shadow:0 12px 26px -10px rgba(233,113,42,.7)}
+  .btn-amber:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent;border:1.5px solid rgba(247,244,236,.4);color:var(--paper)}
+  .btn-ghost:hover{background:rgba(247,244,236,.1)}
+  .btn-dark{background:var(--ink);color:var(--paper)}
+  .btn-dark:hover{transform:translateY(-2px)}
+
+  /* demo ribbon */
+  .demo-bar{background:var(--ink);color:var(--paper);font-size:.82rem;text-align:center;padding:8px 16px;letter-spacing:.02em}
+  .demo-bar b{color:var(--amber)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(247,244,236,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:"Bricolage Grotesque";font-weight:800;font-size:1.18rem;letter-spacing:-.02em}
+  .brand .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(150deg,var(--steel),var(--ink-2));display:grid;place-items:center;color:#fff;flex:none}
+  .nav-links{display:flex;gap:26px;font-weight:600;font-size:.95rem}
+  .nav-links a{opacity:.78;transition:opacity .15s}
+  .nav-links a:hover{opacity:1}
+  .nav-cta{display:flex;align-items:center;gap:14px}
+  .phone{font-weight:700;font-family:"Bricolage Grotesque";font-size:1.05rem;white-space:nowrap}
+  @media(max-width:880px){.nav-links{display:none}.phone{display:none}}
+
+  /* hero */
+  .hero{position:relative;background:radial-gradient(120% 120% at 80% -10%,#19405e 0%,var(--ink) 55%);color:var(--paper);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px;opacity:.6}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:74px 0 86px}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;padding:54px 0 60px;gap:30px}}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--amber)}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.3rem);margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--amber)}
+  .hero p.lead{font-size:1.18rem;opacity:.86;max-width:30ch;margin-bottom:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+  .trust-row{display:flex;gap:26px;flex-wrap:wrap;align-items:center;font-size:.92rem;opacity:.9}
+  .trust-row .t{display:flex;align-items:center;gap:8px}
+  .stars{color:var(--amber);letter-spacing:2px}
+
+  /* hero card */
+  .hero-card{background:rgba(247,244,236,.07);border:1px solid rgba(247,244,236,.16);border-radius:22px;padding:24px;backdrop-filter:blur(6px);box-shadow:var(--shadow)}
+  .hero-card h3{font-size:1.15rem;margin-bottom:4px}
+  .hero-card .sub{font-size:.86rem;opacity:.7;margin-bottom:18px}
+  .badge-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .badge{background:rgba(247,244,236,.06);border:1px solid rgba(247,244,236,.12);border-radius:13px;padding:14px}
+  .badge .n{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.6rem;color:var(--amber);line-height:1}
+  .badge .l{font-size:.8rem;opacity:.78;margin-top:5px}
+
+  /* sections */
+  section.block{padding:78px 0}
+  .sec-head{max-width:640px;margin-bottom:44px}
+  .sec-head .eyebrow{color:var(--amber-deep)}
+  .sec-head .eyebrow::before{background:var(--amber-deep)}
+  .sec-head h2{font-size:clamp(2rem,4vw,2.9rem);margin-bottom:14px}
+  .sec-head p{font-size:1.08rem;opacity:.78}
+
+  /* services */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:880px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:transform .18s ease,box-shadow .18s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .card .ico{width:46px;height:46px;border-radius:12px;background:var(--paper-2);display:grid;place-items:center;margin-bottom:16px;font-size:1.4rem}
+  .card h3{font-size:1.2rem;margin-bottom:7px}
+  .card p{font-size:.96rem;opacity:.76}
+
+  /* why band */
+  .why{background:var(--ink-2);color:var(--paper)}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:880px){.why-grid{grid-template-columns:1fr 1fr;gap:24px}}
+  .why-item .ico{font-size:1.7rem;margin-bottom:10px}
+  .why-item h3{font-size:1.12rem;margin-bottom:6px}
+  .why-item p{font-size:.92rem;opacity:.78}
+
+  /* reviews */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:880px){.reviews{grid-template-columns:1fr}}
+  .review{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px}
+  .review .stars{font-size:1.05rem;margin-bottom:10px}
+  .review p{font-size:.98rem;margin-bottom:16px}
+  .review .who{display:flex;align-items:center;gap:11px}
+  .review .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(150deg,var(--steel),var(--ink-2));color:#fff;display:grid;place-items:center;font-weight:700;font-family:"Bricolage Grotesque"}
+  .review .who b{font-size:.94rem}
+  .review .who span{font-size:.82rem;opacity:.6;display:block}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  .q{border:1px solid var(--line);border-radius:13px;background:#fff;margin-bottom:12px;overflow:hidden}
+  .q summary{list-style:none;cursor:pointer;padding:18px 22px;font-weight:700;font-family:"Bricolage Grotesque";font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .q summary::-webkit-details-marker{display:none}
+  .q summary::after{content:"+";font-size:1.5rem;color:var(--amber-deep);transition:transform .2s}
+  .q[open] summary::after{transform:rotate(45deg)}
+  .q .a{padding:0 22px 20px;opacity:.8;font-size:.98rem}
+
+  /* form / cta */
+  .contact{background:radial-gradient(120% 120% at 10% 0%,#19405e,var(--ink));color:var(--paper)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+  @media(max-width:880px){.contact-grid{grid-template-columns:1fr;gap:30px}}
+  .contact h2{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:14px}
+  .contact .lead{opacity:.85;font-size:1.08rem;margin-bottom:24px}
+  .contact ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .contact ul li{display:flex;align-items:center;gap:11px;opacity:.92}
+  .contact ul li::before{content:"✓";color:var(--amber);font-weight:800}
+  form{background:rgba(247,244,236,.06);border:1px solid rgba(247,244,236,.16);border-radius:20px;padding:26px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.82rem;font-weight:600;opacity:.8;margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;padding:13px 15px;border-radius:11px;border:1px solid rgba(247,244,236,.22);background:rgba(11,27,43,.35);color:var(--paper);font-family:inherit;font-size:1rem}
+  .field input::placeholder,.field textarea::placeholder{color:rgba(247,244,236,.45)}
+  .field textarea{resize:vertical;min-height:84px}
+  form .btn{width:100%;justify-content:center;margin-top:6px}
+  .thanks{display:none;text-align:center;padding:20px 10px}
+  .thanks .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.5rem;color:var(--amber);margin-bottom:8px}
+
+  /* footer */
+  footer{background:var(--ink);color:var(--paper);padding:46px 0 30px}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-start}
+  .foot-grid .brand{color:var(--paper)}
+  .foot-note{opacity:.6;font-size:.85rem;margin-top:8px;max-width:34ch}
+  .foot-links{display:flex;gap:30px;flex-wrap:wrap;font-size:.92rem;opacity:.85}
+  .foot-bottom{border-top:1px solid rgba(247,244,236,.14);margin-top:30px;padding-top:18px;font-size:.8rem;opacity:.55;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* entrance animation */
+  .reveal{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}.d4{animation-delay:.35s}.d5{animation-delay:.45s}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — the same can be built for <b>any</b> local business</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h6v4H3z"/><path d="M9 9h6"/><path d="M15 5v8a4 4 0 0 0 4 4h2"/><path d="M19 21v-4"/></svg>
+      </span>
+      Halstead Plumbing &amp; Heating
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why us</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQs</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="phone">020 8946 0117</span>
+      <a href="#contact" class="btn btn-amber">Get a free quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow reveal d1">Gas Safe registered · Isleworth &amp; West London</span>
+        <h1 class="reveal d2">Leak, breakdown or <em>no hot water?</em> We&rsquo;ll sort it&nbsp;today.</h1>
+        <p class="lead reveal d3">Friendly, fully-qualified plumbers and heating engineers. Fast call-outs, fair fixed prices, and no mess left behind.</p>
+        <div class="hero-cta reveal d4">
+          <a href="#contact" class="btn btn-amber">Book a visit ›</a>
+          <a href="tel:02089460117" class="btn btn-ghost">📞 Call 020 8946 0117</a>
+        </div>
+        <div class="trust-row reveal d5">
+          <span class="t"><span class="stars">★★★★★</span> 4.9 / 5 (210 reviews)</span>
+          <span class="t">⚡ Same-day emergency call-outs</span>
+        </div>
+      </div>
+      <div class="hero-card reveal d4">
+        <h3>Quick quote request</h3>
+        <p class="sub">Tell us what&rsquo;s wrong — we&rsquo;ll call you straight back.</p>
+        <div class="badge-grid">
+          <div class="badge"><div class="n">25+</div><div class="l">Years on the tools</div></div>
+          <div class="badge"><div class="n">60min</div><div class="l">Avg. emergency arrival</div></div>
+          <div class="badge"><div class="n">£0</div><div class="l">Call-out fee on jobs</div></div>
+          <div class="badge"><div class="n">12mo</div><div class="l">Workmanship guarantee</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What we do</span>
+        <h2>One local team for every plumbing &amp; heating job</h2>
+        <p>From a dripping tap to a full bathroom or a new boiler — sorted properly, first time.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="ico">🚿</div><h3>Leaks &amp; repairs</h3><p>Burst pipes, dripping taps, running toilets and water damage — found fast and fixed for good.</p></div>
+        <div class="card"><div class="ico">🔥</div><h3>Boilers &amp; heating</h3><p>Boiler repairs, servicing, replacements and radiator problems. Gas Safe certified.</p></div>
+        <div class="card"><div class="ico">🛁</div><h3>Bathrooms</h3><p>Full and partial bathroom installations, fitted neatly and finished to a high standard.</p></div>
+        <div class="card"><div class="ico">🚨</div><h3>Emergency call-outs</h3><p>No hot water or a flood? Same-day response across Isleworth and West London.</p></div>
+        <div class="card"><div class="ico">🚰</div><h3>Taps &amp; fixtures</h3><p>Kitchen and bathroom taps, showers, sinks and outdoor taps supplied and fitted.</p></div>
+        <div class="card"><div class="ico">🛡️</div><h3>Powerflush &amp; servicing</h3><p>Keep your heating efficient and warm with planned servicing and system powerflushes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="block why" id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" style="color:var(--amber)">Why choose us</span>
+        <h2 style="color:var(--paper)">Trusted in your area for over 25 years</h2>
+        <p style="color:rgba(247,244,236,.8)">Local, reliable and properly qualified — the plumber your neighbours already recommend.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-item"><div class="ico">✅</div><h3>Gas Safe registered</h3><p>Fully certified and insured for your peace of mind on every gas job.</p></div>
+        <div class="why-item"><div class="ico">💷</div><h3>Fixed, fair prices</h3><p>Clear quotes before we start. No surprises, no hidden extras.</p></div>
+        <div class="why-item"><div class="ico">⏱️</div><h3>On time, every time</h3><p>We turn up when we say we will — and call ahead so you&rsquo;re never waiting in.</p></div>
+        <div class="why-item"><div class="ico">🧹</div><h3>Clean &amp; tidy</h3><p>We protect your home and leave it exactly as we found it. Minus the leak.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="block" id="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Happy customers</span>
+        <h2>What local people say</h2>
+      </div>
+      <div class="reviews">
+        <div class="review"><div class="stars">★★★★★</div><p>&ldquo;Boiler packed in on the coldest week of the year. Halstead came out the same morning and had us warm again by lunch. Brilliant.&rdquo;</p><div class="who"><span class="av">SM</span><div><b>Sarah M.</b><span>Osterley</span></div></div></div>
+        <div class="review"><div class="stars">★★★★★</div><p>&ldquo;Honest, tidy and reasonably priced. Explained everything and didn&rsquo;t try to sell me a new boiler I didn&rsquo;t need. Highly recommend.&rdquo;</p><div class="who"><span class="av">DP</span><div><b>David P.</b><span>Hounslow</span></div></div></div>
+        <div class="review"><div class="stars">★★★★★</div><p>&ldquo;New bathroom fitted beautifully. On time every day, lovely team, and the finish is spotless. Couldn&rsquo;t be happier.&rdquo;</p><div class="who"><span class="av">AK</span><div><b>Aisha K.</b><span>Isleworth</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" id="faq" style="background:var(--paper-2)">
+    <div class="wrap">
+      <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
+        <span class="eyebrow" style="justify-content:center">Good to know</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        <details class="q"><summary>Do you charge a call-out fee?</summary><div class="a">No call-out fee when we carry out the work. For emergencies we&rsquo;ll always confirm any charges with you before we begin.</div></details>
+        <details class="q"><summary>How quickly can you come out?</summary><div class="a">For emergencies we aim to be with you the same day, often within the hour across Isleworth and West London. Non-urgent jobs are usually booked within 24–48 hours.</div></details>
+        <details class="q"><summary>Are you Gas Safe registered?</summary><div class="a">Yes — all our heating engineers are Gas Safe registered and fully insured. We&rsquo;re happy to show our credentials on arrival.</div></details>
+        <details class="q"><summary>Do you give quotes before starting?</summary><div class="a">Always. You&rsquo;ll get a clear, fixed price up front so you know exactly where you stand before any work begins.</div></details>
+        <details class="q"><summary>What areas do you cover?</summary><div class="a">Isleworth, Hounslow, Osterley, Brentford, Twickenham and the surrounding West London areas. Not sure? Just give us a call.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FORM -->
+  <section class="block contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <span class="eyebrow" style="color:var(--amber)">Get in touch</span>
+        <h2>Get your free quote today</h2>
+        <p class="lead">Fill in the form and we&rsquo;ll call you straight back — or pick up the phone, we&rsquo;re always happy to help.</p>
+        <ul>
+          <li>Same-day emergency response</li>
+          <li>Free, no-obligation quotes</li>
+          <li>12-month workmanship guarantee</li>
+          <li>Friendly local team you can trust</li>
+        </ul>
+        <p style="margin-top:22px;font-family:'Bricolage Grotesque';font-weight:800;font-size:1.5rem">📞 020 8946 0117</p>
+      </div>
+      <form id="quoteForm" onsubmit="return false;">
+        <div id="formInner">
+          <div class="field"><label>Your name</label><input type="text" placeholder="e.g. Sarah Mills" required></div>
+          <div class="field"><label>Phone number</label><input type="tel" placeholder="07700 900000" required></div>
+          <div class="field"><label>What do you need?</label>
+            <select>
+              <option>Emergency repair</option>
+              <option>Boiler or heating</option>
+              <option>Bathroom installation</option>
+              <option>Leak / dripping tap</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field"><label>Tell us a little more</label><textarea placeholder="Briefly describe the problem..."></textarea></div>
+          <button class="btn btn-amber" onclick="document.getElementById('formInner').style.display='none';document.getElementById('formThanks').style.display='block';">Request my callback ›</button>
+        </div>
+        <div class="thanks" id="formThanks">
+          <div class="big">Thank you! 🎉</div>
+          <p style="opacity:.85">This is a demo form — in a live site, this enquiry would land straight in the business&rsquo;s inbox or dashboard.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h6v4H3z"/><path d="M9 9h6"/><path d="M15 5v8a4 4 0 0 0 4 4h2"/><path d="M19 21v-4"/></svg></span>Halstead Plumbing &amp; Heating</a>
+        <p class="foot-note">Gas Safe registered plumbers &amp; heating engineers serving Isleworth and West London.</p>
+      </div>
+      <div class="foot-links">
+        <a href="#services">Services</a>
+        <a href="#why">Why us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Free quote</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Halstead Plumbing &amp; Heating (demo) · Isleworth, London</span>
+      <span>Example landing page · Local Business AI Hub</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
