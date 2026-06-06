@@ -66,21 +66,24 @@ button{font-family:inherit;}
 /* ===================================
    HERO
    =================================== */
-.hero{padding:80px 0 64px;text-align:center;background:linear-gradient(160deg,#0f172a 0%,#1e3a8a 45%,#065f46 100%);}
-.hero .container{max-width:880px;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:28px;}
+.hero{padding:96px 0 88px;text-align:center;background:linear-gradient(160deg,#0f172a 0%,#1e3a8a 45%,#065f46 100%);}
+.hero .container{max-width:780px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:32px;}
 .badge-dot{width:7px;height:7px;border-radius:50%;background:var(--green-m);animation:pulse 2s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
-.hero h1{font-size:58px;font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.03em;margin-bottom:20px;}
+.hero h1{font-size:54px;font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.03em;margin-bottom:28px;}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,#34d399,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-size:18px;color:rgba(255,255,255,.75);max-width:640px;margin:0 auto 36px;line-height:1.65;}
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:52px;}
-.hero-proof{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;}
-.proof-item{text-align:center;}
-.proof-item strong{display:block;font-size:28px;font-weight:800;color:#fff;}
-.proof-item span{font-size:12px;color:rgba(255,255,255,.55);font-weight:500;}
-.proof-div{width:1px;height:32px;background:rgba(255,255,255,.15);}
-@media(max-width:640px){.hero h1{font-size:36px;}.hero-sub{font-size:16px;}.proof-div{display:none;}}
+.hero-lead{font-size:20px;font-weight:600;color:rgba(255,255,255,.92);max-width:680px;margin:0 auto 28px;line-height:1.6;}
+.hero-body{max-width:640px;margin:0 auto 32px;text-align:left;}
+.hero-body p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:16px;}
+.hero-body p:last-child{margin-bottom:0;}
+.hero-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.hero-pill{padding:6px 16px;border-radius:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:13px;font-weight:600;color:rgba(255,255,255,.88);}
+.hero-close{font-size:18px;font-weight:700;color:#fff;max-width:580px;margin:0 auto 40px;line-height:1.5;}
+.hero-actions{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;}
+.hero-examples-link{font-size:14px;font-weight:600;color:rgba(255,255,255,.65);transition:color .15s;}
+.hero-examples-link:hover{color:#fff;}
+@media(max-width:640px){.hero{padding:64px 0 56px;}.hero h1{font-size:34px;}.hero-lead{font-size:17px;}.hero-body{text-align:center;}.hero-close{font-size:16px;}}
 
 /* ===================================
    STEPS
