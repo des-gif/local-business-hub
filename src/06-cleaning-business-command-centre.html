@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Business Command Centre — Sparkle &amp; Shine Cleaning (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef2f4;
+    --card:#ffffff;
+    --ink:#0f2e2c;
+    --teal:#0f766e;
+    --teal-2:#0d9488;
+    --aqua:#2dd4bf;
+    --txt:#274a47;
+    --muted:#7d918e;
+    --line:#e2e9e8;
+    --green:#16a34a;
+    --amber:#d97706;
+    --red:#dc2626;
+    --blue:#2563eb;
+    --shadow:0 16px 40px -24px rgba(15,46,44,.4);
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--txt);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{color:var(--ink);letter-spacing:-.01em}
+  .demo-bar{background:var(--ink);color:#cffafe;font-size:.8rem;text-align:center;padding:8px 16px}
+  .demo-bar b{color:var(--aqua)}
+
+  .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+  @media(max-width:820px){.app{grid-template-columns:1fr}}
+
+  /* sidebar */
+  .side{background:var(--ink);color:#d6efe c;padding:22px 16px;color:#cdebe6}
+  .logo{display:flex;align-items:center;gap:10px;padding:6px 8px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+  .logo .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(140deg,var(--aqua),var(--teal));display:grid;place-items:center;color:#04201d;font-weight:800;flex:none}
+  .logo b{color:#fff;font-size:1rem;line-height:1.15;font-weight:800}
+  .logo span{font-size:.74rem;color:#7fd1c6;display:block;font-weight:600}
+  .nav{display:flex;flex-direction:column;gap:3px}
+  .nav button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:none;border:0;color:#a7cfc9;font-family:inherit;font-size:.95rem;font-weight:600;padding:11px 12px;border-radius:10px;cursor:pointer;transition:.15s}
+  .nav button:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav button.active{background:var(--teal-2);color:#fff}
+  .nav .ico{font-size:1.05rem}
+  @media(max-width:820px){.side{position:sticky;top:0;z-index:10}.nav{flex-direction:row;overflow-x:auto;gap:6px}.logo{display:none}.nav button{white-space:nowrap;padding:9px 12px}.nav .lbl{display:none}.nav .ico{font-size:1.2rem}}
+
+  /* main */
+  .main{padding:26px 30px 60px}
+  @media(max-width:820px){.main{padding:20px 18px 50px}}
+  .top{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+  .top h1{font-size:1.6rem}
+  .top .sub{color:var(--muted);font-size:.92rem}
+  .top .date{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:.85rem;font-weight:600;color:var(--teal)}
+
+  .view{display:none}
+  .view.active{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* kpi */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
+  @media(max-width:980px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .kpi .l{font-size:.78rem;color:var(--muted);font-weight:600}
+  .kpi .v{font-size:1.7rem;font-weight:800;color:var(--ink);margin-top:3px;line-height:1}
+  .kpi .d{font-size:.76rem;font-weight:700;margin-top:5px}
+  .kpi .up{color:var(--green)}
+
+  .row2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+  @media(max-width:980px){.row2{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:16px}
+  .panel h3{font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .panel h3 .pill{margin-left:auto;font-size:.72rem;font-weight:700;color:var(--teal);background:#e6f5f3;padding:3px 9px;border-radius:999px}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th{text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:11px 10px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:0}
+  td b{color:var(--ink)}
+  .badge{display:inline-block;font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:999px}
+  .b-new{background:#dbeafe;color:#1d4ed8}
+  .b-quoted{background:#fef3c7;color:#b45309}
+  .b-won{background:#dcfce7;color:#15803d}
+  .b-lost{background:#fee2e2;color:#b91c1c}
+  .b-sent{background:#e0f2fe;color:#0369a1}
+  .b-todo{background:#f3f4f6;color:#4b5563}
+  .b-done{background:#dcfce7;color:#15803d}
+  .b-sched{background:#ede9fe;color:#6d28d9}
+
+  /* priorities / reminders */
+  .lst{list-style:none;display:grid;gap:9px}
+  .lst li{display:flex;align-items:center;gap:10px;font-size:.92rem;padding:9px 11px;background:#f7faf9;border:1px solid var(--line);border-radius:10px}
+  .lst li .dot{width:8px;height:8px;border-radius:50%;background:var(--aqua);flex:none}
+
+  /* tasks with toggle */
+  .task{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;cursor:pointer;user-select:none;transition:.12s}
+  .task:hover{border-color:var(--teal-2)}
+  .task .box{width:20px;height:20px;border-radius:6px;border:2px solid var(--muted);display:grid;place-items:center;flex:none;color:#fff;font-size:.8rem;transition:.12s}
+  .task.done .box{background:var(--teal-2);border-color:var(--teal-2)}
+  .task.done span{text-decoration:line-through;color:var(--muted)}
+  .task .meta{margin-left:auto;font-size:.78rem;color:var(--muted)}
+
+  /* goals */
+  .goal{margin-bottom:16px}
+  .goal .gt{display:flex;justify-content:space-between;font-size:.9rem;font-weight:600;margin-bottom:6px}
+  .goal .gt span{color:var(--muted);font-weight:600}
+  .bar{height:9px;background:#eaf1f0;border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--aqua));border-radius:99px}
+
+  /* mini perf bars */
+  .perf{display:flex;align-items:flex-end;gap:10px;height:120px;padding-top:10px}
+  .perf .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .perf .col i{width:100%;max-width:34px;background:linear-gradient(180deg,var(--aqua),var(--teal));border-radius:6px 6px 0 0}
+  .perf .col span{font-size:.74rem;color:var(--muted);font-weight:600}
+
+  /* reputation templates */
+  .tmpl{background:#f7faf9;border:1px solid var(--line);border-left:4px solid var(--teal-2);border-radius:10px;padding:13px 15px;margin-bottom:10px}
+  .tmpl .h{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+  .tmpl p{font-size:.9rem}
+  .formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  @media(max-width:600px){.formrow{grid-template-columns:1fr}}
+  .formrow input,.fb textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.9rem;background:#f7faf9}
+  .fb textarea{min-height:70px;resize:vertical;margin-bottom:10px}
+  .stars-in{font-size:1.3rem;color:var(--amber);letter-spacing:3px}
+  .btn{background:var(--teal-2);color:#fff;border:0;border-radius:9px;padding:10px 18px;font-family:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — a working command centre like this can be tailored for <b>any</b> business · click around!</div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="logo">
+      <span class="mark">S</span>
+      <div><b>Sparkle &amp; Shine</b><span>Command Centre</span></div>
+    </div>
+    <nav class="nav">
+      <button class="active" data-view="overview"><span class="ico">📊</span><span class="lbl">Overview</span></button>
+      <button data-view="leads"><span class="ico">📥</span><span class="lbl">Leads</span></button>
+      <button data-view="quotes"><span class="ico">💷</span><span class="lbl">Quotes</span></button>
+      <button data-view="tasks"><span class="ico">✅</span><span class="lbl">Tasks &amp; Goals</span></button>
+      <button data-view="marketing"><span class="ico">📣</span><span class="lbl">Marketing</span></button>
+      <button data-view="reputation"><span class="ico">⭐</span><span class="lbl">Reputation</span></button>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <section class="view active" id="overview">
+      <div class="top"><div><h1>Good morning, Dawn 👋</h1><div class="sub">Here&rsquo;s what needs your attention today.</div></div><div class="date">Week of 9 June</div></div>
+      <div class="kpis">
+        <div class="kpi"><div class="l">New enquiries</div><div class="v">7</div><div class="d up">▲ 3 this week</div></div>
+        <div class="kpi"><div class="l">Quotes out</div><div class="v">£3,240</div><div class="d">5 awaiting reply</div></div>
+        <div class="kpi"><div class="l">Jobs booked</div><div class="v">12</div><div class="d up">▲ on track</div></div>
+        <div class="kpi"><div class="l">Revenue (June)</div><div class="v">£8,450</div><div class="d up">▲ 18%</div></div>
+        <div class="kpi"><div class="l">Avg rating</div><div class="v">4.9★</div><div class="d">62 reviews</div></div>
+      </div>
+      <div class="row2">
+        <div>
+          <div class="panel"><h3>⚡ Next actions <span class="pill">today</span></h3>
+            <ul class="lst">
+              <li><span class="dot"></span>Call Maria L. back about her end-of-tenancy quote</li>
+              <li><span class="dot"></span>Chase Greenfield Offices on the weekly-clean quote (sent 5 days ago)</li>
+              <li><span class="dot"></span>Send invoice to The Oak Café</li>
+              <li><span class="dot"></span>Request reviews from last week&rsquo;s 3 completed jobs</li>
+            </ul>
+          </div>
+          <div class="panel"><h3>📈 Enquiries — last 4 weeks</h3>
+            <div class="perf">
+              <div class="col"><i style="height:45%"></i><span>W1</span></div>
+              <div class="col"><i style="height:62%"></i><span>W2</span></div>
+              <div class="col"><i style="height:55%"></i><span>W3</span></div>
+              <div class="col"><i style="height:88%"></i><span>W4</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="panel"><h3>🎯 This week&rsquo;s priorities</h3>
+            <ul class="lst">
+              <li><span class="dot"></span>Follow up all 5 open quotes</li>
+              <li><span class="dot"></span>Post 2 before/after photos</li>
+              <li><span class="dot"></span>Confirm Friday&rsquo;s office deep-clean</li>
+              <li><span class="dot"></span>Order more supplies</li>
+            </ul>
+          </div>
+          <div class="panel"><h3>💬 Reputation snapshot</h3>
+            <p style="font-size:.9rem;color:var(--muted)">2 new 5★ reviews this week · 1 review awaiting your reply · 3 review requests to send.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADS -->
+    <section class="view" id="leads">
+      <div class="top"><div><h1>Leads &amp; enquiries</h1><div class="sub">Every new enquiry, tracked from first contact to booked job.</div></div></div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>Customer</th><th>Service</th><th>Source</th><th>Status</th><th>Follow-up</th><th>Next action</th></tr></thead>
+          <tbody>
+            <tr><td><b>Maria Lopez</b></td><td>End-of-tenancy clean</td><td>Website form</td><td><span class="badge b-new">New</span></td><td>Today</td><td>Call to quote</td></tr>
+            <tr><td><b>Greenfield Offices</b></td><td>Weekly office clean</td><td>Referral</td><td><span class="badge b-quoted">Quoted</span></td><td>12 Jun</td><td>Chase quote</td></tr>
+            <tr><td><b>James Okafor</b></td><td>One-off deep clean</td><td>Google</td><td><span class="badge b-won">Won</span></td><td>—</td><td>Schedule job</td></tr>
+            <tr><td><b>The Oak Café</b></td><td>Daily clean (contract)</td><td>Walk-in</td><td><span class="badge b-won">Won</span></td><td>—</td><td>Send invoice</td></tr>
+            <tr><td><b>R. Singh</b></td><td>Carpet clean</td><td>Facebook</td><td><span class="badge b-lost">Lost</span></td><td>—</td><td>Add to newsletter</td></tr>
+            <tr><td><b>Priya Nair</b></td><td>Fortnightly home clean</td><td>Google</td><td><span class="badge b-new">New</span></td><td>Today</td><td>Send quote</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section class="view" id="quotes">
+      <div class="top"><div><h1>Quote tracker</h1><div class="sub">£3,240 in quotes out — don&rsquo;t let them go cold.</div></div></div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>Customer</th><th>Job</th><th>Value</th><th>Status</th><th>Follow-up</th></tr></thead>
+          <tbody>
+            <tr><td><b>Greenfield Offices</b></td><td>Weekly office clean</td><td>£480/mo</td><td><span class="badge b-sent">Sent</span></td><td>12 Jun</td></tr>
+            <tr><td><b>Maria Lopez</b></td><td>End-of-tenancy</td><td>£180</td><td><span class="badge b-sent">Sent</span></td><td>Today</td></tr>
+            <tr><td><b>Priya Nair</b></td><td>Fortnightly home clean</td><td>£70/visit</td><td><span class="badge b-new">Drafting</span></td><td>Today</td></tr>
+            <tr><td><b>The Oak Café</b></td><td>Daily clean</td><td>£900/mo</td><td><span class="badge b-won">Won</span></td><td>—</td></tr>
+            <tr><td><b>R. Singh</b></td><td>Carpet clean</td><td>£140</td><td><span class="badge b-lost">Lost</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section class="view" id="tasks">
+      <div class="top"><div><h1>Tasks &amp; goals</h1><div class="sub">Tick things off — click a task to mark it done.</div></div></div>
+      <div class="row2">
+        <div class="panel"><h3>✅ Task tracker</h3>
+          <div class="task" onclick="this.classList.toggle('done')"><span class="box">✓</span><span>Follow up Greenfield quote</span><span class="meta">Today</span></div>
+          <div class="task" onclick="this.classList.toggle('done')"><span class="box">✓</span><span>Send Maria her quote</span><span class="meta">Today</span></div>
+          <div class="task done" onclick="this.classList.toggle('done')"><span class="box">✓</span><span>Order cleaning supplies</span><span class="meta">Done</span></div>
+          <div class="task" onclick="this.classList.toggle('done')"><span class="box">✓</span><span>Post before/after photos</span><span class="meta">Wed</span></div>
+          <div class="task" onclick="this.classList.toggle('done')"><span class="box">✓</span><span>Request reviews from last week</span><span class="meta">Thu</span></div>
+        </div>
+        <div class="panel"><h3>🎯 Business goals</h3>
+          <div class="goal"><div class="gt"><span>£10k monthly revenue</span><span>£8.4k / £10k</span></div><div class="bar"><i style="width:84%"></i></div></div>
+          <div class="goal"><div class="gt"><span>Reach 75 Google reviews</span><span>62 / 75</span></div><div class="bar"><i style="width:83%"></i></div></div>
+          <div class="goal"><div class="gt"><span>Sign 2 new commercial contracts</span><span>1 / 2</span></div><div class="bar"><i style="width:50%"></i></div></div>
+          <div class="goal"><div class="gt"><span>5 new regular home cleans</span><span>3 / 5</span></div><div class="bar"><i style="width:60%"></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKETING -->
+    <section class="view" id="marketing">
+      <div class="top"><div><h1>Marketing activity</h1><div class="sub">Keep the pipeline full — what&rsquo;s planned and what&rsquo;s done.</div></div></div>
+      <div class="panel">
+        <table>
+          <thead><tr><th>Activity</th><th>Channel</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>"Spring deep-clean offer" post</b></td><td>Google Business</td><td><span class="badge b-done">Posted</span></td></tr>
+            <tr><td><b>Before/after reel</b></td><td>Instagram</td><td><span class="badge b-sched">Scheduled</span></td></tr>
+            <tr><td><b>Review request texts (3 clients)</b></td><td>SMS</td><td><span class="badge b-todo">To do</span></td></tr>
+            <tr><td><b>Local Facebook group introduction</b></td><td>Facebook</td><td><span class="badge b-todo">To do</span></td></tr>
+            <tr><td><b>Office-cleaning flyer drop</b></td><td>Local / print</td><td><span class="badge b-new">Idea</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REPUTATION -->
+    <section class="view" id="reputation">
+      <div class="top"><div><h1>Reputation manager</h1><div class="sub">Win reviews, reply well, and turn feedback into bookings.</div></div></div>
+      <div class="row2">
+        <div>
+          <div class="panel"><h3>⭐ Review &amp; testimonial requests</h3>
+            <div class="tmpl"><div class="h">Review request — text</div><p>Hi [Name], thanks for choosing Sparkle &amp; Shine! ✨ If you were happy with your clean, a quick Google review would mean the world to us: [link]</p></div>
+            <div class="tmpl"><div class="h">Testimonial request</div><p>Hi [Name], we&rsquo;re putting together a few words from happy customers — would you mind sharing a sentence about your experience with us? No pressure at all!</p></div>
+          </div>
+          <div class="panel"><h3>💬 Review responses</h3>
+            <div class="tmpl"><div class="h">Positive review reply</div><p>Thank you so much, [Name]! ✨ It was a pleasure cleaning for you — we can&rsquo;t wait to help keep your place sparkling. See you next time!</p></div>
+            <div class="tmpl"><div class="h">Negative review reply</div><p>Hi [Name], we&rsquo;re sorry your clean didn&rsquo;t meet our usual standard — that&rsquo;s not like us. We&rsquo;d really like to put it right; please call us on [number] and ask for Dawn.</p></div>
+            <div class="tmpl"><div class="h">Reputation recovery wording</div><p>We hold our hands up and we&rsquo;ve already made changes to make sure this doesn&rsquo;t happen again. Thank you for giving us the chance to do better.</p></div>
+          </div>
+        </div>
+        <div>
+          <div class="panel"><h3>📝 Customer feedback form</h3>
+            <div class="fb">
+              <div class="formrow"><input placeholder="Your name"><input placeholder="Job date"></div>
+              <div style="margin-bottom:8px;font-size:.85rem;color:var(--muted);font-weight:600">How did we do?</div>
+              <div class="stars-in" style="margin-bottom:10px">★★★★★</div>
+              <textarea placeholder="Tell us about your clean..."></textarea>
+              <button class="btn" onclick="this.textContent='Thanks for your feedback! ✨'">Submit feedback</button>
+            </div>
+          </div>
+          <div class="panel"><h3>🛟 Complaint response</h3>
+            <div class="tmpl"><div class="h">Complaint acknowledgement</div><p>Hi [Name], thank you for letting us know — I&rsquo;m sorry to hear this. Your satisfaction matters to us and I&rsquo;ll personally look into it today and call you back by [time].</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.nav button');
+  const views = document.querySelectorAll('.view');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.getAttribute('data-view');
+      views.forEach(v=>v.classList.toggle('active', v.id===target));
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
