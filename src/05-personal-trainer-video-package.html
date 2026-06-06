@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Marketing Video — Forge Personal Training (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0f0d;
+    --ink-2:#161915;
+    --panel:#1b1f1a;
+    --lime:#c8fa3c;
+    --lime-deep:#a6d61f;
+    --paper:#f2f4ee;
+    --muted:#9aa295;
+    --line:rgba(255,255,255,.12);
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Archivo",system-ui,sans-serif;color:var(--paper);background:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.anton{font-family:"Anton",system-ui,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.02;text-transform:uppercase}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--lime);color:var(--ink);font-size:.82rem;text-align:center;padding:9px 16px;font-weight:700;letter-spacing:.02em}
+
+  .cover{background:radial-gradient(120% 120% at 85% -20%,#1f2a16,var(--ink));padding:62px 0 54px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(100deg,rgba(200,250,60,.05) 0 2px,transparent 2px 30px)}
+  .cover .wrap{position:relative}
+  .kicker{font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.78rem;color:var(--lime);margin-bottom:16px;font-family:"Archivo"}
+  .cover h1{font-size:clamp(2.6rem,7vw,4.6rem);color:var(--paper)}
+  .cover h1 span{color:var(--lime)}
+  .cover .biz{font-weight:600;opacity:.8;font-size:1.08rem;margin-top:8px}
+  .cover .meta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+  .cover .meta span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:.85rem}
+
+  main{padding:18px 0 40px}
+  .sec{padding:38px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-family:"Archivo";font-weight:800;color:var(--lime-deep);font-size:.85rem;letter-spacing:.06em}
+  .sec h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:4px 0 8px;color:var(--paper)}
+  .sec .intro{color:var(--muted);margin-bottom:22px;max-width:64ch}
+
+  /* concept grid */
+  .concept{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:760px){.concept{grid-template-columns:1fr 1fr}}
+  .cbox{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}
+  .cbox .l{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lime-deep);font-weight:700;margin-bottom:6px}
+  .cbox .v{font-weight:600;font-size:.98rem}
+
+  /* storyboard scene */
+  .scene{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+  .scene .bar{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--ink-2);border-bottom:1px solid var(--line)}
+  .scene .tc{background:var(--lime);color:var(--ink);font-family:"Anton";font-size:.95rem;padding:3px 11px;border-radius:7px;letter-spacing:.02em}
+  .scene .bar b{font-family:"Anton";font-size:1.05rem;color:var(--paper)}
+  .scene .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+  @media(max-width:760px){.scene .cols{grid-template-columns:1fr}}
+  .col{padding:16px 18px;border-right:1px solid var(--line)}
+  .col:last-child{border-right:0}
+  @media(max-width:760px){.col{border-right:0;border-bottom:1px solid var(--line)}.col:last-child{border-bottom:0}}
+  .col .h{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lime-deep);font-weight:700;margin-bottom:7px}
+  .col p{font-size:.93rem}
+  .col .overlay{font-family:"Anton";font-size:1.15rem;color:var(--lime);text-transform:uppercase}
+
+  .opts{display:grid;gap:10px}
+  .opt{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:11px;padding:13px 16px;font-size:.96rem}
+  .opt b{color:var(--lime)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+  .panel h3{font-family:"Anton";font-size:1.2rem;color:var(--paper);margin-bottom:10px}
+  .panel ul{list-style:none;display:grid;gap:8px}
+  .panel ul li{display:flex;gap:9px;font-size:.93rem;color:var(--paper)}
+  .panel ul li::before{content:"▸";color:var(--lime)}
+
+  .formats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.formats{grid-template-columns:1fr}}
+  .fmt{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .fmt .big{font-family:"Anton";font-size:1.7rem;color:var(--lime)}
+  .fmt .t{font-weight:700;margin:4px 0 6px}
+  .fmt p{font-size:.9rem;color:var(--muted)}
+
+  footer{background:var(--ink-2);color:var(--paper);text-align:center;padding:30px 20px;font-size:.82rem;opacity:.85}
+  footer b{color:var(--lime)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by Local Business AI Hub — the same video package can be created for ANY local business</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">AI Marketing Video · Creative Blueprint</div>
+    <h1>Your turn to <span>put yourself first</span></h1>
+    <div class="biz">Prepared for: Forge Personal Training · Ealing, West London</div>
+    <div class="meta">
+      <span>🏋️ Personal trainer</span>
+      <span>⏱️ ~50 seconds</span>
+      <span>📱 Instagram · TikTok · YouTube · website</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- concept -->
+    <section class="sec">
+      <div class="num">01 · CONCEPT</div>
+      <h2>The big idea</h2>
+      <p class="intro">A warm, motivational spot aimed at busy adults who put themselves last. The emotional promise: <strong>fitness that fits your life, with real support and zero judgement.</strong></p>
+      <div class="concept">
+        <div class="cbox"><div class="l">Goal</div><div class="v">Book free intro sessions</div></div>
+        <div class="cbox"><div class="l">Viewer</div><div class="v">Busy locals, 30–55, new to PT</div></div>
+        <div class="cbox"><div class="l">Tone</div><div class="v">Uplifting, real, encouraging</div></div>
+        <div class="cbox"><div class="l">Length</div><div class="v">~50s + cut-downs</div></div>
+      </div>
+    </section>
+
+    <!-- storyboard -->
+    <section class="sec">
+      <div class="num">02 · STORYBOARD &amp; SCRIPT</div>
+      <h2>Scene by scene</h2>
+      <p class="intro">Each scene shows the visual, the voiceover, and the on-screen text — ready to film or hand to an AI video tool.</p>
+
+      <div class="scene">
+        <div class="bar"><span class="tc">0–4s</span><b>The hook</b></div>
+        <div class="cols">
+          <div class="col"><div class="h">🎬 Visual</div><p>A tired person juggling work, family, phone — rushing, never stopping.</p></div>
+          <div class="col"><div class="h">🎙️ Voiceover</div><p>&ldquo;Always putting everyone else first?&rdquo;</p></div>
+          <div class="col"><div class="h">🔤 On-screen</div><p class="overlay">Your turn.</p></div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="bar"><span class="tc">4–12s</span><b>Meet Forge</b></div>
+        <div class="cols">
+          <div class="col"><div class="h">🎬 Visual</div><p>Bright studio. Jordan greets a client with a genuine smile and handshake.</p></div>
+          <div class="col"><div class="h">🎙️ Voiceover</div><p>&ldquo;At Forge, we make fitness fit your life — not the other way round.&rdquo;</p></div>
+          <div class="col"><div class="h">🔤 On-screen</div><p class="overlay">Forge PT</p></div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="bar"><span class="tc">12–22s</span><b>How it works</b></div>
+        <div class="cols">
+          <div class="col"><div class="h">🎬 Visual</div><p>Quick montage: tailored session, good form, encouragement, a laugh mid-workout.</p></div>
+          <div class="col"><div class="h">🎙️ Voiceover</div><p>&ldquo;One-to-one training built around your goals, your body, and your schedule.&rdquo;</p></div>
+          <div class="col"><div class="h">🔤 On-screen</div><p class="overlay">Train your way</p></div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="bar"><span class="tc">22–32s</span><b>The difference</b></div>
+        <div class="cols">
+          <div class="col"><div class="h">🎬 Visual</div><p>Client growing in confidence — stronger, smiling, no busy crowds around.</p></div>
+          <div class="col"><div class="h">🎙️ Voiceover</div><p>&ldquo;No judgement. No crowds. Just real support and results that last.&rdquo;</p></div>
+          <div class="col"><div class="h">🔤 On-screen</div><p class="overlay">Real support · real results</p></div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="bar"><span class="tc">32–42s</span><b>Proof</b></div>
+        <div class="cols">
+          <div class="col"><div class="h">🎬 Visual</div><p>Short testimonial clip from a happy client (or a before/after with permission).</p></div>
+          <div class="col"><div class="h">🎙️ Voiceover</div><p>&ldquo;I&rsquo;ve never felt stronger or more confident — Maria, lost 2 stone with Forge.&rdquo;</p></div>
+          <div class="col"><div class="h">🔤 On-screen</div><p class="overlay">★★★★★ Maria, Ealing</p></div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="bar"><span class="tc">42–50s</span><b>The offer + CTA</b></div>
+        <div class="cols">
+          <div class="col"><div class="h">🎬 Visual</div><p>Jordan to camera in the studio, warm and inviting. Logo + details animate in.</p></div>
+          <div class="col"><div class="h">🎙️ Voiceover</div><p>&ldquo;Your first session is on us. Let&rsquo;s get started — book today.&rdquo;</p></div>
+          <div class="col"><div class="h">🔤 On-screen</div><p class="overlay">Free first session</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sec">
+      <div class="num">03 · CALL-TO-ACTION</div>
+      <h2>Closing call-to-action options</h2>
+      <p class="intro">End card text — pick the one that fits the platform.</p>
+      <div class="opts">
+        <div class="opt"><b>Primary:</b> &ldquo;Book your FREE first session — Forge PT, Ealing. Link in bio.&rdquo;</div>
+        <div class="opt"><b>Urgency:</b> &ldquo;Only 5 free sessions left this month. Claim yours today.&rdquo;</div>
+        <div class="opt"><b>Soft:</b> &ldquo;Curious? Message us &lsquo;START&rsquo; and we&rsquo;ll take it from there.&rdquo;</div>
+      </div>
+    </section>
+
+    <!-- AI presenter + captions -->
+    <section class="sec">
+      <div class="num">04 · PRODUCTION OPTIONS</div>
+      <h2>AI presenter &amp; caption styling</h2>
+      <div class="two">
+        <div class="panel">
+          <h3>AI presenter / avatar option</h3>
+          <ul>
+            <li>No footage? The same script can be delivered by a friendly AI presenter / avatar.</li>
+            <li>Suggested style: warm, approachable, smart-casual — speaking directly to camera.</li>
+            <li>Pair the avatar with simple b-roll or bold text scenes for energy.</li>
+            <li>Ideal for businesses that want a polished video fast, without a film crew.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Caption &amp; text-overlay guidance</h3>
+          <ul>
+            <li>Bold, condensed, UPPERCASE font (like this one) for punch.</li>
+            <li>Keep overlays to 3–5 words, lower-third or centred.</li>
+            <li>High-contrast lime-on-dark so it&rsquo;s readable on mobile.</li>
+            <li>Animate text in quickly on each scene change — assume sound is off.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- short formats -->
+    <section class="sec">
+      <div class="num">05 · SHORT FORMATS</div>
+      <h2>Cut-downs from the same shoot</h2>
+      <p class="intro">One filming session, multiple ready-to-post videos.</p>
+      <div class="formats">
+        <div class="fmt"><div class="big">15s</div><div class="t">Reel / TikTok</div><p>Hook → how it works → free-session CTA. Fast and punchy.</p></div>
+        <div class="fmt"><div class="big">9:16</div><div class="t">Story version</div><p>Vertical re-frame with tappable "Book now" sticker.</p></div>
+        <div class="fmt"><div class="big">6s</div><div class="t">Bumper ad</div><p>"Your turn." → "Free first session — Forge PT." Logo. Done.</p></div>
+      </div>
+    </section>
+
+    <!-- music -->
+    <section class="sec">
+      <div class="num">06 · MUSIC &amp; TONE</div>
+      <h2>Soundtrack direction</h2>
+      <p class="intro">Upbeat, motivational track that builds — soft and reflective on the hook, lifting from "Meet Forge", peaking on the proof/CTA. Keep voiceover warm and conversational, never shouty.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example AI Marketing Video package · prepared for the fictional "Forge Personal Training" · built by <b>Local Business AI Hub</b><br>
+  Concept, script, storyboard and captions are production-ready — the finished film is generated from this blueprint.
+</footer>
+
+</body>
+</html>
