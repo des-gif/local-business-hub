@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brand &amp; Trust Builder — Marshall &amp; Sons Building Co. (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#2f4a3a;
+    --pine-2:#3a5a47;
+    --sand:#c7a06a;
+    --sand-deep:#a9824c;
+    --cream:#f5f1e7;
+    --cream-2:#ece5d5;
+    --txt:#3a3a31;
+    --muted:#857e6e;
+    --line:rgba(47,74,58,.15);
+    --shadow:0 18px 46px -26px rgba(47,74,58,.45);
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Mukta",system-ui,sans-serif;color:var(--txt);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Zilla Slab",serif;color:var(--pine);letter-spacing:-.005em;line-height:1.12;font-weight:600}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+
+  .demo-bar{background:var(--pine);color:var(--cream);font-size:.82rem;text-align:center;padding:9px 16px}
+  .demo-bar b{color:var(--sand)}
+
+  .cover{background:linear-gradient(160deg,var(--pine-2),var(--pine));color:var(--cream);padding:60px 0 52px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(199,160,106,.06) 0 1px,transparent 1px 40px)}
+  .cover .wrap{position:relative}
+  .kicker{font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.76rem;color:var(--sand);margin-bottom:14px}
+  .cover h1{color:#fff;font-size:clamp(2.2rem,5.5vw,3.5rem)}
+  .cover .biz{font-weight:600;opacity:.86;font-size:1.05rem;margin-top:8px}
+  .cover .meta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  .cover .meta span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:7px 14px;font-size:.85rem}
+
+  main{padding:18px 0 40px}
+  .sec{padding:34px 0;border-bottom:1px solid var(--line)}
+  .sec:last-child{border-bottom:0}
+  .num{font-family:"Zilla Slab";color:var(--sand-deep);font-size:.95rem;font-weight:700;letter-spacing:.04em}
+  .sec h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin:2px 0 8px}
+  .sec .intro{color:var(--muted);margin-bottom:18px;max-width:64ch}
+
+  .copy{background:#fff;border:1px solid var(--line);border-left:4px solid var(--sand);border-radius:12px;padding:18px 20px;margin-bottom:12px}
+  .copy p{margin-bottom:9px}.copy p:last-child{margin-bottom:0}
+  .copy strong{color:var(--pine)}
+
+  .statements{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:720px){.statements{grid-template-columns:1fr 1fr}}
+  @media(max-width:460px){.statements{grid-template-columns:1fr}}
+  .st{background:var(--pine);color:var(--cream);border-radius:12px;padding:16px;text-align:center}
+  .st b{font-family:"Zilla Slab";color:var(--sand);font-size:1.05rem;display:block}
+  .st span{font-size:.85rem;opacity:.85}
+
+  ul.why{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  @media(max-width:720px){ul.why{grid-template-columns:1fr}}
+  ul.why li{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 15px;display:flex;gap:10px;font-size:.95rem}
+  ul.why li::before{content:"✓";color:var(--sand-deep);font-weight:800}
+  ul.why li b{color:var(--pine)}
+
+  .promise{background:linear-gradient(160deg,var(--pine-2),var(--pine));color:var(--cream);border-radius:16px;padding:26px 28px;text-align:center}
+  .promise .q{font-family:"Zilla Slab";font-size:1.4rem;color:#fff;line-height:1.3}
+  .promise .by{color:var(--sand);font-size:.9rem;margin-top:10px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+
+  .reviews{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.reviews{grid-template-columns:1fr}}
+  .rev{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .rev .stars{color:var(--sand-deep);letter-spacing:2px}
+  .rev p{margin:9px 0 12px;font-size:.96rem}
+  .rev .who b{color:var(--pine)}
+  .rev .who span{color:var(--muted);font-size:.85rem;display:block}
+
+  /* case study framework */
+  .case{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .case .row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--line)}
+  .case .row:last-child{border-bottom:0}
+  @media(max-width:560px){.case .row{grid-template-columns:1fr}}
+  .case .k{background:var(--cream-2);padding:14px 16px;font-family:"Zilla Slab";font-weight:600;color:var(--pine);font-size:.95rem}
+  .case .v{padding:14px 16px;font-size:.94rem}
+  .case .v .eg{color:var(--muted);font-style:italic;display:block;margin-top:4px;font-size:.88rem}
+
+  footer{background:var(--pine);color:var(--cream);text-align:center;padding:30px 20px;font-size:.82rem;opacity:.9}
+  footer b{color:var(--sand)}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">DEMO EXAMPLE · built by <b>Local Business AI Hub</b> — the same brand &amp; trust pack can be created for <b>any</b> business</div>
+
+<header class="cover">
+  <div class="wrap">
+    <div class="kicker">Brand &amp; Trust Builder</div>
+    <h1>The words that make customers feel safe</h1>
+    <div class="biz">Prepared for: Marshall &amp; Sons Building Co. · West London &amp; Surrey</div>
+    <div class="meta">
+      <span>🧱 Builder / construction</span>
+      <span>📍 West London &amp; Surrey</span>
+      <span>🤝 Credibility &amp; reassurance copy</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="sec">
+      <div class="num">01</div>
+      <h2>About us</h2>
+      <p class="intro">A warm, confident introduction to who you are.</p>
+      <div class="copy">
+        <p>Marshall &amp; Sons is a family-run building company serving West London and Surrey for over <strong>30 years</strong>. From extensions and loft conversions to full renovations and new builds, we take on every project with the same care we&rsquo;d give our own homes.</p>
+        <p>We&rsquo;ve grown almost entirely on word of mouth — because we turn up when we say we will, keep our sites clean, and finish what we start. No drama, no disappearing acts. Just honest, quality building, done properly.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">02</div>
+      <h2>Founder / business story</h2>
+      <p class="intro">The human story behind the company builds instant connection and trust.</p>
+      <div class="copy">
+        <p>It started in 1992 with Dave Marshall, a van, and a simple belief: do good work, treat people right, and the rest takes care of itself. Three decades on, Dave still answers the phone — now alongside his two sons, who learned the trade on his sites.</p>
+        <p>We&rsquo;re still that same family firm at heart. We&rsquo;ve just got a bigger team, a longer list of happy customers, and a reputation across the area we&rsquo;re very proud to protect.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">03</div>
+      <h2>Why choose us</h2>
+      <p class="intro">The reasons to pick you over the next builder — clear and reassuring.</p>
+      <ul class="why">
+        <li><b>30+ years&rsquo; experience</b> — established, trusted, and still here.</li>
+        <li><b>Fully insured &amp; qualified</b> — your home and project are protected.</li>
+        <li><b>Fixed, detailed quotes</b> — you know the price before we start.</li>
+        <li><b>Clean, respectful sites</b> — we look after your home throughout.</li>
+        <li><b>On time, on budget</b> — clear timelines and honest updates.</li>
+        <li><b>Guaranteed workmanship</b> — backed in writing, every job.</li>
+      </ul>
+    </section>
+
+    <section class="sec">
+      <div class="num">04</div>
+      <h2>Service promise</h2>
+      <p class="intro">A single, memorable promise to anchor the brand.</p>
+      <div class="promise">
+        <div class="q">&ldquo;We&rsquo;ll treat your home like our own, finish what we start, and stand behind every job we do.&rdquo;</div>
+        <div class="by">— Our promise to you</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">05</div>
+      <h2>Trust-building statements</h2>
+      <p class="intro">Short, punchy reassurances to use across the website and quotes.</p>
+      <div class="statements">
+        <div class="st"><b>Fully insured</b><span>£5m public liability</span></div>
+        <div class="st"><b>Fixed quotes</b><span>No nasty surprises</span></div>
+        <div class="st"><b>Family-run</b><span>Since 1992</span></div>
+        <div class="st"><b>Guaranteed work</b><span>In writing</span></div>
+        <div class="st"><b>Building Regs</b><span>All work compliant</span></div>
+        <div class="st"><b>Clean sites</b><span>Respect for your home</span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">06</div>
+      <h2>Guarantee wording</h2>
+      <p class="intro">Clear guarantee copy that removes the risk for the customer.</p>
+      <div class="copy"><p>Every project we complete comes with a <strong>written workmanship guarantee</strong>. If anything isn&rsquo;t right within the guarantee period, we&rsquo;ll come back and put it right — no quibbles, no extra cost. That&rsquo;s our name on it, and we don&rsquo;t take that lightly.</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">07</div>
+      <h2>Safety &amp; compliance wording</h2>
+      <p class="intro">Reassures customers that everything is done by the book.</p>
+      <div class="copy"><p>All our work is carried out to current <strong>Building Regulations</strong> and health &amp; safety standards. We&rsquo;re fully insured with public liability cover, our team holds the relevant trade qualifications, and we handle the necessary certifications and sign-offs so you don&rsquo;t have to worry about a thing.</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">08</div>
+      <h2>Customer reassurance wording</h2>
+      <p class="intro">Directly addresses the fears that stop people booking a builder.</p>
+      <div class="copy">
+        <p><strong>Worried about cowboy builders?</strong> So are we. That&rsquo;s why everything is fixed-price, in writing, and guaranteed.</p>
+        <p><strong>Worried about mess and disruption?</strong> We protect your home, tidy up daily, and keep you updated every step of the way.</p>
+        <p><strong>Worried we&rsquo;ll vanish halfway through?</strong> We&rsquo;ve been here 30 years and we&rsquo;ll be here long after your project&rsquo;s done.</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="num">09</div>
+      <h2>Testimonials section</h2>
+      <p class="intro">Real-feeling reviews, plus a simple structure to collect more.</p>
+      <div class="reviews">
+        <div class="rev"><div class="stars">★★★★★</div><p>&ldquo;Marshall &amp; Sons built our rear extension and we couldn&rsquo;t be happier. Tidy, punctual and the finish is superb. Felt safe with them in our home.&rdquo;</p><div class="who"><b>Helen &amp; Tom R.</b><span>Twickenham</span></div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>&ldquo;Honest from day one. The quote was the price we paid, and they finished a day early. Already booked them for the loft.&rdquo;</p><div class="who"><b>Priya S.</b><span>Kingston</span></div></div>
+      </div>
+      <div class="copy" style="margin-top:14px"><p><strong>Tip — how to gather strong testimonials:</strong> ask right after handover, and prompt with one question: &ldquo;What were you nervous about before, and how did we do?&rdquo; The answers make the most reassuring reviews.</p></div>
+    </section>
+
+    <section class="sec">
+      <div class="num">10</div>
+      <h2>Case study structure</h2>
+      <p class="intro">A reusable framework that turns finished jobs into powerful proof. Fill it in for each project.</p>
+      <div class="case">
+        <div class="row"><div class="k">The brief</div><div class="v">What the client wanted.<span class="eg">e.g. &ldquo;A double-storey side extension to create a kitchen-diner and extra bedroom.&rdquo;</span></div></div>
+        <div class="row"><div class="k">The challenge</div><div class="v">Any tricky bit you solved.<span class="eg">e.g. &ldquo;Working around a tight access lane and keeping the family living there throughout.&rdquo;</span></div></div>
+        <div class="row"><div class="k">What we did</div><div class="v">The work, in plain English.<span class="eg">e.g. &ldquo;Full build, electrics, plastering and finishing over 10 weeks, on schedule.&rdquo;</span></div></div>
+        <div class="row"><div class="k">The result</div><div class="v">The outcome and value.<span class="eg">e.g. &ldquo;A bright, open family space — and an estimated 15% added to the home&rsquo;s value.&rdquo;</span></div></div>
+        <div class="row"><div class="k">Client quote</div><div class="v">One line in their words.<span class="eg">e.g. &ldquo;They made a stressful project genuinely easy.&rdquo;</span></div></div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  Example Brand &amp; Trust Builder · prepared for the fictional "Marshall &amp; Sons Building Co." · built by <b>Local Business AI Hub</b><br>
+  The same pack can be tailored to any business&rsquo;s story, values and customers.
+</footer>
+
+</body>
+</html>
