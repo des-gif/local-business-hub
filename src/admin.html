@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Local Business AI Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .admin-wrap{max-width:760px;margin:0 auto;padding:48px 28px 80px;}
+  .admin-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--text);margin-bottom:36px;transition:color .12s;}
+  .admin-back:hover{color:var(--blue);}
+  .admin-header{margin-bottom:32px;}
+  .admin-header h1{font-size:28px;font-weight:800;color:var(--navy);margin-bottom:8px;}
+  .admin-header p{font-size:15px;color:var(--text);line-height:1.65;}
+  .admin-notice{display:flex;gap:12px;align-items:flex-start;background:var(--blue-ll);border:1px solid var(--blue-l);border-radius:var(--rs);padding:14px 16px;margin-bottom:32px;}
+  .admin-notice-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+  .admin-notice p{font-size:13px;color:var(--navy);line-height:1.6;}
+  .admin-notice strong{font-weight:700;}
+  .forms-list{display:flex;flex-direction:column;gap:10px;}
+  .form-row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:14px 18px;transition:border-color .12s;}
+  .form-row:hover{border-color:var(--border2);}
+  .form-name{font-size:14px;font-weight:600;color:var(--navy);flex:1;min-width:0;}
+  .form-actions{display:flex;gap:8px;flex-shrink:0;}
+  .btn-open{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;background:var(--blue);color:#fff;border:none;border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background .12s;}
+  .btn-open:hover{background:var(--blue-d);}
+  .btn-copy{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;background:#fff;color:var(--text);border:1px solid var(--border);border-radius:var(--rx);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .12s;min-width:88px;justify-content:center;}
+  .btn-copy:hover{border-color:var(--blue);color:var(--blue);}
+  .btn-copy.copied{border-color:var(--green);color:var(--green-d);background:var(--green-l);}
+  @media(max-width:560px){
+    .form-row{flex-direction:column;align-items:flex-start;gap:10px;}
+    .form-actions{width:100%;}
+    .btn-open,.btn-copy{flex:1;justify-content:center;}
+  }
+</style>
+</head>
+<body style="background:var(--surface);min-height:100vh;">
+
+<div class="admin-wrap">
+
+  <a href="/" class="admin-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to site
+  </a>
+
+  <div class="admin-header">
+    <p class="eyebrow">Internal</p>
+    <h1>Customer brief forms</h1>
+    <p>Open to preview, or copy a link to send to a customer after they pay.</p>
+  </div>
+
+  <div class="admin-notice">
+    <span class="admin-notice-icon">📬</span>
+    <p><strong>Submissions arrive in Netlify → Forms.</strong> Turn on Form notifications in your Netlify site settings to get them emailed to you automatically.</p>
+  </div>
+
+  <div class="forms-list">
+
+    <div class="form-row">
+      <span class="form-name">Landing Pages and Websites</span>
+      <div class="form-actions">
+        <a href="/brief-landing-pages.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-landing-pages.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">AI Google Business Pack</span>
+      <div class="form-actions">
+        <a href="/brief-google-business-pack.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-google-business-pack.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">AI Marketing Video</span>
+      <div class="form-actions">
+        <a href="/brief-marketing-video.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-marketing-video.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">CEO Business Dashboard</span>
+      <div class="form-actions">
+        <a href="/brief-ceo-dashboard.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-ceo-dashboard.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">Lead and Quote Tracker</span>
+      <div class="form-actions">
+        <a href="/brief-lead-quote-tracker.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-lead-quote-tracker.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">AI Customer Response System</span>
+      <div class="form-actions">
+        <a href="/brief-customer-response.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-customer-response.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">Review and Reputation System</span>
+      <div class="form-actions">
+        <a href="/brief-review-reputation.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-review-reputation.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">Booking and Enquiry Forms</span>
+      <div class="form-actions">
+        <a href="/brief-booking-forms.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-booking-forms.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">Local SEO Starter Pack</span>
+      <div class="form-actions">
+        <a href="/brief-local-seo.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-local-seo.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <span class="form-name">Specialist Business Support</span>
+      <div class="form-actions">
+        <a href="/brief-specialist-support.html" target="_blank" rel="noopener" class="btn-open">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Open form
+        </a>
+        <button class="btn-copy" onclick="copyLink(this,'https://localbusinessai.netlify.app/brief-specialist-support.html')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(function() {
+    var orig = btn.innerHTML;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+  }).catch(function() {
+    var t = document.createElement('textarea');
+    t.value = url;
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand('copy');
+    document.body.removeChild(t);
+    var orig = btn.innerHTML;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
