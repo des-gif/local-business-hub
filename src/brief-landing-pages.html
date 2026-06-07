@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Landing Page Brief — Local Business AI Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#16223e;--blue:#2f6bff;--blue-deep:#1f54d6;--mist:#f5f7fb;--txt:#3a455c;--muted:#7b879c;--line:#e6eaf2;--r:14px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--txt);background:var(--mist);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,legend{color:var(--navy);letter-spacing:-.01em}
+  .wrap{max-width:700px;margin:0 auto;padding:0 20px}
+  .top{background:var(--navy);color:#dbe4f7;padding:26px 0}
+  .top .wrap{display:flex;align-items:center;gap:10px}
+  .logo{font-weight:800;color:#fff;font-size:1.05rem}
+  .head{padding:32px 0 6px}
+  .pill{display:inline-block;background:#e3f0e6;color:#1f7a3d;font-weight:700;font-size:.78rem;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .head h1{font-size:clamp(1.6rem,4.5vw,2.25rem);font-weight:800;margin-bottom:10px}
+  .head p{color:var(--muted);font-size:1.02rem}
+  .progress-note{margin-top:12px;font-size:.9rem;color:var(--blue-deep);font-weight:600}
+
+  form{margin:22px 0 60px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:16px}
+  .step{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  legend,.q{font-weight:700;color:var(--navy);font-size:1.08rem;margin-bottom:4px;display:block}
+  .hint{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  fieldset{border:0}
+
+  .info{background:#eef3ff;border:1px solid #d6e2ff;border-radius:var(--r);padding:20px 22px;margin-bottom:16px}
+  .info h3{font-size:1.05rem;margin-bottom:6px}
+  .info p{font-size:.92rem;color:var(--txt);margin-bottom:10px}
+  .incl{display:flex;flex-wrap:wrap;gap:8px}
+  .incl span{background:#fff;border:1px solid #d6e2ff;color:var(--blue-deep);font-weight:600;font-size:.85rem;padding:6px 12px;border-radius:999px}
+  .slots{list-style:none;display:grid;gap:7px}
+  .slots li{font-size:.92rem;color:var(--txt)}
+  .slots b{color:var(--navy)}
+
+  .opts{display:flex;flex-wrap:wrap;gap:10px}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .opt span{display:block;border:1.5px solid var(--line);border-radius:11px;padding:11px 16px;font-weight:600;font-size:.94rem;color:var(--txt);cursor:pointer;transition:all .15s;background:#fff}
+  .opt input:checked + span{border-color:var(--blue);background:#eef3ff;color:var(--blue-deep);box-shadow:0 0 0 3px rgba(47,107,255,.1)}
+  .opt input:focus-visible + span{outline:2px solid var(--blue);outline-offset:2px}
+
+  /* design preview cards */
+  .design-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .design{position:relative}
+  .design input{position:absolute;opacity:0;inset:0;cursor:pointer;z-index:2}
+  .design .box{border:1.5px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .15s;background:#fff}
+  .design input:checked + .box{border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.14)}
+  .preview{height:84px;padding:12px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+  .preview .aa{font-size:1.3rem;font-weight:800;line-height:1}
+  .preview .bar{height:6px;border-radius:3px;opacity:.85}
+  .preview .bar.s{width:60%}
+  .design .name{padding:9px 12px;font-weight:700;font-size:.9rem;color:var(--navy);border-top:1px solid var(--line)}
+  /* style flavours */
+  .pv-modern{background:#fff}.pv-modern .aa{color:#2f6bff}.pv-modern .bar{background:#cfd8e6}
+  .pv-bold{background:#14161a}.pv-bold .aa{color:#c6f546}.pv-bold .bar{background:#3a3f47}
+  .pv-warm{background:#fbf3e9}.pv-warm .aa{color:#a4612a;font-family:"Fraunces",serif}.pv-warm .bar{background:#e6d2ba}
+  .pv-prem{background:#111}.pv-prem .aa{color:#d9b46a;font-family:"Fraunces",serif}.pv-prem .bar{background:#3a3a3a}
+  .pv-trust{background:#fff}.pv-trust .aa{color:#16223e}.pv-trust .bar{background:#b9c6dc}.pv-trust .bar.top{background:#16223e;height:10px;width:100%}
+
+  /* colour palettes */
+  .pal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .pal{position:relative}
+  .pal input{position:absolute;opacity:0;inset:0;cursor:pointer;z-index:2}
+  .pal .box{border:1.5px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .15s}
+  .pal input:checked + .box{border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.14)}
+  .sw{height:46px;display:flex}
+  .sw i{flex:1}
+  .pal .name{padding:9px 12px;font-weight:700;font-size:.9rem;color:var(--navy);background:#fff}
+
+  label.field{display:block;font-weight:700;color:var(--navy);margin-bottom:6px}
+  input[type=text],input[type=email],textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;font:inherit;color:var(--navy);background:#fff;transition:border-color .15s}
+  input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.1)}
+  textarea{resize:vertical;min-height:90px}
+  .req{color:var(--blue)}
+
+  .upload{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .upbtn{display:inline-flex;align-items:center;gap:8px;background:#eef3ff;border:1.5px dashed var(--blue);color:var(--blue-deep);font-weight:700;padding:13px 20px;border-radius:11px;cursor:pointer}
+  .upbtn:hover{background:#e2ecff}
+  .upload input[type=file]{display:none}
+  #fileName{font-size:.9rem;color:var(--muted)}
+
+  .submit{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:16px 28px;font:700 1.05rem "Plus Jakarta Sans",sans-serif;cursor:pointer;width:100%;transition:background .15s,transform .1s}
+  .submit:hover{background:var(--blue-deep)}.submit:active{transform:scale(.99)}
+  .foot-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:14px}
+  .hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap"><span class="logo">◈ Local Business AI Hub</span></div></div>
+
+<div class="wrap">
+  <div class="head">
+    <span class="pill">✓ Payment received — thank you!</span>
+    <h1>Let's build your landing page</h1>
+    <p>This short brief is how I learn everything I need to build your page exactly right. There's no wrong answer — tap your choices, and type a little where it helps. The more you share, the better your page will be.</p>
+    <div class="progress-note">Takes about 5 minutes · everything comes straight to me</div>
+  </div>
+
+  <form id="briefForm" name="brief-landing-pages" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/brief-thank-you.html">
+    <input type="hidden" name="form-name" value="brief-landing-pages">
+    <input type="hidden" name="service" value="Landing Pages and Websites">
+    <p class="hp"><label>Don't fill this in: <input name="bot-field"></label></p>
+
+    <!-- 1 business basics -->
+    <div class="card">
+      <div class="step">Step 1 — Your business</div>
+      <span class="q">The basics</span>
+      <p class="hint">So your page speaks to the right people in the right place.</p>
+      <label class="field" style="margin-top:6px">Business name <span class="req">*</span></label>
+      <input type="text" name="business_name" required>
+      <label class="field" style="margin-top:14px">Area you serve</label>
+      <input type="text" name="area" placeholder="e.g. Hounslow & West London">
+      <label class="field" style="margin-top:14px">Your main services or products <span class="req">*</span></label>
+      <p class="hint" style="margin:4px 0 8px">List the key things you offer — this becomes the heart of your page.</p>
+      <textarea name="services" required placeholder="e.g. Boiler repairs, bathroom installations, emergency call-outs..."></textarea>
+    </div>
+
+    <!-- what's included (info, not a question) -->
+    <div class="info">
+      <h3>What's included in your landing page</h3>
+      <p>Your page is built to a complete, professional standard — you don't need to choose sections, it all comes as part of the price:</p>
+      <div class="incl">
+        <span>Eye-catching hero</span><span>Your services</span><span>About you</span>
+        <span>Customer reviews</span><span>FAQs</span><span>Photo gallery</span><span>Enquiry form</span><span>Mobile-friendly</span>
+      </div>
+    </div>
+
+    <!-- 2 goal -->
+    <div class="card">
+      <div class="step">Step 2 — The goal</div>
+      <fieldset>
+        <legend>What should this page do above all else? <span class="req">*</span></legend>
+        <p class="hint">Pick the one that matters most — I'll design everything around it.</p>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="main_goal" value="Get more enquiries" required><span>Get more enquiries</span></label>
+          <label class="opt"><input type="radio" name="main_goal" value="Take bookings"><span>Take bookings</span></label>
+          <label class="opt"><input type="radio" name="main_goal" value="Win bigger / better jobs"><span>Win bigger jobs</span></label>
+          <label class="opt"><input type="radio" name="main_goal" value="Build trust & credibility"><span>Build trust</span></label>
+          <label class="opt"><input type="radio" name="main_goal" value="Sell a product"><span>Sell a product</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- 3 standout -->
+    <div class="card">
+      <div class="step">Step 3 — What makes you stand out</div>
+      <fieldset>
+        <legend>Why should a customer choose you?</legend>
+        <p class="hint">Tap all that are true — I'll make these shine on your page.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="standout" value="Same-day service"><span>Same-day service</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="15+ years experience"><span>15+ years experience</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="Fully insured"><span>Fully insured</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="5-star reviews"><span>5-star reviews</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="Family-run"><span>Family-run</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="No call-out charge"><span>No call-out charge</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="Work guaranteed"><span>Work guaranteed</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="Local & trusted"><span>Local &amp; trusted</span></label>
+          <label class="opt"><input type="checkbox" name="standout" value="Accredited / certified"><span>Accredited</span></label>
+        </div>
+        <label class="field" style="margin-top:14px">Anything else that sets you apart?</label>
+        <input type="text" name="standout_other" placeholder="In your own words...">
+      </fieldset>
+    </div>
+
+    <!-- 4 design feel with previews -->
+    <div class="card">
+      <div class="step">Step 4 — The look &amp; feel</div>
+      <fieldset>
+        <legend>Which look feels like your business? <span class="req">*</span></legend>
+        <p class="hint">Here's a taste of each — tap the one you're drawn to.</p>
+        <div class="design-grid">
+          <label class="design"><input type="radio" name="design_feel" value="Clean & modern" required>
+            <div class="box"><div class="preview pv-modern"><div class="aa">Aa</div><div class="bar"></div><div class="bar s"></div></div><div class="name">Clean &amp; modern</div></div></label>
+          <label class="design"><input type="radio" name="design_feel" value="Bold & punchy">
+            <div class="box"><div class="preview pv-bold"><div class="aa">Aa</div><div class="bar"></div><div class="bar s"></div></div><div class="name">Bold &amp; punchy</div></div></label>
+          <label class="design"><input type="radio" name="design_feel" value="Warm & friendly">
+            <div class="box"><div class="preview pv-warm"><div class="aa">Aa</div><div class="bar"></div><div class="bar s"></div></div><div class="name">Warm &amp; friendly</div></div></label>
+          <label class="design"><input type="radio" name="design_feel" value="Premium & elegant">
+            <div class="box"><div class="preview pv-prem"><div class="aa">Aa</div><div class="bar"></div><div class="bar s"></div></div><div class="name">Premium &amp; elegant</div></div></label>
+          <label class="design"><input type="radio" name="design_feel" value="Trustworthy & professional">
+            <div class="box"><div class="preview pv-trust"><div class="bar top"></div><div class="aa">Aa</div><div class="bar s"></div></div><div class="name">Trustworthy</div></div></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- 5 colours with swatches -->
+    <div class="card">
+      <div class="step">Step 5 — Colours</div>
+      <fieldset>
+        <legend>Pick a colour palette</legend>
+        <p class="hint">Tap a palette you like — or choose "match my logo" and I'll pull colours from it.</p>
+        <div class="pal-grid">
+          <label class="pal"><input type="radio" name="palette" value="Ocean (navy & blue)">
+            <div class="box"><div class="sw"><i style="background:#16223e"></i><i style="background:#2f6bff"></i><i style="background:#7aa7ff"></i><i style="background:#eef3ff"></i></div><div class="name">Ocean</div></div></label>
+          <label class="pal"><input type="radio" name="palette" value="Forest (greens)">
+            <div class="box"><div class="sw"><i style="background:#2f4a3a"></i><i style="background:#3a7d54"></i><i style="background:#9cc6a8"></i><i style="background:#f1f6f0"></i></div><div class="name">Forest</div></div></label>
+          <label class="pal"><input type="radio" name="palette" value="Sunset (orange)">
+            <div class="box"><div class="sw"><i style="background:#222831"></i><i style="background:#f4742b"></i><i style="background:#ffb066"></i><i style="background:#fff3e9"></i></div><div class="name">Sunset</div></div></label>
+          <label class="pal"><input type="radio" name="palette" value="Berry (plum & pink)">
+            <div class="box"><div class="sw"><i style="background:#4a2440"></i><i style="background:#b14a86"></i><i style="background:#e7a6c9"></i><i style="background:#fdeef6"></i></div><div class="name">Berry</div></div></label>
+          <label class="pal"><input type="radio" name="palette" value="Charcoal (mono)">
+            <div class="box"><div class="sw"><i style="background:#111418"></i><i style="background:#444b56"></i><i style="background:#aab2c0"></i><i style="background:#f3f5f8"></i></div><div class="name">Charcoal</div></div></label>
+          <label class="pal"><input type="radio" name="palette" value="Match my logo / you choose">
+            <div class="box"><div class="sw"><i style="background:linear-gradient(90deg,#2f6bff,#b14a86,#f4742b,#3a7d54)"></i></div><div class="name">Match my logo</div></div></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- 6 logo -->
+    <div class="card">
+      <div class="step">Step 6 — Your logo</div>
+      <span class="q">Add your logo</span>
+      <p class="hint">If you have a logo, pop it here (PNG, JPG or PDF). No logo? I can design one for you — just tick the option below.</p>
+      <div class="upload">
+        <label class="upbtn">📎 Add your logo
+          <input type="file" name="logo" accept=".png,.jpg,.jpeg,.svg,.pdf" id="logoFile">
+        </label>
+        <span id="fileName">No file chosen</span>
+      </div>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="logo_design" value="Yes - design a logo for me (add-on)"><span>I don't have a logo — design one for me (add-on)</span></label>
+      </div>
+    </div>
+
+    <!-- 7 photos & gallery -->
+    <div class="card">
+      <div class="step">Step 7 — Photos &amp; gallery</div>
+      <span class="q">Your photos</span>
+      <p class="hint">Send us examples of your work and we'll build you a <b>15-image gallery</b>, then use your other photos across the rest of the site. Your page has <b>numbered image spots</b> (below) — when you send your photos, just label each one with its number and we'll place it exactly where you want it.</p>
+      <div class="info" style="margin:0 0 16px">
+        <h3>Your numbered image spots</h3>
+        <ol class="slots">
+          <li><b>Image 1</b> — Main hero banner (top of the page)</li>
+          <li><b>Image 2</b> — About section photo</li>
+          <li><b>Images 3–4</b> — Service photos</li>
+          <li><b>Image 5</b> — Team / "meet us" photo</li>
+          <li><b>Gallery 1–15</b> — Showcase of your work</li>
+          <li><b>Image 6</b> — Footer / contact background</li>
+        </ol>
+      </div>
+      <div class="upload">
+        <label class="upbtn">📷 Add your photos
+          <input type="file" name="photos_files" accept="image/*" multiple id="photoFiles">
+        </label>
+        <span id="photoName">No files chosen</span>
+      </div>
+      <fieldset>
+        <legend>How would you like to handle photos? <span class="req">*</span></legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="photos" value="I'll send my own (labelled by number)" required><span>I'll send my own</span></label>
+          <label class="opt"><input type="radio" name="photos" value="Produce professional photos for me (add-on)"><span>Produce photos for me (add-on)</span></label>
+          <label class="opt"><input type="radio" name="photos" value="Use professional stock images"><span>Use professional stock</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- 8 reviews -->
+    <div class="card">
+      <div class="step">Step 8 — Reviews</div>
+      <fieldset>
+        <legend>Got customer reviews to feature?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="reviews" value="Yes - I'll send them"><span>Yes — I'll send them</span></label>
+          <label class="opt"><input type="radio" name="reviews" value="Not yet - leave space"><span>Not yet — leave space</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- 9 extras -->
+    <div class="card">
+      <div class="step">Step 9 — Optional extras</div>
+      <fieldset>
+        <legend>Anything you'd like added? <span style="color:var(--muted);font-weight:500;font-size:.85rem">(paid add-ons)</span></legend>
+        <p class="hint">Tap any extras you'd like — <b>each is a paid add-on</b> and I'll confirm the cost with you before doing anything. Leave them all unticked if the standard build is perfect for you.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="extras" value="Tagline / slogan"><span>Tagline / slogan</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Special offer banner"><span>Special offer banner</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Opening hours"><span>Opening hours</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Map & directions"><span>Map &amp; directions</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Social media links"><span>Social media links</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Awards & accreditations"><span>Awards &amp; accreditations</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Meet the team section"><span>Meet the team</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Price list"><span>Price list</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="WhatsApp chat button"><span>WhatsApp chat button</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Booking / enquiry calendar"><span>Booking calendar</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Before & after gallery"><span>Before &amp; after gallery</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Promo video"><span>Promo video</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Newsletter sign-up"><span>Newsletter sign-up</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Downloadable brochure"><span>Downloadable brochure</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Multiple service pages"><span>Multiple service pages</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Extra FAQs"><span>Extra FAQs</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Accessibility focus"><span>Accessibility focus</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Live chat"><span>Live chat</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Match a site I like (discuss)"><span>Match a site I like</span></label>
+          <label class="opt"><input type="checkbox" name="extras" value="Nothing else - keep it simple"><span>Nothing else — keep it simple</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- 9 contact (whatsapp/email only) -->
+    <div class="card">
+      <div class="step">Step 10 — Staying in touch</div>
+      <fieldset>
+        <legend>Best way for me to reach you about your build? <span class="req">*</span></legend>
+        <p class="hint">I'll send updates and your finished page this way.</p>
+        <div class="opts" style="margin-bottom:16px">
+          <label class="opt"><input type="radio" name="contact_method" value="Email" required><span>Email</span></label>
+          <label class="opt"><input type="radio" name="contact_method" value="WhatsApp"><span>WhatsApp</span></label>
+        </div>
+      </fieldset>
+      <label class="field">Email <span class="req">*</span></label>
+      <input type="email" name="email" required>
+      <label class="field" style="margin-top:14px">WhatsApp number <span style="color:var(--muted);font-weight:500">(if you chose WhatsApp)</span></label>
+      <input type="text" name="whatsapp" placeholder="e.g. 07700 900000">
+    </div>
+
+    <button class="submit" type="submit">Send my brief →</button>
+    <p class="foot-note">Your answers come straight to Des so your build can begin right away.</p>
+  </form>
+</div>
+
+<script>
+  var f=document.getElementById('logoFile');
+  if(f){f.addEventListener('change',function(){document.getElementById('fileName').textContent=f.files.length?f.files[0].name:'No file chosen';});}
+  var p=document.getElementById('photoFiles');
+  if(p){p.addEventListener('change',function(){document.getElementById('photoName').textContent=p.files.length?(p.files.length+' file'+(p.files.length>1?'s':'')+' chosen'):'No files chosen';});}
+</script>
+</body>
+</html>
