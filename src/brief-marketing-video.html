@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Marketing Video Brief — Local Business AI Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#16223e;--blue:#2f6bff;--blue-deep:#1f54d6;--mist:#f5f7fb;--txt:#3a455c;--muted:#7b879c;--line:#e6eaf2;--r:14px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--txt);background:var(--mist);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,legend{color:var(--navy);letter-spacing:-.01em}
+  .wrap{max-width:700px;margin:0 auto;padding:0 20px}
+  .top{background:var(--navy);color:#dbe4f7;padding:26px 0}
+  .top .wrap{display:flex;align-items:center;gap:10px}
+  .logo{font-weight:800;color:#fff;font-size:1.05rem}
+  .head{padding:32px 0 6px}
+  .pill{display:inline-block;background:#e3f0e6;color:#1f7a3d;font-weight:700;font-size:.78rem;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .head h1{font-size:clamp(1.6rem,4.5vw,2.25rem);font-weight:800;margin-bottom:10px}
+  .head p{color:var(--muted);font-size:1.02rem}
+  .progress-note{margin-top:12px;font-size:.9rem;color:var(--blue-deep);font-weight:600}
+  form{margin:22px 0 60px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:16px}
+  .step{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  legend,.q{font-weight:700;color:var(--navy);font-size:1.08rem;margin-bottom:4px;display:block}
+  .hint{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  fieldset{border:0}
+  .opts{display:flex;flex-wrap:wrap;gap:10px}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .opt span{display:block;border:1.5px solid var(--line);border-radius:11px;padding:11px 16px;font-weight:600;font-size:.94rem;color:var(--txt);cursor:pointer;transition:all .15s;background:#fff}
+  .opt input:checked + span{border-color:var(--blue);background:#eef3ff;color:var(--blue-deep);box-shadow:0 0 0 3px rgba(47,107,255,.1)}
+  .opt input:focus-visible + span{outline:2px solid var(--blue);outline-offset:2px}
+  label.field{display:block;font-weight:700;color:var(--navy);margin-bottom:6px}
+  input[type=text],input[type=email],input[type=url],textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;font:inherit;color:var(--navy);background:#fff;transition:border-color .15s}
+  input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.1)}
+  textarea{resize:vertical;min-height:80px}
+  .req{color:var(--blue)}
+  .addon{color:var(--muted);font-weight:500;font-size:.85rem}
+  .submit{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:16px 28px;font:700 1.05rem "Plus Jakarta Sans",sans-serif;cursor:pointer;width:100%;transition:background .15s,transform .1s}
+  .submit:hover{background:var(--blue-deep)}.submit:active{transform:scale(.99)}
+  .foot-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:14px}
+  .hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><span class="logo">◈ Local Business AI Hub</span></div></div>
+<div class="wrap">
+  <div class="head">
+    <span class="pill">✓ Payment received — thank you!</span>
+    <h1>Let&#x27;s create your marketing video</h1>
+    <p>Tell me what the video is for and the feel you want — I&#x27;ll turn it into a script and a finished video.</p>
+    <div class="progress-note">Takes about 3 minutes · everything comes straight to me</div>
+  </div>
+  <form name="brief-marketing-video" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/brief-thank-you.html">
+    <input type="hidden" name="form-name" value="brief-marketing-video">
+    <input type="hidden" name="service" value="AI Marketing Video">
+    <p class="hp"><label>Don't fill this in: <input name="bot-field"></label></p>
+    <div class="card"><div class="step">Step 1 — Your business</div><span class="q">The basics</span><p class="hint">So everything is set up for the right business in the right area.</p><label class="field" style="margin-top:6px">Business name <span class="req">*</span></label><input type="text" name="business_name" required><label class="field" style="margin-top:14px">Area you serve</label><input type="text" name="area" placeholder="e.g. Hounslow & West London"></div>
+<div class="card"><div class="step">Step 2 — The goal</div><fieldset><legend>What&#x27;s the video for? <span class="req">*</span></legend><p class="hint">Pick the main aim.</p><div class="opts"><label class="opt"><input type="radio" name="video_goal" value="Promote my business" required><span>Promote my business</span></label><label class="opt"><input type="radio" name="video_goal" value="Promote an offer"><span>Promote an offer</span></label><label class="opt"><input type="radio" name="video_goal" value="Explain a service"><span>Explain a service</span></label><label class="opt"><input type="radio" name="video_goal" value="Introduce the team"><span>Introduce the team</span></label><label class="opt"><input type="radio" name="video_goal" value="A social media reel"><span>A social media reel</span></label></div></fieldset></div>
+<div class="card"><div class="step">Step 3 — Where it&#x27;ll be used</div><fieldset><legend>Where will you use it?</legend><p class="hint">Tap all that apply.</p><div class="opts"><label class="opt"><input type="checkbox" name="video_use" value="Website"><span>Website</span></label><label class="opt"><input type="checkbox" name="video_use" value="Facebook"><span>Facebook</span></label><label class="opt"><input type="checkbox" name="video_use" value="Instagram"><span>Instagram</span></label><label class="opt"><input type="checkbox" name="video_use" value="TikTok"><span>TikTok</span></label><label class="opt"><input type="checkbox" name="video_use" value="YouTube"><span>YouTube</span></label><label class="opt"><input type="checkbox" name="video_use" value="WhatsApp"><span>WhatsApp</span></label><label class="opt"><input type="checkbox" name="video_use" value="Google Profile"><span>Google Profile</span></label><label class="opt"><input type="checkbox" name="video_use" value="Email"><span>Email</span></label></div></fieldset></div>
+<div class="card"><div class="step">Step 4 — Length</div><fieldset><legend>How long should it be? <span class="req">*</span></legend><div class="opts"><label class="opt"><input type="radio" name="video_length" value="15–30 seconds" required><span>15–30 seconds</span></label><label class="opt"><input type="radio" name="video_length" value="30–60 seconds"><span>30–60 seconds</span></label><label class="opt"><input type="radio" name="video_length" value="60–90 seconds"><span>60–90 seconds</span></label></div></fieldset></div>
+<div class="card"><div class="step">Step 5 — Tone</div><fieldset><legend>What feel are you after? <span class="req">*</span></legend><div class="opts"><label class="opt"><input type="radio" name="video_tone" value="Energetic" required><span>Energetic</span></label><label class="opt"><input type="radio" name="video_tone" value="Friendly"><span>Friendly</span></label><label class="opt"><input type="radio" name="video_tone" value="Professional"><span>Professional</span></label><label class="opt"><input type="radio" name="video_tone" value="Premium"><span>Premium</span></label><label class="opt"><input type="radio" name="video_tone" value="Fun &amp; light"><span>Fun &amp; light</span></label></div></fieldset></div>
+<div class="card"><div class="step">Step 6 — Style</div><fieldset><legend>How should it look? <span class="req">*</span></legend><div class="opts"><label class="opt"><input type="radio" name="video_style" value="AI presenter (talking head)" required><span>AI presenter (talking head)</span></label><label class="opt"><input type="radio" name="video_style" value="Text &amp; images only"><span>Text &amp; images only</span></label><label class="opt"><input type="radio" name="video_style" value="Voiceover over visuals"><span>Voiceover over visuals</span></label><label class="opt"><input type="radio" name="video_style" value="You decide for me"><span>You decide for me</span></label></div></fieldset></div>
+<div class="card"><div class="step">Step 7 — Key message</div><label class="field">What&#x27;s the one thing it must say? <span class="req">*</span></label><p class="hint">Your main message or offer — keep it short and punchy.</p><textarea name="key_message" required placeholder="e.g. 20 years keeping local homes warm — same-day boiler repairs, no call-out fee."></textarea></div>
+<div class="card"><div class="step">Step 8 — Add-on</div><fieldset><legend>Want a custom-produced video?</legend><p class="hint">Optional paid add-on (our Boutique service) — I&#x27;ll confirm the cost first.</p><div class="opts"><label class="opt"><input type="checkbox" name="addon" value="Yes — custom filmed/produced video (add-on)"><span>Yes — custom filmed/produced video (add-on)</span></label><label class="opt"><input type="checkbox" name="addon" value="No — AI-generated is perfect"><span>No — AI-generated is perfect</span></label></div></fieldset></div>
+<div class="card"><div class="step">Step 9 — Staying in touch</div><fieldset><legend>Best way for me to reach you about this? <span class="req">*</span></legend><p class="hint">I'll send updates and your finished work this way.</p><div class="opts" style="margin-bottom:16px"><label class="opt"><input type="radio" name="contact_method" value="Email" required><span>Email</span></label><label class="opt"><input type="radio" name="contact_method" value="WhatsApp"><span>WhatsApp</span></label></div></fieldset><label class="field">Email <span class="req">*</span></label><input type="email" name="email" required><label class="field" style="margin-top:14px">WhatsApp number <span class="addon">(if you chose WhatsApp)</span></label><input type="text" name="whatsapp" placeholder="e.g. 07700 900000"></div>
+    <button class="submit" type="submit">Send my brief →</button>
+    <p class="foot-note">Your answers come straight to Des so work can begin right away.</p>
+  </form>
+</div>
+</body>
+</html>
