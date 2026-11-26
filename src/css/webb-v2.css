@@ -417,6 +417,115 @@ img { display: block; max-width: 100%; height: auto; }
 .work-tile:hover .work-tile__link svg { transform: translate(2px,-2px); }
 @media (max-width: 860px) { .work-grid { grid-template-columns: 1fr; } }
 
+/* ===== Sector tiles — 7 image tiles with elegant text line ===== */
+.sectors {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.sector {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 300px;
+  background: #0b1126;
+  color: var(--soft);
+  text-decoration: none;
+  transition: transform .3s var(--ease);
+  isolation: isolate;
+  display: block;
+}
+.sector:hover { transform: translateY(-4px); }
+.sector img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  z-index: -2;
+  transition: transform .6s var(--ease);
+}
+.sector:hover img { transform: scale(1.05); }
+.sector__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(170deg, rgba(8,13,31,.25) 0%, rgba(8,13,31,.70) 55%, rgba(8,13,31,.92) 100%);
+  z-index: -1;
+}
+.sector--abstract {
+  background: radial-gradient(1200px 400px at 20% -10%, rgba(37,99,235,.35), transparent 60%),
+              radial-gradient(900px 400px at 85% 100%, rgba(139,92,246,.22), transparent 70%),
+              #0a1024;
+}
+.sector--abstract img { display: none; }
+.sector--abstract .sector__scrim { display: none; }
+.sector__inner {
+  position: relative;
+  padding: 26px 26px 28px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  height: 100%; min-height: inherit;
+}
+.sector__tag {
+  font-size: 11px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(245,247,255,.68);
+  margin: 0 0 6px;
+}
+.sector__name {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px; font-weight: 700; line-height: 1.1;
+  margin: 0 0 12px;
+  color: var(--soft);
+}
+.sector__list {
+  color: rgba(245,247,255,.80);
+  font-size: 14.5px; line-height: 1.55;
+  margin: 0;
+  max-width: 460px;
+}
+.sector--wide { grid-column: 1 / -1; min-height: 240px; }
+@media (max-width: 860px) {
+  .sectors { grid-template-columns: 1fr 1fr; }
+  .sector__name { font-size: 24px; }
+}
+@media (max-width: 560px) {
+  .sectors { grid-template-columns: 1fr; }
+  .sector { min-height: 240px; }
+}
+
+/* ===== Trades portfolio row ===== */
+.trades-portfolio {
+  margin-top: 56px;
+}
+.trades-portfolio__head { margin-bottom: 20px; }
+.trades-portfolio__head h3 {
+  font-size: 22px; font-weight: 700; color: var(--soft);
+  margin: 0 0 6px;
+}
+.trades-portfolio__head p { color: rgba(245,247,255,.72); margin: 0; font-size: 15px; }
+.trades-portfolio__grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+}
+.trades-portfolio__tile {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 14px 14px 18px;
+  text-decoration: none;
+  color: var(--soft);
+  transition: transform .3s var(--ease), background .3s var(--ease);
+}
+.trades-portfolio__tile:hover { transform: translateY(-3px); background: rgba(255,255,255,.07); }
+.trades-portfolio__shot {
+  display: block; width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.25);
+  margin-bottom: 14px;
+}
+.trades-portfolio__meta {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 4px;
+}
+.trades-portfolio__meta strong { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 15px; color: var(--soft); }
+.trades-portfolio__meta span { font-size: 13px; color: var(--cobalt); font-weight: 600; }
+@media (max-width: 860px) { .trades-portfolio__grid { grid-template-columns: 1fr; } }
+
 /* ===== "Everything your business needs" — product range (navy) ===== */
 .range { margin-top: 90px; }
 .range__head { margin-bottom: 42px; max-width: 760px; }
