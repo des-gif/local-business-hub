@@ -140,6 +140,59 @@
     });
   });
 
+  // --- Try it now — fills a template preview, no server call ---
+  var tryForm = document.getElementById('try-now-form');
+  if (tryForm) {
+    tryForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var biz   = (document.getElementById('try-biz').value   || '').trim();
+      var trade = (document.getElementById('try-trade').value || '').trim();
+      var town  = (document.getElementById('try-town').value  || '').trim();
+      if (!biz || !trade || !town) return;
+      var cap = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
+      document.getElementById('try-pv-brand').textContent = biz;
+      document.getElementById('try-pv-kicker').textContent = cap(trade) + ' · Local · Trusted';
+      document.getElementById('try-pv-headline').textContent = cap(trade) + ' services in ' + cap(town) + '.';
+      document.getElementById('try-pv-sub').textContent = biz + ' — friendly, dependable ' + trade.toLowerCase() + ' work across ' + cap(town) + ' and the surrounding area. Honest advice, work done properly, first time.';
+      var pv = document.getElementById('try-now-preview');
+      pv.hidden = false;
+      pv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
+  // --- Talk to us (floating widget) ---
+  var talkLauncher = document.getElementById('talk-launcher');
+  var talkPanel    = document.getElementById('talk-panel');
+  var talkClose    = document.getElementById('talk-close');
+  var talkForm     = document.getElementById('talk-form');
+  if (talkLauncher && talkPanel) {
+    function openTalk() {
+      talkPanel.hidden = false;
+      talkPanel.classList.add('is-open');
+      talkLauncher.setAttribute('aria-expanded', 'true');
+    }
+    function closeTalk() {
+      talkPanel.classList.remove('is-open');
+      talkLauncher.setAttribute('aria-expanded', 'false');
+      setTimeout(function () {
+        if (!talkPanel.classList.contains('is-open')) talkPanel.hidden = true;
+      }, 220);
+    }
+    talkLauncher.addEventListener('click', function () {
+      if (talkPanel.classList.contains('is-open')) closeTalk(); else openTalk();
+    });
+    if (talkClose) talkClose.addEventListener('click', closeTalk);
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && talkPanel.classList.contains('is-open')) closeTalk();
+    });
+    // Close talk when user opens the full enquiry dialog from it
+    talkPanel.querySelectorAll('[data-open-enquiry]').forEach(function (el) {
+      el.addEventListener('click', function () { closeTalk(); });
+    });
+    // Wire the mini form through the same AJAX path
+    wireForm(talkForm, document.getElementById('talk-err'), document.getElementById('talk-ok'));
+  }
+
   // --- Reveal-on-scroll (progressive enhancement) ---
   if ('IntersectionObserver' in window) {
     var reveals = document.querySelectorAll('.reveal');

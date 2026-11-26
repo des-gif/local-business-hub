@@ -269,7 +269,7 @@
       </a>
 
       <a class="sector sector--wide" href="#" data-open-enquiry data-interest="Business website — Other">
-        <img src="img/apps-coming-soon.jpg" alt="Other" loading="lazy" width="1536" height="1024">
+        <img src="img/care-ai-receptionist.jpg" alt="Other" loading="lazy" width="1536" height="1024">
         <div class="sector__scrim" aria-hidden="true"></div>
         <div class="sector__inner">
           <p class="sector__tag">Sector</p>
@@ -279,12 +279,47 @@
       </a>
     </div>
 
-    <!-- Slower-scrolling business-types strip -->
-    <div class="biz-strip" aria-label="Business types we cover">
-      <div class="biz-strip__track">
-        <span>Electrician</span><span>Plumber</span><span>Builder</span><span>Heating engineer</span><span>Roofer</span><span>Decorator</span><span>Carpenter</span><span>Tiler</span><span>Handyman</span><span>Locksmith</span><span>Solicitor</span><span>Accountant</span><span>Consultant</span><span>Financial adviser</span><span>Mortgage broker</span><span>HR consultant</span><span>Coach</span><span>Marketing agency</span><span>Café</span><span>Restaurant</span><span>Bakery</span><span>Catering</span><span>Pub &amp; bar</span><span>Hair salon</span><span>Barber</span><span>Beauty &amp; nails</span><span>Spa</span><span>Massage therapist</span><span>Aesthetics clinic</span><span>Personal trainer</span><span>Gym &amp; studio</span><span>Yoga &amp; Pilates</span><span>Nutritionist</span><span>Physio</span><span>Retail shop</span><span>Online shop</span><span>Florist</span><span>Pet shop</span><span>Driving instructor</span><span>Music teacher</span><span>Tutor</span><span>Dog walker</span><span>Mechanic</span><span>Cleaner</span><span>Photographer</span>
-        <!-- duplicate for seamless loop -->
-        <span>Electrician</span><span>Plumber</span><span>Builder</span><span>Heating engineer</span><span>Roofer</span><span>Decorator</span><span>Carpenter</span><span>Tiler</span><span>Handyman</span><span>Locksmith</span><span>Solicitor</span><span>Accountant</span><span>Consultant</span><span>Financial adviser</span><span>Mortgage broker</span><span>HR consultant</span><span>Coach</span><span>Marketing agency</span><span>Café</span><span>Restaurant</span><span>Bakery</span><span>Catering</span><span>Pub &amp; bar</span><span>Hair salon</span><span>Barber</span><span>Beauty &amp; nails</span><span>Spa</span><span>Massage therapist</span><span>Aesthetics clinic</span><span>Personal trainer</span><span>Gym &amp; studio</span><span>Yoga &amp; Pilates</span><span>Nutritionist</span><span>Physio</span><span>Retail shop</span><span>Online shop</span><span>Florist</span><span>Pet shop</span><span>Driving instructor</span><span>Music teacher</span><span>Tutor</span><span>Dog walker</span><span>Mechanic</span><span>Cleaner</span><span>Photographer</span>
+    <!-- Try it now — template preview, no AI, no server call -->
+    <div class="try-now" id="try-now">
+      <div class="try-now__head">
+        <p class="eyebrow eyebrow--light">Try it now</p>
+        <h3>See a quick homepage preview<br>for your business.</h3>
+        <p>Fill in three fields and we'll drop them into a basic homepage template so you can picture it. It's a sketch, not a finished site — a proper build starts with a conversation.</p>
+      </div>
+      <form class="try-now__form" id="try-now-form" novalidate>
+        <div class="try-now__fields">
+          <label>
+            <span>Business name</span>
+            <input type="text" name="biz" id="try-biz" required placeholder="e.g. Thorpe Electrical" autocomplete="organization">
+          </label>
+          <label>
+            <span>Trade or service</span>
+            <input type="text" name="trade" id="try-trade" required placeholder="e.g. Electrician" autocomplete="off">
+          </label>
+          <label>
+            <span>Town</span>
+            <input type="text" name="town" id="try-town" required placeholder="e.g. Ashford" autocomplete="address-level2">
+          </label>
+        </div>
+        <button class="btn btn--primary" type="submit">Show me the preview</button>
+      </form>
+      <div class="try-now__preview" id="try-now-preview" hidden aria-live="polite">
+        <div class="try-now__preview-inner">
+          <div class="try-now__preview-nav">
+            <span class="try-now__preview-brand" id="try-pv-brand">Your business</span>
+            <span class="try-now__preview-cta">Get in touch</span>
+          </div>
+          <div class="try-now__preview-body">
+            <p class="try-now__preview-kicker" id="try-pv-kicker">Local · Trusted · Nearby</p>
+            <h4 id="try-pv-headline">Expert service in your town.</h4>
+            <p id="try-pv-sub">Friendly, dependable work for homes and businesses — honest advice, work done properly, first time.</p>
+            <div class="try-now__preview-ctas">
+              <span class="btn btn--primary">Request a quote</span>
+              <span class="btn btn--ghost">Call today</span>
+            </div>
+          </div>
+        </div>
+        <p class="try-now__note">This is a template sketch. A real build is designed around your actual services, photos and area — <a href="#" data-open-enquiry data-interest="Business website">chat to Des</a>.</p>
       </div>
     </div>
 
@@ -397,32 +432,32 @@
         <div class="range-mini">
           <h4>AI Customer Response System</h4>
           <p>Ready-to-send email and message templates for every stage of the customer journey — from first enquiry to review request.</p>
-          <button type="button" data-open-enquiry data-interest="AI Customer Response System">Ask about this →</button>
+          <button type="button" data-open-enquiry data-interest="AI Customer Response System">Ask about this<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
         <div class="range-mini">
           <h4>Review &amp; Reputation System</h4>
           <p>A toolkit to consistently win more 5-star reviews, respond to feedback professionally and build a reputation that wins trust.</p>
-          <button type="button" data-open-enquiry data-interest="Review &amp; Reputation System">Ask about this →</button>
+          <button type="button" data-open-enquiry data-interest="Review &amp; Reputation System">Ask about this<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
         <div class="range-mini">
           <h4>Booking &amp; Enquiry Forms</h4>
           <p>Clean, conversion-focused contact and booking form copy designed to turn website visitors into real enquiries.</p>
-          <button type="button" data-open-enquiry data-interest="Booking &amp; Enquiry Forms">Ask about this →</button>
+          <button type="button" data-open-enquiry data-interest="Booking &amp; Enquiry Forms">Ask about this<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
         <div class="range-mini">
           <h4>Local SEO Starter Pack</h4>
           <p>Keyword targeting, page titles, meta descriptions and content guidance to help your business rank in local search.</p>
-          <button type="button" data-open-enquiry data-interest="Local SEO Starter Pack">Ask about this →</button>
+          <button type="button" data-open-enquiry data-interest="Local SEO Starter Pack">Ask about this<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
         <div class="range-mini">
           <h4>CEO Business Dashboard</h4>
           <p>A personalised dashboard of your key business metrics, priorities and actions — built to help you run your business, not just react to it.</p>
-          <button type="button" data-open-enquiry data-interest="CEO Business Dashboard">Ask about this →</button>
+          <button type="button" data-open-enquiry data-interest="CEO Business Dashboard">Ask about this<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
         <div class="range-mini">
           <h4>Specialist Business Support</h4>
           <p>Tailored AI support for specialist sectors including care, health, education and other regulated or niche businesses.</p>
-          <button type="button" data-open-enquiry data-interest="Specialist Business Support">Ask about this →</button>
+          <button type="button" data-open-enquiry data-interest="Specialist Business Support">Ask about this<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
         </div>
       </div>
     </div>
@@ -521,7 +556,7 @@
   <div class="container">
     <div class="about">
       <div class="about__media">
-        <img src="img/apps-coming-soon.jpg" alt="A still life of cobalt paper and chrome — the quiet, careful making behind every build" loading="lazy" width="1536" height="1024">
+        <img src="img/about-video-editor.jpg" alt="An editor at work — filmmaker turned care leader, making practical digital tools" loading="lazy" width="1536" height="1024">
       </div>
       <div class="about__body">
         <p class="eyebrow eyebrow--light">About</p>
@@ -653,7 +688,7 @@
         </div>
       </div>
       <div class="enq-band__media">
-        <img src="img/apps-coming-soon.jpg" alt="An ivory-walled gallery space with a blue glass portal" loading="lazy">
+        <img src="img/hero-glass-portal.jpg" alt="An ivory-walled gallery space with a blue glass portal" loading="lazy">
       </div>
     </div>
   </div>
@@ -726,6 +761,8 @@
           <option value="Hospitality website">Hospitality website</option>
           <option value="Salon / beauty website">Salon / beauty website</option>
           <option value="AI marketing kits">AI marketing kits</option>
+          <option value="Talk to us">Talk to us (call back)</option>
+          <option value="Apps coming soon — beta interest">Apps coming soon — beta interest</option>
         </select>
       </div>
       <div class="form-field">
@@ -752,6 +789,47 @@
       <p class="dialog__foot">Or email <a class="link" href="mailto:info@webbcareconsultancy.com">info@webbcareconsultancy.com</a> · call <a class="link" href="tel:+447876453800">07876 453800</a>.</p>
     </form>
   </div>
+</div>
+
+<!-- ============== Talk to us — floating widget (front-end only) ============== -->
+<button class="talk" type="button" id="talk-launcher" aria-haspopup="dialog" aria-expanded="false" aria-controls="talk-panel">
+  <span class="talk__icon" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.4 8.4 0 0 1-1.3 4.5A8.5 8.5 0 0 1 12 20a8.4 8.4 0 0 1-4.5-1.3L3 20l1.3-4.5A8.5 8.5 0 0 1 3 11.5a8.5 8.5 0 0 1 17 0z"/>
+    </svg>
+  </span>
+  <span class="talk__label">Talk to us</span>
+</button>
+
+<div class="talk-panel" id="talk-panel" role="dialog" aria-modal="false" aria-labelledby="talk-panel-title" hidden>
+  <div class="talk-panel__head">
+    <div>
+      <p class="talk-panel__eyebrow">Webb Digital</p>
+      <h3 id="talk-panel-title">Talk to us.</h3>
+      <p class="talk-panel__sub">Leave your details and Des will call back within a working day. Voice chat is coming soon.</p>
+    </div>
+    <button class="talk-panel__close" type="button" id="talk-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="talk-panel__quick">
+    <button type="button" data-open-enquiry data-interest="Care service website">I run a care service</button>
+    <button type="button" data-open-enquiry data-interest="Business website">I run a local business</button>
+    <button type="button" data-open-enquiry data-interest="General enquiry">Just curious</button>
+  </div>
+  <form class="talk-panel__form" id="talk-form" action="/.netlify/functions/enquiry" method="POST" novalidate>
+    <input type="hidden" name="type" value="Talk to us">
+    <input type="text" name="company-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
+    <label><span>Your name</span><input name="name" required autocomplete="name"></label>
+    <label><span>Business (optional)</span><input name="business" autocomplete="organization"></label>
+    <label><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
+    <label><span>Phone (optional)</span><input name="phone" type="tel" autocomplete="tel"></label>
+    <label><span>What would you like to chat about?</span><textarea name="message" rows="2" placeholder="One line is plenty."></textarea></label>
+    <button class="btn btn--primary" type="submit">Request a call back</button>
+    <p class="form-err" id="talk-err"></p>
+    <p class="form-ok" id="talk-ok">Thanks — Des will be in touch within a working day.</p>
+  </form>
+  <p class="talk-panel__foot">Prefer to type a proper enquiry? <a href="#" data-open-enquiry data-interest="General enquiry">Open the full form</a>.</p>
 </div>
 
 <script src="js/webb-v2.js" defer></script>
