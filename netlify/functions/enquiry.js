@@ -40,8 +40,8 @@ exports.handler = async (event) => {
   if (honeypot) {
     return { statusCode: 303, headers: { Location: THANKS_URL }, body: '' };
   }
-  if (!name || !phone || !email) {
-    return { statusCode: 400, body: 'Please fill in your name, phone and email.' };
+  if (!name || !email) {
+    return { statusCode: 400, body: 'Please fill in your name and email.' };
   }
 
   const TO = process.env.ENQUIRY_TO || 'des@webbcareconsultancy.com';
