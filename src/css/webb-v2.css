@@ -1010,6 +1010,10 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* ===== Talk to us (floating widget) ===== */
+/* `display: inline-flex` below beats the UA style for [hidden], so re-state
+   the hide rule explicitly — webb-v2.js sets `.hidden = true` once Retell is
+   active, and this rule is what actually makes the pill disappear. */
+.talk[hidden], .talk-panel[hidden] { display: none !important; }
 .talk {
   position: fixed; right: 20px; bottom: 20px; z-index: 60;
   display: inline-flex; align-items: center; gap: 8px;
