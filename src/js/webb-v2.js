@@ -78,45 +78,52 @@
   });
 
   // --- Form submit (AJAX) ---
-  if (form) {
-    form.addEventListener('submit', async function (ev) {
+  function wireForm(f, err, ok) {
+    if (!f) return;
+    f.addEventListener('submit', async function (ev) {
       ev.preventDefault();
-      if (errEl) errEl.style.display = 'none';
-      if (okEl) okEl.style.display = 'none';
+      if (err) err.style.display = 'none';
+      if (ok) ok.style.display = 'none';
 
-      var fd = new FormData(form);
+      var fd = new FormData(f);
       var payload = {};
       fd.forEach(function (v, k) { payload[k] = v; });
 
-      var btn = form.querySelector('button[type=submit]');
+      var btn = f.querySelector('button[type=submit]');
       var old = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
       try {
-        var res = await fetch(form.action, {
+        var res = await fetch(f.action, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(payload),
         });
         if (res.ok) {
-          if (okEl) okEl.style.display = 'block';
-          form.reset();
+          if (ok) ok.style.display = 'block';
+          f.reset();
         } else {
           var txt;
           try { txt = (await res.json()).error; } catch (_) { txt = null; }
           if (!txt) txt = 'Something went wrong. Please email des@webbcareconsultancy.com or call 07876 453800.';
-          if (errEl) { errEl.textContent = txt; errEl.style.display = 'block'; }
+          if (err) { err.textContent = txt; err.style.display = 'block'; }
         }
       } catch (e) {
-        if (errEl) {
-          errEl.textContent = 'Could not reach the server. Please email des@webbcareconsultancy.com or call 07876 453800.';
-          errEl.style.display = 'block';
+        if (err) {
+          err.textContent = 'Could not reach the server. Please email des@webbcareconsultancy.com or call 07876 453800.';
+          err.style.display = 'block';
         }
       } finally {
         if (btn) { btn.disabled = false; btn.textContent = old || 'Send my enquiry'; }
       }
     });
   }
+  wireForm(form, errEl, okEl);
+  wireForm(
+    document.getElementById('tell-us-form'),
+    document.getElementById('tu-err'),
+    document.getElementById('tu-ok')
+  );
 
   // --- Reveal-on-scroll (progressive enhancement) ---
   if ('IntersectionObserver' in window) {
