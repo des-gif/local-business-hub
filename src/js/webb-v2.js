@@ -161,10 +161,20 @@
   }
 
   // --- Talk to us (floating widget) ---
+  // Retell voice/avatar host: when the <script id="retell-widget"> actually
+  // loads (i.e. its `src` attribute is set, not the on-hold placeholder),
+  // the shop's own "Talk to us" pill hides so Retell's FAB is the only
+  // bottom-right CTA. See src/index.html head for activation steps.
+  var retellTag = document.getElementById('retell-widget');
+  var retellActive = !!(retellTag && retellTag.src);
   var talkLauncher = document.getElementById('talk-launcher');
   var talkPanel    = document.getElementById('talk-panel');
   var talkClose    = document.getElementById('talk-close');
   var talkForm     = document.getElementById('talk-form');
+  if (retellActive && talkLauncher) {
+    talkLauncher.hidden = true;
+    if (talkPanel) talkPanel.hidden = true;
+  }
   if (talkLauncher && talkPanel) {
     function openTalk() {
       talkPanel.hidden = false;

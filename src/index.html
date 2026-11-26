@@ -13,6 +13,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/webb-v2.css">
+
+<!-- ========== Talk to us — Retell voice/avatar host (ON HOLD) ==========
+     This markup mirrors the LSN site's widget (same shape, same Retell
+     widget version). Right now it is INACTIVE because the `src` attribute
+     is renamed to `data-on-hold-src` (browsers only load scripts with a
+     real `src`), and the public key / agent id below are placeholders.
+
+     TO ACTIVATE once Des has a Retell agent for the shop (NEEDS DES below):
+       1. Replace PUBLIC_KEY_PENDING with the real public key (format: public_key_...)
+       2. Replace AGENT_ID_PENDING with the real agent id (format: agent_...)
+       3. Rename `data-on-hold-src` -> `src`
+     Deploy. The floating "Talk to us" pill will hide itself automatically
+     once the Retell widget loads (handled in js/webb-v2.js). =============
+-->
+<script
+  id="retell-widget"
+  data-on-hold-src="https://dashboard.retellai.com/retell-widget-v2.js"
+  type="module"
+  data-voice-public-key="PUBLIC_KEY_PENDING"
+  data-voice-agent-id="AGENT_ID_PENDING"
+  data-title="Webb Digital"
+  data-bot-name="Webb Digital Assistant"
+  data-fab-text="Talk to our assistant"
+  data-theme-color="#080D1F"
+  data-component-color="#2563EB"
+></script>
 </head>
 <body>
 
