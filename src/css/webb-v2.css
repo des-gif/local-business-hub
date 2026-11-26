@@ -807,6 +807,66 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .link:hover { border-bottom-color: var(--cobalt); }
 
+/* ===== See it in action — click-to-play Shorts ===== */
+.shorts-strip {
+  margin-top: 56px;
+  padding: 32px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+}
+.shorts-strip__head { text-align: center; margin-bottom: 24px; }
+.shorts-strip__head h3 {
+  font-family: 'Manrope', sans-serif; font-weight: 700;
+  font-size: 22px; color: var(--soft); margin: 6px 0 4px;
+}
+.shorts-strip__head p { color: rgba(245,247,255,.7); font-size: 14px; margin: 0; }
+.shorts-strip__grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 20px; max-width: 640px; margin: 0 auto;
+}
+.short {
+  position: relative; overflow: hidden;
+  border-radius: 14px; border: none; padding: 0;
+  background: #0b1126;
+  aspect-ratio: 9 / 16;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  transition: transform .25s var(--ease);
+}
+.short:hover { transform: translateY(-3px); }
+.short__thumb {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: .9;
+  transition: opacity .25s var(--ease);
+}
+.short:hover .short__thumb { opacity: 1; }
+.short__title {
+  position: absolute; left: 14px; right: 14px; bottom: 14px;
+  color: #fff; font-weight: 700; font-size: 14px;
+  text-align: left; line-height: 1.3;
+  text-shadow: 0 2px 10px rgba(0,0,0,.8);
+}
+.short__play {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,.92); color: #0b1126;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  transition: transform .2s var(--ease);
+}
+.short:hover .short__play { transform: translate(-50%, -50%) scale(1.06); }
+.short__frame {
+  width: 100%; aspect-ratio: 9 / 16;
+  border: none; border-radius: 14px;
+  background: #000;
+}
+@media (max-width: 520px) {
+  .shorts-strip__grid { grid-template-columns: 1fr; max-width: 320px; }
+}
+
 /* ===== Slow-scrolling business-types strip ===== */
 .biz-strip {
   margin-top: 40px;

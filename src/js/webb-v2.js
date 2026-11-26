@@ -125,6 +125,21 @@
     document.getElementById('tu-ok')
   );
 
+  // --- Click-to-play YouTube Shorts (privacy-enhanced nocookie embed) ---
+  document.querySelectorAll('.short[data-video]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-video');
+      if (!id) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      iframe.title = btn.getAttribute('aria-label') || 'YouTube Short';
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'short__frame';
+      btn.replaceWith(iframe);
+    });
+  });
+
   // --- Reveal-on-scroll (progressive enhancement) ---
   if ('IntersectionObserver' in window) {
     var reveals = document.querySelectorAll('.reveal');
