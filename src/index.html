@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Local Business AI Hub — Complete marketing kit, generated in minutes</title>
-<meta name="description" content="Answer 10 questions. Get a landing page, 5 email templates, 10 social posts and a professional video — all AI-generated for your business.">
+<title>Webb Digital — Websites, apps and AI for care providers and local businesses</title>
+<meta name="description" content="Webb Digital builds websites, apps and AI tools for care providers and local businesses — from £495 for a business site to £995 for a care service site, Safer Recruitment, Simplicity and AI receptionist.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/webbdigital.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
@@ -16,16 +17,16 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="container">
-    <a class="logo" href="#" onclick="goHome();return false;">
-      <span class="logo-icon">◈</span> Local Business AI Hub
+    <a class="logo" href="#top" onclick="goHome();return false;">
+      <span class="logo-icon">◈</span> Webb Digital
     </a>
     <div class="nav-links">
-      <a href="#how-it-works">How it works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#what-you-get">What you get</a>
-      <a href="#" onclick="scrollForm();return false;">Build my kit</a>
+      <a href="#care-providers">For care providers</a>
+      <a href="#local-businesses">For local businesses</a>
+      <a href="#apps-coming">Apps</a>
+      <a href="#enquiry">Enquire</a>
     </div>
-    <button class="btn-primary" onclick="scrollForm()">Get Started</button>
+    <a class="btn-primary" href="#enquiry">Enquire</a>
   </div>
 </nav>
 
@@ -35,27 +36,190 @@
 <div id="page-form">
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="container">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        AI-powered · 40+ business types · Done for you
+        Webb Digital · a Webb Care Consultancy company
       </div>
-      <h1>AI for Local Businesses</h1>
-      <p class="hero-lead">Your business does not need more jargon. It needs more enquiries, better follow-up and a professional online presence that actually helps you win work.</p>
-      <div class="hero-body">
-        <p>Everyone is talking about AI, but most small business owners are still being left to work it out on their own. That is where we come in.</p>
-        <p>Local Business AI Hub helps builders, plumbers, cleaners, hairdressers, consultants, care providers and other local businesses use AI in a practical way. We create the tools, content and systems your business needs to look professional, get found online, respond faster and stop losing opportunities.</p>
+      <h1>Websites, apps and AI<br><em>for care providers and local businesses</em></h1>
+      <p class="hero-lead">From a smart, simple business website to a full care provider platform — built by people who've run the services, not just coded them.</p>
+
+      <!-- Two doors -->
+      <div class="two-doors">
+        <a class="door" href="#care-providers">
+          <div class="door-badge">For care providers</div>
+          <div class="door-title">Websites, Safer Recruitment, Simplicity &amp; more</div>
+          <div class="door-sub">Websites from £995 · built by a former Ofsted and CQC Registered Manager.</div>
+          <div class="door-cta">See what's included →</div>
+        </a>
+        <a class="door" href="#local-businesses">
+          <div class="door-badge">For local businesses &amp; professionals</div>
+          <div class="door-title">Fast websites, AI kits and tools — trades, pros, food, retail</div>
+          <div class="door-sub">Websites from £495 · optional £29 / month hosting &amp; changes.</div>
+          <div class="door-cta">See what's included →</div>
+        </a>
       </div>
-      <div class="hero-pills">
-        <span class="hero-pill">No tech skills</span>
-        <span class="hero-pill">No confusing setup</span>
-        <span class="hero-pill">No expensive agency nonsense</span>
+    </div>
+  </section>
+
+  <!-- CARE PROVIDERS -->
+  <section class="section" id="care-providers">
+    <div class="container">
+      <p class="eyebrow">For care providers</p>
+      <h2 class="section-title" style="margin-bottom:10px;">Everything a modern care provider needs</h2>
+      <p class="section-sub">Built by a former Ofsted and CQC Registered Manager — websites, recruitment, policies, incident recording and an AI receptionist, in plain English.</p>
+
+      <div class="wd-grid wd-grid-3">
+        <article class="wd-card">
+          <div class="wd-tier">Website</div>
+          <h3>Care service websites</h3>
+          <p>A proper website for your home or service — About, Careers, Referrals, Safeguarding — mobile-first and ready to connect to Google Business.</p>
+          <div class="wd-price"><span>From</span> £995</div>
+          <div class="wd-portfolio">
+            <a href="https://crofton-house.netlify.app" target="_blank" rel="noopener">crofton-house.netlify.app</a>
+            <a href="https://red-kite-associates.netlify.app" target="_blank" rel="noopener">red-kite-associates.netlify.app</a>
+          </div>
+          <a class="wd-btn" href="#enquiry" data-enquiry-type="care">Book a demo</a>
+        </article>
+
+        <article class="wd-card">
+          <div class="wd-tier">Recruitment</div>
+          <h3>Safer Recruitment system</h3>
+          <p>A full applicant pipeline matched to Keeping Children Safe in Education and Working Together — references, DBS, right to work, interview records, flags and alerts.</p>
+          <div class="wd-price-note">Priced per service &amp; team size.</div>
+          <a class="wd-btn" href="#enquiry" data-enquiry-type="care">Book a demo</a>
+        </article>
+
+        <article class="wd-card">
+          <div class="wd-tier">Compliance</div>
+          <h3>Simplicity</h3>
+          <p>Policies, documents and staff sign-off in one place. Managers see who's signed what; reminders chase the rest automatically; every version is kept.</p>
+          <div class="wd-price-note">Priced per home / service.</div>
+          <a class="wd-btn" href="#enquiry" data-enquiry-type="care">Book a demo</a>
+        </article>
+
+        <article class="wd-card">
+          <div class="wd-tier">Clinical</div>
+          <h3>Restraint Log</h3>
+          <p>Digital physical-intervention recording with reviewer sign-off, debrief and reportable-event flags. Replaces paper books and spreadsheet trackers.</p>
+          <div class="wd-price-note">Priced per service.</div>
+          <a class="wd-btn" href="#enquiry" data-enquiry-type="care">Book a demo</a>
+        </article>
+
+        <article class="wd-card">
+          <div class="wd-tier">AI</div>
+          <h3>AI receptionist</h3>
+          <p>A phone and web agent that answers common questions, routes real ones to the right person and takes messages — so referrals and family calls don't get missed.</p>
+          <div class="wd-price-note">Priced per home / service.</div>
+          <a class="wd-btn" href="#enquiry" data-enquiry-type="care">Book a demo</a>
+        </article>
       </div>
-      <p class="hero-close">Just clear, affordable, done-for-you AI support built around your business.</p>
-      <div class="hero-actions">
-        <button class="btn-primary btn-xl" onclick="scrollForm()">Get Started</button>
-        <a href="examples.html" class="hero-examples-link">See examples →</a>
+
+      <p class="wd-strap">Built by a former Ofsted and CQC Registered Manager.</p>
+    </div>
+  </section>
+
+  <!-- LOCAL BUSINESSES INTRO -->
+  <section class="section bg-subtle" id="local-businesses">
+    <div class="container">
+      <p class="eyebrow">For local businesses &amp; professionals</p>
+      <h2 class="section-title" style="margin-bottom:10px;">A professional website — fast, affordable, built around your trade</h2>
+      <p class="section-sub">Websites from £495, with optional £29 / month hosting &amp; ongoing changes. Below are the trades and professions we already work with — if you're not on the list, we probably still cover you.</p>
+
+      <div class="wd-chips" aria-label="Business types">
+        <span class="wd-chip wd-chip-lead">Trades</span>
+        <span class="wd-chip">Electrician</span>
+        <span class="wd-chip">Plumber</span>
+        <span class="wd-chip">Builder</span>
+        <span class="wd-chip">Heating engineer</span>
+        <span class="wd-chip">Roofer</span>
+        <span class="wd-chip">Decorator</span>
+        <span class="wd-chip">Carpenter / joiner</span>
+        <span class="wd-chip">Tiler</span>
+        <span class="wd-chip">Handyman</span>
+        <span class="wd-chip">Locksmith</span>
+      </div>
+      <div class="wd-chips">
+        <span class="wd-chip wd-chip-lead">Professional services</span>
+        <span class="wd-chip">Solicitor</span>
+        <span class="wd-chip">Accountant</span>
+        <span class="wd-chip">Consultant</span>
+        <span class="wd-chip">Financial adviser</span>
+        <span class="wd-chip">Mortgage broker</span>
+        <span class="wd-chip">HR consultant</span>
+        <span class="wd-chip">Coach</span>
+        <span class="wd-chip">Marketing agency</span>
+      </div>
+      <div class="wd-chips">
+        <span class="wd-chip wd-chip-lead">Food &amp; hospitality</span>
+        <span class="wd-chip">Café / coffee shop</span>
+        <span class="wd-chip">Restaurant / takeaway</span>
+        <span class="wd-chip">Bakery</span>
+        <span class="wd-chip">Catering</span>
+        <span class="wd-chip">Pub / bar</span>
+      </div>
+      <div class="wd-chips">
+        <span class="wd-chip wd-chip-lead">Beauty &amp; wellbeing</span>
+        <span class="wd-chip">Hair salon</span>
+        <span class="wd-chip">Barber</span>
+        <span class="wd-chip">Beauty &amp; nails</span>
+        <span class="wd-chip">Spa</span>
+        <span class="wd-chip">Massage therapist</span>
+        <span class="wd-chip">Aesthetics clinic</span>
+      </div>
+      <div class="wd-chips">
+        <span class="wd-chip wd-chip-lead">Fitness</span>
+        <span class="wd-chip">Personal trainer</span>
+        <span class="wd-chip">Gym / studio</span>
+        <span class="wd-chip">Yoga / Pilates</span>
+        <span class="wd-chip">Nutritionist</span>
+        <span class="wd-chip">Physio / osteo</span>
+      </div>
+      <div class="wd-chips">
+        <span class="wd-chip wd-chip-lead">Retail</span>
+        <span class="wd-chip">Retail shop</span>
+        <span class="wd-chip">Online shop</span>
+        <span class="wd-chip">Florist</span>
+        <span class="wd-chip">Pet shop</span>
+      </div>
+      <div class="wd-chips">
+        <span class="wd-chip wd-chip-lead">Other</span>
+        <span class="wd-chip">Driving instructor</span>
+        <span class="wd-chip">Music teacher</span>
+        <span class="wd-chip">Tutor</span>
+        <span class="wd-chip">Dog walker / groomer</span>
+        <span class="wd-chip">Mechanic</span>
+        <span class="wd-chip">Cleaner</span>
+        <span class="wd-chip">Photographer</span>
+        <span class="wd-chip">Something else</span>
+      </div>
+
+      <h3 class="wd-sub-h">Trades portfolio</h3>
+      <div class="wd-grid wd-grid-3 wd-portfolio-grid">
+        <a class="wd-pf" href="https://athind-construction.netlify.app" target="_blank" rel="noopener">
+          <div class="wd-pf-name">A Thind Construction</div>
+          <div class="wd-pf-trade">Builder · London</div>
+          <div class="wd-pf-url">athind-construction.netlify.app</div>
+        </a>
+        <a class="wd-pf" href="https://antwired.netlify.app" target="_blank" rel="noopener">
+          <div class="wd-pf-name">Ant Wired</div>
+          <div class="wd-pf-trade">Electrician · Ashford, Kent</div>
+          <div class="wd-pf-url">antwired.netlify.app</div>
+        </a>
+        <a class="wd-pf" href="https://bwheatingplumbing.co.uk" target="_blank" rel="noopener">
+          <div class="wd-pf-name">BW Heating &amp; Plumbing</div>
+          <div class="wd-pf-trade">Heating engineer · Edenbridge</div>
+          <div class="wd-pf-url">bwheatingplumbing.co.uk</div>
+        </a>
+      </div>
+
+      <div class="wd-website-offer">
+        <div>
+          <h3>Website &amp; monthly care</h3>
+          <p>From <strong>£495 one-off build</strong> + optional <strong>£29 / month</strong> hosting, changes and small content updates. Mobile-first, enquiry form, Google Business &amp; social links, ready in days.</p>
+        </div>
+        <a class="wd-btn wd-btn-big" href="#enquiry" data-enquiry-type="local">Get a quote</a>
       </div>
     </div>
   </section>
@@ -93,8 +257,8 @@
         </div>
         <div class="step-card">
           <div class="step-number">02</div>
-          <h3>AI generates everything</h3>
-          <p>Claude AI writes your landing page, emails and social posts. HeyGen creates your talking-head marketing video automatically.</p>
+          <h3>Your kit is generated</h3>
+          <p>We generate your landing page copy, emails and social posts, plus a short talking-head marketing video — automatically, in under a minute.</p>
         </div>
         <div class="step-card">
           <div class="step-number">03</div>
@@ -108,9 +272,9 @@
   <!-- PRICING -->
   <section class="section pricing-bg" id="pricing">
     <div class="container">
-      <p class="eyebrow eyebrow-light">Pricing</p>
-      <h2 class="section-title light" style="margin-bottom:12px;">Simple, transparent pricing</h2>
-      <p class="pricing-intro">From instant self-serve content to fully produced video — pick the option that fits your business right now.</p>
+      <p class="eyebrow eyebrow-light">AI marketing kits</p>
+      <h2 class="section-title light" style="margin-bottom:12px;">Marketing content, generated for you</h2>
+      <p class="pricing-intro">Not ready for a full website yet? Pick a kit, answer 10 questions, and get professional landing copy, emails, social posts and a short video — ready to use.</p>
       <div class="pricing-grid">
 
         <!-- 1 — Starter -->
@@ -336,12 +500,12 @@
       <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
         <div style="width:100%;max-width:300px;">
           <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);">
-            <iframe src="https://www.youtube-nocookie.com/embed/IrA8-mTvmx8" title="Local Business AI Hub — example 1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/IrA8-mTvmx8" title="Webb Digital — example 1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
         <div style="width:100%;max-width:300px;">
           <div style="position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);">
-            <iframe src="https://www.youtube-nocookie.com/embed/oj-cPpoI5dc" title="Local Business AI Hub — example 2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/oj-cPpoI5dc" title="Webb Digital — example 2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:var(--r);" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
       </div>
@@ -357,13 +521,81 @@
     </div>
   </div>
 
+  <!-- APPS COMING SOON -->
+  <section class="section" id="apps-coming">
+    <div class="container">
+      <p class="eyebrow">Apps coming soon</p>
+      <h2 class="section-title" style="margin-bottom:10px;">Practical apps for your home and business</h2>
+      <p class="section-sub">New in-house apps we're building in-house for homeowners and local tradespeople.</p>
+      <div class="wd-grid wd-grid-3">
+        <div class="wd-app">
+          <div class="wd-app-tag">Coming soon</div>
+          <h3>Electrical usage monitoring</h3>
+          <p>See where your electricity is really going — by room, by appliance, by time of day — and spot the easy wins before the bill lands.</p>
+        </div>
+        <div class="wd-app">
+          <div class="wd-app-tag">Coming soon</div>
+          <h3>Lighting &amp; shading planner</h3>
+          <p>Plan smart lighting and shading room-by-room, with a visual preview and a parts list your electrician can quote from.</p>
+        </div>
+        <div class="wd-app">
+          <div class="wd-app-tag">Coming soon</div>
+          <h3>Home electrical self-checklist</h3>
+          <p>Walk through your home with your phone: sockets, lights, consumer unit, smoke alarms. A plain-English report tells you what's fine and what to get an electrician to look at.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY FORM -->
+  <section class="section bg-subtle" id="enquiry">
+    <div class="container" style="max-width:720px;">
+      <p class="eyebrow">Talk to us</p>
+      <h2 class="section-title" style="margin-bottom:10px;">Tell us about your project</h2>
+      <p class="section-sub">A real person (Des) reads every one of these and replies within a working day.</p>
+      <form id="wd-enquiry" class="wd-form" action="/.netlify/functions/enquiry" method="POST" novalidate>
+        <input type="text" name="company-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;">
+        <div class="wd-row">
+          <label><span>You are</span>
+            <select name="type" id="wd-type" required>
+              <option value="">— Choose —</option>
+              <option value="Care provider">Care provider</option>
+              <option value="Local business or professional">Local business or professional</option>
+              <option value="Something else">Something else</option>
+            </select>
+          </label>
+          <label><span>Your name</span>
+            <input type="text" name="name" required autocomplete="name">
+          </label>
+        </div>
+        <div class="wd-row">
+          <label><span>Business / service name</span>
+            <input type="text" name="business" autocomplete="organization">
+          </label>
+          <label><span>Phone</span>
+            <input type="tel" name="phone" required autocomplete="tel">
+          </label>
+        </div>
+        <label><span>Email</span>
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label><span>What are you looking for? (optional)</span>
+          <textarea name="message" rows="4" placeholder="e.g. a children's home website, an electrician's site, Simplicity for 3 homes…"></textarea>
+        </label>
+        <button class="wd-btn wd-btn-big" type="submit">Send enquiry</button>
+        <p class="wd-formfoot">Goes straight to Des at Webb Digital. We never share your details.</p>
+        <div id="wd-form-err" class="form-error" style="display:none;"></div>
+      </form>
+    </div>
+  </section>
+
   <!-- THE FORM -->
   <section class="section form-bg" id="form-top">
     <div class="container">
       <div class="form-header">
         <p class="eyebrow eyebrow-light">Build your kit</p>
         <h2 class="section-title light">Tell us about your business</h2>
-        <p class="form-header-sub">10 questions · under 5 minutes · your API keys are never exposed</p>
+        <p class="form-header-sub">10 questions · under 5 minutes · instant delivery</p>
       </div>
 
       <div class="form-card" id="main-form">
@@ -569,7 +801,7 @@
             Generate My Complete Marketing Kit
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
-          <p class="submit-note">Takes 30–60 seconds. Your API keys are stored only in Netlify's secure environment.</p>
+          <p class="submit-note">Takes 30–60 seconds. You'll be reviewing your kit before the end of the next coffee break.</p>
           <div id="form-err" class="form-error" style="display:none;"></div>
         </div>
 
@@ -713,36 +945,106 @@
 </div><!-- /page-results -->
 
 
+<!-- TESTIMONIALS (hidden until we have real ones) -->
+<section class="section" id="testimonials" hidden aria-hidden="true">
+  <div class="container">
+    <p class="eyebrow">What clients say</p>
+    <h2 class="section-title">Trusted by real local businesses and care providers</h2>
+    <div class="wd-grid wd-grid-3" id="wd-testimonials">
+      <!-- Testimonials live here. Nothing is shown until a real quote replaces this comment. -->
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><span class="logo-icon">◈</span> Local Business AI Hub</div>
-      <p>AI-powered marketing kits for UK local businesses.</p>
+      <div class="footer-logo"><span class="logo-icon">◈</span> Webb Digital</div>
+      <p>Websites, apps and AI for care providers and local businesses.</p>
     </div>
     <div class="footer-cols">
       <div>
-        <h4>Product</h4>
-        <a href="#how-it-works">How it works</a>
-        <a href="#what-you-get">What you get</a>
-        <a href="#form-top">Build my kit</a>
+        <h4>For care providers</h4>
+        <a href="#care-providers">Care service websites</a>
+        <a href="#care-providers">Safer Recruitment</a>
+        <a href="#care-providers">Simplicity</a>
+        <a href="#care-providers">Restraint Log</a>
+        <a href="#care-providers">AI receptionist</a>
       </div>
       <div>
-        <h4>Company</h4>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#">Privacy</a>
-        <a href="/admin.html" target="_blank" rel="noopener">Admin</a>
+        <h4>For local businesses</h4>
+        <a href="#local-businesses">Websites from £495</a>
+        <a href="#pricing">AI marketing kits</a>
+        <a href="#apps-coming">Apps coming soon</a>
+        <a href="#enquiry">Enquire</a>
       </div>
     </div>
   </div>
   <div class="footer-base">
     <div class="container footer-base-inner">
-      <span>© 2026 Local Business AI Hub. All rights reserved.</span>
-      <span>Built by Webb Care Consultancy</span>
+      <span>© 2026 Webb Digital. All rights reserved.</span>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <div class="container">
+      <p>Webb Digital is a trading name of Webb Care Consultancy Limited, 20–22 Wenlock Road, London N1 7GU. Registered in England &amp; Wales, company number 13926277.</p>
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  // Enquiry form: AJAX submit so we can show thanks without a flash
+  var f = document.getElementById('wd-enquiry');
+  if (!f) return;
+  // Pre-select care/local when the user clicked an in-page CTA
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('[data-enquiry-type]') : null;
+    if (!a) return;
+    var sel = document.getElementById('wd-type');
+    if (!sel) return;
+    var want = a.getAttribute('data-enquiry-type');
+    if (want === 'care') sel.value = 'Care provider';
+    else if (want === 'local') sel.value = 'Local business or professional';
+  });
+  f.addEventListener('submit', async function(ev){
+    ev.preventDefault();
+    var err = document.getElementById('wd-form-err');
+    err.style.display = 'none';
+    var fd = new FormData(f);
+    var payload = {};
+    fd.forEach(function(v, k){ payload[k] = v; });
+    var btn = f.querySelector('button[type=submit]');
+    btn.disabled = true;
+    var oldLabel = btn.textContent;
+    btn.textContent = 'Sending…';
+    try {
+      var res = await fetch(f.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (res.redirected) { window.location = res.url; return; }
+      if (!res.ok) {
+        var txt = await res.text();
+        err.textContent = txt || 'Something went wrong. Please try again or email des@webbcareconsultancy.com.';
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = oldLabel;
+        return;
+      }
+      var data = await res.json().catch(function(){ return { thanks: '/thanks.html' }; });
+      window.location = (data && data.thanks) || '/thanks.html';
+    } catch (e) {
+      err.textContent = 'Could not reach the server. Please try again, or email des@webbcareconsultancy.com.';
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = oldLabel;
+    }
+  });
+})();
+</script>
 
 <script src="js/app.js"></script>
 </body>

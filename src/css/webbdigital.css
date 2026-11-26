@@ -1,0 +1,98 @@
+/* ================= WEBB DIGITAL ADDITIONS ================= */
+
+/* Hero tweaks */
+.hero h1 br{display:block;}
+.hero h1 em{display:inline-block;margin-top:4px;}
+@media(max-width:640px){.hero h1{font-size:30px;line-height:1.1;}.hero h1 em{font-size:26px;}}
+
+/* Two doors */
+.two-doors{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:860px;margin:40px auto 0;}
+@media(max-width:720px){.two-doors{grid-template-columns:1fr;}}
+.door{display:flex;flex-direction:column;gap:6px;padding:22px 20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:16px;color:#fff;text-align:left;transition:all .18s;backdrop-filter:blur(6px);}
+.door:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);transform:translateY(-2px);}
+.door-badge{display:inline-block;align-self:flex-start;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.14);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#c7d2fe;}
+.door-title{font-size:19px;font-weight:800;line-height:1.3;color:#fff;margin-top:6px;}
+.door-sub{font-size:14px;color:rgba(255,255,255,.75);line-height:1.5;}
+.door-cta{margin-top:6px;font-size:13px;font-weight:700;color:#93c5fd;}
+
+/* Section sub */
+.section-sub{font-size:16px;color:var(--text);max-width:720px;line-height:1.65;margin-bottom:36px;}
+
+/* WD cards (service tiles) */
+.wd-grid{display:grid;gap:16px;}
+.wd-grid-3{grid-template-columns:repeat(3,1fr);}
+@media(max-width:900px){.wd-grid-3{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.wd-grid-3{grid-template-columns:1fr;}}
+.wd-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px;transition:box-shadow .18s,transform .18s,border-color .18s;}
+.wd-card:hover{box-shadow:var(--sh-l);transform:translateY(-3px);border-color:var(--border2);}
+.wd-tier{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--blue);}
+.wd-card h3{font-size:17px;font-weight:800;color:var(--navy);margin-top:2px;line-height:1.3;}
+.wd-card p{font-size:14px;color:var(--text);line-height:1.6;flex:1;}
+.wd-price{font-size:22px;font-weight:900;color:var(--navy);margin-top:6px;}
+.wd-price span{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-right:4px;vertical-align:middle;}
+.wd-price-note{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:4px;}
+.wd-portfolio{display:flex;flex-direction:column;gap:3px;margin-top:4px;}
+.wd-portfolio a{font-size:12.5px;color:var(--blue);font-weight:600;}
+.wd-portfolio a:hover{text-decoration:underline;}
+.wd-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;padding:11px 18px;background:var(--blue);color:#fff !important;border:none;border-radius:var(--rs);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;text-decoration:none;}
+.wd-btn:hover{background:var(--blue-d);transform:translateY(-1px);box-shadow:var(--sh-m);}
+.wd-btn-big{padding:14px 24px;font-size:15px;border-radius:var(--r);}
+.wd-strap{margin-top:28px;font-size:14px;font-weight:600;color:var(--navy);text-align:center;font-style:italic;}
+
+/* Chips */
+.wd-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center;}
+.wd-chip{display:inline-flex;align-items:center;padding:6px 13px;border:1px solid var(--border);border-radius:20px;background:#fff;font-size:12.5px;font-weight:500;color:var(--text);}
+.wd-chip-lead{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700;letter-spacing:.02em;}
+
+.wd-sub-h{margin:36px 0 18px;font-size:19px;font-weight:800;color:var(--navy);}
+
+/* Portfolio tiles */
+.wd-portfolio-grid{grid-template-columns:repeat(3,1fr);}
+@media(max-width:720px){.wd-portfolio-grid{grid-template-columns:1fr;}}
+.wd-pf{display:flex;flex-direction:column;gap:3px;padding:18px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--r);color:var(--navy);transition:all .18s;}
+.wd-pf:hover{border-color:var(--blue);box-shadow:var(--sh-l);transform:translateY(-2px);}
+.wd-pf-name{font-size:16px;font-weight:800;color:var(--navy);}
+.wd-pf-trade{font-size:13px;color:var(--text);}
+.wd-pf-url{font-size:12px;color:var(--blue);font-weight:600;}
+
+/* Websites offer strip */
+.wd-website-offer{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:40px;padding:22px 26px;background:linear-gradient(135deg,var(--blue),var(--blue-d));border-radius:var(--r);color:#fff;flex-wrap:wrap;}
+.wd-website-offer h3{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}
+.wd-website-offer p{font-size:14px;color:rgba(255,255,255,.85);line-height:1.55;max-width:560px;}
+.wd-website-offer strong{color:#fff;font-weight:800;}
+.wd-website-offer .wd-btn{background:#fff;color:var(--blue) !important;}
+.wd-website-offer .wd-btn:hover{background:#f1f5f9;}
+
+/* Apps coming soon */
+.wd-app{background:#fff;border:1px dashed var(--border2);border-radius:var(--r);padding:22px;}
+.wd-app-tag{display:inline-block;padding:3px 10px;border-radius:20px;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.wd-app h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.wd-app p{font-size:13.5px;color:var(--text);line-height:1.65;}
+
+/* Enquiry form */
+.wd-form{position:relative;background:#fff;padding:28px;border-radius:16px;border:1px solid var(--border);box-shadow:var(--sh-m);display:flex;flex-direction:column;gap:14px;}
+.wd-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--navy);}
+.wd-form input,.wd-form select,.wd-form textarea{padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;font-family:inherit;color:var(--navy);background:#fff;transition:border-color .15s,box-shadow .15s;}
+.wd-form input:focus,.wd-form select:focus,.wd-form textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,78,216,.1);}
+.wd-form textarea{resize:vertical;min-height:90px;line-height:1.6;}
+.wd-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.wd-row{grid-template-columns:1fr;}}
+.wd-form .wd-btn-big{margin-top:6px;align-self:flex-start;}
+.wd-formfoot{font-size:12px;color:var(--muted);margin-top:4px;}
+
+/* Footer legal strip */
+.footer-legal{border-top:1px solid rgba(255,255,255,.04);padding:16px 0 22px;background:#060b19;}
+.footer-legal p{font-size:11.5px;color:#334155;line-height:1.5;text-align:center;max-width:700px;margin:0 auto;}
+
+/* Mobile 390 polish */
+@media(max-width:420px){
+  .container{padding:0 18px;}
+  .section{padding:52px 0;}
+  .section-title{font-size:26px;margin-bottom:28px;}
+  .hero{padding:52px 0 44px;}
+  .hero-lead{font-size:16px;margin-bottom:22px;}
+  .door-title{font-size:17px;}
+  .wd-card,.wd-app{padding:18px;}
+  .wd-website-offer{padding:18px 20px;flex-direction:column;align-items:stretch;text-align:left;}
+  .wd-website-offer .wd-btn{align-self:flex-start;}
+}
