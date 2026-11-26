@@ -889,7 +889,7 @@ var _chatHistory = [];   // [{role: 'user'|'assistant', content: string}]
 var _chatOpen    = false;
 var _chatBusy    = false;
 
-var CHAT_FALLBACK = 'Sorry, something went wrong — please email des@webbcareconsultancy.com or click Get Started above.';
+var CHAT_FALLBACK = 'Sorry, something went wrong — please email info@webbcareconsultancy.com or click Get Started above.';
 
 function chatInit() {
   var widget = document.createElement('div');

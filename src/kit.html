@@ -588,7 +588,7 @@
       </form>
       <p class="wd-formfoot" style="margin-top:14px;text-align:center;font-size:13.5px;color:var(--text);">
         Prefer to skip the form? Email
-        <a href="mailto:des@webbcareconsultancy.com" style="color:var(--blue);font-weight:600;">des@webbcareconsultancy.com</a>
+        <a href="mailto:info@webbcareconsultancy.com" style="color:var(--blue);font-weight:600;">info@webbcareconsultancy.com</a>
         or call <a href="tel:+447876453800" style="color:var(--blue);font-weight:600;">07876 453800</a>.
       </p>
     </div>
@@ -1033,7 +1033,7 @@
       if (res.redirected) { window.location = res.url; return; }
       if (!res.ok) {
         var txt = await res.text();
-        err.textContent = txt || 'Something went wrong. Please try again or email des@webbcareconsultancy.com.';
+        err.textContent = txt || 'Something went wrong. Please try again or email info@webbcareconsultancy.com.';
         err.style.display = 'block';
         btn.disabled = false;
         btn.textContent = oldLabel;
@@ -1042,7 +1042,7 @@
       var data = await res.json().catch(function(){ return { thanks: '/thanks.html' }; });
       window.location = (data && data.thanks) || '/thanks.html';
     } catch (e) {
-      err.textContent = 'Could not reach the server. Please try again, or email des@webbcareconsultancy.com.';
+      err.textContent = 'Could not reach the server. Please try again, or email info@webbcareconsultancy.com.';
       err.style.display = 'block';
       btn.disabled = false;
       btn.textContent = oldLabel;

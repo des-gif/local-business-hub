@@ -1,6 +1,6 @@
 // Webb Digital enquiry endpoint — modelled on Ant Wired's. Validates, enforces
 // honeypot, and sends via Resend from the verified webbcareconsultancy.com domain.
-// TO is ENQUIRY_TO (default des@webbcareconsultancy.com).
+// TO is ENQUIRY_TO (default info@webbcareconsultancy.com).
 
 const FROM = 'Webb Digital <enquiries@webbcareconsultancy.com>';
 const THANKS_URL = '/thanks.html';
@@ -44,7 +44,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Please fill in your name and email.' };
   }
 
-  const TO = process.env.ENQUIRY_TO || 'des@webbcareconsultancy.com';
+  const TO = process.env.ENQUIRY_TO || 'info@webbcareconsultancy.com';
   const key = process.env.RESEND_API_KEY;
   if (!key) {
     console.error('RESEND_API_KEY is not set on this site');
@@ -84,7 +84,7 @@ exports.handler = async (event) => {
   const txt = await res.text();
   if (!res.ok) {
     console.error('Resend send failed', res.status, txt);
-    return { statusCode: 502, body: `Email send failed. Please email des@webbcareconsultancy.com directly.` };
+    return { statusCode: 502, body: `Email send failed. Please email info@webbcareconsultancy.com directly.` };
   }
   console.log('Resend sent OK');
 

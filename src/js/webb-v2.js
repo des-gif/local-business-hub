@@ -105,12 +105,12 @@
         } else {
           var txt;
           try { txt = (await res.json()).error; } catch (_) { txt = null; }
-          if (!txt) txt = 'Something went wrong. Please email des@webbcareconsultancy.com or call 07876 453800.';
+          if (!txt) txt = 'Something went wrong. Please email info@webbcareconsultancy.com or call 07876 453800.';
           if (err) { err.textContent = txt; err.style.display = 'block'; }
         }
       } catch (e) {
         if (err) {
-          err.textContent = 'Could not reach the server. Please email des@webbcareconsultancy.com or call 07876 453800.';
+          err.textContent = 'Could not reach the server. Please email info@webbcareconsultancy.com or call 07876 453800.';
           err.style.display = 'block';
         }
       } finally {
