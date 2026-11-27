@@ -213,4 +213,63 @@
     }, { threshold: 0.12 });
     reveals.forEach(function (el) { io.observe(el); });
   }
+
+  // --- What we build: expand/collapse in place + audio player ---
+  var wb = document.getElementById('what-we-build');
+  if (wb) {
+    // Expand / collapse (no scroll jump — stable in-place reveal)
+    wb.querySelectorAll('.wb-card__toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        var bodyId = btn.getAttribute('aria-controls');
+        var body = bodyId ? document.getElementById(bodyId) : null;
+        var card = btn.closest('.wb-card');
+        var label = btn.querySelector('.wb-card__toggle-label');
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if (card) card.classList.toggle('is-open', !expanded);
+        if (body) { if (expanded) { body.hidden = true; } else { body.hidden = false; } }
+        if (label) {
+          var original = label.getAttribute('data-original');
+          if (!original) { label.setAttribute('data-original', label.textContent); original = label.textContent; }
+          label.textContent = expanded ? original : 'Close';
+        }
+      });
+    });
+
+    // Audio: only one plays at a time, keyboard accessible, no autoplay.
+    var audio = null;
+    var current = null;
+    var live = document.getElementById('wb-live');
+    function stopCurrent() {
+      if (audio) { try { audio.pause(); } catch (e) {} audio = null; }
+      if (current) {
+        current.classList.remove('is-playing');
+        var lbl = current.querySelector('.wb-listen__label');
+        if (lbl) {
+          var orig = current.getAttribute('data-orig-label');
+          if (orig) lbl.textContent = orig;
+        }
+        current = null;
+      }
+      if (live) live.textContent = '';
+    }
+    wb.querySelectorAll('.wb-listen').forEach(function (btn) {
+      var lbl = btn.querySelector('.wb-listen__label');
+      if (lbl) btn.setAttribute('data-orig-label', lbl.textContent);
+      btn.addEventListener('click', function () {
+        var src = btn.getAttribute('data-wb-audio');
+        if (!src) return;
+        if (current === btn) { stopCurrent(); return; }
+        stopCurrent();
+        audio = new Audio(src);
+        current = btn;
+        btn.classList.add('is-playing');
+        if (lbl) lbl.textContent = 'Playing…';
+        if (live) live.textContent = 'Playing audio.';
+        audio.addEventListener('ended', stopCurrent);
+        audio.addEventListener('error', stopCurrent);
+        audio.play().catch(function () { stopCurrent(); });
+      });
+    });
+  }
 })();
