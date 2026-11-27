@@ -61,29 +61,44 @@
   // Retell's shadow-DOM FAB has max-width:200px + text-overflow:ellipsis on its
   // CSS-module classes (_fabBase_*, _fabText_*). We inject an override into the
   // widget's shadow root so the full "Talk to our AI assistant" label shows.
+  // Retell mounts into a plain <div> host, so we scan every shadow root and
+  // pick the one containing a [class*="fab"] descendant.
   function widenRetellPill() {
     var PILL_CSS =
-      '[class*="fabBase"]{max-width:none !important;min-width:0 !important;padding:0 18px !important;width:auto !important;}' +
-      '[class*="fabText"]{overflow:visible !important;text-overflow:clip !important;white-space:nowrap !important;max-width:none !important;}' +
-      '[class*="fabWrap"]{max-width:none !important;}';
-    var tries = 0;
-    var iv = setInterval(function () {
-      tries++;
-      var host = null;
+      '[class*="fabBase" i],[class*="fabWrap" i],[class*="fabChat" i],button{max-width:none !important;min-width:0 !important;width:auto !important;}' +
+      '[class*="fabBase" i],button{padding:0 18px !important;}' +
+      '[class*="fabText" i],span{max-width:none !important;overflow:visible !important;text-overflow:clip !important;}' +
+      'button,[class*="fabText" i]{white-space:nowrap !important;}';
+    function inject(host) {
+      if (!host || !host.shadowRoot) return false;
+      if (host.shadowRoot.querySelector('style[data-webb-pill]')) return true;
+      var st = document.createElement('style');
+      st.setAttribute('data-webb-pill', '1');
+      st.textContent = PILL_CSS;
+      host.shadowRoot.appendChild(st);
+      return true;
+    }
+    function findHost() {
       var all = document.body.querySelectorAll('*');
       for (var i = 0; i < all.length; i++) {
-        var tn = all[i].tagName || '';
-        if (/retell/i.test(tn) && all[i].shadowRoot) { host = all[i]; break; }
+        var sr = all[i].shadowRoot;
+        if (sr && sr.querySelector && sr.querySelector('[class*="fab" i]')) return all[i];
       }
+      return null;
+    }
+    var tries = 0;
+    var observer = null;
+    var iv = setInterval(function () {
+      tries++;
+      var host = findHost();
       if (host) {
-        if (!host.shadowRoot.querySelector('style[data-webb-pill]')) {
-          var st = document.createElement('style');
-          st.setAttribute('data-webb-pill', '1');
-          st.textContent = PILL_CSS;
-          host.shadowRoot.appendChild(st);
+        inject(host);
+        if (!observer) {
+          observer = new MutationObserver(function () { inject(host); });
+          try { observer.observe(host.shadowRoot, { childList: true, subtree: true }); } catch (_) {}
         }
         clearInterval(iv);
-      } else if (tries > 60) {
+      } else if (tries > 120) {
         clearInterval(iv);
       }
     }, 250);

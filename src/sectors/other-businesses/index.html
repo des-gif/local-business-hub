@@ -81,7 +81,7 @@
           <svg viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-8 11H7v-2h4v2zm0-4H7V9h4v2zm6 4h-4v-2h4v2zm0-4h-4V9h4v2z"/></svg>
           <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
         </div>
-        <a class="sec-screen__coming" href="#enquiry"><span>Film coming soon —</span> Discuss your project</a>
+        <a class="sec-screen__coming" href="#enquiry">Discuss your project</a>
       </figure>
       <figure class="sec-screen" data-sector="other-businesses" data-kind="ai">
         <video class="sec-screen__media" playsinline preload="none" poster="../../img/sectors/other-businesses-poster-ai.webp" crossorigin="anonymous">
@@ -101,7 +101,7 @@
           <svg viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-8 11H7v-2h4v2zm0-4H7V9h4v2zm6 4h-4v-2h4v2zm0-4h-4V9h4v2z"/></svg>
           <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
         </div>
-        <a class="sec-screen__coming" href="#enquiry"><span>Film coming soon —</span> Discuss your project</a>
+        <a class="sec-screen__coming" href="#enquiry">Discuss your project</a>
       </figure>
     </div>
   </div>
@@ -302,44 +302,6 @@
 })();
 </script>
 
-<script>
-(function () {
-  'use strict';
-  document.querySelectorAll('.sec-screen').forEach(function (frame) {
-    var btn = frame.querySelector('.sec-screen__play');
-    var video = frame.querySelector('video');
-    var source = frame.querySelector('source');
-    var track = frame.querySelector('track');
-    var coming = frame.querySelector('.sec-screen__coming');
-    if (!btn || !video) return;
-    btn.addEventListener('click', function () {
-      var srcUrl = source && source.getAttribute('data-src');
-      if (!srcUrl) return;
-      // Probe if the video file exists.
-      fetch(srcUrl, { method: 'HEAD' }).then(function (r) {
-        if (r.ok) {
-          source.setAttribute('src', srcUrl);
-          if (track) {
-            var tsrc = track.getAttribute('data-src');
-            if (tsrc) track.setAttribute('src', tsrc);
-          }
-          video.setAttribute('controls', 'controls');
-          video.load();
-          video.play();
-          btn.style.display = 'none';
-          var bar = frame.querySelector('.sec-screen__bar');
-          if (bar) bar.style.display = 'none';
-          var scrim = frame.querySelector('.sec-screen__scrim');
-          if (scrim) scrim.style.display = 'none';
-        } else {
-          frame.classList.add('is-open');
-        }
-      }).catch(function () {
-        frame.classList.add('is-open');
-      });
-    });
-  });
-})();
-</script>
+<script src="/js/film-lightbox.js" defer></script>
 </body>
 </html>

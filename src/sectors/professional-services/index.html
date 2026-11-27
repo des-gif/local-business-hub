@@ -57,26 +57,26 @@
 </section>
 
 <!-- ============== VIDEO SCREENS ============== -->
-<section class="sec-screens2-wrap" aria-labelledby="sec-screens-h">
+<section class="sec-screens3-wrap" aria-labelledby="sec-screens-h">
   <div class="container">
     <div class="sec-screens-head">
       <h2 id="sec-screens-h">See what we can build for you.</h2>
     </div>
-    <div class="sec-screens2">
-      <figure class="sec-screen2">
-        <h3 class="sec-screen2__title">Your website &amp; apps</h3>
-        <div class="sec-screen2__frame">
-          <img class="sec-screen2__img" src="../../img/sectors/professional-services-screen-1.webp" alt="Professional services — Your website &amp; apps" loading="lazy" decoding="async">
-          <button class="sec-screen2__hit" type="button" style="left:18.12%;top:17.22%;width:63.76%;height:63.23%;" data-video="../../video/professional-services-website.mp4" aria-label="Play — your website &amp; apps"></button>
-          <a class="sec-screen2__hint" href="#enquiry">Discuss your project</a>
+    <div class="sec-screens3">
+      <figure class="sec-screen3">
+        <h3 class="sec-screen3__title">Your website &amp; apps</h3>
+        <div class="sec-screen3__frame">
+          <img class="sec-screen3__img" src="../../img/sectors/professional-services-portrait-1.webp" alt="Professional services — Your website &amp; apps" loading="lazy" decoding="async">
+          <button class="sec-screen3__hit" type="button" data-video="../../video/professional-services-website.mp4" aria-label="Play — your website &amp; apps"></button>
+          <a class="sec-screen3__hint" href="#enquiry">Discuss your project</a>
         </div>
       </figure>
-      <figure class="sec-screen2">
-        <h3 class="sec-screen2__title">AI &amp; automation</h3>
-        <div class="sec-screen2__frame">
-          <img class="sec-screen2__img" src="../../img/sectors/professional-services-screen-2.webp" alt="Professional services — AI &amp; automation" loading="lazy" decoding="async">
-          <button class="sec-screen2__hit" type="button" style="left:17.58%;top:15.73%;width:63.46%;height:63.66%;" data-video="../../video/professional-services-ai.mp4" aria-label="Play — AI &amp; automation"></button>
-          <a class="sec-screen2__hint" href="#enquiry">Discuss your project</a>
+      <figure class="sec-screen3">
+        <h3 class="sec-screen3__title">AI &amp; automation</h3>
+        <div class="sec-screen3__frame">
+          <img class="sec-screen3__img" src="../../img/sectors/professional-services-portrait-2.webp" alt="Professional services — AI &amp; automation" loading="lazy" decoding="async">
+          <button class="sec-screen3__hit" type="button" data-video="../../video/professional-services-ai.mp4" aria-label="Play — AI &amp; automation"></button>
+          <a class="sec-screen3__hint" href="#enquiry">Discuss your project</a>
         </div>
       </figure>
     </div>
@@ -294,32 +294,6 @@
 })();
 </script>
 
-<script>
-(function () {
-  'use strict';
-  document.querySelectorAll('.sec-screen2').forEach(function (fig) {
-    var btn = fig.querySelector('.sec-screen2__hit');
-    if (!btn) return;
-    var url = btn.getAttribute('data-video');
-    btn.addEventListener('click', function (ev) {
-      ev.preventDefault();
-      fetch(url, { method: 'HEAD' }).then(function (r) {
-        if (r.ok) {
-          var v = document.createElement('video');
-          v.src = url;
-          v.controls = true;
-          v.autoplay = true;
-          v.playsInline = true;
-          btn.innerHTML = '';
-          btn.appendChild(v);
-          try { v.play(); } catch (_) {}
-        } else {
-          fig.classList.add('is-open');
-        }
-      }).catch(function () { fig.classList.add('is-open'); });
-    });
-  });
-})();
-</script>
+<script src="/js/film-lightbox.js" defer></script>
 </body>
 </html>
