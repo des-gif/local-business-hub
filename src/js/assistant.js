@@ -13,7 +13,7 @@
   };
   var FAB_TEXT_FULL = 'Talk to our AI assistant';
   var FAB_TEXT_SHORT = 'Ask our assistant';
-  var NARROW_LABEL_BP = 480;
+  var NARROW_LABEL_BP = 420;
   var HIDE_BUBBLE_BP = 360;
   var BUBBLE_DELAY_MS = 4000;
   var BUBBLE_KEY = 'webb-assistant-bubble-seen-v1';
@@ -55,6 +55,38 @@
       s.setAttribute('data-fab-text', FAB_TEXT_SHORT);
     }
     document.head.appendChild(s);
+    widenRetellPill();
+  }
+
+  // Retell's shadow-DOM FAB has max-width:200px + text-overflow:ellipsis on its
+  // CSS-module classes (_fabBase_*, _fabText_*). We inject an override into the
+  // widget's shadow root so the full "Talk to our AI assistant" label shows.
+  function widenRetellPill() {
+    var PILL_CSS =
+      '[class*="fabBase"]{max-width:none !important;min-width:0 !important;padding:0 18px !important;width:auto !important;}' +
+      '[class*="fabText"]{overflow:visible !important;text-overflow:clip !important;white-space:nowrap !important;max-width:none !important;}' +
+      '[class*="fabWrap"]{max-width:none !important;}';
+    var tries = 0;
+    var iv = setInterval(function () {
+      tries++;
+      var host = null;
+      var all = document.body.querySelectorAll('*');
+      for (var i = 0; i < all.length; i++) {
+        var tn = all[i].tagName || '';
+        if (/retell/i.test(tn) && all[i].shadowRoot) { host = all[i]; break; }
+      }
+      if (host) {
+        if (!host.shadowRoot.querySelector('style[data-webb-pill]')) {
+          var st = document.createElement('style');
+          st.setAttribute('data-webb-pill', '1');
+          st.textContent = PILL_CSS;
+          host.shadowRoot.appendChild(st);
+        }
+        clearInterval(iv);
+      } else if (tries > 60) {
+        clearInterval(iv);
+      }
+    }, 250);
   }
 
   function openAssistant() {
