@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/webb-v2.css">
 <script src="/js/assistant.js" defer></script>
+<script src="/js/film-lightbox.js" defer></script>
 </head>
 <body>
 
@@ -42,21 +43,40 @@
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="container">
-    <div class="hero__inner">
-      <div class="hero__kicker">
-        <span class="dot" aria-hidden="true"></span>
-        Web design · Digital tools · AI
+    <div class="hero__top">
+      <div class="hero__inner">
+        <div class="hero__kicker">
+          <span class="dot" aria-hidden="true"></span>
+          Web design · Digital tools · AI
+        </div>
+        <h1>We make AI<br><em>simple for you.</em></h1>
+        <p class="hero__lead">Websites, business apps and AI assistants — built around your business.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary btn--lg" href="#doors">
+            Explore what we build
+            <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#" data-open-enquiry data-interest="General enquiry">Let's talk</a>
+        </div>
+        <p class="hero__note">Care websites from £995 · Business websites from £495</p>
       </div>
-      <h1>We make AI<br><em>simple for you.</em></h1>
-      <p class="hero__lead">Websites, business apps and AI assistants — built around your business.</p>
-      <div class="hero__ctas">
-        <a class="btn btn--primary btn--lg" href="#doors">
-          Explore what we build
-          <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a class="btn btn--ghost btn--lg" href="#" data-open-enquiry data-interest="General enquiry">Let's talk</a>
+
+      <div class="hero__films" aria-label="See what we build — tap to play">
+        <figure class="hero-film">
+          <h3 class="hero-film__title">Your website &amp; apps</h3>
+          <div class="hero-film__frame">
+            <img class="hero-film__img" src="img/sectors/professional-services-portrait-1.webp" alt="Your website &amp; apps — tap to play" loading="lazy" decoding="async">
+            <button class="sec-screen3__hit hero-film__hit" type="button" data-video="video/professional-services-website.mp4" aria-label="Play — your website &amp; apps"></button>
+          </div>
+        </figure>
+        <figure class="hero-film">
+          <h3 class="hero-film__title">AI &amp; automation</h3>
+          <div class="hero-film__frame">
+            <img class="hero-film__img" src="img/sectors/professional-services-portrait-2.webp" alt="AI &amp; automation — tap to play" loading="lazy" decoding="async">
+            <button class="sec-screen3__hit hero-film__hit" type="button" data-video="video/professional-services-ai.mp4" aria-label="Play — AI &amp; automation"></button>
+          </div>
+        </figure>
       </div>
-      <p class="hero__note">Care websites from £995 · Business websites from £495</p>
     </div>
 
     <div class="hero__sectors" id="sectors">
