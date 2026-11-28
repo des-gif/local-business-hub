@@ -122,6 +122,28 @@
     return v;
   }
 
+  // YouTube ID: 11 chars, alphanumeric + "-" or "_". Used for the "See it in action"
+  // short-form videos on the homepage.
+  var YT_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+  function isYouTubeId(s) { return YT_ID_RE.test(String(s || '')); }
+
+  function hideFilmFigure(btn) {
+    var fig = btn.closest && btn.closest('.hero-film, .sec-screen3, .sec-screen2, .sec-screen');
+    if (fig) { fig.style.display = 'none'; return; }
+    btn.style.display = 'none';
+  }
+  function showYouTube(panel, id, title) {
+    var ifr = document.createElement('iframe');
+    ifr.className = 'webb-lb__video';
+    ifr.src = 'https://www.youtube.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&playsinline=1';
+    ifr.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    ifr.setAttribute('allowfullscreen', '');
+    ifr.setAttribute('loading', 'eager');
+    if (title) ifr.setAttribute('aria-label', title);
+    panel.appendChild(ifr);
+    return ifr;
+  }
+
   function open(url, opts) {
     opts = opts || {};
     if (current) close();
@@ -141,6 +163,12 @@
     if (!url) {
       var a = showFallback(shell.panel, opts.title);
       focusInitial(a);
+      return;
+    }
+
+    if (isYouTubeId(url)) {
+      var ifr = showYouTube(shell.panel, url, opts.title);
+      focusInitial(ifr);
       return;
     }
 
@@ -171,7 +199,7 @@
   }
 
   function wire() {
-    var selectors = ['.sec-screen3__hit', '.sec-screen2__hit', '.sec-screen__play'];
+    var selectors = ['.sec-screen3__hit', '.sec-screen2__hit', '.sec-screen__play', '.hero-film__hit', 'button.short'];
     document.querySelectorAll(selectors.join(', ')).forEach(function (btn) {
       if (btn.getAttribute('data-lb-wired') === '1') return;
       btn.setAttribute('data-lb-wired', '1');
@@ -187,6 +215,27 @@
         ev.preventDefault();
         open(url, { title: titleFromButton(btn) });
       });
+
+      // Self-heal: for mp4 buttons (not YouTube IDs), quietly HEAD the file.
+      // If 404, hide the containing film figure so the page doesn't advertise
+      // a film that doesn't exist. Figure reappears automatically once the
+      // mp4 lands in /video/ (e.g. after JOB 11 films arrive).
+      if (url && !isYouTubeId(url) && /\.(mp4|webm|mov)(\?|$)/i.test(url)) {
+        try {
+          var cacheKey = 'wd-film-exists:' + url;
+          var cached = sessionStorage.getItem(cacheKey);
+          if (cached === '0') { hideFilmFigure(btn); return; }
+          if (cached !== '1') {
+            fetch(url, { method: 'HEAD' }).then(function (r) {
+              try { sessionStorage.setItem(cacheKey, r && r.ok ? '1' : '0'); } catch (_) {}
+              if (!r || !r.ok) hideFilmFigure(btn);
+            }).catch(function () {
+              try { sessionStorage.setItem(cacheKey, '0'); } catch (_) {}
+              hideFilmFigure(btn);
+            });
+          }
+        } catch (_) { /* sessionStorage disabled, fall through */ }
+      }
     });
 
     // Film-label pills: clicking the label opens the same film as its screen.
