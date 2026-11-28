@@ -1,10 +1,12 @@
 [build]
   publish = "src"
   functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
 
 [dev]
   publish = "src"
   functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
   port = 8888
 
 [[headers]]

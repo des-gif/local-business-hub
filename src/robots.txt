@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /affiliates/
+Allow: /
+
+Sitemap: https://shop.webbcareconsultancy.com/sitemap.xml
