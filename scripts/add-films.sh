@@ -13,7 +13,7 @@ WIRE_PY="$REPO_ROOT/scripts/wire-films.py"
 [ -x "$FFMPEG" ] || { echo "ffmpeg not found at $FFMPEG"; exit 2; }
 mkdir -p "$OUT_DIR"
 
-echo "[1/3] Compressing 10 films (H.264 CRF26, max 1280w, AAC 128k)..."
+echo "[1/3] Compressing 18 films (H.264 CRF26, max 1280w, AAC 128k)..."
 FAIL=0
 # slug|kind|exact source filename (ignore "(1)" duplicates)
 while IFS='|' read -r slug kind src; do
@@ -54,6 +54,14 @@ property-lettings|website|Film 1_ Your website & apps (export as property-lettin
 property-lettings|ai|Film 2_ AI & automation (export as property-lettings-ai.mp4)_1080p.mp4
 professional-services|website|Film 1_ Your website & apps (export as professional-services-website.mp4)_1080p.mp4
 professional-services|ai|Film 2_ AI & automation (export as professional-services-ai.mp4)_1080p.mp4
+hospitality|website|Film 1_ Your website & apps (export as hospitality-website.mp4)_1080p.mp4
+hospitality|ai|Film 2_ AI & automation (export as hospitality-ai.mp4)_1080p.mp4
+shops-retail|website|Film 1_ Your website & apps (export as shops-retail-website.mp4)_1080p.mp4
+shops-retail|ai|Film 2_ AI & automation (export as shops-retail-ai.mp4)_1080p.mp4
+training-education|website|Film 1_ Your website & apps (export as training-education-website.mp4)_1080p.mp4
+training-education|ai|Film 2_ AI & automation (export as training-education-ai.mp4)_1080p.mp4
+other-businesses|website|Film 1_ Your website & apps (export as other-businesses-website.mp4)_1080p.mp4
+other-businesses|ai|Film 2_ AI & automation (export as other-businesses-ai.mp4)_1080p.mp4
 MAP
 
 echo
@@ -69,4 +77,4 @@ if [ "$FAIL" -gt 0 ]; then
   echo "DONE with $FAIL missing source(s)."
   exit 1
 fi
-echo "DONE: 10 films + 10 posters + wiring complete."
+echo "DONE: 18 films + 18 posters + wiring complete."
