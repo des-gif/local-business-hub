@@ -1,5 +1,30 @@
 # CLAUDE.md
 
+## Shop deploys ONLY via `netlify deploy --dir=src` (never git push)
+
+**Mandatory (Des, 2026-11-28).** `src/video/` is gitignored (large mp4s). Git-triggered Netlify builds DO NOT include the videos — pushing to `main` therefore wipes every film from live. Git auto-builds for the shop site (`e08fc1be-db84-40ce-ab89-9904614b06b5`, `localbusinessai`) are now **stopped** (`build_settings.stop_builds=true`). Do not re-enable them.
+
+Every production deploy of the shop goes through:
+
+```bash
+npx -y netlify-cli deploy --prod \
+  --dir=/Users/desmondwebb/local-business-hub/src \
+  --site=e08fc1be-db84-40ce-ab89-9904614b06b5 \
+  --message="…"
+```
+
+After each deploy, confirm every mp4 referenced in `src/` returns 200:
+
+```bash
+for f in src/video/*.mp4; do
+  n=$(basename "$f")
+  c=$(curl -sI -o /dev/null -w "%{http_code}" "https://shop.webbcareconsultancy.com/video/$n")
+  [ "$c" = "200" ] || echo "MISSING: $n ($c)"
+done
+```
+
+Git pushes are still fine for keeping the repo in sync — they just no longer deploy.
+
 ## Rule: Syntax-check every .js file before pushing
 
 Before pushing **any** change, run `node --check` on every `.js` file you edited — including files in `netlify/functions/`. Only push if **all pass clean**. One JS syntax error can break the whole page or take a function offline.
