@@ -63,14 +63,14 @@
 
       <div class="hero__films" aria-label="See what we build — tap to play">
         <figure class="hero-film">
-          <h3 class="hero-film__title">Your website &amp; apps</h3>
+          <h3 class="hero-film__title" data-film-label="true" role="button" tabindex="0">Your website &amp; apps <span class="hero-film__title-tag">5-min film</span></h3>
           <div class="hero-film__frame">
             <img class="hero-film__img" src="img/sectors/professional-services-portrait-1.webp" alt="Your website &amp; apps — tap to play" loading="lazy" decoding="async">
             <button class="sec-screen3__hit hero-film__hit" type="button" data-video="video/professional-services-website.mp4" aria-label="Play — your website &amp; apps"></button>
           </div>
         </figure>
         <figure class="hero-film">
-          <h3 class="hero-film__title">AI &amp; automation</h3>
+          <h3 class="hero-film__title" data-film-label="true" role="button" tabindex="0">AI &amp; automation <span class="hero-film__title-tag">5-min film</span></h3>
           <div class="hero-film__frame">
             <img class="hero-film__img" src="img/sectors/professional-services-portrait-2.webp" alt="AI &amp; automation — tap to play" loading="lazy" decoding="async">
             <button class="sec-screen3__hit hero-film__hit" type="button" data-video="video/professional-services-ai.mp4" aria-label="Play — AI &amp; automation"></button>
@@ -144,15 +144,14 @@
   <div class="container">
     <div class="wb__head">
       <p class="eyebrow eyebrow--light">What we build</p>
-      <div class="wb__head-row">
-        <h2 id="wb-h">Four straightforward things,<br>built around your business.</h2>
-        <button class="wb-listen wb-listen--section" type="button"
-                data-wb-audio="audio/what-we-build-all.mp3"
-                aria-label="Listen to this section">
-          <svg class="wb-listen__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          <span class="wb-listen__label">Listen to this section</span>
-        </button>
-      </div>
+      <h2 id="wb-h">Four straightforward things,<br>built around your business.</h2>
+      <button class="wb-listen wb-listen--section" type="button"
+              data-wb-audio="audio/what-we-build-all.mp3"
+              aria-label="Listen to this section">
+        <svg class="wb-listen__icon wb-listen__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-7v2.06a7 7 0 0 1 0 13.88V23a9 9 0 0 0 0-18z"/></svg>
+        <svg class="wb-listen__icon wb-listen__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        <span class="wb-listen__label">Listen to this section</span>
+      </button>
     </div>
 
     <div class="wb__grid">
@@ -733,24 +732,24 @@
   </div>
 </section>
 
-<!-- ============== APPS COMING SOON ============== -->
-<section class="section section--navy" id="apps-coming-soon">
+<!-- ============== AVAILABLE BY APPOINTMENT ============== -->
+<section class="section section--navy" id="available-by-appointment">
   <div class="container">
     <div class="apps-coming">
       <div class="apps-coming__media">
-        <img src="img/apps-coming-soon.jpg" alt="Cobalt paper and chrome — a quiet still life for the apps we're building next" loading="lazy" width="1536" height="1024">
+        <img src="img/apps-coming-soon.jpg" alt="Cobalt paper and chrome — a quiet still life for apps built on request" loading="lazy" width="1536" height="1024">
       </div>
       <div class="apps-coming__body">
-        <p class="eyebrow eyebrow--light">Apps coming soon</p>
-        <h2>New apps we're building<br>for homeowners and local tradespeople.</h2>
-        <p>Three small, honest apps in private build. If any of them sound useful for your home or your trade, let us know and we'll keep you posted on the beta.</p>
+        <p class="eyebrow eyebrow--light">Available by appointment</p>
+        <h2>Three more apps we build<br>for homeowners and local tradespeople.</h2>
+        <p>Three small, honest apps — if any of them sound useful for your home or your trade, arrange a demo and we'll walk you through how it would work for you.</p>
         <ul class="apps-coming__list">
           <li><strong>Electrical monitoring</strong> — a simple way for electricians and homeowners to see what a property is drawing, room by room.</li>
           <li><strong>Lighting &amp; shading planner</strong> — plan lights, switches and shading for an extension or refurb without a fifty-page spec.</li>
           <li><strong>Home self-checklist</strong> — the small annual checks most of us forget, in one tidy list you tick off at your own pace.</li>
         </ul>
         <div style="margin-top:28px;">
-          <a class="btn btn--primary" href="#" data-open-enquiry data-interest="Apps coming soon — beta interest">Register beta interest</a>
+          <a class="btn btn--primary" href="#contact" data-open-enquiry data-interest="Apps — arrange a demo">Arrange a demo</a>
         </div>
       </div>
     </div>
@@ -806,6 +805,7 @@
 </section>
 
 <!-- ============== INLINE ENQUIRY — "Tell us about your project." ============== -->
+<a id="contact" aria-hidden="true" tabindex="-1" style="position:absolute;top:-80px;"></a>
 <section class="section section--ivory" id="tell-us">
   <div class="container">
     <div class="tell-us">
@@ -836,7 +836,7 @@
             <option value="AI Receptionist">AI Receptionist</option>
             <option value="Business website">Business website</option>
             <option value="AI marketing kits">AI marketing kits</option>
-            <option value="Apps coming soon — beta interest">Apps coming soon — beta interest</option>
+            <option value="Apps — arrange a demo">Apps — arrange a demo</option>
           </select>
         </div>
 
@@ -977,7 +977,7 @@
           <option value="Salon / beauty website">Salon / beauty website</option>
           <option value="AI marketing kits">AI marketing kits</option>
           <option value="Talk to us">Talk to us (call back)</option>
-          <option value="Apps coming soon — beta interest">Apps coming soon — beta interest</option>
+          <option value="Apps — arrange a demo">Apps — arrange a demo</option>
         </select>
       </div>
       <div class="form-field">

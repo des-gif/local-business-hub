@@ -168,11 +168,30 @@ body { padding-top: 70px; }
 }
 .hero-film { margin: 0; display: flex; flex-direction: column; align-items: center; }
 .hero-film__title {
-  font: 600 13px/1.3 'Inter', sans-serif;
-  color: rgba(245,247,255,.92);
-  margin: 0 0 10px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 700 17px/1 'Inter', sans-serif;
+  color: #fff;
+  background: #10b981;
+  border: 1px solid #10b981;
+  border-radius: 999px;
+  padding: 10px 20px;
+  margin: 0 auto 14px;
   text-align: center;
-  letter-spacing: .01em;
+  letter-spacing: .005em;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(16,185,129,.4), 0 6px 18px rgba(16,185,129,.28);
+  transition: transform .18s var(--ease), background .18s var(--ease);
+}
+.hero-film__title:hover { transform: translateY(-1px); background: #059669; border-color: #059669; }
+.hero-film__title::before { content: "▶"; font-size: 12px; margin-right: 2px; }
+.hero-film__title-tag {
+  font: 600 11px/1 'Inter', sans-serif;
+  color: #fff;
+  background: rgba(255,255,255,.22);
+  border-radius: 999px;
+  padding: 4px 9px;
+  letter-spacing: .04em;
+  margin-left: 4px;
 }
 .hero-film__frame {
   position: relative;
@@ -1045,7 +1064,7 @@ body { padding-top: 70px; }
   .shorts-strip__grid { grid-template-columns: 1fr; max-width: 320px; }
 }
 
-/* ===== Apps coming soon ===== */
+/* ===== Available by appointment ===== */
 .apps-coming {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -1532,7 +1551,34 @@ body { padding-top: 70px; }
   background: var(--cobalt);
   border-color: var(--cobalt);
 }
-.wb-listen--section { margin-top: 6px; }
+
+/* Section-level Listen button: directly under the heading, green fill. */
+.wb-listen--section {
+  margin: 16px 0 0;
+  padding: 12px 22px;
+  font: 700 16px/1 'Inter', sans-serif;
+  background: #10b981;
+  color: #fff;
+  border: 1px solid #10b981;
+  border-radius: 999px;
+  box-shadow: 0 0 0 0 rgba(16,185,129,.45), 0 6px 18px rgba(16,185,129,.28);
+  animation: wbListenPulse 1.6s ease-out 1;
+}
+.wb-listen--section:hover { background: #059669; border-color: #059669; }
+.wb-listen--section .wb-listen__icon { width: 18px; height: 18px; }
+.wb-listen--section .wb-listen__icon--pause { display: none; }
+.wb-listen--section.is-playing { background: #059669; border-color: #059669; }
+.wb-listen--section.is-playing .wb-listen__icon--play { display: none; }
+.wb-listen--section.is-playing .wb-listen__icon--pause { display: inline-block; }
+
+@keyframes wbListenPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(16,185,129,.55), 0 6px 18px rgba(16,185,129,.28); }
+  70%  { box-shadow: 0 0 0 16px rgba(16,185,129,0), 0 6px 18px rgba(16,185,129,.28); }
+  100% { box-shadow: 0 0 0 0 rgba(16,185,129,0), 0 6px 18px rgba(16,185,129,.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wb-listen--section { animation: none; }
+}
 
 /* Hide every Listen button until audio files exist. */
 .wb[data-audio-ready="false"] .wb-listen { display: none; }
@@ -1877,12 +1923,63 @@ body { padding-top: 70px; }
 }
 .sec-screen3 { margin: 0; display: flex; flex-direction: column; align-items: center; }
 .sec-screen3__title {
-  margin: 0 0 14px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 0 auto 14px;
+  padding: 10px 20px;
   color: #fff;
-  font-family: 'Manrope', sans-serif;
+  background: #10b981;
+  border: 1px solid #10b981;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: clamp(18px, 1.8vw, 22px);
+  font-size: 17px;
+  line-height: 1;
   text-align: center;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(16,185,129,.4), 0 6px 18px rgba(16,185,129,.28);
+  transition: transform .18s var(--ease), background .18s var(--ease);
+  align-self: center;
+}
+.sec-screen3__title:hover { transform: translateY(-1px); background: #059669; border-color: #059669; }
+.sec-screen3__title::before { content: "▶"; font-size: 12px; margin-right: 2px; }
+.sec-screen3__title-tag,
+.sec-screen2__title-tag,
+.sec-screen__title-tag {
+  font: 600 11px/1 'Inter', sans-serif;
+  color: #fff;
+  background: rgba(255,255,255,.22);
+  border-radius: 999px;
+  padding: 4px 9px;
+  letter-spacing: .04em;
+  margin-left: 4px;
+}
+
+/* sec-screen2 (swimwear-leisure) + sec-screen figcaption (other-businesses) pill styling. */
+.sec-screen2__title,
+.sec-screen__title {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 0 auto 14px;
+  padding: 10px 20px;
+  color: #fff;
+  background: #10b981;
+  border: 1px solid #10b981;
+  border-radius: 999px;
+  font: 700 17px/1 'Inter', sans-serif;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(16,185,129,.4), 0 6px 18px rgba(16,185,129,.28);
+  transition: transform .18s var(--ease), background .18s var(--ease);
+  align-self: center;
+}
+.sec-screen2__title:hover,
+.sec-screen__title:hover { transform: translateY(-1px); background: #059669; border-color: #059669; }
+.sec-screen2__title::before,
+.sec-screen__title::before { content: "▶"; font-size: 12px; margin-right: 2px; }
+
+/* Film-label pill elements should behave like buttons when focused. */
+[data-film-label]:focus-visible {
+  outline: 3px solid #4cff2a;
+  outline-offset: 3px;
 }
 .sec-screen3__frame {
   position: relative;

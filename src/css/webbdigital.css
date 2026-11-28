@@ -63,7 +63,7 @@
 .wd-website-offer .wd-btn{background:#fff;color:var(--blue) !important;}
 .wd-website-offer .wd-btn:hover{background:#f1f5f9;}
 
-/* Apps coming soon */
+/* Available by appointment */
 .wd-app{background:#fff;border:1px dashed var(--border2);border-radius:var(--r);padding:22px;}
 .wd-app-tag{display:inline-block;padding:3px 10px;border-radius:20px;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
 .wd-app h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px;}

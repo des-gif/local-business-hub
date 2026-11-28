@@ -2,8 +2,8 @@
   'use strict';
 
   var OPEN_CLASS = 'webb-lb-open';
-  var FALLBACK_HREF = '#enquiry';
-  var FALLBACK_TEXT = 'Film coming soon — Discuss your project';
+  var FALLBACK_HREF = '#contact';
+  var FALLBACK_TEXT = 'Discuss your project';
 
   var current = null;
   var lastFocus = null;
@@ -87,7 +87,7 @@
     box.className = 'webb-lb__fallback';
     var h = document.createElement('p');
     h.className = 'webb-lb__fallback-title';
-    h.textContent = title || 'Film coming soon';
+    h.textContent = title || 'Discuss your project';
     var a = document.createElement('a');
     a.className = 'webb-lb__fallback-cta';
     a.href = FALLBACK_HREF;
@@ -186,6 +186,28 @@
       btn.addEventListener('click', function (ev) {
         ev.preventDefault();
         open(url, { title: titleFromButton(btn) });
+      });
+    });
+
+    // Film-label pills: clicking the label opens the same film as its screen.
+    document.querySelectorAll('[data-film-label]').forEach(function (lbl) {
+      if (lbl.getAttribute('data-lb-wired') === '1') return;
+      lbl.setAttribute('data-lb-wired', '1');
+      function trigger() {
+        var fig = lbl.closest && lbl.closest('figure');
+        if (!fig) return;
+        var hit = fig.querySelector('.sec-screen3__hit, .sec-screen2__hit, .sec-screen__play, .hero-film__hit');
+        if (hit) { hit.click(); return; }
+        var src = fig.querySelector('source[data-src]');
+        var url = src && src.getAttribute('data-src');
+        if (url) open(url, { title: (lbl.textContent || '').trim() });
+      }
+      lbl.addEventListener('click', function (ev) { ev.preventDefault(); trigger(); });
+      lbl.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ' || ev.keyCode === 13 || ev.keyCode === 32) {
+          ev.preventDefault();
+          trigger();
+        }
       });
     });
   }
